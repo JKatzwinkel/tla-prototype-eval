@@ -1,0 +1,3 @@
+[submodule "static/resjs"]
+	path = static/resjs
+	url = https://github.com/nederhof/resjs.git

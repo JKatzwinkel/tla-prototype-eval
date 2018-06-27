@@ -1,0 +1,110 @@
+		{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<link rel="stylesheet" type="text/css" href="{% static "resjs/res.css"%}" />
+		<script type="text/javascript" src="{% static "resjs/res_aux.js" %}"></script>
+		<script type="text/javascript" src="{% static "resjs/res_points.js" %}"></script>
+		<script type="text/javascript" src="{% static "resjs/res_lite.js" %}"></script>
+		<script type="text/javascript" src="{% static "resjs/res_struct.js" %}"></script>
+		<script type="text/javascript" src="{% static "resjs/res_syntax.js" %}"></script>
+		<script type="text/javascript" src="{% static "resjs/res_format.js" %}"></script>
+		<script type="text/javascript" src="{% static "resjs/res_render.js" %}"></script>
+		<script type="text/javascript" src="{% static "resjs/res_web.js" %}"></script>
+		<style>
+			body {
+				font-family: 'BBAWLibertine';
+			}
+			.mod {
+				color: #bbb;
+			}
+			.inline {
+				font-size: 0.9em;
+				vertical-align: -5px;
+				background-color: #eee;
+			}
+		</style>
+		<title>{{ lemma.name }}</title>
+	</head>
+	<body>
+
+		<h2>
+			{{ lemma.name }}
+			{% for glyphs in word_glyphs %}
+				<canvas class="res inline">{{ glyphs }}</canvas>
+			{% endfor %}
+			<span class="mod">
+				({{ lemma.id }})
+			</span>
+		</h2>
+
+		<div class="metadata_revision">
+			<div class="revision_date">
+				Last revision:
+				<span class="value">{{ revision_date }}</span>
+			</div>
+		</div>
+
+		<h3>Metadata</h3>
+		<div class="metadata_direct">
+			<div class="translations">
+				Translations:
+				<table>
+					<tbody>
+						{% for translation in lemma.translations.translations %}
+						<tr>
+							<td class="mod">{{ translation.lang }}</td>
+							<td>{{ translation.value }}</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+
+			<div class="word_class">
+				Word class:
+				<span class="value">{{ lemma.type }}</span>
+			</div>
+
+			<div class="bibliography">
+				{% for bib in lemma_bibliography %}
+				<div class="bibentry">
+					Bibliography:
+					<span class="value">{{ bib }}</span>
+				</div>
+				{% endfor %}
+			</div>
+
+			<div class="annotations">
+				Annotation
+			</div>
+
+		</div>
+
+
+		<h3>Comments</h3>
+		<div class="comments">
+		</div>
+
+
+		<h3>TLA Relations</h3>
+		<div class="relations">
+			{% for predicate, objects in lemma_relations.items %}
+			<h4>{{ predicate }}</h4>
+			<ul>
+			{% for object in objects %}
+				<li>
+					<a href="/lemma/details/{{ object.id }}">
+						{{ object.name }}
+					</a>
+				</li>
+			{% endfor %}
+			</ul>
+			{% endfor %}
+
+		</div>
+
+
+	</body>
+</html>
