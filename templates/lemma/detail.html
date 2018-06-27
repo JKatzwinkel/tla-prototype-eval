@@ -1,4 +1,4 @@
-		{% load static %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -39,10 +39,10 @@
 		<h2>
 			{{ lemma.name }}
 			{% for glyphs in word_glyphs %}
-				<canvas class="res inline">{{ glyphs }}</canvas>
+				<canvas class="res inline" title="{{ glyphs }}">{{ glyphs }}</canvas>
 			{% endfor %}
 			<span class="mod">
-				({{ lemma.id }})
+				(<a href="http://localhost:9200/lemma/_search/?q=id:{{ lemma.id }}">{{ lemma.id }}</a>)
 			</span>
 		</h2>
 
@@ -105,7 +105,6 @@
 					{{ object.name }}
 				</a>
 				{% for glyphs in object.glyphs %}
-				{{ glyphs }}
 					<canvas class="res inline">{{ glyphs }}</canvas>
 				{% endfor %}
 			</div>

@@ -1,5 +1,7 @@
 from django.http import Http404
 from django.shortcuts import render
+from django.views.decorators.http import require_http_methods
+
 
 import store
 
@@ -46,9 +48,9 @@ def lemma_relations(lemma):
 
 
 
+@require_http_methods(["GET"])
 def details(request, lemma_id):
     lemma = store.get_lemma(lemma_id)
-
     return render(request, 'lemma/detail.html', {
                 'lemma': lemma,
                 'word_glyphs': word_glyphs(lemma),
@@ -57,4 +59,21 @@ def details(request, lemma_id):
                 'lemma_relations': lemma_relations(lemma),
                 })
 
+
+@require_http_methods(["GET"])
+def search(request):
+    query=' '.join(['{}:{}'.format(k, v) for k, v in request.GET.items()])
+    print(query)
+    hits = store.search_lemma(query)
+    for hit in hits:
+        hit.get('_source')['score'] = hit.get('_score')
+        hit.get('_source')['word_glyphs'] = word_glyphs(hit.get('_source'))
+        hit.get('_source')['bib'] = lemma_bibliography(hit.get('_source'))
+    hits = [hit.get('_source') for hit in hits]
+
+    print(hits)
+    return render(request, 'lemma/search.html', {
+        'name': request.GET.get('name'),
+        'hits': hits
+        })
 

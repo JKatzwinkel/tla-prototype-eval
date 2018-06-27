@@ -4,4 +4,5 @@ from . import views
 
 urlpatterns = [
         path('details/<str:lemma_id>', views.details),
+        path('search', views.search),
         ]

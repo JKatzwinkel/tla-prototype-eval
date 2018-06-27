@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<link rel="stylesheet" type="text/css" href="{% static "resjs/res.css"%}" />
+		<script type="text/javascript" src="{% static "resjs/res_aux.js" %}"></script>
+		<script type="text/javascript" src="{% static "resjs/res_points.js" %}"></script>
+		<script type="text/javascript" src="{% static "resjs/res_lite.js" %}"></script>
+		<script type="text/javascript" src="{% static "resjs/res_struct.js" %}"></script>
+		<script type="text/javascript" src="{% static "resjs/res_syntax.js" %}"></script>
+		<script type="text/javascript" src="{% static "resjs/res_format.js" %}"></script>
+		<script type="text/javascript" src="{% static "resjs/res_render.js" %}"></script>
+		<script type="text/javascript" src="{% static "resjs/res_web.js" %}"></script>
+		<style>
+			body {
+				font-family: 'BBAWLibertine';
+			}
+			.mod {
+				color: #bbb;
+			}
+			.inline {
+				font-size: 0.9em;
+				vertical-align: -5px;
+				background-color: #eee;
+			}
+			.value {
+				font-weight: 400;
+			}
+			.keylabel {
+				font-style: italic;
+				font-weight: 600;
+			}
+			.word_class {
+				font-weight: 100;
+			}
+			.translation {
+				font-weight: 600;
+			}
+			.bibliography {
+				font-style: italic;
+			}
+		</style>
+		<title>lemma search</title>
+	</head>
+	<body>
+
+		<form action="/lemma/search" method="get">
+			<input id="name" type="text" name="name" value="{{ name }}">
+		</form>
+
+		<div class="results">
+			{% for hit in hits|dictsortreversed:"score" %}
+			<div class="result" id="{{ hit.name }}">
+				<a href="/lemma/details/{{ hit.id }}">
+				{{ hit.name }}
+				</a>
+
+				{% for glyphs in hit.word_glyphs %}
+					<canvas class="res" style="font-size:1.2em;vertical-align:-0.4em">{{ glyphs }}</canvas>
+				{% endfor %}
+
+				<span class="translation">
+					{% for translation in hit.translations.translations %}
+						{% if translation.lang == "de" %}
+							{{ translation.value }}
+						{% endif %}
+					{% endfor %}
+				</span>
+
+				<span class="word_class">
+					{{ hit.type }}
+				</span>
+
+				<span class="bibliography">
+					{{ hit.bib }}
+				</span>
+
+
+			</div>
+			{% endfor %}
+		</div>
+
+	</body>
+</html>

@@ -6,6 +6,10 @@ def get_lemma(_id):
     """ """
     res = es.search(index='lemma', doc_type='lemma', q='_id:{}'.format(_id))
     if res.get('hits', {}).get('total', 0) == 1:
-        return res.get('hits', {}).get('hits', {})[0].get('_source')
+        return res.get('hits', {}).get('hits', [])[0].get('_source')
 
 
+def search_lemma(query):
+    """ """
+    res = es.search(index='lemma', doc_type='lemma', q=query, size=100)
+    return res.get('hits', {}).get('hits', [])
