@@ -92,15 +92,17 @@
 		<div class="relations">
 			{% for predicate, objects in lemma_relations.items %}
 			<h4>{{ predicate }}</h4>
-			<ul>
 			{% for object in objects %}
-				<li>
-					<a href="/lemma/details/{{ object.id }}">
-						{{ object.name }}
-					</a>
-				</li>
+			<div class="relation {{ predicate }}">
+				<a href="/lemma/details/{{ object.id }}">
+					{{ object.name }}
+				</a>
+				{% for glyphs in object.glyphs %}
+				{{ glyphs }}
+					<canvas class="res inline">{{ glyphs }}</canvas>
+				{% endfor %}
+			</div>
 			{% endfor %}
-			</ul>
 			{% endfor %}
 
 		</div>
