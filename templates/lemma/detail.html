@@ -24,6 +24,13 @@
 				vertical-align: -5px;
 				background-color: #eee;
 			}
+			.value {
+				font-weight: 400;
+			}
+			.keylabel {
+				font-style: italic;
+				font-weight: 600;
+			}
 		</style>
 		<title>{{ lemma.name }}</title>
 	</head>
@@ -41,7 +48,7 @@
 
 		<div class="metadata_revision">
 			<div class="revision_date">
-				Last revision:
+				<span class="keylabel">Last revision:</span>
 				<span class="value">{{ revision_date }}</span>
 			</div>
 		</div>
@@ -49,7 +56,7 @@
 		<h3>Metadata</h3>
 		<div class="metadata_direct">
 			<div class="translations">
-				Translations:
+				<span class="keylabel">Translations:</span>
 				<table>
 					<tbody>
 						{% for translation in lemma.translations.translations %}
@@ -63,21 +70,21 @@
 			</div>
 
 			<div class="word_class">
-				Word class:
+				<span class="keylabel">Word class:</span>
 				<span class="value">{{ lemma.type }}</span>
 			</div>
 
 			<div class="bibliography">
 				{% for bib in lemma_bibliography %}
 				<div class="bibentry">
-					Bibliography:
+					<span class="keylabel">Bibliography:</span>
 					<span class="value">{{ bib }}</span>
 				</div>
 				{% endfor %}
 			</div>
 
 			<div class="annotations">
-				Annotation
+				<span class="keylabel">Annotation</span>
 			</div>
 
 		</div>
