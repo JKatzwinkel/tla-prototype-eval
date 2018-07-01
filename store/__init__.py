@@ -9,7 +9,7 @@ def get_lemma(_id):
         return res.get('hits', {}).get('hits', [])[0].get('_source')
 
 
-def search_lemma(query):
+def search_lemma(query, size=100, offset=0):
     """ """
-    res = es.search(index='lemma', doc_type='lemma', q=query, size=100)
-    return res.get('hits', {}).get('hits', [])
+    res = es.search(index='lemma', doc_type='lemma', q=query, size=size, from_=offset)
+    return res.get('hits', {})

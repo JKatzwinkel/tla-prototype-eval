@@ -62,18 +62,26 @@ def details(request, lemma_id):
 
 @require_http_methods(["GET"])
 def search(request):
-    query=' '.join(['{}:{}'.format(k, v) for k, v in request.GET.items()])
-    print(query)
-    hits = store.search_lemma(query)
-    for hit in hits:
+    params = request.GET.copy()
+    size = int(params.pop('size', [100])[0])
+    page = int(params.pop('page', [1])[0])
+    print(page)
+    print(size)
+    query = ' '.join(['{}:{}'.format(k, v) for k, v in params.items()])
+    hits = store.search_lemma(query, size=size, offset=(page-1)*size)
+
+    for hit in hits.get('hits', []):
         hit.get('_source')['score'] = hit.get('_score')
         hit.get('_source')['word_glyphs'] = word_glyphs(hit.get('_source'))
         hit.get('_source')['bib'] = lemma_bibliography(hit.get('_source'))
-    hits = [hit.get('_source') for hit in hits]
+    results = [hit.get('_source') for hit in hits.get('hits', [])]
 
-    print(hits)
     return render(request, 'lemma/search.html', {
-        'name': request.GET.get('name'),
-        'hits': hits
+        'name': params.get('name'),
+        'hits': results,
+        'count': hits.get('total'),
+        'size': size,
+        'page': page,
+        'parameters': '&'.join(['{}={}'.format(k, v) for k, v in params.items()])
         })
 

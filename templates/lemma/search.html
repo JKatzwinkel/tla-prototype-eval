@@ -79,6 +79,14 @@
 
 			</div>
 			{% endfor %}
+
+			<div class="pagination">
+				{% if page > 1 %}
+				<a href="/lemma/search?{{ parameters }}&page={{ page|add:"-1" }}&size={{ size }}">{{ page|add:"-1" }}</a>
+				{% endif %}
+				{{ size }} / {{ count }}
+				<a href="/lemma/search?{{ parameters }}&page={{ page|add:"1" }}&size={{ size }}">{{ page|add:"1" }}</a>
+			</div>
 		</div>
 
 	</body>
