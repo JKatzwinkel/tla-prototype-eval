@@ -40,6 +40,20 @@
 			.bibliography {
 				font-style: italic;
 			}
+
+			.pagination {
+					display: inline-block;
+					padding: 10px 20px;
+			}
+			.pagination a {
+					color: black;
+					padding: 8px 16px;
+					text-decoration: none;
+			}
+			.pagination a.active {
+					background-color: #4CAF50;
+					color: white;
+			}
 		</style>
 		<title>lemma search</title>
 	</head>
@@ -50,6 +64,9 @@
 		</form>
 
 		<div class="results">
+
+			Showing results {{ pagination.offset|add:"1" }} through {{ pagination.max_offset }} of {{ pagination.count }} in total.
+
 			{% for hit in hits|dictsortreversed:"score" %}
 			<div class="result" id="{{ hit.name }}">
 				<a href="/lemma/details/{{ hit.id }}">
@@ -81,11 +98,36 @@
 			{% endfor %}
 
 			<div class="pagination">
-				{% if page > 1 %}
-				<a href="/lemma/search?{{ parameters }}&page={{ page|add:"-1" }}&size={{ size }}">{{ page|add:"-1" }}</a>
+				{% if pagination.prev %}
+				<a href="/lemma/search?{{ parameters }}&page={{ pagination.prev }}&size={{ pagination.size }}">&laquo;</a>
+				{% else %}
+				&laquo;
 				{% endif %}
-				{{ size }} / {{ count }}
-				<a href="/lemma/search?{{ parameters }}&page={{ page|add:"1" }}&size={{ size }}">{{ page|add:"1" }}</a>
+				{% if pagination.first %}
+				<a href="/lemma/search?{{ parameters }}&page={{ pagination.first }}&size={{ pagination.size }}">{{ pagination.first}}</a>
+				{% if pagination.first < pagination.prev|add:"-1" %}
+				&hellip;
+				{% endif %}
+				{% endif %}
+				{% if pagination.prev %}
+				<a href="/lemma/search?{{ parameters }}&page={{ pagination.prev }}&size={{ pagination.size }}">{{ pagination.prev }}</a>
+				{% endif %}
+				<a class="active" href="/lemma/search?{{ parameters }}&page={{ pagination.page }}&size={{ pagination.size }}">{{ pagination.page }}</a>
+				{% if pagination.next %}
+				<a href="/lemma/search?{{ parameters }}&page={{ pagination.next }}&size={{ pagination.size }}">{{ pagination.next }}</a>
+				{% endif %}
+				{% if pagination.last%}
+				{% if pagination.next|add:"1" < pagination.last %}
+				&hellip;
+				{% endif %}
+				<a href="/lemma/search?{{ parameters }}&page={{ pagination.last }}&size={{ pagination.size }}">{{ pagination.last }}</a>
+				{% endif %}
+				{% if pagination.next%}
+				<a href="/lemma/search?{{ parameters }}&page={{ pagination.next }}&size={{ pagination.size }}">&raquo;</a>
+				{% else %}
+				&raquo;
+				{% endif %}
+
 			</div>
 		</div>
 

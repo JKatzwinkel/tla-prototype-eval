@@ -47,6 +47,24 @@ def lemma_relations(lemma):
     return res
 
 
+def pagination(page, size, hits):
+    pagination_ = {"page": page,
+                   "size": size,
+                   "count": hits,
+                   "offset": size * (page-1),
+                   "max_offset": min(size * page, hits)}
+
+    if page > 1:
+        pagination_["prev"] = page - 1
+        if page > 2:
+            pagination_["first"] = 1
+    last = hits // size + int(hits % size > 0)
+    if page < last:
+        pagination_["next"] = page + 1
+        if page < last - 1:
+            pagination_["last"] = last
+    return pagination_
+
 
 @require_http_methods(["GET"])
 def details(request, lemma_id):
@@ -79,9 +97,7 @@ def search(request):
     return render(request, 'lemma/search.html', {
         'name': params.get('name'),
         'hits': results,
-        'count': hits.get('total'),
-        'size': size,
-        'page': page,
+        'pagination': pagination(page, size, hits.get('total')),
         'parameters': '&'.join(['{}={}'.format(k, v) for k, v in params.items()])
         })
 
