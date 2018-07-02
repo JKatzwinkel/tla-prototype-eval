@@ -7,18 +7,20 @@ import store
 
 
 def resolve_name(lemma_id=None, lemma=None):
-    lemma = lemma or store.get_lemma(lemma_id)
+    lemma = lemma or store.get('lemma', lemma_id)
     if lemma:
         return lemma.get('name')
     else:
         print('lemma id does not exist: {}'.format(lemma_id))
         return lemma_id
 
+
 def word_glyphs(lemma):
     word_glyphs = []
-    for word in lemma.get('words', []):
-        word_glyphs.append(
-                '-'.join([e.get('code') for e in word.get('graphics', [])]))
+    if lemma:
+        for word in lemma.get('words', []):
+            word_glyphs.append(
+                    '-'.join([e.get('code') for e in word.get('graphics', [])]))
     return word_glyphs
 
 
@@ -38,7 +40,7 @@ def lemma_relations(lemma):
         object_id = relation.get('objectId')
         predicate = relation.get('type')
         objects = res.get(predicate, [])
-        obj = store.get_lemma(object_id)
+        obj = store.get('lemma', object_id)
         objects.append({
             "id": object_id,
             "name": resolve_name(lemma=obj),
@@ -68,8 +70,8 @@ def pagination(page, size, hits):
 
 @require_http_methods(["GET"])
 def details(request, lemma_id):
-    lemma = store.get_lemma(lemma_id)
-    return render(request, 'lemma/detail.html', {
+    lemma = store.get('lemma', lemma_id)
+    return render(request, 'lemma/details.html', {
                 'lemma': lemma,
                 'word_glyphs': word_glyphs(lemma),
                 'revision_date': revision_date(lemma),
@@ -95,7 +97,7 @@ def search(request):
     results = [hit.get('_source') for hit in hits.get('hits', [])]
 
     return render(request, 'lemma/search.html', {
-        'name': params.get('name'),
+        'name': params.get('name', ''),
         'hits': results,
         'pagination': pagination(page, size, hits.get('total')),
         'parameters': '&'.join(['{}={}'.format(k, v) for k, v in params.items()])
