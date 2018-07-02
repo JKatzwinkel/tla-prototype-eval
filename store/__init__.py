@@ -49,4 +49,14 @@ def get(index, _id):
         return res.get('_source')
 
 
+def resolve_name(index, _id=None, obj=None):
+    """ takes either an object or an object id to be looked up in a given index and extracts the name field. """
+    obj = obj or get(index, _id)
+    if obj:
+        return obj.get('name')
+    else:
+        print('obj id does not exist: {}'.format(_id))
+        return _id
+
+
 

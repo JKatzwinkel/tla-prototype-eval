@@ -6,14 +6,6 @@ from django.views.decorators.http import require_http_methods
 import store
 
 
-def resolve_name(lemma_id=None, lemma=None):
-    lemma = lemma or store.get('lemma', lemma_id)
-    if lemma:
-        return lemma.get('name')
-    else:
-        print('lemma id does not exist: {}'.format(lemma_id))
-        return lemma_id
-
 
 def word_glyphs(lemma):
     word_glyphs = []
@@ -64,7 +56,7 @@ def search(request):
     params = request.GET.copy()
     size = int(params.pop('size', [100])[0])
     page = int(params.pop('page', [1])[0])
-    
+
     query = ' '.join(['{}:{}'.format(k, v) for k, v in params.items()])
     hits = store.search('lemma', query, size=size, offset=(page-1)*size)
 
