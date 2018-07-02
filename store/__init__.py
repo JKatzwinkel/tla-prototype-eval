@@ -42,11 +42,11 @@ def search(index, query, size=100, offset=0):
 
 
 def get(index, _id):
-    """ retrieve document with given id from given index assuming its doctype is the 
+    """ retrieve document with given id from given index assuming its doctype is the
     same as index. """
-    res = es.search(index=index, doc_type=index, q='_id:{}'.format(_id))
-    if res.get('hits', {}).get('total', 0) == 1:
-        return res.get('hits', {}).get('hits', [])[0].get('_source')
-    
+    res = es.get(index, index, _id)
+    if res:
+        return res.get('_source')
+
 
 
