@@ -1,0 +1,10 @@
+{% extends "../terminology/base_search.html" %}
+
+{% block title %}thesaurus search{% endblock %}
+
+{% block single_result %}
+	<a href="/ths/details/{{ hit.id }}">
+		{{ hit.name }
+	</a>
+
+{% endblock %}

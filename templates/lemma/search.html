@@ -1,135 +1,32 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta http-equiv="content-type" content="text/html; charset=utf-8">
-		<link rel="stylesheet" type="text/css" href="{% static "resjs/res.css"%}" />
-		<script type="text/javascript" src="{% static "resjs/res_aux.js" %}"></script>
-		<script type="text/javascript" src="{% static "resjs/res_points.js" %}"></script>
-		<script type="text/javascript" src="{% static "resjs/res_lite.js" %}"></script>
-		<script type="text/javascript" src="{% static "resjs/res_struct.js" %}"></script>
-		<script type="text/javascript" src="{% static "resjs/res_syntax.js" %}"></script>
-		<script type="text/javascript" src="{% static "resjs/res_format.js" %}"></script>
-		<script type="text/javascript" src="{% static "resjs/res_render.js" %}"></script>
-		<script type="text/javascript" src="{% static "resjs/res_web.js" %}"></script>
-		<style>
-			body {
-				font-family: 'BBAWLibertine';
-			}
-			.mod {
-				color: #bbb;
-			}
-			.inline {
-				font-size: 0.9em;
-				vertical-align: -5px;
-				background-color: #eee;
-			}
-			.value {
-				font-weight: 400;
-			}
-			.keylabel {
-				font-style: italic;
-				font-weight: 600;
-			}
-			.word_class {
-				font-weight: 100;
-			}
-			.translation {
-				font-weight: 600;
-			}
-			.bibliography {
-				font-style: italic;
-			}
+{% extends "../terminology/base_search.html" %}
 
-			.pagination {
-					display: inline-block;
-					padding: 10px 20px;
-			}
-			.pagination a {
-					color: black;
-					padding: 8px 16px;
-					text-decoration: none;
-			}
-			.pagination a.active {
-					background-color: #4CAF50;
-					color: white;
-			}
-		</style>
-		<title>lemma search</title>
-	</head>
-	<body>
+{% block title %}lemma search {{ name }}{% endblock %}
 
-		<form action="/lemma/search" method="get">
-			<input id="name" type="text" name="name" value="{{ name }}">
-		</form>
+{% block single_result %}
+	<a href="/lemma/details/{{ hit.id }}">
+	{{ hit.name }}
+	</a>
 
-		<div class="results">
+	{% for glyphs in hit.word_glyphs %}
+		<canvas class="res" style="font-size:1.2em;vertical-align:-0.4em">{{ glyphs }}</canvas>
+	{% endfor %}
 
-			Showing results {{ pagination.offset|add:"1" }} through {{ pagination.max_offset }} of {{ pagination.count }} in total.
+	<span class="translation">
+		{% for translation in hit.translations.translations %}
+			{% if translation.lang == "de" %}
+				{{ translation.value }}
+			{% endif %}
+		{% endfor %}
+	</span>
 
-			{% for hit in hits|dictsortreversed:"score" %}
-			<div class="result" id="{{ hit.name }}">
-				<a href="/lemma/details/{{ hit.id }}">
-				{{ hit.name }}
-				</a>
+	<span class="word_class">
+		{{ hit.type }}
+	</span>
 
-				{% for glyphs in hit.word_glyphs %}
-					<canvas class="res" style="font-size:1.2em;vertical-align:-0.4em">{{ glyphs }}</canvas>
-				{% endfor %}
-
-				<span class="translation">
-					{% for translation in hit.translations.translations %}
-						{% if translation.lang == "de" %}
-							{{ translation.value }}
-						{% endif %}
-					{% endfor %}
-				</span>
-
-				<span class="word_class">
-					{{ hit.type }}
-				</span>
-
-				<span class="bibliography">
-					{{ hit.bib }}
-				</span>
+	<span class="bibliography">
+		{{ hit.bib }}
+	</span>
+{% endblock %}
 
 
-			</div>
-			{% endfor %}
 
-			<div class="pagination">
-				{% if pagination.prev %}
-				<a href="/lemma/search?{{ parameters }}&page={{ pagination.prev }}&size={{ pagination.size }}">&laquo;</a>
-				{% else %}
-				&laquo;
-				{% endif %}
-				{% if pagination.first %}
-				<a href="/lemma/search?{{ parameters }}&page={{ pagination.first }}&size={{ pagination.size }}">{{ pagination.first}}</a>
-				{% if pagination.first < pagination.prev|add:"-1" %}
-				&hellip;
-				{% endif %}
-				{% endif %}
-				{% if pagination.prev %}
-				<a href="/lemma/search?{{ parameters }}&page={{ pagination.prev }}&size={{ pagination.size }}">{{ pagination.prev }}</a>
-				{% endif %}
-				<a class="active" href="/lemma/search?{{ parameters }}&page={{ pagination.page }}&size={{ pagination.size }}">{{ pagination.page }}</a>
-				{% if pagination.next %}
-				<a href="/lemma/search?{{ parameters }}&page={{ pagination.next }}&size={{ pagination.size }}">{{ pagination.next }}</a>
-				{% endif %}
-				{% if pagination.last%}
-				{% if pagination.next|add:"1" < pagination.last %}
-				&hellip;
-				{% endif %}
-				<a href="/lemma/search?{{ parameters }}&page={{ pagination.last }}&size={{ pagination.size }}">{{ pagination.last }}</a>
-				{% endif %}
-				{% if pagination.next%}
-				<a href="/lemma/search?{{ parameters }}&page={{ pagination.next }}&size={{ pagination.size }}">&raquo;</a>
-				{% else %}
-				&raquo;
-				{% endif %}
-
-			</div>
-		</div>
-
-	</body>
-</html>
