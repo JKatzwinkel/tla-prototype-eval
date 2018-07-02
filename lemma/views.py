@@ -24,9 +24,6 @@ def word_glyphs(lemma):
     return word_glyphs
 
 
-def revision_date(lemma):
-    return lemma.get('revisions', [])[-1].split('@')[1]
-
 
 def lemma_bibliography(lemma):
     return [bibentry.get('value')
@@ -49,24 +46,6 @@ def lemma_relations(lemma):
     return res
 
 
-def pagination(page, size, hits):
-    pagination_ = {"page": page,
-                   "size": size,
-                   "count": hits,
-                   "offset": size * (page-1),
-                   "max_offset": min(size * page, hits)}
-
-    if page > 1:
-        pagination_["prev"] = page - 1
-        if page > 2:
-            pagination_["first"] = 1
-    last = hits // size + int(hits % size > 0)
-    if page < last:
-        pagination_["next"] = page + 1
-        if page < last - 1:
-            pagination_["last"] = last
-    return pagination_
-
 
 @require_http_methods(["GET"])
 def details(request, lemma_id):
@@ -74,7 +53,7 @@ def details(request, lemma_id):
     return render(request, 'lemma/details.html', {
                 'lemma': lemma,
                 'word_glyphs': word_glyphs(lemma),
-                'revision_date': revision_date(lemma),
+                'revision_date': store.obj_revision_date(lemma),
                 'lemma_bibliography': lemma_bibliography(lemma),
                 'lemma_relations': lemma_relations(lemma),
                 })
@@ -85,10 +64,9 @@ def search(request):
     params = request.GET.copy()
     size = int(params.pop('size', [100])[0])
     page = int(params.pop('page', [1])[0])
-    print(page)
-    print(size)
+    
     query = ' '.join(['{}:{}'.format(k, v) for k, v in params.items()])
-    hits = store.search_lemma(query, size=size, offset=(page-1)*size)
+    hits = store.search('lemma', query, size=size, offset=(page-1)*size)
 
     for hit in hits.get('hits', []):
         hit.get('_source')['score'] = hit.get('_score')
@@ -99,7 +77,7 @@ def search(request):
     return render(request, 'lemma/search.html', {
         'name': params.get('name', ''),
         'hits': results,
-        'pagination': pagination(page, size, hits.get('total')),
+        'pagination': store.pagination(page, size, hits.get('total')),
         'parameters': '&'.join(['{}={}'.format(k, v) for k, v in params.items()])
         })
 

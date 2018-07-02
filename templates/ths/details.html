@@ -1,65 +1,25 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta http-equiv="content-type" content="text/html; charset=utf-8">
-		<link rel="stylesheet" type="text/css" href="{% static "resjs/res.css"%}" />
-		<script type="text/javascript" src="{% static "resjs/res_aux.js" %}"></script>
-		<script type="text/javascript" src="{% static "resjs/res_points.js" %}"></script>
-		<script type="text/javascript" src="{% static "resjs/res_lite.js" %}"></script>
-		<script type="text/javascript" src="{% static "resjs/res_struct.js" %}"></script>
-		<script type="text/javascript" src="{% static "resjs/res_syntax.js" %}"></script>
-		<script type="text/javascript" src="{% static "resjs/res_format.js" %}"></script>
-		<script type="text/javascript" src="{% static "resjs/res_render.js" %}"></script>
-		<script type="text/javascript" src="{% static "resjs/res_web.js" %}"></script>
-		<style>
-			body {
-				font-family: 'BBAWLibertine';
-			}
-			.mod {
-				color: #bbb;
-			}
-			.inline {
-				font-size: 0.9em;
-				vertical-align: -5px;
-				background-color: #eee;
-			}
-			.value {
-				font-weight: 400;
-			}
-			.keylabel {
-				font-style: italic;
-				font-weight: 600;
-			}
-		</style>
-		<title>{{ lemma.name }}</title>
-	</head>
-	<body>
+{% extends "../terminology/base_details.html" %}
 
+{% block title %}{{ obj.name }}{% endblock %}
+
+
+{% block heading %}
 		<h2>
-			{{ lemma.name }}
-			{% for glyphs in word_glyphs %}
-				<canvas class="res inline" title="{{ glyphs }}">{{ glyphs }}</canvas>
-			{% endfor %}
+			{{ obj.name }}
 			<span class="mod">
-				(<a href="http://localhost:9200/lemma/_search/?q=id:{{ lemma.id }}">{{ lemma.id }}</a>)
+				(<a href="http://localhost:9200/ths/_search/?q=id:{{ obj.id }}">{{ obj.id }}</a>)
 			</span>
 		</h2>
+{% endblock %}
 
-		<div class="metadata_revision">
-			<div class="revision_date">
-				<span class="keylabel">Last revision:</span>
-				<span class="value">{{ revision_date }}</span>
-			</div>
-		</div>
-
+{% block content %}
 		<h3>Metadata</h3>
 		<div class="metadata_direct">
 			<div class="translations">
 				<span class="keylabel">Translations:</span>
 				<table>
 					<tbody>
-						{% for translation in lemma.translations.translations %}
+						{% for translation in obj.translations.translations %}
 						<tr>
 							<td class="mod">{{ translation.lang }}</td>
 							<td>{{ translation.value }}</td>
@@ -70,12 +30,12 @@
 			</div>
 
 			<div class="word_class">
-				<span class="keylabel">Word class:</span>
-				<span class="value">{{ lemma.type }}</span>
+				<span class="keylabel">Type:</span>
+				<span class="value">{{ obj.type }}</span>
 			</div>
 
 			<div class="bibliography">
-				{% for bib in lemma_bibliography %}
+				{% for bib in ths_bibliography %}
 				<div class="bibentry">
 					<span class="keylabel">Bibliography:</span>
 					<span class="value">{{ bib }}</span>
@@ -97,22 +57,18 @@
 
 		<h3>TLA Relations</h3>
 		<div class="relations">
-			{% for predicate, objects in lemma_relations.items %}
+			{% for predicate, objects in ths_relations.items %}
 			<h4>{{ predicate }}</h4>
 			{% for object in objects %}
 			<div class="relation {{ predicate }}">
 				<a href="/lemma/details/{{ object.id }}">
 					{{ object.name }}
 				</a>
-				{% for glyphs in object.glyphs %}
-					<canvas class="res inline">{{ glyphs }}</canvas>
-				{% endfor %}
 			</div>
 			{% endfor %}
 			{% endfor %}
 
 		</div>
+{% endblock %}
 
 
-	</body>
-</html>

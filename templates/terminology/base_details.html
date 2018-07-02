@@ -48,14 +48,16 @@
 		</h2>
 		{% endblock %}
 
-		{% block content %}
+		{% block object_metadata %}
 		<div class="metadata_revision">
 			<div class="revision_date">
 				<span class="keylabel">Last revision:</span>
 				<span class="value">{{ revision_date }}</span>
 			</div>
 		</div>
+		{% endblock %}
 
+		{% block content %}
 		<h3>Metadata</h3>
 		<div class="metadata_direct">
 			<div class="translations">
