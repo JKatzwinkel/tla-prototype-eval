@@ -40,3 +40,12 @@ def search(request):
         })
 
 
+@require_http_methods(["GET"])
+def list(request):
+    params = request.GET.copy()
+    hits = store.search('ths', 'root:true', size=9999)
+    return render(request, 'ths/search.html', {
+        'hits': store.hits_contents(hits)
+        })
+
+

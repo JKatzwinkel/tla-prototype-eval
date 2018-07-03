@@ -10,19 +10,34 @@
 				(<a href="/es/ths/get/{{ obj.id }}">{{ obj.id }}</a>)
 			</span>
 		</h2>
+		{% for path in obj.paths %}
+		<div class="path" id="path_{{ forloop.counter }}">
+			{% for linked in path %}
+			<span id="{{ linked.id }}">
+				<a href="/ths/details/{{ linked.id }}">
+					{{ linked.name }}
+				</a>
+			</span>
+			{% if not forloop.last %}
+			&gt;
+			{% endif %}
+			{% endfor %}
+		</div>
+		{% endfor %}
 {% endblock %}
+
 
 {% block content %}
 		<h3>Metadata</h3>
 		<div class="metadata_direct">
 			<div class="translations">
-				<span class="keylabel">Translations:</span>
+				<span class="keylabel">Synomyms:</span>
 				<table>
 					<tbody>
-						{% for translation in obj.translations.translations %}
+						{% for synonym in obj.synonyms %}
 						<tr>
-							<td class="mod">{{ translation.lang }}</td>
-							<td>{{ translation.value }}</td>
+							<td class="mod">{{synonym.lang }}</td>
+							<td>{{ synonym.value }}</td>
 						</tr>
 						{% endfor %}
 					</tbody>
@@ -56,18 +71,52 @@
 
 
 		<h3>TLA Relations</h3>
-		<div class="relations">
-			{% for predicate, objects in ths_relations.items %}
-			<h4>{{ predicate }}</h4>
-			{% for object in objects %}
-			<div class="relation {{ predicate }}">
-				<a href="/lemma/details/{{ object.id }}">
-					{{ object.name }}
-				</a>
+		<div class="relations" style="width:50%">
+			<h4>Broader Terms:</h4>
+			<div class="broader" style="wdith:50%">
+				{% for object in obj.relations.partOf %}
+				<span class="relation" style="padding:0px 5px">
+					<a href="/ths/details/{{ object.id }}">
+						{{ object.name }}
+					</a>
+				</span>
+				{% endfor %}
 			</div>
-			{% endfor %}
-			{% endfor %}
+			
+			<h4>Narrower Terms:</h4>
+			<div class="narrower" style="wdith:50%">
+				{% for object in obj.relations.partOf_inverse %}
+				<span class="relation" style="padding:0px 5px">
+					<a href="/ths/details/{{ object.id }}">
+						{{ object.name }}
+					</a>
+				</span>
+				{% endfor %}
+			</div>
 
+
+			<h3>External Links</h3>
+			<table>
+				<thead>
+					<tr>
+						<th style="text-align:right">Provider</th>
+						<th style="text-align:center">Type</th>
+						<th style="text-align:left">Descriptor</th>
+					</tr>
+				</thead>
+				<tbody>
+				{% for reference in obj.externalReferences %}
+					<tr>
+						<td style="text-align:right">{{ reference.provider }}</td>
+						<td style="text-align:center">{{ reference.type }}</td>
+						<td style="text-align:left">
+							{{ reference.reference|urlize }}
+						</td>
+					</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+	
 		</div>
 {% endblock %}
 
