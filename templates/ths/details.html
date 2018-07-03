@@ -7,7 +7,7 @@
 		<h2>
 			{{ obj.name }}
 			<span class="mod">
-				(<a href="http://localhost:9200/ths/_search/?q=id:{{ obj.id }}">{{ obj.id }}</a>)
+				(<a href="/es/ths/get/{{ obj.id }}">{{ obj.id }}</a>)
 			</span>
 		</h2>
 {% endblock %}

@@ -19,8 +19,10 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    path('home/', views.index),
-    path('admin/', admin.site.urls),
-    path('lemma/', include('lemma.urls')),
-    path('ths/', include('ths.urls'))
+        path('es/<str:index>/get/<str:_id>', views.es_get),
+        path('es/<str:index>/search/<str:query>', views.es_search),
+        path('home/', views.index),
+        path('admin/', admin.site.urls),
+        path('lemma/', include('lemma.urls')),
+        path('ths/', include('ths.urls'))
 ]

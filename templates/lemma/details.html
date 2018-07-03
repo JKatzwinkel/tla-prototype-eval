@@ -9,19 +9,13 @@
 		<canvas class="res inline" title="{{ glyphs }}">{{ glyphs }}</canvas>
 	{% endfor %}
 	<span class="mod">
-		(<a href="http://localhost:9200/lemma/_search/?q=id:{{ lemma.id }}">{{ lemma.id }}</a>)
+		(<a href="/es/lemma/get/{{ lemma.id }}">{{ lemma.id }}</a>)
 	</span>
 </h2>
 {% endblock %}
 
 
 {% block content %}
-		<div class="metadata_revision">
-			<div class="revision_date">
-				<span class="keylabel">Last revision:</span>
-				<span class="value">{{ revision_date }}</span>
-			</div>
-		</div>
 
 		<h3>Metadata</h3>
 		<div class="metadata_direct">
