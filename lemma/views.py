@@ -7,6 +7,7 @@ import store
 
 
 
+
 def word_glyphs(lemma):
     word_glyphs = []
     if lemma:
@@ -32,7 +33,7 @@ def lemma_relations(lemma):
         obj = store.get('lemma', object_id)
         objects.append({
             "id": object_id,
-            "name": resolve_name(lemma=obj),
+            "name": store.resolve_name('lemma', obj=obj),
             "glyphs": word_glyphs(obj)})
         res[predicate] = objects
     return res

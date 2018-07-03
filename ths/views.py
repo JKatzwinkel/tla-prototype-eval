@@ -5,6 +5,7 @@ from django.views.decorators.http import require_http_methods
 import store
 
 
+
 def param_pop(params, key, default):
     values = params.pop(key, [default])
     if len(values) < 2:
@@ -31,13 +32,9 @@ def search(request):
     query = store.lucenify(params)
     hits = store.search('ths', query, size=size, offset=(page-1)*size)
 
-    for hit in hits.get('hits', []):
-        hit.get('_source')['score'] = hit.get('_score')
-    results = [hit.get('_source') for hit in hits.get('hits', [])]
-
     return render(request, 'ths/search.html', {
         'name': params.get('name', ''),
-        'hits': results,
+        'hits': store.hits_contents(hits),
         'pagination': store.pagination(page, size, hits.get('total')),
         'parameters': '&'.join(['{}={}'.format(k, v) for k, v in params.items()])
         })
