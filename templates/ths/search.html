@@ -10,7 +10,7 @@
 
 {% block single_result %}
 	<a href="/ths/details/{{ hit.id }}">
-		{{ hit.name }}
+		{{ hit.name }} <span class="mod">({{ hit.relations.partOf_inverse|length }})</span>
 	</a>
 
 {% endblock %}

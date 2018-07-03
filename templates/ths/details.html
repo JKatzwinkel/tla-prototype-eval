@@ -31,13 +31,13 @@
 		<h3>Metadata</h3>
 		<div class="metadata_direct">
 			<div class="translations">
-				<span class="keylabel">Synomyms:</span>
+				<span class="keylabel">Synonyms</span>
 				<table>
 					<tbody>
-						{% for synonym in obj.synonyms %}
+						{% for synonym in obj.passport.synonyms.synonym_group %}
 						<tr>
-							<td class="mod">{{synonym.lang }}</td>
-							<td>{{ synonym.value }}</td>
+							<td class="mod">{{ synonym.language }}</td>
+							<td>{{ synonym.synonym }}</td>
 						</tr>
 						{% endfor %}
 					</tbody>
@@ -89,6 +89,10 @@
 				<span class="relation" style="padding:0px 5px">
 					<a href="/ths/details/{{ object.id }}">
 						{{ object.name }}
+						{% if object.transitive > 0 %}
+						<span class="mod">({{ object.transitive }})</span>
+						{% endif %}
+
 					</a>
 				</span>
 				{% endfor %}
