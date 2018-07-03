@@ -12,49 +12,8 @@
 		<script type="text/javascript" src="{% static "resjs/res_format.js" %}"></script>
 		<script type="text/javascript" src="{% static "resjs/res_render.js" %}"></script>
 		<script type="text/javascript" src="{% static "resjs/res_web.js" %}"></script>
-		<style>
-			body {
-				font-family: 'BBAWLibertine';
-			}
-			.mod {
-				color: #bbb;
-			}
-			.inline {
-				font-size: 0.9em;
-				vertical-align: -5px;
-				background-color: #eee;
-			}
-			.value {
-				font-weight: 400;
-			}
-			.keylabel {
-				font-style: italic;
-				font-weight: 600;
-			}
-			.word_class {
-				font-weight: 100;
-			}
-			.translation {
-				font-weight: 600;
-			}
-			.bibliography {
-				font-style: italic;
-			}
-
-			.pagination {
-					display: inline-block;
-					padding: 10px 20px;
-			}
-			.pagination a {
-					color: black;
-					padding: 8px 16px;
-					text-decoration: none;
-			}
-			.pagination a.active {
-					background-color: #4CAF50;
-					color: white;
-			}
-		</style>
+		<link rel="stylesheet" type="text/css" href="{% static "css/webd.css"%}" />
+		<link rel="stylesheet" type="text/css" href="{% static "css/search.css"%}" />
 		<title>{% block title %}lemma search{% endblock %}</title>
 	</head>
 	<body>

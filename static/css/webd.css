@@ -1,0 +1,24 @@
+@font-face {
+		font-family: BBAWLibertine;
+		src: url(../BBAWLibertine_ah.ttf);
+}
+
+body {
+	font-family: BBAWLibertine;
+}
+.mod {
+	color: #bbb;
+}
+.inline {
+	font-size: 0.9em;
+	vertical-align: -5px;
+	background-color: #eee;
+}
+.value {
+	font-weight: 400;
+}
+.keylabel {
+	font-style: italic;
+	font-weight: 600;
+}
+

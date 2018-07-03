@@ -12,31 +12,7 @@
 		<script type="text/javascript" src="{% static "resjs/res_format.js" %}"></script>
 		<script type="text/javascript" src="{% static "resjs/res_render.js" %}"></script>
 		<script type="text/javascript" src="{% static "resjs/res_web.js" %}"></script>
-		<style>
-			@font-face {
-					font-family: BBAWLibertine;
-					src: url({% static "BBAWLibertine_ah.ttf" %});
-			}
-
-			body {
-				font-family: BBAWLibertine;
-			}
-			.mod {
-				color: #bbb;
-			}
-			.inline {
-				font-size: 0.9em;
-				vertical-align: -5px;
-				background-color: #eee;
-			}
-			.value {
-				font-weight: 400;
-			}
-			.keylabel {
-				font-style: italic;
-				font-weight: 600;
-			}
-		</style>
+		<link rel="stylesheet" type="text/css" href="{% static "css/webd.css"%}" />
 		<title>{% block title %}Details page{% endblock %}</title>
 	</head>
 	<body>
