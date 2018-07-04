@@ -6,6 +6,9 @@
 body {
 	font-family: BBAWLibertine;
 }
+a {
+	text-decoration: none;
+}
 .mod {
 	color: #bbb;
 }
