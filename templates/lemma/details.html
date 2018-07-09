@@ -23,10 +23,10 @@
 				<span class="keylabel">Translations:</span>
 				<table>
 					<tbody>
-						{% for translation in lemma.translations.translations %}
+						{% for lang, translation in lemma.translations.items %}
 						<tr>
-							<td class="mod">{{ translation.lang }}</td>
-							<td>{{ translation.value }}</td>
+							<td class="mod">{{ lang }}</td>
+							<td>{{ translation }}</td>
 						</tr>
 						{% endfor %}
 					</tbody>
