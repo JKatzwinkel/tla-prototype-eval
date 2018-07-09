@@ -58,7 +58,7 @@ def search(request):
     size = int(params.pop('size', [100])[0])
     page = int(params.pop('page', [1])[0])
 
-    query = ' '.join(['{}:{}'.format(k, v) for k, v in params.items()])
+    query = store.lucenify(params)
     hits = store.search('lemma', query, size=size, offset=(page-1)*size)
 
     for hit in hits.get('hits', []):
