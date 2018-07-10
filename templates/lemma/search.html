@@ -12,11 +12,7 @@
 	{% endfor %}
 
 	<span class="translation">
-		{% for translation in hit.translations.translations %}
-			{% if translation.lang == "de" %}
-				{{ translation.value }}
-			{% endif %}
-		{% endfor %}
+	  {{ hit.translations.de }}
 	</span>
 
 	<span class="word_class">

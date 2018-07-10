@@ -19,10 +19,7 @@ def word_glyphs(lemma):
 
 
 def lemma_bibliography(lemma):
-    return [bibentry.get('value')
-            for entry_group in lemma.get('passport', {}).get('children', [])
-            for bibentry in entry_group.get('children', [])
-            if entry_group.get('type') == 'bibliography']
+    return [bib_entry for bib_entry in lemma.get('passport', {}).get('bibliography', {}).values()]
 
 def lemma_relations(lemma):
     res = {}
