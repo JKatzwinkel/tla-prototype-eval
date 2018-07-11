@@ -1,0 +1,16 @@
+	[
+		{
+			"key": "find_spot.find_spot.place.place",
+			"labels": {
+				"en": "Find Spot"
+			},
+			"resolve": true
+		},
+		{
+			"key": "object.description_of_object.type",
+			"labels": {
+				"en": "Object Type"
+			},
+			"resolve": true
+		}
+	]

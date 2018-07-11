@@ -24,6 +24,7 @@ def lemma_bibliography(lemma):
             for bibentry in entry_group.get('children', [])
             if entry_group.get('type') == 'bibliography']
 
+
 def lemma_relations(lemma):
     res = {}
     for relation in lemma.get('relations', []):
