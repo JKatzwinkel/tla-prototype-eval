@@ -1,0 +1,16 @@
+{% extends "../terminology/base_search.html" %}
+
+{% block title %}object search{% endblock %}
+
+{% block search_form %}
+	<form action="/object/search" method="get">
+		<input id="name" type="text" name="name" value="{{ name }}">
+	</form>
+{% endblock %}
+
+{% block single_result %}
+	<a href="/object/details/{{ hit.id }}">
+		{{ hit.name }} <span class="mod">({{ hit.relations.partOf_inverse|length }})</span>
+	</a>
+
+{% endblock %}
