@@ -12,6 +12,11 @@
 		<script type="text/javascript" src="{% static "resjs/res_format.js" %}"></script>
 		<script type="text/javascript" src="{% static "resjs/res_render.js" %}"></script>
 		<script type="text/javascript" src="{% static "resjs/res_web.js" %}"></script>
+		<script type="text/javascript" src="{% static "js/jquery-3.3.1.js" %}"></script>
+		<script type="text/javascript">
+			{% block headjs %}
+			{% endblock %}
+		</script>
 		<link rel="stylesheet" type="text/css" href="{% static "css/webd.css"%}" />
 		<link rel="stylesheet" type="text/css" href="{% static "css/header.css"%}" />
 		<link rel="stylesheet" type="text/css" href="{% static "css/body.css"%}" />

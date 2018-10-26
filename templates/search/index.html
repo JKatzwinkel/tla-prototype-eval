@@ -1,4 +1,30 @@
 {% extends "../base.html" %}
+{% load js %}
+
+{% block headjs %}
+var wordClasses = {{ word_classes | js }};
+$(document).ready(function(){
+ var wordClassTypesField = $("#word_class_types");
+ var wordClassSubtypesField = $("#word_class_subtypes");
+ wordClassSubtypesField.hide();
+
+ wordClassTypesField.bind('input', function(){
+	var key = wordClassTypesField.val();
+	if (key in wordClasses && wordClasses[key] != null) {
+		wordClasses[key].forEach((subtype, index) => {
+			$('#word_class_subtypes_list').append(
+			'<option value="'+subtype+'"/>');
+		});
+		wordClassSubtypesField.show(100);
+	} else {
+		wordClassSubtypesField.hide(100);
+			$('#word_class_subtypes_list').empty();
+			wordClassSubtypesField.val('');
+		}
+ });
+});
+{% endblock %}
+
 
 {% block title %}Search TLA{% endblock %}
 
