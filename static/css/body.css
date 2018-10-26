@@ -64,6 +64,10 @@ div#container div.search-form-container table tr:nth-child(even) {
 	background-color: #ddd;
 }
 
+div#container div#content div div.search-form-container table tbody tr td.input-method-choice input {
+	font-family: BBAWLibertine;
+}
+
 
 
 
