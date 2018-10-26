@@ -25,5 +25,6 @@ urlpatterns = [
         path('admin/', admin.site.urls),
         path('lemma/', include('lemma.urls')),
         path('object/', include('object.urls')),
-        path('ths/', include('ths.urls'))
+        path('ths/', include('ths.urls')),
+        path('search/', include('search.urls')),
 ]

@@ -4,7 +4,8 @@
 }
 
 body {
-	font-family: BBAWLibertine;
+	font-family: Tahoma, Geneva, sans-serif;
+	background-color: #eee;
 }
 a {
 	text-decoration: none;

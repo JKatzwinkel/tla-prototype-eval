@@ -1,0 +1,67 @@
+{% extends "../base.html" %}
+
+{% block title %}Search TLA{% endblock %}
+
+{% block breadcrumbs %}
+<li>Search TLA</li>
+{% endblock %}
+
+{% block content%}
+<div>
+	<h3>Dictionary Entries</h3>
+	<hr/>
+	<div class="search-form-container">
+		<table>
+			<form>
+				<tr>
+					<td/>
+					<td>
+						<input type="checkbox" name="hieroglyphic" value="hieroglyphic"/>
+							Hieroglyphics/Hieratic
+						<input type="checkbox" name="demotic" value="demotic"/>
+							Demotic
+						<input type="checkbox" name="coptic" value="coptic"/>
+							Coptic
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						Transcription
+					</td>
+					<td class="input-method-choice">
+						<input type="text" name="transcription" style="width:100%"/>
+						<input type="radio" name="transcription_input_method" value="unicode" checked="true"/>
+						Unicode
+						<input type="radio" name="transcription_input_method" value="mdc"/>
+						Manuel de Codage
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						Translation
+					</td>
+					<td>
+						<input type="text" name="translation" style="width:71%"/>
+						<select name="translation_lang" style="width:25%">
+							<option value="de">German</option>
+							<option value="en">English</option>
+							<option value="fr">French</option>
+						</select>
+					</td>
+				</tr>
+
+			</form>
+		</table>
+	</div>
+</div>
+{% endblock %}
+
+{% block sidebar %}
+<div>
+
+</div>
+{% endblock %}
+
+
