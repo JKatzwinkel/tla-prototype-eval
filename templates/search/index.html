@@ -78,6 +78,60 @@ $(document).ready(function(){
 					</td>
 				</tr>
 
+				<tr>
+					<td>
+						Word Class
+					</td>
+					<td>
+						<input list="word_class_types_list" style="width:47%" id="word_class_types"/>
+						<datalist id="word_class_types_list">
+							{% for type, subtypes in word_classes.items %}
+								<option value="{{ type }}"/>
+							{% endfor %}
+						</datalist>
+						<input list="word_class_subtypes_list" style="wdith:47%"
+								id="word_class_subtypes"/>
+						<datalist id="word_class_subtypes_list">
+						</datalist>
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						Bibliography
+					</td>
+					<td>
+						<input type="text" name="bibliography" style="width:100%"/>
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						Root
+					</td>
+					<td class="input-method-choice">
+						<input type="text" name="root" style="width:100%" />
+						<input type="radio" name="transcription_input_method" value="unicode" checked="true"/>
+						Unicode
+						<input type="radio" name="transcription_input_method" value="mdc"/>
+						Manuel de Codage
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						Annotation Type
+					</td>
+					<td>
+						<input list="anno_types_list" style="width:47%" id="anno_types"/>
+						<datalist id="anno_types_list">
+						</datalist>
+						<input list="anno_subtypes_list" style="width:47%" id="anno_subtypes"/>
+						<datalist id="anno_subtypes_list">
+						</datalist>
+					</td>
+				</tr>
+						
 			</form>
 		</table>
 	</div>

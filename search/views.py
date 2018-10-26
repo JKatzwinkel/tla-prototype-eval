@@ -1,8 +1,6 @@
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 
-from . import forms
-
 WORD_CLASSES = {
         "substantive": [
           "substantive_masc",
