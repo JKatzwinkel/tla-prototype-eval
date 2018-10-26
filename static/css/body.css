@@ -38,7 +38,6 @@ div#container div#content {
 	top: 30px;
 	min-width: 500px;
 	min-height: 300px;
-	border: 1px solid red;
 	padding: 20px;
 	margin: 5px;
 	background-color: white;
@@ -78,7 +77,6 @@ div#container div#sidebar {
 	background-color: #eee;
 	padding: 10px;
 	margin: 5px;
-	border: 1px solid green;
 }
 
 
