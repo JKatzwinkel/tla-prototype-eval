@@ -1,0 +1,16 @@
+[[source]]
+verify_ssl = true
+url = "https://pypi.org/simple"
+name = "pypi"
+
+[packages]
+django-extensions = "==2.0.7"
+django = "*"
+elasticsearch = "*"
+
+[dev-packages]
+ipython = "*"
+bpython = "*"
+
+[requires]
+python_version = "3.5"
