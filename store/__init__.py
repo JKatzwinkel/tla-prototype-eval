@@ -53,9 +53,12 @@ def search(index, query, size=100, offset=0):
 def get(index, _id):
     """ retrieve document with given id from given index assuming its doctype is the
     same as index. """
-    res = es.get(index, index, _id)
-    if res:
-        return res.get('_source')
+    try:
+        res = es.get(index, index, _id)
+        if res:
+            return res.get('_source')
+    except:
+        pass
 
 
 def resolve_name(index, _id=None, obj=None):
