@@ -68,10 +68,13 @@ def search(request):
     return render(request, 'search/index.html',
             {
                 'word_classes': WORD_CLASSES,
-                'huso': 'HUSO',
                 }
             )
 
 
+@require_http_methods(["GET"])
+def search_dict(request):
+    params = request.GET.copy()
+    return render(request, 'search/lemma.html', {})
 
 # Create your views here.
