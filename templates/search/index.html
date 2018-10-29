@@ -33,9 +33,9 @@ $(document).ready(function(){
 {% endblock %}
 
 {% block content%}
-<div>
-	<h3>Dictionary Entries</h3>
-	<hr/>
+<h3>Dictionary Entries</h3>
+<hr/>
+<div class="stuff">
 	<div class="search-form-container">
 		<table>
 			<form>
@@ -57,9 +57,9 @@ $(document).ready(function(){
 					</td>
 					<td class="input-method-choice">
 						<input type="text" name="transcription" style="width:100%"/>
-						<input type="radio" name="transcription_input_method" value="unicode" checked="true"/>
+						<input type="radio" name="transcription_input_method_lemma" value="unicode_lemma" checked="true"/>
 						Unicode
-						<input type="radio" name="transcription_input_method" value="mdc"/>
+						<input type="radio" name="transcription_input_method_lemma" value="mdc_lemma"/>
 						Manuel de Codage
 					</td>
 				</tr>
@@ -111,9 +111,9 @@ $(document).ready(function(){
 					</td>
 					<td class="input-method-choice">
 						<input type="text" name="root" style="width:100%" />
-						<input type="radio" name="transcription_input_method" value="unicode" checked="true"/>
+						<input type="radio" name="transcription_input_method_root" value="unicode_root" checked="true"/>
 						Unicode
-						<input type="radio" name="transcription_input_method" value="mdc"/>
+						<input type="radio" name="transcription_input_method_root" value="mdc_root"/>
 						Manuel de Codage
 					</td>
 				</tr>
@@ -136,12 +136,16 @@ $(document).ready(function(){
 		</table>
 	</div>
 </div>
-{% endblock %}
 
-{% block sidebar %}
-<div>
-
+<!-- sidebar -->
+<div class="sidebar">
+	<h3>bla</h3>
+	<div class="sidebar-button">
+		info i
+	</div>
 </div>
+
+
 {% endblock %}
 
 

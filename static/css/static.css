@@ -35,5 +35,38 @@ div#header div#menu ul li {
 	text-transform: uppercase;
 	font-weight: bold;
 	color: #447;
+	font-size: 12px;
 }
 
+
+div#footer {
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-bottom: 20px;
+	background-color: white;
+	font-size: 10px;
+}
+
+div#footer table #footer-site-info ul,
+div#footer table #footer-office-info ul {
+	list-style-type: none;
+	margin: 20px;
+	padding: 10px;
+}
+
+div#footer table #footer-site-info li.emph,
+div#footer table #footer-office-info li.emph {
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+	
+div#footer table #footer-logos {
+	text-align: right;
+}
+
+div#footer table #footer-logos img {
+	width: 234px;
+}

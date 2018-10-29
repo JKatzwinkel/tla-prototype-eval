@@ -1,10 +1,10 @@
 div#container {
+	margin-top: -30px;
 	margin-left: 10px;
 	margin-right: 10px;
 	padding-left: 20px;
 	padding-right: 20px;
 	background-color: white;
-	position: relative;
 	min-height: 600px;
 }
 
@@ -14,12 +14,10 @@ div#container div#breadcrumbs {
 }
 
 div#container div#breadcrumbs ul {
-	position: absolute;
-	top: 0px;
-	left: 15px;
 	list-style-type: none;
 	font-size: 10px;
 	margin: 0;
+	margin-top: 20px;
 	padding: 0;
 }
 
@@ -29,18 +27,16 @@ div#container div#breadcrumbs ul li {
 	color: #555;
 }
 
-
-
-
 div#container div#content {
-	position: absolute;
-	left: 10px;
-	top: 30px;
-	min-width: 500px;
+	width: 80%;
+	margin: auto;
+}
+
+
+div#container div.stuff {
+	width: 69%;
 	min-height: 300px;
-	padding: 20px;
-	margin: 5px;
-	background-color: white;
+	float: left;
 }
 
 div#container h3 {
@@ -72,15 +68,11 @@ div#container div#content div div.search-form-container table tbody tr td.input-
 
 
 
-div#container div#sidebar {
-	position: absolute;
-	right: 30px;
-	top: 0px;
-	width: 300px;
+div#container div.sidebar {
+	width: 29%;
 	min-height: 500px;
-	background-color: #eee;
 	padding: 10px;
-	margin: 5px;
+	margin-left: 69%;
 }
 
 

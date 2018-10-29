@@ -18,7 +18,7 @@
 			{% endblock %}
 		</script>
 		<link rel="stylesheet" type="text/css" href="{% static "css/webd.css"%}" />
-		<link rel="stylesheet" type="text/css" href="{% static "css/header.css"%}" />
+		<link rel="stylesheet" type="text/css" href="{% static "css/static.css"%}" />
 		<link rel="stylesheet" type="text/css" href="{% static "css/body.css"%}" />
 		<link rel="stylesheet" type="text/css" href="{% static "css/search.css"%}" />
 		<title>
@@ -53,6 +53,7 @@
 					{% block breadcrumbs %}
 					{% endblock %}
 				</ul>
+				<br/>
 			</div>
 
 			<div id="content">
@@ -61,13 +62,52 @@
 				{% endblock %}
 			</div>
 
-			<div id="sidebar">
-				{% block sidebar%}
-
-				{% endblock %}
-			</div>
-
 		</div>
+
+
+		
+		{% block footer %}
+		<div id="footer">
+			<table width="96%">
+				<tr>
+					<td width="30%" id="footer-site-info">
+						<ul>
+							<li class="emph">
+								Thesaurus Linguae Aegyptiae
+							</li>
+							<li>
+								Strukturen und Transformationen des Wortschatzes der aegyptischen Sprache
+							</li>
+							<li><br/></li>
+							<li><br/></li>
+							<li>
+								<a href="http://aaew.bbaw.de/tla">
+									http://aaew.bbaw.de/tla
+								</a>
+							</li>
+						</ul>
+					</td>
+					<td width="30%" id="footer-office-info">
+						<ul>
+							<li class="emph">
+								Contact
+							</li>
+							<li class="emph">
+								Legal notice
+							</li>
+							<li class="emph">
+								Privacy statement
+							</li>
+						</ul>
+					</td>
+					<td width="40%" id="footer-logos">
+						<img src="{% static "img/bbaw_logo.png" %}"/><br/>
+						<img src="{% static "img/saw_logo.png" %}"/>
+					</td>
+				</tr>
+			</table>
+		</div>
+		{% endblock %}
 
 	</body>
 </html>
