@@ -75,6 +75,6 @@ def search(request):
 @require_http_methods(["GET"])
 def search_dict(request):
     params = request.GET.copy()
-    return render(request, 'search/lemma.html', {})
+    return render(request, 'search/dict.html', {})
 
 # Create your views here.
