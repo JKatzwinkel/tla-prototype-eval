@@ -23,19 +23,19 @@ div#container div#breadcrumbs ul {
 
 div#container div#breadcrumbs ul li {
 	float: left;
-	margin: 5px;
+	margin: 5px 5px 0px 5px;
 	color: #555;
 }
 
 div#container div#content {
 	width: 80%;
 	margin: auto;
+	padding: 20px 0px 0px 0px;
 }
 
 
 div#container div.stuff {
 	width: 69%;
-	min-height: 300px;
 	float: left;
 }
 
@@ -70,8 +70,7 @@ div#container div#content div div.search-form-container table tbody tr td.input-
 
 div#container div.sidebar {
 	width: 29%;
-	min-height: 500px;
-	padding: 10px;
+	padding: 10px 5px 0px 5px;
 	margin-left: 69%;
 }
 

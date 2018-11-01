@@ -1,0 +1,137 @@
+{% extends "../base.html" %}
+{% load js %}
+{% load static %}
+
+
+{% block headcss %}
+	<link rel="stylesheet" type="text/css" href="{% static "css/details.css"%}" />
+{% endblock %}
+
+{% block title %}Details: {{ lemma.name }} (Dictionary Entry){% endblock %}
+
+{% block breadcrumbs %}
+<li>
+	<a href="/search">
+		Search TLA
+	</a>
+</li>
+<li>
+	Details: Dictionary Entry
+</li>
+{% endblock %}
+
+{% block content%}
+<div class="meta-head-bar">
+	<div class="stuff">
+		<div id="head-bar-title">
+			{% for word in lemma.words %}
+				<span class="head-bar-emph transcription">
+					{{ word.transcription }}
+				</span>
+			{% endfor %}
+		</div>
+		<div id="head-bar-reviewstate">
+			{{ lemma.revisionState }}
+		</div>
+	</div>
+	<div class="sidebar">
+		link
+	</div>
+</div>
+
+<hr/>
+
+<div class="stuff">
+	<div class="details-container">
+		<div class="hieroglyphs">
+			{% for word in lemma.words %}
+				{% if word.glyphs %}
+					<span class="glyphbox">
+						<canvas class="res" title="{{word.glyphs}}">
+							{{word.glyphs}}
+						</canvas>
+					</span>
+				{%endif%}
+			{% endfor %}
+		</div>
+
+		<div class="translation de">
+			{{ lemma.translations.de }}
+		</div>
+
+	</div>
+	<div class="details-container translations">
+			{% for lang, translation in lemma.translations.items %}
+				{% if lang != "de" %}
+				<div class="translation {{lang}}">
+					{{translation}} {{lang}}
+				</div>
+				{% endif %}
+			{% endfor %}
+	</div>
+
+	<div class="details-container">
+		<div class="lemma-type">
+			<span id="lemma-type">
+				{{lemma.type}}
+			</span>
+			{% if lemma.subtype %}
+				<span id="lemma-subtype">
+					({{lemma.subtype}})
+				</span>
+			{% endif %}
+		</div>
+	</div>
+
+	<div class="details-container">
+		<table style="width:100%">
+			<tr>
+				<td class="revision">
+					<span class="field-label">TLA Editor: </span>
+					<span class="field-value">{{lemma.edited.name}}</span>
+					<br/>
+					<span class="field-label">Last Revision: </span>
+					<span class="field-value">{{lemma.edited.date}}</span>
+					<br/>
+					<span class="field-label">Review State: </span>
+					<span class="field-value">{{lemma.revisionState}}</span>
+				</td>
+
+				<td class="relations">
+					<span class="field-label">TLA Relations</span>
+					<table style="border-collapse:collapse">
+						{% for predicate, relatives in lemma.relations.items %}
+						<tr>
+							<td class="relation-predicate">
+								{{predicate}}:
+							</td>
+							<td class="relation-related">
+								<ul>
+									{% for item in relatives %}
+										<li class="">
+											<a href="/view/lemma/{{item.id}}" title="{{item.id}} ({{predicate}})" class="transcription">
+												{{item.name}}
+											</a>
+											<span style="color:#aaa;font-size:10px">
+												({{item.type}})
+											</span>
+										</li>
+									{% endfor %}
+								</ul>
+							</td>
+						</tr>
+						{% endfor %}
+					</table>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	
+</div>
+<div class="sidebar">
+</div>
+
+{% endblock %}
+
+

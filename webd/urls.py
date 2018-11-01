@@ -27,4 +27,5 @@ urlpatterns = [
         path('object/', include('object.urls')),
         path('ths/', include('ths.urls')),
         path('search/', include('search.urls')),
+        path('view/', include('detail.urls')),
 ]
