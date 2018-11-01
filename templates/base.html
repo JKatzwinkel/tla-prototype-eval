@@ -3,7 +3,6 @@
 <html lang="en">
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8">
-		<link rel="stylesheet" type="text/css" href="{% static "resjs/res.css"%}" />
 		<script type="text/javascript" src="{% static "resjs/res_aux.js" %}"></script>
 		<script type="text/javascript" src="{% static "resjs/res_points.js" %}"></script>
 		<script type="text/javascript" src="{% static "resjs/res_lite.js" %}"></script>
@@ -13,14 +12,15 @@
 		<script type="text/javascript" src="{% static "resjs/res_render.js" %}"></script>
 		<script type="text/javascript" src="{% static "resjs/res_web.js" %}"></script>
 		<script type="text/javascript" src="{% static "js/jquery-3.3.1.js" %}"></script>
-		<script type="text/javascript">
-			{% block headjs %}
-			{% endblock %}
-		</script>
+		{% block headjs %}
+		{% endblock %}
+		<link rel="stylesheet" type="text/css" href="{% static "resjs/res.css"%}" />
 		<link rel="stylesheet" type="text/css" href="{% static "css/webd.css"%}" />
 		<link rel="stylesheet" type="text/css" href="{% static "css/static.css"%}" />
 		<link rel="stylesheet" type="text/css" href="{% static "css/body.css"%}" />
 		<link rel="stylesheet" type="text/css" href="{% static "css/search.css"%}" />
+		{% block headcss %}
+		{% endblock %}
 		<title>
 			{% block title %}lemma search{% endblock %}
 		</title>
