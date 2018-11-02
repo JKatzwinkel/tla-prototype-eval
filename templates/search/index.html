@@ -26,7 +26,7 @@ $(document).ready(function(){
 	var wordClassTypesField = $("#word_class_types");
 	var wordClassSubtypesField = $("#word_class_subtypes");
 	wordClassSubtypesField.hide();
-	wordClassTypesField.bind('input', function(){
+	wordClassTypesField.bind('input', function(){//bind is deprecated actually we supposed to use on()
 		var key = wordClassTypesField.val();
 		if (key in wordClasses && wordClasses[key] != null) {
 			wordClasses[key].forEach((subtype, index) => {
@@ -164,12 +164,9 @@ $(document).ready(function(){
 		<button class="sidebar-button">
 			info i
 		</button>
-		<button class="sidebar-button" type="submit" form="dict-search">
+		<button class="sidebar-button" type="submit" form="dict-search" formtarget="_self" formmethod="get" formenctype="application/x-www-form-urlencoded">
 			Search
 		</button>
-		<div class="sidebar-button">
-			<input type="submit" value="Search"/>
-		</div>
 	</div>
 
 
