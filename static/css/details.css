@@ -35,22 +35,6 @@ div.details-container .field-label {
 }
 
 
-div.hieroglyphs {
-	padding: 1px;
-}
-
-span.glyphbox canvas.res {
-	padding: 2px;
-	margin: 0px 3px 0px 0px;
-	background-color: #eee;
-	border: 1px solid white;
-}
-
-span.glyphbox canvas.res:hover {
-	background-color: #ddd;
-	border: 1px solid #bbb;
-}
-
 div.translation {
 	font-size: 12px;
 	font-weight: normal;

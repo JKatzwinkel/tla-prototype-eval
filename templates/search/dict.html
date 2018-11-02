@@ -5,8 +5,13 @@
 <script type="text/javascript">
 toggleHieroglyphs = function() {
 	$(".hieroglyphs").css("display",
-			$("#toggle-hieroglyphs div").hasClass("plus") ? "block" : "none");
-	$("#toggle-hieroglyphs div").toggleClass("plus minus");
+			$("#toggle-hieroglyphs span").hasClass("plus") ? "block" : "none");
+	$("#toggle-hieroglyphs span").toggleClass("plus minus");
+}
+toggleWordclass = function() {
+	$(".lemma-type").css("display",
+			$("#toggle-wordclass span").hasClass("plus") ? "block" : "none");
+	$("#toggle-wordclass span").toggleClass("plus minus");
 }
 </script>
 {% endblock%}
@@ -61,11 +66,11 @@ toggleHieroglyphs = function() {
 		</div>
 		<div class="details-container lemma-type" style="display:none">
 			<span id="lemma-type">
-				{{lemma.type}}
+				{{hit.type}}
 			</span>
-			{% if lemma.subtype %}
+			{% if hit.subtype %}
 				<span id="lemma-subtype">
-					({{lemma.subtype}})
+					({{hit.subtype}})
 				</span>
 			{% endif %}
 		</div>
@@ -78,11 +83,18 @@ toggleHieroglyphs = function() {
 	{% endfor %}
 </div>
 <div class="sidebar">
+	<div class="text">
+		Show Properties:
+	</div>
 	<button class="sidebar-button" onclick="toggleHieroglyphs()" id="toggle-hieroglyphs">
-		<div class="icon plus">
-			+
-		</div>
-		Hieroglyphs
+		<span class="icon plus">
+			Hieroglyphs
+		</span>
+	</button>
+	<button class="sidebar-button" onclick="toggleWordclass()" id="toggle-wordclass">
+		<span class="icon plus">
+			Word Class
+		</span>
 	</button>
 </div>
 {% endblock %}
