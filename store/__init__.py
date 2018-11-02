@@ -46,7 +46,10 @@ def pagination(page, size, hits):
 def search(index, query, size=100, offset=0):
     """ performs a search on the given index for documents of the same doc_type as
     the given index and applying a given lucene query. """
-    res = es.search(index=index, doc_type=index, q=query, size=size, from_=offset)
+    if type(query) is str:
+        res = es.search(index=index, doc_type=index, q=query, size=size, from_=offset)
+    else:
+        res = es.search(index=index, doc_type=index, body=query, size=size, from_=offset)
     return res.get('hits', {})
 
 

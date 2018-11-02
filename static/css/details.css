@@ -17,7 +17,6 @@ div.meta-head-bar div#head-bar-reviewstate {
 	float: right;
 	font-size: 10px;
 	padding: 10px 5px 0px 0px;
-
 }
 
 div.meta-head-bar span.head-bar-emph {
@@ -28,20 +27,7 @@ div.meta-head-bar span.head-bar-emph {
 	padding: 2px 3px 1px 3px;
 }
 
-.transcription {
-	font-family: BBAWLibertine;
-}
 
-
-div.stuff div.details-container {
-	padding: 5px;
-	border-bottom: 1px solid #bbb;
-	font-size: 12px;
-}
-
-div.details-container span {
-	margin: 3px 1px 3px 1px;
-}
 
 div.details-container .field-label {
 	font-weight: bold;

@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 
+import store
+
 WORD_CLASSES = {
         "substantive": [
           "substantive_masc",
@@ -62,6 +64,19 @@ WORD_CLASSES = {
         "interjection": None}
 
 
+def dict_search_query(**params):
+    q = {"query": {"bool": {"must": []}}}
+    if 'transcription' in params:
+        q['query']['bool']['must'].append(
+                {
+                    "match": {
+                        "name": params.get('transcription')[0]
+                        }
+                    })
+    return q
+
+
+
 @require_http_methods(["GET"])
 def search(request):
     params = request.GET.copy()
@@ -76,6 +91,9 @@ def search(request):
 def search_dict(request):
     params = request.GET.copy()
     print(params)
-    return render(request, 'search/dict.html', {})
+    hits = store.search('wlist', dict_search_query(**params))
+    hits = store.hits_contents(hits)
+    print(hits)
+    return render(request, 'search/dict.html', {'hits': hits})
 
 # Create your views here.
