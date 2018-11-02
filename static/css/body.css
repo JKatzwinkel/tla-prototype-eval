@@ -51,7 +51,7 @@ div#container div.search-form-container table tr td {
 	padding: 10px;
 }
 
-div#container div.search-form-container .input-method-choice {
+div#container div.search-form-container .encoding {
 	font-size: 10px;
 }
 
@@ -60,8 +60,8 @@ div#container div.search-form-container table tr:nth-child(even) {
 	background-color: #ddd;
 }
 
-div#container div#content div div.search-form-container table tbody tr td.input-method-choice input {
-	font-family: BBAWLibertine;
+div#container div#content div div.search-form-container table tbody tr td.encoding input {
+	font-family: BBAWLibertine; /* why */
 }
 
 
@@ -74,4 +74,20 @@ div#container div.sidebar {
 	margin-left: 69%;
 }
 
+div.sidebar .sidebar-button {
+	margin: 5px;
+	width: 100%;
+}
+
+div.sidebar button.sidebar-button {
+	padding: 5px 15px;
+	line-height: normal;
+	background-color: #888;
+	color: white;
+	font-weight: bold;
+	font-family: Arial;
+	text-align: left;
+	border: 0 none;
+	cursor: pointer;
+}
 

@@ -3,13 +3,30 @@
 
 {% block headjs %}
 <script type="text/javascript">
-	var wordClasses = {{ word_classes | js }};
-	$(document).ready(function(){
-	 var wordClassTypesField = $("#word_class_types");
-	 var wordClassSubtypesField = $("#word_class_subtypes");
-	 wordClassSubtypesField.hide();
-
-	 wordClassTypesField.bind('input', function(){
+var wordClasses = {{ word_classes | js }};
+$(document).ready(function(){
+	// prevent submit button from passing empty parameters in GET request
+	$("#dict-search").submit(function() {
+		// disable empty input fields
+		$(this).find("input").filter(function() {
+			return (!this.value || this.value.length < 1);
+		}).attr("disabled", "disabled");
+		if (!$("#dict-search-transcription").val()) {
+			$("input[name=transcription_enc]").attr("disabled", "disabled");
+		}
+		if (!$("#dict-search-root").val()) {
+			$("input[name=root_enc]").attr("disabled", "disabled");
+		}
+		if (!$("#dict-search-translation").val()) {
+			$("select[name=lang]").attr("disabled", "disabled");
+		}
+		return true;
+	});
+	// inject subtype choices list depending on the type input field value
+	var wordClassTypesField = $("#word_class_types");
+	var wordClassSubtypesField = $("#word_class_subtypes");
+	wordClassSubtypesField.hide();
+	wordClassTypesField.bind('input', function(){
 		var key = wordClassTypesField.val();
 		if (key in wordClasses && wordClasses[key] != null) {
 			wordClasses[key].forEach((subtype, index) => {
@@ -21,131 +38,141 @@
 			wordClassSubtypesField.hide(150);
 				$('#word_class_subtypes_list').empty();
 				wordClassSubtypesField.val('');
-			}
-	 });
+		}
 	});
+});
 </script>
 {% endblock %}
-
 
 {% block title %}Search TLA{% endblock %}
 
 {% block breadcrumbs %}
-<li>Search TLA</li>
+<li>
+	<a href="/search">
+		Search TLA
+	</a>
+</li>
 {% endblock %}
 
 {% block content%}
 <h3>Dictionary Entries</h3>
 <hr/>
-<div class="stuff">
-	<div class="search-form-container">
-		<table>
-			<form>
-				<tr>
-					<td/>
-					<td>
-						<input type="checkbox" name="hieroglyphic" value="hieroglyphic"/>
-							Hieroglyphics/Hieratic
-						<input type="checkbox" name="demotic" value="demotic"/>
-							Demotic
-						<input type="checkbox" name="coptic" value="coptic"/>
-							Coptic
-					</td>
-				</tr>
+	<div class="stuff">
+		<div class="search-form-container">
+			<form action="/search/dict" id="dict-search" name="dict-search">
+				<table>
+					<tr>
+						<td/>
+						<td>
+							<input type="checkbox" name="script" value="h" checked="true"/>
+								Hieroglyphic/Hieratic
+							<input type="checkbox" name="script" value="d"/>
+								Demotic
+							<input type="checkbox" name="script" value="c"/>
+								Coptic
+						</td>
+					</tr>
 
-				<tr>
-					<td>
-						Transcription
-					</td>
-					<td class="input-method-choice">
-						<input type="text" name="transcription" style="width:100%"/>
-						<input type="radio" name="transcription_input_method_lemma" value="unicode_lemma" checked="true"/>
-						Unicode
-						<input type="radio" name="transcription_input_method_lemma" value="mdc_lemma"/>
-						Manuel de Codage
-					</td>
-				</tr>
+					<tr>
+						<td>
+							Transcription
+						</td>
+						<td class="encoding">
+							<input type="text" name="transcription" style="width:100%" id="dict-search-transcription"/>
+							<input type="radio" name="transcription_enc" value="unicode" checked="true"/>
+							Unicode
+							<input type="radio" name="transcription_enc" value="mdc"/>
+							Manuel de Codage
+						</td>
+					</tr>
 
-				<tr>
-					<td>
-						Translation
-					</td>
-					<td>
-						<input type="text" name="translation" style="width:71%"/>
-						<select name="translation_lang" style="width:25%">
-							<option value="de">German</option>
-							<option value="en">English</option>
-							<option value="fr">French</option>
-						</select>
-					</td>
-				</tr>
+					<tr>
+						<td>
+							Translation
+						</td>
+						<td>
+							<input type="text" name="translation" style="width:71%" id="dict-search-translation"/>
+							<select name="lang" style="width:25%">
+								<option value="de">German</option>
+								<option value="en">English</option>
+								<option value="fr">French</option>
+							</select>
+						</td>
+					</tr>
 
-				<tr>
-					<td>
-						Word Class
-					</td>
-					<td>
-						<input list="word_class_types_list" style="width:47%" id="word_class_types"/>
-						<datalist id="word_class_types_list">
-							{% for type, subtypes in word_classes.items %}
-								<option value="{{ type }}"/>
-							{% endfor %}
-						</datalist>
-						<input list="word_class_subtypes_list" style="wdith:47%"
-								id="word_class_subtypes"/>
-						<datalist id="word_class_subtypes_list">
-						</datalist>
-					</td>
-				</tr>
+					<tr>
+						<td>
+							Word Class
+						</td>
+						<td>
+							<input list="word_class_types_list" style="width:47%"
+																					id="word_class_types" name="wc_type"/>
+							<datalist id="word_class_types_list">
+								{% for type, subtypes in word_classes.items %}
+									<option value="{{ type }}"/>
+								{% endfor %}
+							</datalist>
+							<input list="word_class_subtypes_list" style="wdith:47%"
+																					id="word_class_subtypes" name="wc_subtype"/>
+							<datalist id="word_class_subtypes_list">
+								<!-- get injected -->
+							</datalist>
+						</td>
+					</tr>
 
-				<tr>
-					<td>
-						Bibliography
-					</td>
-					<td>
-						<input type="text" name="bibliography" style="width:100%"/>
-					</td>
-				</tr>
+					<tr>
+						<td>
+							Bibliography
+						</td>
+						<td>
+							<input type="text" name="bib" style="width:100%"/>
+						</td>
+					</tr>
 
-				<tr>
-					<td>
-						Root
-					</td>
-					<td class="input-method-choice">
-						<input type="text" name="root" style="width:100%" />
-						<input type="radio" name="transcription_input_method_root" value="unicode_root" checked="true"/>
-						Unicode
-						<input type="radio" name="transcription_input_method_root" value="mdc_root"/>
-						Manuel de Codage
-					</td>
-				</tr>
+					<tr>
+						<td>
+							Root
+						</td>
+						<td class="encoding">
+							<input type="text" name="root" style="width:100%" id="dict-search-root"/>
+							<input type="radio" name="root_enc" value="unicode" checked="true"/>
+							Unicode
+							<input type="radio" name="root_enc" value="mdc"/>
+							Manuel de Codage
+						</td>
+					</tr>
 
-				<tr>
-					<td>
-						Annotation Type
-					</td>
-					<td>
-						<input list="anno_types_list" style="width:47%" id="anno_types"/>
-						<datalist id="anno_types_list">
-						</datalist>
-						<input list="anno_subtypes_list" style="width:47%" id="anno_subtypes"/>
-						<datalist id="anno_subtypes_list">
-						</datalist>
-					</td>
-				</tr>
-						
+					<tr>
+						<td>
+							Annotation Type
+						</td>
+						<td>
+							<input list="anno_types_list" style="width:47%" id="anno_types" name="anno_type"/>
+							<datalist id="anno_types_list">
+							</datalist>
+							<input list="anno_subtypes_list" style="width:47%" id="anno_subtypes" name="anno_subtype"/>
+							<datalist id="anno_subtypes_list">
+							</datalist>
+						</td>
+					</tr>			
+				</table>
 			</form>
-		</table>
+		</div>
 	</div>
-</div>
+	<!-- sidebar -->
+	<div class="sidebar">
+		<button class="sidebar-button">
+			info i
+		</button>
+		<button class="sidebar-button" type="submit" form="dict-search">
+			Search
+		</button>
+		<div class="sidebar-button">
+			<input type="submit" value="Search"/>
+		</div>
+	</div>
 
-<!-- sidebar -->
-<div class="sidebar">
-	<h3>bla</h3>
-	<div class="sidebar-button">
-		info i
-	</div>
-</div>
+
 
 
 {% endblock %}

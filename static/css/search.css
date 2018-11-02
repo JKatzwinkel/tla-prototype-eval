@@ -1,3 +1,24 @@
+
+div.sidebar button[type=submit].sidebar-button {
+	background-color: #935;
+	color: white;
+	font-weight: bold;
+	font-family: Arial;
+	text-align: left;
+	border: 0 none;
+	cursor: pointer;
+	border-bottom: 1px solid #624;
+	border-right: 1px solid #624;
+	width: 100%;
+}
+
+
+
+/* these are for the old templates (lemma/{details,search}.html, ths/{details,search}.html,
+ * index.html)
+ *
+ */
+
 .word_class {
 	font-weight: 100;
 }
