@@ -105,4 +105,12 @@ div.sidebar button.sidebar-button {
 	cursor: pointer;
 }
 
-
+button.sidebar-button .plus {
+	background-image: url("../img/icon/plus.svg");
+}
+button.sidebar-button .minus {
+	background-image: url("../img/icon/minus.svg");
+}
+button.sidebar-button .info{
+	background-image: url("../img/icon/info.svg");
+}
