@@ -76,6 +76,9 @@ def dict_search_query(**params):
     return q
 
 
+def hit_tree(hits):
+    return [h for h in hits]
+
 
 @require_http_methods(["GET"])
 def search(request):
@@ -91,9 +94,21 @@ def search(request):
 def search_dict(request):
     params = request.GET.copy()
     print(params)
-    hits = store.search('wlist', dict_search_query(**params))
+    hits = store.search('wlist',
+            dict_search_query(**params),
+            offset=params.get('start', 1)-1,
+            size=15
+            )
+    count = hits.get('total')
     hits = store.hits_contents(hits)
+    hits = hit_tree(hits)
     print(hits)
-    return render(request, 'search/dict.html', {'hits': hits})
+    return render(request, 'search/dict.html',
+            {
+                'hits': hits,
+                'hitcount': count,
+                'start': params.get('start', 1)
+                })
+
 
 # Create your views here.

@@ -27,7 +27,7 @@ toggleWordclass = function() {
 
 
 {% block content%}
-<h3>Dictionary Entries</h3>
+<h3>{{start}} - {{start|add:"14"}} of {{hitcount}} Dictionary Entries</h3>
 <hr/>
 <div class="stuff">
 	{% for hit in hits %}
