@@ -1,6 +1,16 @@
 {% extends "../base.html" %}
 {% block title %}Search Dictionary for ...{% endblock %}
 
+{% block headjs %}
+<script type="text/javascript">
+toggleHieroglyphs = function() {
+	$(".hieroglyphs").css("display",
+			$("#toggle-hieroglyphs div").hasClass("plus") ? "block" : "none");
+	$("#toggle-hieroglyphs div").toggleClass("plus minus");
+}
+</script>
+{% endblock%}
+
 {% block breadcrumbs %}
 <li>
 	<a href="/search">
@@ -49,6 +59,16 @@
 				{{hit.translations.de }}
 			</div>
 		</div>
+		<div class="details-container lemma-type" style="display:none">
+			<span id="lemma-type">
+				{{lemma.type}}
+			</span>
+			{% if lemma.subtype %}
+				<span id="lemma-subtype">
+					({{lemma.subtype}})
+				</span>
+			{% endif %}
+		</div>
 		<div class="details-container" style="border: 0 none">
 			<div class="bibliography" style="font-size:9px">
 				{{hit.passport.bibliography.bibliographical_text_field}}
@@ -58,6 +78,12 @@
 	{% endfor %}
 </div>
 <div class="sidebar">
+	<button class="sidebar-button" onclick="toggleHieroglyphs()" id="toggle-hieroglyphs">
+		<div style="color:white;font-weight:bold;height:10px;width:10px;margin:1px 5px;padding:0;border:2px solid white;border-radius:10px;float:left" class="plus">
+			+
+		</div>
+		Hieroglyphs
+	</button>
 </div>
 {% endblock %}
 	
