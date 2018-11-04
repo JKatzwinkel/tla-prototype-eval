@@ -27,58 +27,71 @@ toggleWordclass = function() {
 
 
 {% block content%}
-<h3>{{start}} - {{start|add:"14"}} of {{hitcount}} Dictionary Entries</h3>
+<h3>{{start}} - {{end}} of {{hitcount}} Dictionary Entries</h3>
 <hr/>
 <div class="stuff">
-	{% for hit in hits %}
+	{% for indent, pred, hit in hits %}
 	<div class="hit dict-result" id="{{hit.id}}" style="border-bottom:1px solid #aaa;padding:5px">
-		<div class="details-container">
-			<div class="result-head">
-				<table width="100%">
-					<tr>
-						<div class="hieroglyphs" style="display:none">
-							{% for word in hit.words %}
-								{% if word.glyphs %}
-									<span class="glyphbox">
-										<canvas class="res" title="{{word.glyphs}}">
-											{{word.glyphs}}
-										</canvas>
-									</span>
-								{%endif%}
-							{% endfor %}
+		<table style="width:100%">
+			<tr>
+				{% for i in indent %}
+				<td>
+				</td>
+				{% endfor %}
+				<td>
+					<div class="details-container">
+						<div class="result-head">
+							<table width="100%">
+								<tr>
+									<div class="hieroglyphs" style="display:none">
+										{% for word in hit.words %}
+											{% if word.glyphs %}
+												<span class="glyphbox">
+													<canvas class="res" title="{{word.glyphs}}">
+														{{word.glyphs}}
+													</canvas>
+												</span>
+											{%endif%}
+										{% endfor %}
+									</div>
+									<td class="name" style="font-weight:bold;font-size:14px">
+										<a class="transcription" href="/view/lemma/{{hit.id}}">
+											{{hit.name }}
+										</a>
+									</td>
+									<td class="head-bar-reviewstate" style="text-align:right">
+										<span style="color:#bbb">
+											{{hit.id}}
+										</span>
+										{{hit.revisionState}}
+									</td>
+								</tr>
+							</table>
 						</div>
-						<td class="name" style="font-weight:bold;font-size:14px">
-							<a class="transcription" href="/view/lemma/{{hit.id}}">
-								{{hit.name }}
-							</a>
-						</td>
-						<td class="head-bar-reviewstate" style="text-align:right">
-							{{hit.revisionState}}
-						</td>
-					</tr>
-				</table>
-			</div>
-		</div>
-		<div class="details-container">
-			<div class="translation de" style="font-size:9px">
-				{{hit.translations.de }}
-			</div>
-		</div>
-		<div class="details-container lemma-type" style="display:none">
-			<span id="lemma-type">
-				{{hit.type}}
-			</span>
-			{% if hit.subtype %}
-				<span id="lemma-subtype">
-					({{hit.subtype}})
-				</span>
-			{% endif %}
-		</div>
-		<div class="details-container" style="border: 0 none">
-			<div class="bibliography" style="font-size:9px">
-				{{hit.passport.bibliography.bibliographical_text_field}}
-			</div>
-		</div>
+					</div>
+					<div class="details-container">
+						<div class="translation de" style="font-size:9px">
+							{{hit.translations.de }}
+						</div>
+					</div>
+					<div class="details-container lemma-type" style="display:none">
+						<span id="lemma-type">
+							{{hit.type}}
+						</span>
+						{% if hit.subtype %}
+							<span id="lemma-subtype">
+								({{hit.subtype}})
+							</span>
+						{% endif %}
+					</div>
+					<div class="details-container" style="border: 0 none">
+						<div class="bibliography" style="font-size:9px">
+							{{hit.passport.bibliography.bibliographical_text_field}}
+						</div>
+					</div>
+				</td>
+			</tr>
+		</table>
 	</div>
 	{% endfor %}
 </div>
