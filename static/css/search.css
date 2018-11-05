@@ -16,3 +16,10 @@ div.sidebar button[type=submit].sidebar-button {
 .translation {
 	font-weight: 600;
 }
+
+
+.hit:hover {
+	background-color: #ddd;
+	background-image: linear-gradient(to right, #ddd , #ffffff);
+}
+

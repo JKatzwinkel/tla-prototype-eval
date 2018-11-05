@@ -67,7 +67,7 @@ toggleTranslations = function() {
 											{%endif%}
 										{% endfor %}
 									</div>
-									<td class="name" style="font-weight:bold;font-size:14px">
+									<td class="name" style="font-weight:bold;font-size:16px">
 										<a class="transcription" href="/view/lemma/{{hit.id}}">
 											{{hit.name }}
 										</a>
@@ -83,14 +83,14 @@ toggleTranslations = function() {
 						</div>
 					</div>
 					<div class="details-container">
-						<div class="translation de" style="font-size:9px">
+						<div class="translation de" style="font-size:11px">
 							{{hit.translations.de }}
 						</div>
 					</div>
 					<div class="details-container lemma-translations" style="display:none">
 						{% for lang, translation in hit.translations.items %}
 							{% if lang != "de" %}
-								<div class="translation {{lang}}" title="{{lang}}" style="font-size:9px;font-weight:normal;">
+								<div class="translation {{lang}}" title="{{lang}}" style="font-size:11px;font-weight:normal;">
 									{{translation}}
 								</div>
 							{% endif %}
@@ -107,7 +107,7 @@ toggleTranslations = function() {
 						{% endif %}
 					</div>
 					<div class="details-container" style="border: 0 none">
-						<div class="bibliography" style="font-size:9px">
+						<div class="bibliography" style="font-size:11px">
 							{{hit.passport.bibliography.bibliographical_text_field}}
 						</div>
 					</div>
