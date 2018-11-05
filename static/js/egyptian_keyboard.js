@@ -66,7 +66,7 @@ var VKI_attach, VKI_close;
   this.VKI_dead = false;
   this.VKI_deadBox = true; // Show the dead keys checkbox
   this.VKI_deadkeysOn = false;  // Turn dead keys on by default
-  this.VKI_numberPad = true;  // Allow user to open and close the number pad
+  this.VKI_numberPad = false;  // Allow user to open and close the number pad
   this.VKI_numberPadOn = false;  // Show number pad by default
   this.VKI_kts = this.VKI_kt = "Egyptian";  // Default keyboard layout
   this.VKI_langAdapt = true;  // Use lang attribute of input to select keyboard
@@ -893,7 +893,7 @@ var VKI_attach, VKI_close;
             var left = oLeft + self.VKI_target.offsetWidth;
             var bottom = scr.offsetHeight - oTop - self.VKI_target.offsetHeight;
             var right = scr.offsetWidth - oLeft - self.VKI_target.offsetWidth;
-            self.VKI_keyboard.style.display = (top < 0 || left < 0 || bottom < 0 || right < 0) ? "none" : "";
+            //self.VKI_keyboard.style.display = (top < 0 || left < 0 || bottom < 0 || right < 0) ? "none" : "";
             if (self.VKI_isIE6) self.VKI_iframe.style.display = (top < 0 || left < 0 || bottom < 0 || right < 0) ? "none" : "";
           }
         }
