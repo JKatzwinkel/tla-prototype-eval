@@ -45,11 +45,11 @@ toggleTranslations = function() {
 <hr/>
 <div class="stuff">
 	{% for indent, pred, hit in hits %}
-	<div class="hit dict-result" id="{{hit.id}}" style="border-bottom:1px solid #aaa;padding:5px">
+	<div class="hit dict-result {%if pred%}{{pred}}{%endif%}" id="{{hit.id}}" style="border-bottom:1px solid #aaa;padding:5px">
 		<table style="width:100%">
 			<tr>
 				{% for i in indent %}
-				<td>
+				<td class="indentation">
 				</td>
 				{% endfor %}
 				<td>

@@ -104,13 +104,13 @@ def hit_tree(hits):
     structure = {h.get('id'): (hits.index(h), h) 
             for h in hits}
     res = []
-    def nest(hit, indent=0):
+    def nest(hit, indent=0, pred=None):
         if hit.get('id') in structure:
             structure.pop(hit.get('id'))
         else:
             return
         """ append hit to result list (represented as tuple containing indentation and rel type """
-        res.append((range(indent), None, hit))
+        res.append((range(indent), pred, hit))
         """ generate list of (id,relationtype) tuples representing the search results which
         are directly related to the current search result while preseving order """
         related_hit_ids = sorted([
@@ -123,8 +123,7 @@ def hit_tree(hits):
         for hid, pred in related_hit_ids:
             if hid in structure:
                 _, obj = structure.get(hid)
-                nest(obj, indent+1)
-
+                nest(obj, indent=indent+1, pred=pred)
 
     while len(hits) > 0:
         hit = hits.pop(0)
