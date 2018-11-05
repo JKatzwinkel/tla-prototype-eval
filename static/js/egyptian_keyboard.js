@@ -68,7 +68,7 @@ var VKI_attach, VKI_close;
   this.VKI_deadkeysOn = false;  // Turn dead keys on by default
   this.VKI_numberPad = true;  // Allow user to open and close the number pad
   this.VKI_numberPadOn = false;  // Show number pad by default
-  this.VKI_kts = this.VKI_kt = "US International";  // Default keyboard layout
+  this.VKI_kts = this.VKI_kt = "Egyptian";  // Default keyboard layout
   this.VKI_langAdapt = true;  // Use lang attribute of input to select keyboard
   this.VKI_size = 3;  // Default keyboard size (1-5)
   this.VKI_sizeAdj = true;  // Allow user to adjust keyboard size
