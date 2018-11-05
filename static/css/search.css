@@ -13,33 +13,6 @@ div.sidebar button[type=submit].sidebar-button {
 }
 
 
-
-/* these are for the old templates (lemma/{details,search}.html, ths/{details,search}.html,
- * index.html)
- *
- */
-
-.word_class {
-	font-weight: 100;
-}
 .translation {
 	font-weight: 600;
 }
-.bibliography {
-	font-style: italic;
-}
-
-.pagination {
-		display: inline-block;
-		padding: 10px 20px;
-}
-.pagination a {
-		color: black;
-		padding: 8px 16px;
-		text-decoration: none;
-}
-.pagination a.active {
-		background-color: #4CAF50;
-		color: white;
-}
-

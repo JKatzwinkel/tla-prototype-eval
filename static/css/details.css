@@ -35,16 +35,6 @@ div.details-container .field-label {
 }
 
 
-div.translation {
-	font-size: 12px;
-	font-weight: normal;
-	margin: 5px;
-}
-
-div.translation.fr {
-	font-style: italic;
-}
-
 div.lemma-type {
 	margin: 8px;
 	font-size: 11px;
