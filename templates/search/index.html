@@ -7,6 +7,7 @@
 {% endblock%}
 
 {% block headjs %}
+<script type="text/javascript" src="{% static "js/egyptian_keyboard.js"%}" charset="UTF-8"></script>
 <script type="text/javascript">
 var wordClasses = {{ word_classes | js }};
 $(document).ready(function(){
@@ -85,7 +86,9 @@ $(document).ready(function(){
 							Transcription
 						</td>
 						<td class="encoding">
-							<input type="text" name="transcription" style="width:100%" id="dict-search-transcription"/>
+							<input type="text" name="transcription" style="width:100%" id="dict-search-transcription" 
+														class="keyboardInput" lang="egy" vki_attached="true"/>
+							<img src="{% static "img/icon/keyboard.png"%}" class="keyboardInputInitiator" title="Display virtual keyboard"/>
 							<input type="radio" name="transcription_enc" value="unicode" checked="true"/>
 							Unicode
 							<input type="radio" name="transcription_enc" value="mdc"/>
