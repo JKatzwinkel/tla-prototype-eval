@@ -80,20 +80,33 @@ def dict_search_query(**params):
 
 def hit_tree(hits):
     """ extracts the implicit hierarchical structure among the given objects """
-    structure = {h.get('id'):h for h in hits}
+    structure = {h.get('id'): (hits.index(h), h) 
+            for h in hits}
     res = []
+    def nest(hit, indent=0):
+        if hit.get('id') in structure:
+            structure.pop(hit.get('id'))
+        else:
+            return
+        """ append hit to result list (represented as tuple containing indentation and rel type """
+        res.append((range(indent), None, hit))
+        """ generate list of (id,relationtype) tuples representing the search results which
+        are directly related to the current search result while preseving order """
+        related_hit_ids = sorted([
+                (hid.get('id'),
+                    pred) for pred in [
+                    'rootOf', 'successor', 'referencing'
+                    ] for hid in hit.get('relations', {}).get(
+                        pred, []) if hid.get('id') in structure],
+                    key = lambda t: structure.get(t[0])[0])
+        for hid, pred in related_hit_ids:
+            _, obj = structure.get(hid)
+            nest(obj, indent+1)
+
     while len(hits) > 0:
-        h = hits.pop(0)
-        res.append((range(0), None, h))
-        for pred in ['rootOf', 'successor']:
-            for rel in h.get('relations', {}).get(pred, []):
-                if structure.get(rel.get('id')) in hits:
-                    obj = hits.pop(
-                            hits.index(
-                                structure.get(rel.get('id'))
-                                )
-                            )
-                    res.append((range(1), pred, obj))
+        hit = hits.pop(0)
+        nest(hit)
+
     return res
 
 
