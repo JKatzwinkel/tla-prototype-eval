@@ -139,5 +139,21 @@ toggleTranslations = function() {
 </div>
 {% endblock %}
 	
-
+<hr/>
+{%block pagination%}
+{% if pagination|length > 1 %}
+<div class="stuff" style="text-align:center;">
+	<div class="pagination">
+		{% for pageno, link in pagination %}
+		<a {% ifnotequal pageno '...'%}href="{{link}}"{%endifnotequal%}>
+				<span class="pagelink {%ifequal pageno page%}thispage{%endifequal%}">
+					{{pageno}}
+				</span>
+			</a>
+			</span>
+		{% endfor %}
+	</div>
+</div>
+{%endif%}
+{%endblock%}
 

@@ -23,3 +23,31 @@ div.sidebar button[type=submit].sidebar-button {
 	background-image: linear-gradient(to right, #ddd , #ffffff);
 }
 
+
+.indentation {
+	width: 32px;
+}
+
+.hit.dict-result.referencedBy,
+.hit.dict-result.referencedBy a {
+	color: #aaa;
+}
+
+
+.pagination {
+	margin: 10px;
+}
+
+.pagination span.pagelink {
+	font-size: 12px;
+	border-bottom: 3px solid var(--link-color);
+	margin: 4px;
+	padding: 2px 8px;
+}
+
+.pagination span.pagelink:hover,
+.pagination span.pagelink.thispage {
+	background-color: var(--link-color);
+	color: white;
+}
+

@@ -3,6 +3,8 @@ from django.views.decorators.http import require_http_methods
 
 import store
 
+RESULTS_PER_PAGE = 15
+
 WORD_CLASSES = {
         "substantive": [
           "substantive_masc",
@@ -132,19 +134,33 @@ def search(request):
             )
 
 
-def pagination(page, hitcount):
-    pass
+def pagination(request, hitcount):
+    page = int(request.GET.get('page', 1))
+    if 'page' in request.get_full_path():
+        href = request.get_full_path().replace('page={}'.format(page), 'page={}')
+    else:
+        href = request.get_full_path() + '&page={}'
+    lastpageno = hitcount // RESULTS_PER_PAGE + 2
+    pages = []
+    for i in range(1, lastpageno):
+        if i < 3 or i > lastpageno-2 or (i-page)**2<3:
+            if len(pages) > 1:
+                if type(pages[-1][0]) is int and pages[-1][0] < i - 1:
+                    pages.append(('...', None))
+            pages.append((i, href.format(i)))
+    return pages
+
 
 
 @require_http_methods(["GET"])
 def search_dict(request):
     params = request.GET.copy()
     page = int(params.get('page', 1))
-    offset = (page - 1) * 15
+    offset = (page - 1) * RESULTS_PER_PAGE
     hits = store.search('wlist',
             dict_search_query(**params),
             offset=offset,
-            size=15,
+            size=RESULTS_PER_PAGE,
             )
     count = hits.get('total')
     hits = store.hits_contents(hits)
@@ -155,7 +171,8 @@ def search_dict(request):
                 'hitcount': count,
                 'page': page,
                 'start': offset+1,
-                'end': min(count, offset+15),
+                'end': min(count, offset+RESULTS_PER_PAGE),
+                'pagination': pagination(request, count),
                 })
 
 
