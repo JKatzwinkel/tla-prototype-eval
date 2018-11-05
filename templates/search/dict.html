@@ -45,11 +45,11 @@ toggleTranslations = function() {
 <hr/>
 <div class="stuff">
 	{% for indent, pred, hit in hits %}
-	<div class="hit dict-result" id="{{hit.id}}" style="border-bottom:1px solid #aaa;padding:5px">
+	<div class="hit dict-result {%if pred%}{{pred}}{%endif%}" id="{{hit.id}}" style="border-bottom:1px solid #aaa;padding:5px">
 		<table style="width:100%">
 			<tr>
 				{% for i in indent %}
-				<td>
+				<td class="indentation">
 				</td>
 				{% endfor %}
 				<td>
@@ -61,14 +61,13 @@ toggleTranslations = function() {
 										{% for word in hit.words %}
 											{% if word.glyphs %}
 												<span class="glyphbox">
-													<canvas class="res" title="{{word.glyphs}}">
-														{{word.glyphs}}
-													</canvas>
+													<img src="http://tladev.bbaw.de:5000/render?mdc={{word.glyphs}}" 
+															title="{{word.glyphs}}" style="height:32px"/>
 												</span>
 											{%endif%}
 										{% endfor %}
 									</div>
-									<td class="name" style="font-weight:bold;font-size:14px">
+									<td class="name" style="font-weight:bold;font-size:16px">
 										<a class="transcription" href="/view/lemma/{{hit.id}}">
 											{{hit.name }}
 										</a>
@@ -84,14 +83,14 @@ toggleTranslations = function() {
 						</div>
 					</div>
 					<div class="details-container">
-						<div class="translation de" style="font-size:9px">
+						<div class="translation de" style="font-size:11px">
 							{{hit.translations.de }}
 						</div>
 					</div>
 					<div class="details-container lemma-translations" style="display:none">
 						{% for lang, translation in hit.translations.items %}
 							{% if lang != "de" %}
-								<div class="translation {{lang}}" title="{{lang}}" style="font-size:9px;font-weight:normal;">
+								<div class="translation {{lang}}" title="{{lang}}" style="font-size:11px;font-weight:normal;">
 									{{translation}}
 								</div>
 							{% endif %}
@@ -108,7 +107,7 @@ toggleTranslations = function() {
 						{% endif %}
 					</div>
 					<div class="details-container" style="border: 0 none">
-						<div class="bibliography" style="font-size:9px">
+						<div class="bibliography" style="font-size:11px">
 							{{hit.passport.bibliography.bibliographical_text_field}}
 						</div>
 					</div>
@@ -140,5 +139,21 @@ toggleTranslations = function() {
 </div>
 {% endblock %}
 	
-
+<hr/>
+{%block pagination%}
+{% if pagination|length > 1 %}
+<div class="stuff" style="text-align:center;">
+	<div class="pagination">
+		{% for pageno, link in pagination %}
+		<a {% ifnotequal pageno '...'%}href="{{link}}"{%endifnotequal%}>
+				<span class="pagelink {%ifequal pageno page%}thispage{%endifequal%}">
+					{{pageno}}
+				</span>
+			</a>
+			</span>
+		{% endfor %}
+	</div>
+</div>
+{%endif%}
+{%endblock%}
 

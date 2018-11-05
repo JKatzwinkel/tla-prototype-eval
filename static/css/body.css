@@ -16,7 +16,7 @@ a:visited {
 }
 
 div#container {
-	margin-top: -30px;
+	margin-top: -20px;
 	margin-left: 10px;
 	margin-right: 10px;
 	padding-left: 20px;
@@ -84,7 +84,7 @@ div#container div#content div div.search-form-container table tbody tr td.encodi
 div.stuff div.details-container {
 	padding: 5px;
 	border-bottom: 1px solid #bbb;
-	font-size: 12px;
+	font-size: 13px;
 }
 
 div.details-container span {
@@ -92,7 +92,7 @@ div.details-container span {
 }
 
 div.text {
-	font-size: 10px;
+	font-size: 11px;
 	padding: 5px 10px;
 	color: #999;
 }
@@ -115,7 +115,7 @@ span.glyphbox canvas.res:hover {
 }
 
 div.translation {
-	font-size: 12px;
+	font-size: 13px;
 	font-weight: normal;
 	margin: 5px;
 }
