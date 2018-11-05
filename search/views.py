@@ -86,6 +86,15 @@ def dict_search_query(**params):
                         }
             pred = 'must' if 'd' in params.get('script') else 'must_not'
             q['query']['bool'][pred].append(query)
+    if 'translation' in params:
+        for lang in params.get('lang', ['de']):
+            q['query']['bool']['must'].append(
+                    {
+                        "match": {
+                            "translations.{}".format(lang): params.get('translation')[0]
+                            }
+                        })
+
 
     return q
 
