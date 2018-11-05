@@ -132,13 +132,19 @@ def search(request):
             )
 
 
+def pagination(page, hitcount):
+    pass
+
+
 @require_http_methods(["GET"])
 def search_dict(request):
     params = request.GET.copy()
+    page = int(params.get('page', 1))
+    offset = (page - 1) * 15
     hits = store.search('wlist',
             dict_search_query(**params),
-            offset=params.get('start', 1)-1,
-            size=15
+            offset=offset,
+            size=15,
             )
     count = hits.get('total')
     hits = store.hits_contents(hits)
@@ -147,8 +153,9 @@ def search_dict(request):
             {
                 'hits': hits,
                 'hitcount': count,
-                'start': params.get('start', 1),
-                'end': min(count, params.get('start', 1)+14),
+                'page': page,
+                'start': offset+1,
+                'end': min(count, offset+15),
                 })
 
 
