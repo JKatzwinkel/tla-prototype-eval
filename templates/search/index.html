@@ -11,7 +11,7 @@
 <script type="text/javascript" src="{% static "js/egyptian_keyboard.js"%}" charset="UTF-8"></script>
 <script type="text/javascript">
 var wordClasses = {{ word_classes | js }};
-$(document).ready(function(){
+$(window).on('pageshow', function(){
 	// prevent submit button from passing empty parameters in GET request
 	$("#dict-search").submit(function() {
 		// disable empty input fields
@@ -29,6 +29,8 @@ $(document).ready(function(){
 		}
 		return true;
 	});
+	// Un-disable form fields when page loads, in case they click back after submission
+	$("#dict-search input").attr("disabled", false);
 	// inject subtype choices list depending on the type input field value
 	var wordClassTypesField = $("#word_class_types");
 	var wordClassSubtypesField = $("#word_class_subtypes");
