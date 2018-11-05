@@ -110,8 +110,10 @@ def hit_tree(hits):
                         pred, []) if hid.get('id') in structure],
                     key = lambda t: structure.get(t[0])[0])
         for hid, pred in related_hit_ids:
-            _, obj = structure.get(hid)
-            nest(obj, indent+1)
+            if hid in structure:
+                _, obj = structure.get(hid)
+                nest(obj, indent+1)
+
 
     while len(hits) > 0:
         hit = hits.pop(0)
