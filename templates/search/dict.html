@@ -13,6 +13,11 @@ toggleWordclass = function() {
 			$("#toggle-wordclass span").hasClass("plus") ? "block" : "none");
 	$("#toggle-wordclass span").toggleClass("plus minus");
 }
+toggleTranslations = function() {
+	$(".lemma-translations").css("display",
+			$("#toggle-translations span").hasClass("plus") ? "block" : "none");
+	$("#toggle-translations span").toggleClass("plus minus");
+}
 </script>
 {% endblock%}
 
@@ -74,6 +79,15 @@ toggleWordclass = function() {
 							{{hit.translations.de }}
 						</div>
 					</div>
+					<div class="details-container lemma-translations" style="display:none">
+						{% for lang, translation in hit.translations.items %}
+							{% if lang != "de" %}
+								<div class="translation {{lang}}" title="{{lang}}" style="font-size:9px;font-weight:normal;">
+									{{translation}}
+								</div>
+							{% endif %}
+						{% endfor %}
+					</div>
 					<div class="details-container lemma-type" style="display:none">
 						<span id="lemma-type">
 							{{hit.type}}
@@ -102,6 +116,11 @@ toggleWordclass = function() {
 	<button class="sidebar-button" onclick="toggleHieroglyphs()" id="toggle-hieroglyphs">
 		<span class="icon plus">
 			Hieroglyphs
+		</span>
+	</button>
+	<button class="sidebar-button" onclick="toggleTranslations()" id="toggle-translations">
+		<span class="icon plus">
+			Translations
 		</span>
 	</button>
 	<button class="sidebar-button" onclick="toggleWordclass()" id="toggle-wordclass">

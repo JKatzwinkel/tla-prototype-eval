@@ -65,8 +65,8 @@
 	<div class="details-container translations">
 			{% for lang, translation in lemma.translations.items %}
 				{% if lang != "de" %}
-				<div class="translation {{lang}}">
-					{{translation}} {{lang}}
+				<div class="translation {{lang}}" title="{{lang}}">
+					{{translation}}
 				</div>
 				{% endif %}
 			{% endfor %}
