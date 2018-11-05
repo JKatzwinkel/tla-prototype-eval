@@ -1,5 +1,18 @@
+:root {
+	--link-color: #b34;
+	--link-color-visited: #43b;
+}
+
 .transcription {
 	font-family: BBAWLibertine;
+}
+
+a {
+	color: var(--link-color);
+}
+
+a:visited {
+	color: var(--link-color-visited);
 }
 
 div#container {
