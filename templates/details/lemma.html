@@ -138,7 +138,13 @@
 	<div class="sidebar-details-container">
 		<h5>Bibliography</h5>
 		<div>
-			{{lemma.passport.bibliography.bibliographical_text_field}}
+			<ul>
+				{%for bib in bibl%}
+					<li>
+						{{bib}}
+					</li>
+				{%endfor%}
+			</ul>
 		</div>
 
 
