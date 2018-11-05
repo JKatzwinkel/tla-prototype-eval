@@ -67,7 +67,7 @@ WORD_CLASSES = {
 def dict_search_query(**params):
     """ generate elasticsearch query object with parameters as would be expected to come from
     the `dict-search` form in the `search/index.html` template. """
-    q = {"query": {"bool": {"must": []}}}
+    q = {"query": {"bool": {"must": [], "must_not": []}}}
     if 'transcription' in params:
         q['query']['bool']['must'].append(
             {
@@ -75,6 +75,16 @@ def dict_search_query(**params):
                     "name": params.get('transcription')[0]
                     }
                 })
+    if 'script' in params:
+        if ('h' in params.get('script')) ^ ('d' in params.get('script')):
+            query = {
+                        "prefix": {
+                            "id": "d"
+                            }
+                        }
+            pred = 'must' if 'd' in params.get('script') else 'must_not'
+            q['query']['bool'][pred].append(query)
+
     return q
 
 
