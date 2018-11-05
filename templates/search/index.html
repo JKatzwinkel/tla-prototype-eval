@@ -4,6 +4,7 @@
 
 {% block headcss%}
 	<link rel="stylesheet" type="text/css" href="{% static "css/search.css"%}" />
+	<link rel="stylesheet" type="text/css" href="{% static "css/keyboard.css"%}" />
 {% endblock%}
 
 {% block headjs %}
@@ -87,8 +88,7 @@ $(document).ready(function(){
 						</td>
 						<td class="encoding">
 							<input type="text" name="transcription" style="width:100%" id="dict-search-transcription" 
-														class="keyboardInput" lang="egy" vki_attached="true"/>
-							<img src="{% static "img/icon/keyboard.png"%}" class="keyboardInputInitiator" title="Display virtual keyboard"/>
+														class="keyboardInput" lang="egy"/>
 							<input type="radio" name="transcription_enc" value="unicode" checked="true"/>
 							Unicode
 							<input type="radio" name="transcription_enc" value="mdc"/>
