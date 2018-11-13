@@ -145,6 +145,16 @@
 				{%endfor%}
 			</ul>
 		</div>
+		<h5>Occurences</h5>
+		<div>
+			<ul>
+				{% for where, count in lemma.occurences.items %}
+				<li>
+				{{where}}: {{count}}
+				</li>
+				{%endfor%}
+			</ul>
+		</div>
 
 
 	</div>
