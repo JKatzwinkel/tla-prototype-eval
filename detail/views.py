@@ -17,7 +17,7 @@ def lemma_details_page(request, lemma_id):
                     [str.strip]),
                 default=[])
             )
-    return render(request, 'details/lemma.html', {
+    return render(request, 'details/l.html', {
         'lemma': lemma,
         'bibl': bibl,
         })

@@ -111,7 +111,7 @@ def dict_search_query(**params):
 
 def hit_tree(hits):
     """ extracts the implicit hierarchical structure among the given objects """
-    structure = {h.get('id'): (hits.index(h), h) 
+    structure = {h.get('id'): (hits.index(h), h)
             for h in hits}
     res = []
     def nest(hit, indent=0, pred=None):
@@ -120,7 +120,7 @@ def hit_tree(hits):
         else:
             return
         """ append hit to result list (represented as tuple containing indentation and rel type """
-        res.append((range(indent), pred, hit))
+        res.append((indent, pred, hit))
         """ generate list of (id,relationtype) tuples representing the search results which
         are directly related to the current search result while preseving order """
         related_hit_ids = sorted([
@@ -145,7 +145,7 @@ def hit_tree(hits):
 @require_http_methods(["GET"])
 def search(request):
     params = request.GET.copy()
-    return render(request, 'search/index.html',
+    return render(request, 'search/i.html',
             {
                 'word_classes': WORD_CLASSES,
                 }
@@ -183,8 +183,9 @@ def search_dict(request):
     count = hits.get('total')
     hits = store.hits_contents(hits)
     hits = hit_tree(hits)
-    return render(request, 'search/dict.html',
+    return render(request, 'search/d.html',
             {
+                'params': params,
                 'hits': hits,
                 'hitcount': count,
                 'page': page,

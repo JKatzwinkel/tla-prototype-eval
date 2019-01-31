@@ -1,0 +1,170 @@
+{% extends "../b.html" %}
+{% load static %}
+{% load js %}
+
+{% block title %}TLA - Prototyp - Trefferliste{% endblock %}
+
+{% block content %}
+<!-- Page Content -->
+<div class="container content my-4">
+
+	<div class="row">
+		<!-- Breadcrumbs -->
+		<div class="col-12">
+			<nav aria-label="breadcrumb">
+			  <ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="#">Home</a></li>
+				<li class="breadcrumb-item"><a href="01_search.html">Search</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Search Results</li>
+			  </ol>
+			</nav>
+		</div>
+	</div><!-- /.row -->
+	
+	<!-- Suchergebnis + sortieren-->	
+	<div class="row search-entries">
+		<div class="col-sm-8 result">
+			<h2 class="bbaw-libertine"><mark>{{params.transcription}}</mark></h2>
+		</div>
+		<div class="col-sm-4">
+		 <div class="input-group mb-3">
+			<div class="input-group-append">
+				<label class="input-group-text" for="inputGroupSelect02">Order by</label>
+			  </div>
+			<select class="custom-select" id="inputGroupSelect02">
+				<option selected>alphabetical order</option>
+				<option value="1">option 2</option>
+				<option value="2">option 3</option>
+			  </select>			  
+			</div>
+		</div>		
+    </div><!-- /.row -->
+	
+	<!-- Trefferanzahl-->
+	<div class="row searchresult">		
+			<div class="col-sm-12 pt-3">
+			<p class="result-entries">Results: <b>{{start}} - {{end}}</b> of <b>{{hitcount}}</b> Dictionary Entries</p>
+			</div>
+	</div><!-- /.row -->  
+	  	
+	<!-- Trefferliste -->
+	<div class="row result-list">	
+		<div class="col-sm-8">
+		<!-- Treffer -->
+			{% for indent, pred, hit in hits %}
+			<div class="result-list-item push-{{indent}} {%if pred%}{{pred}}{%endif%}" id="{{hit.id}}">
+				<!--{% if pred %}
+					<div class="col-1 pt-3"><p class="font-italic">{{pred}}</p></div>
+				{% endif %}-->
+				<!-- Redaktionsstatus -->
+				<div class="red-status ok"><a href="#"><span class="far fa-check-circle"></span></a></div>				
+				
+				<!-- Lemma -->
+				<a href="/view/lemma/{{hit.id}}" title="{%if pred%}{{pred}}{%endif%}">
+				<h2 class="word bbaw-libertine">
+				<!-- Hieroglyph -->
+					<div class="hieroglyph hide">
+						{% for word in hit.words %}
+							{% if word.glyphs %}
+								<span class="glyphbox">
+									<img src="http://tladev.bbaw.de:5000/render?mdc={{word.glyphs}}" title="{{word.glyphs}}" style="height:32px;"/>
+								<spand>
+							{% endif %}
+						{% endfor %}
+					</div>				
+					{{hit.name}}
+					<span class="fas fa-arrow-circle-right"></span>
+				</h2>
+				</a>
+				
+				<!-- Translation DE -->
+				<p class="translation">{{hit.translations.de}}</p>
+				
+				<!-- Translation EN FR -->
+				<div class="translation-languages hide">
+					<p class="text-muted">{{hit.translations.en}}
+					<br>
+					<span class="font-italic">{{hit.translations.fr}}</span>
+					</p>
+				</div>
+				
+				<!-- Wordclass -->
+				<div class="word-class hide">
+					<p>
+						<strong>
+							<span class="font-italic">{{hit.type}}</span>
+							{%if hit.subtype%}<span>({{hit.subtype}})</span>{%endif%}
+						</strong>
+					</p>
+				</div>
+				
+				<!-- Bibliografy -->
+				<a class="result-list-bibliography">{{hit.passport.bibliography.bibliographical_text_field}}<span class="fas fa-arrow-circle-right"></span></a>
+				
+				<!-- combination-search -->
+				<div class="combination-search ml-4 my-3 hide">
+					<input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+					  <label class="form-check-label" for="inlineCheckbox2">Select for Combination Search</label>
+				</div>
+			</div> <!-- .Treffer -->
+			{% endfor %}
+
+
+		</div> <!-- .col-sm-8 -->
+	
+	
+		<!-- Sidebar -->
+		<div class="col-sm-4">
+		<div class="sticky-top">
+			<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail hieroglyph-btn "><i class="fas fa-plus-circle"></i>Hieroglyphs</button>
+			
+			<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn "><span class="fas fa-plus-circle"></span>Translation Languages</button>
+			<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-class-btn"><span class="fas fa-plus-circle"></span>Word Class</button>
+			<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail combination-search-btn"><span class="fas fa-plus-circle"></span>Combination Search</button>
+			<br>	
+			<button type="button" class="btn btn-block btn-light text-left text-decoration-none show-detail combination-search-btn"><span class="fas fa-search-plus"></span>Combination Search</button>
+			<a href="01_search.html"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Modify Search</button></a>
+		</div>
+		</div>
+	</div> <!-- /.row -->	  
+
+</div><!-- /.container Content -->
+{% endblock %}
+
+{% block pagination %} 	
+   <!-- Pagniantion -->
+    <footer class="py-2 mb-4">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-8">
+				   <nav aria-label="Page navigation example">
+					  <ul class="pagination justify-content-center">
+						<li class="page-item disabled">
+						  <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+						</li>
+						<li class="page-item"><a class="page-link" href="#">1</a></li>
+						<li class="page-item"><a class="page-link" href="#">2</a></li>
+						<li class="page-item"><a class="page-link" href="#">3</a></li>
+						<li class="page-item">
+						  <a class="page-link" href="#">Next</a>
+						</li>
+					  </ul>
+					</nav> 
+				</div>
+				
+				<div class="col-sm-4">
+					<div class="input-group-append">
+					<label class="input-group-text" for="inputGroupSelect02">Goto page</label>
+					<input type="gotopage" class="form-control" id="GlobalSearch" aria-describedby="GlobalSearch" placeholder="">
+				  </div>
+					  
+			</div>
+		</div>	  
+				</div>
+				
+						
+			</div>
+		</div>
+      <!-- /.container -->
+    </footer>   
+{% endblock %}
