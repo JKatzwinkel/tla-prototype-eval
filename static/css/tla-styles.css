@@ -9,8 +9,8 @@
 /* Typography */
 
 @font-face {
-	font-family: 'BBAWLibertine';
-	src: url('../fonts/bbaw_libertine_ah.ttf') format('truetype');
+		font-family: BBAWLibertine;
+		src: url(../font/BBAWLibertine_ah.ttf);
 }
 
 a, p, h1, h2, h3 {

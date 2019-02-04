@@ -277,18 +277,19 @@ var VKI_attach, VKI_close;
   VKI_attach = function(elem) {
     if (elem.getAttribute("VKI_attached")) return false;
     if (self.VKI_imageURI) {
-      var keybut = document.createElement('img');
-          keybut.src = self.VKI_imageURI;
-          keybut.alt = self.VKI_i18n['01'];
-          keybut.className = "keyboardInputInitiator";
-          keybut.title = self.VKI_i18n['01'];
-          keybut.elem = elem;
-          keybut.onclick = function(e) {
-            e = e || event;
-            if (e.stopPropagation) { e.stopPropagation(); } else e.cancelBubble = true;
-            self.VKI_show(this.elem);
-          };
-      elem.parentNode.insertBefore(keybut, (elem.dir == "rtl") ? elem : elem.nextSibling);
+      var keybut = document.createElement('span');
+      keybut.className = "fas fa-keyboard fa-lg ml-2 keyboardInputInitiator";
+      keybut.title = self.VKI_i18n['01'];
+      var keybutlink = document.createElement('a');
+      keybutlink.appendChild(keybut);
+      keybutlink.style.color = "#ff0000"
+      keybutlink.elem = elem;
+      keybutlink.onclick = function(e) {
+        e = e || event;
+        if (e.stopPropagation) { e.stopPropagation(); } else e.cancelBubble = true;
+        self.VKI_show(this.elem);
+      };
+      elem.parentNode.insertBefore(keybutlink, (elem.dir == "rtl") ? elem : elem.nextSibling);
     } else {
       elem.onfocus = function() {
         if (self.VKI_target != this) {

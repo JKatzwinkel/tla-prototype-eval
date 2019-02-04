@@ -1,11 +1,10 @@
 $(window).on('pageshow', init);
 
 function init() {	
-	console.log('hi folks');
 // Show/Hide - Buttons
 	// .hieroglyph
 		$('html').not('.hieroglyph').click(function (e) {
-		        console.log($(e.target).parent());
+		        //console.log($(e.target).parent());
 		 if ($('.hieroglyph').is(':visible') && !e.target == '.hieroglyph') {
                 $('.hieroglyph').slideUp('ease-out');
             }
@@ -17,7 +16,7 @@ function init() {
 		
 	// .translation-languages
 		$('html').not('.translation-languages').click(function (e) {
-		        console.log($(e.target).parent());
+		        //console.log($(e.target).parent());
 		 if ($('.translation-languages').is(':visible') && !e.target == '.translation-languages') {
                 $('.translation-languages').slideUp('ease-out');
             }
@@ -30,7 +29,7 @@ function init() {
 	
 	// .word-class
 		$('html').not('.word-class').click(function (e) {
-		        console.log($(e.target).parent());
+		        //console.log($(e.target).parent());
 		 if ($('.word-class').is(':visible') && !e.target == '.word-class') {
                 $('.word-class').slideUp('ease-out');
             }
@@ -42,7 +41,7 @@ function init() {
 		
 	// .combination-search
 		$('html').not('.combination-search').click(function (e) {
-		        console.log($(e.target).parent());
+		        //console.log($(e.target).parent());
 		 if ($('.combination-search').is(':visible') && !e.target == '.combination-search') {
                 $('.combination-search').slideUp('ease-out');
             }
@@ -69,7 +68,6 @@ function init() {
 			}
 		});
 		header.init();
-		console.log('header initialized');
 		}());
 		
 		

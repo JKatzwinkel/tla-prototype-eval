@@ -2,6 +2,56 @@
 {% load static %}
 {% load js %}
 
+{% block headjs %}
+<script type="text/javascript" src="{% static "js/egyptian_keyboard.js"%}"></script>
+<link rel="stylesheet" type="text/css" href="{% static "css/keyboard.css"%}"/>
+
+<script type="text/javascript">
+var wordClasses = {{ word_classes | js }};
+$(window).on('pageshow', function(){
+  // prevent submit button from passing empty parameters in GET request
+  $("#dict-search").submit(function() {
+    // disable empty input fields
+    $(this).find("textarea").filter(function() {
+      return (!this.value || this.value.length < 1);
+    }).attr("disabled", "disabled");
+    if (!$("#dict-search-transcription").val()) {
+      $("input[name=transcription_enc]").attr("disabled", "disabled");
+    }
+    if (!$("#dict-search-root").val()) {
+      $("input[name=root_enc]").attr("disabled", "disabled");
+    }
+    if (!$("#dict-search-translation").val()) {
+      $("select[name=lang]").attr("disabled", "disabled");
+    }
+    return true;
+  });
+  // Un-disable form fields when page loads, in case they click back after submission
+  $("#dict-search input").attr("disabled", false);
+  // inject subtype choices list depending on the type input field value
+  var wordClassTypesField = $("#word_class_types");
+  var wordClassSubtypesField = $("#word_class_subtypes");
+  wordClassSubtypesField.hide();
+  wordClassTypesField.bind('input', function(){//bind is deprecated actually we supposed to use on()
+    var key = wordClassTypesField.val();
+    if (key in wordClasses && wordClasses[key] != null) {
+      wordClassSubtypesField.empty();
+      wordClasses[key].forEach((subtype, index) => {
+        $('#word_class_subtypes').append(
+        '<option value="'+subtype+'">'+subtype+'</option>');
+      });
+      wordClassSubtypesField.show(150);
+    } else {
+      wordClassSubtypesField.hide(150);
+	    wordClassSubtypesField.empty();
+        wordClassSubtypesField.val('');
+    }
+  });
+});
+</script>
+
+{% endblock %}
+
 {% block title %}TLA - Prototyp - Search{% endblock %}
 
 	{% block content %}  
@@ -30,7 +80,7 @@
 			
 		<div class="col-sm-8 my-3">
 			<div class="form-group">
-				<input type="email" class="form-control" id="GlobalSearch" aria-describedby="GlobalSearch" placeholder="Type here what ever you are looking for">
+				<input type="text" class="form-control" id="GlobalSearch" aria-describedby="GlobalSearch" placeholder="Type here what ever you are looking for">
 				<small id="GlobalSearch" class="form-text text-muted pl-2 pt-1">Search for Egyptian words in transcription or modern translations ...</small>
 			 </div>
 		</div>
@@ -61,34 +111,34 @@
 			  </h2>
 			</div>
 
-			<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-			  <form>
+			<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+			  <form id="dict-search" action="/search/dict" name="dict-search">
 				  <!-- Transcription -->
 				  <div class="form-group row bg-grey">
 					<label for="language" class="col-sm-2 col-form-label"></label>
 					<div class="form-check form-check-inline ml-3">
-					  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" checked>
+					  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="script" value="h" checked>
 					  <label class="form-check-label" for="inlineCheckbox1">Hieroglyphs/Hieratic</label>
 					</div>
 					<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+					  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="script" value="d" checked>
 					  <label class="form-check-label" for="inlineCheckbox2">Demotic</label>
 					</div>	
 					<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+					  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="script" value="c">
 					  <label class="form-check-label" for="inlineCheckbox2">Coptic</label>
 					</div>					
 				  </div>
 				  <div class="form-group row">
 					<label for="Transcription" class="col-sm-2 col-form-label">Transcription</label>
 					<div class="col-sm-10">
-					  <textarea class="form-control mb-3" id="TranscriptionTextarea1" rows="3"></textarea>
+					  <textarea type="text" class="form-control mb-3 keyboardInput" id="dict-search-transcription" rows="3" name="transcription" lang="egy"></textarea>
 					  <div class="form-check form-check-inline">
-						  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked>
-						  <label class="form-check-label" for="inlineRadio1">Unicode<a href="#"><span class="fas fa-keyboard fa-lg ml-2"></span></a></label>
+						  <input class="form-check-input" type="radio" id="inlineRadio1" value="unicode" checked name="transcription_enc">
+						  <label class="form-check-label" for="inlineRadio1">Unicode<a href="#"></a></label>
 						</div>
 						<div class="form-check form-check-inline">
-						  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+						  <input class="form-check-input" type="radio" name="transcription_enc" id="inlineRadio2" value="mdc">
 						  <label class="form-check-label" for="inlineRadio2">Manuel de Codage</label>
 						</div>
 					</div>
@@ -98,17 +148,17 @@
 				  <div class="form-group row bg-grey">
 					<label for="Translation" class="col-sm-2 col-form-label">Translation</label>
 					<div class="col-sm-10">
-					  <textarea class="form-control mb-3" id="exampleFormControlTextarea1" rows="3"></textarea>
+					  <textarea class="form-control mb-3" id="dict-search-translation" rows="3" name="translation"></textarea>
 						 <div class="form-check form-check-inline">
-						  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" checked>
+						  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="lang" value="de" checked>
 						  <label class="form-check-label" for="inlineCheckbox1">German</label>
 						</div>
 						<div class="form-check form-check-inline">
-						  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+						  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="lang" value="en">
 						  <label class="form-check-label" for="inlineCheckbox2">English</label>
 						</div>	
 						<div class="form-check form-check-inline">
-						  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+						  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="lang" value="fr">
 						  <label class="form-check-label" for="inlineCheckbox2">French</label>
 						</div>
 					</div>
@@ -116,17 +166,16 @@
 				  
 				  <!-- Word-Class -->			  
 				  <div class="form-group row">
-					<label for="inputPassword3" class="col-sm-2 col-form-label">Word-Class</label>
+					<label for="inputPassword3" class="col-sm-2 col-form-label">Word Class</label>
 					<div class="col-sm-5">
-						<select class="form-control">
-						  <option>Substantiv</option>
+						<select class="form-control" id="word_class_types" name="wc_type">
+						{% for type, subtypes in word_classes.items%}
+						  <option value="{{type}}">{{type}}</option>
+						{%endfor%}
 						</select>					  
 					</div>
 					<div class="col-sm-5">
-						<select class="form-control">
-						  <option>male</option>
-						  <option>female</option>
-						  <option>other</option>
+						<select class="form-control" id="word_class_subtypes" name="wc_subtype">
 						</select>
 					  
 					</div>
@@ -136,7 +185,7 @@
 				  <div class="form-group row bg-grey">
 					<label for="Translation" class="col-sm-2 col-form-label">Bibliography</label>
 					<div class="col-sm-10">
-					  <input class="form-control" type="text" placeholder="">						 
+					  <input class="form-control" type="text" placeholder="" name="bib">
 					</div>
 				  </div>
 				  
@@ -144,21 +193,21 @@
 				  <div class="form-group row">
 					<label for="Transcription" class="col-sm-2 col-form-label">Root</label>
 					<div class="col-sm-10">
-					  <textarea class="form-control mb-3" id="TranscriptionTextarea1" rows="3"></textarea>
+					  <textarea class="form-control mb-3 keyboardInput" name="root" id="dict-search-root" rows="3" lang="egy"></textarea>
 					  <div class="form-check form-check-inline">
-						  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" >
-						  <label class="form-check-label" for="inlineRadio1">Unicode<a href="#"><span class="fas fa-keyboard fa-lg ml-2"></span></a></label>
+						  <input class="form-check-input" type="radio" name="root_enc" id="inlineRadio3" value="unicode" checked="true">
+						  <label class="form-check-label" for="inlineRadio3">Unicode<a href="#"></a></label>
 						</div>
 						<div class="form-check form-check-inline">
-						  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-						  <label class="form-check-label" for="inlineRadio2">Manuel de Codage</label>
+						  <input class="form-check-input" type="radio" name="root_enc" id="inlineRadio4" value="mdc">
+						  <label class="form-check-label" for="inlineRadio4">Manuel de Codage</label>
 						</div>
 					</div>
 				  </div>
 				  
 				  <!-- Annotaion -->			  
 				  <div class="form-group row bg-grey">
-					<label for="Word-Class" class="col-sm-2 col-form-label">Word-Class</label>
+					<label for="Word-Class" class="col-sm-2 col-form-label">Annotation Type</label>
 					<div class="col-sm-10">
 						<select class="form-control">
 						  <option>Annotation 1</option>
@@ -245,8 +294,12 @@
 					
 				</div>		
 			
-				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none"><span class="fas fa-times-circle"></span>Clear all</button>
-				<button type="button" class="btn btn-block btn-danger text-left text-decoration-none mt-4"><span class="fas fa-arrow-circle-right"></span>Search</button>
+				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none">
+					<span class="fas fa-times-circle"></span>Clear all
+				</button>
+				<button type="submit" class="btn btn-block btn-danger text-left text-decoration-none mt-4" form="dict-search" formtarget="_self" formmethod="get" formenctype="application/x-www-form-urlencoded">
+					<span class="fas fa-arrow-circle-right"></span>Search
+				</button>
 			</div> <!-- .sticky -->
 		</div>
       <!-- /.row -->
