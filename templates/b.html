@@ -1,19 +1,19 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>
-    	{% block title %}TLA - Prototyp - Template{% endblock %}
-    </title>
+	<title>
+		{% block title %}TLA - Prototyp - Template{% endblock %}
+	</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="{% static "vendor/bootstrap/css/bootstrap.min.css" %}" rel="stylesheet" type="text/css">
-    <!-- Bootstrap core JavaScript -->
-    <script src="{% static "js/jquery.min.js" %}"></script>
-    <script src="{% static "vendor/bootstrap/js/bootstrap.bundle.min.js" %}"></script>
+	<!-- Bootstrap core CSS -->
+	<link href="{% static "vendor/bootstrap/css/bootstrap.min.css" %}" rel="stylesheet" type="text/css">
+	<!-- Bootstrap core JavaScript -->
+	<script src="{% static "js/jquery.min.js" %}"></script>
+	<script src="{% static "vendor/bootstrap/js/bootstrap.bundle.min.js" %}"></script>
 
 	<script src="{% static "js/headroom.js" %}"></script>
 	<script src="{% static "js/tla-functions.js" %}"></script>
@@ -24,134 +24,134 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,500,700,700i,900" rel="stylesheet">
 	<script defer src="https://use.fontawesome.com/releases/v5.6.3/js/all.js" integrity="sha384-EIHISlAOj4zgYieurP0SdoiBYfGJKkgWedPHH4jCzpCXLmzVsw1ouK59MuUtP4a1" crossorigin="anonymous"></script>	
 	
-    <!-- Custom styles for this template -->
-    <link href="{% static "css/tla-styles.css" %}" rel="stylesheet" type="text/css">
-  </head>
+	<!-- Custom styles for this template -->
+	<link href="{% static "css/tla-styles.css" %}" rel="stylesheet" type="text/css">
+	</head>
 
 
-  <body>
+	<body>
 
 	{% block header %}
 	<header id="header" class="header">
-		<!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
-      <div class="container">
-        <a class="navbar-brand" href="#">TLA</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-        	<ul class="navbar-nav ml-auto">
-            	<li class="nav-item">
-         	    	<a class="nav-link" href="01_search.html">Search</a>
-            	</li>
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">TLA</a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-				  		<a class="dropdown-item" href="#">Introduction</a>
-				  		<a class="dropdown-item" href="#">Project</a>
-				  		<a class="dropdown-item" href="#">Collaboration</a>
-				  		<a class="dropdown-item" href="#">Licence</a>
-					</div>
-			  	</li>	
+	<!-- Navigation -->
+	<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+		<div class="container">
+		<a class="navbar-brand" href="#">TLA</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarResponsive">
+			<ul class="navbar-nav ml-auto">
 				<li class="nav-item">
-              		<a class="nav-link" href="#">Dictionary</a>
-            	</li>
-				<li class="nav-item">
-	            	<a class="nav-link" href="#">Text Corpus</a>
-	            </li>
-				<li class="nav-item">
-	            	<a class="nav-link" href="#">Extras</a>
-	            </li>
-				<li class="nav-item">
-	            	<a class="nav-link" href="#">Help</a>
-	            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+				<a class="nav-link" href="/search">Search</a>
+				</li>
+		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">TLA</a>
+			<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+				<a class="dropdown-item" href="#">Introduction</a>
+				<a class="dropdown-item" href="#">Project</a>
+				<a class="dropdown-item" href="#">Collaboration</a>
+				<a class="dropdown-item" href="#">Licence</a>
+			</div>
+			</li>	
+		<li class="nav-item">
+					<a class="nav-link" href="#">Dictionary</a>
+				</li>
+		<li class="nav-item">
+				<a class="nav-link" href="#">Text Corpus</a>
+				</li>
+		<li class="nav-item">
+				<a class="nav-link" href="#">Extras</a>
+				</li>
+		<li class="nav-item">
+				<a class="nav-link" href="#">Help</a>
+				</li>
+			</ul>
+		</div>
+		</div>
+	</nav>
 	</header>
-  {% endblock %}
-  
-    <!-- Page Content -->
-    <div class="container content">
+	{% endblock %}
+	
+	<!-- Page Content -->
+	<div class="container content">
 
-    	{% block content %}
-    	<div class="row">
-			<!-- Breadcrumbs -->
-			<div class="col-12">
-				<nav aria-label="breadcrumb">
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="#">Home</a></li>
-						{% block breadcrumbs %}
-						<li class="breadcrumb-item active" aria-current="page">Search</li>
-						{% endblock %}
-				  	</ol>
-				</nav>
-			</div>
-	  	</div>
-	  	<!-- /.row -->
-	  
-		<div class="row global-search">
-			<div class="col-sm-12">
-				<h4 class="font-weight-light">Title</h4>
-				<hr>
-			</div>
-			<!-- einfaches Suchformular -->
+		{% block content %}
+		<div class="row">
+		<!-- Breadcrumbs -->
+		<div class="col-12">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="#">Home</a></li>
+			{% block breadcrumbs %}
+			<li class="breadcrumb-item active" aria-current="page">Search</li>
+			{% endblock %}
+			</ol>
+		</nav>
+		</div>
 		</div>
 		<!-- /.row -->
-		  
-		<!-- Content -->
-		<div class="row search my-4">
-			<div class="col-sm-8">
-				<p>Inhalt</p>	
-			</div>
-		
-			<!-- Sidebar -->
-			<div class="col-sm-4">
-				<button type="button" class="btn btn-block btn-danger text-left text-decoration-none mt-4"><span class="fas fa-arrow-circle-right"></span>Search</button>
-			</div>
-	     
-		</div> <!-- /.row -->
-		{% endblock %}
-
-		{% block pagination %}
-		{% endblock %}
-	</div><!-- /.container Content -->  	
-     
 	
-
-	{% block footer %}	
-    <!-- Footer -->
-    <footer class="py-5 bg-light">
-		<div class="container">
-			<div class="row">
-				<div class="col-4">
-				   <address>
-					<strong>Thesaurus Linguae Aegyptiae</strong>
-					<br>Berlin-Brandenburgische Akademie der Wissenschaften
-					<br>Jägerstraße 22/23
-					<br>10117 Berlin
-					<br><a href="#">http://aaew.bbaw.de</a>
-				  </address>         
-				</div>
-				
-				<div class="col-5">
-					<a href="#">Contact</a> 
-					<br><a href="#">Legal Notice</a> 
-					<br><a href="#">Privacy statement</a> 		  
-				</div>
-				
-				<div class="col-3 align-cemter">
-					<a href="http://www.bbaw.de"><img src="{% static "img/logo_bbaw.png" %}"></a>
-					<br><br><a href="http://www.saw-leipzig.de/de"><img src="{% static "img/logo_saw.png" %}"></a>						
-				</div>				
-			</div>
+	<div class="row global-search">
+		<div class="col-sm-12">
+		<h4 class="font-weight-light">Title</h4>
+		<hr>
 		</div>
-      <!-- /.container -->
-    </footer>
-    {% endblock %}
+		<!-- einfaches Suchformular -->
+	</div>
+	<!-- /.row -->
+		
+	<!-- Content -->
+	<div class="row search my-4">
+		<div class="col-sm-8">
+		<p>Inhalt</p>
+		</div>
+	
+		<!-- Sidebar -->
+		<div class="col-sm-4">
+		<button type="button" class="btn btn-block btn-danger text-left text-decoration-none mt-4"><span class="fas fa-arrow-circle-right"></span>Search</button>
+		</div>
+		 
+	</div> <!-- /.row -->
+	{% endblock %}
 
-  </body>
+	{% block pagination %}
+	{% endblock %}
+	</div><!-- /.container Content -->	
+	 
+
+
+	{% block footer %}
+	<!-- Footer -->
+	<footer class="py-5 bg-light">
+	<div class="container">
+		<div class="row">
+		<div class="col-4">
+			 <address>
+			<strong>Thesaurus Linguae Aegyptiae</strong>
+			<br>Berlin-Brandenburgische Akademie der Wissenschaften
+			<br>Jägerstraße 22/23
+			<br>10117 Berlin
+			<br><a href="#">http://aaew.bbaw.de</a>
+			</address>		 
+		</div>
+		
+		<div class="col-5">
+			<a href="#">Contact</a> 
+			<br><a href="#">Legal Notice</a> 
+			<br><a href="#">Privacy statement</a>	
+		</div>
+		
+		<div class="col-3 align-cemter">
+			<a href="http://www.bbaw.de"><img src="{% static "img/logo_bbaw.png" %}"></a>
+			<br><br><a href="http://www.saw-leipzig.de/de"><img src="{% static "img/logo_saw.png" %}"></a>
+		</div>
+		</div>
+	</div>
+		<!-- /.container -->
+	</footer>
+	{% endblock %}
+
+	</body>
 
 </html>
