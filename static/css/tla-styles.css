@@ -156,7 +156,7 @@ a.navbar-brand {
 .result-list-item h2{	
 	color: red;
 	}
-.result-list-item p.translation{
+.result-list-item span.translation{
 	font-weight: 500;
 	}
 .result-list-item.push-1{
