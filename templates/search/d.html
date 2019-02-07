@@ -62,23 +62,27 @@
 				<!-- Lemma -->
 				<a href="/view/lemma/{{hit.id}}" title="{%if pred%}{{pred}}{%endif%}">
 				<h2 class="word bbaw-libertine">
+					{{hit.name}}
 				<!-- Hieroglyph -->
-					<div class="hieroglyph hide">
+					<span class="hieroglyph hide">
 						{% for word in hit.words %}
 							{% if word.glyphs %}
 								<span class="glyphbox">
 									<img src="http://tladev.bbaw.de:5000/render?mdc={{word.glyphs}}" title="{{word.glyphs}}" style="height:32px;"/>
-								<spand>
+								</span>
 							{% endif %}
 						{% endfor %}
-					</div>				
-					{{hit.name}}
-					<span class="fas fa-arrow-circle-right"></span>
+					</span>
 				</h2>
 				</a>
 				
 				<!-- Translation DE -->
-				<p class="translation">{{hit.translations.de}}</p>
+				<p>
+				<span class="translation">{{hit.translations.de}}</span>
+				<!-- Bibliografy -->
+				<a class="result-list-bibliography">{{hit.passport.bibliography.bibliographical_text_field}}<span class="fas fa-arrow-circle-right"></span></a>
+				</p>
+				
 				
 				<!-- Translation EN FR -->
 				<div class="translation-languages hide">
@@ -97,9 +101,6 @@
 						</strong>
 					</p>
 				</div>
-				
-				<!-- Bibliografy -->
-				<a class="result-list-bibliography">{{hit.passport.bibliography.bibliographical_text_field}}<span class="fas fa-arrow-circle-right"></span></a>
 				
 				<!-- combination-search -->
 				<div class="combination-search ml-4 my-3 hide">
