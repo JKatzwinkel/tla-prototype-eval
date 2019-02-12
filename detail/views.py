@@ -1,12 +1,43 @@
+from datetime import datetime
+
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
+from django.utils.http import urlencode
 
 from glom import glom, Coalesce
 
 import store
 
 
-require_http_methods(["GET"])
+def coins_openurl_kev(doc):
+    # generate a contextobject referent
+    # https://groups.niso.org/apps/group_public/download.php/14833/z39_88_2004_r2010.pdf
+    ctx_rft = [
+        ('ctx_ver', "Z39.88-2004"),
+        ('ctx_enc', "info.ofi/enc:UTF-8"),
+        ('ctx_tim', datetime.now().isotime()),
+        ('rft.language', "en-US"),
+        ('rft.au', glom(doc, "edited.name")),
+        ('rft.genre', "article"),
+        ('rft.atitle', 'Lemma {} - {}'.format(
+            doc.get("id"),
+            doc.get("name"),
+        )),
+        ('rft.jtitle', "Thesaurus Linguae Aegyptiae"),
+        ('rft.stitle', "TLA"),
+        ('rft.volume', "19"),
+        ('rft.issue', "1"),
+        ('rft.date', glom(doc, "edited.date")),
+        ('rft.place', 'Berlin'),
+        ('rft.publisher', 'Berlin-Brandenburgische Akademie der Wissenschaften'),
+        ('rft_val_fmt', 'info:ofi/fmt:kev:mtx:journal'),
+        ('url_ver', "Z39.88-2004"),
+    ]
+    coins_kev = urlencode(ctx_rft)
+    return coins_kev
+
+
+@require_http_methods(["GET"])
 def lemma_details_page(request, lemma_id):
     lemma = store.get('wlist', lemma_id)
     bibl = glom(lemma,
@@ -20,6 +51,7 @@ def lemma_details_page(request, lemma_id):
     return render(request, 'details/l.html', {
         'lemma': lemma,
         'bibl': bibl,
+        'coins': coins_openurl_kev(lemma),
         })
 
 
