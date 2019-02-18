@@ -43,7 +43,7 @@
 	<!-- Trefferanzahl-->
 	<div class="row searchresult">		
 			<div class="col-sm-12 pt-3">
-			<p class="result-entries">Results: <b>{{start}} - {{end}}</b> of <b>{{hitcount}}</b> Dictionary Entries</p>
+				<p class="result-entries">Results: <b>{{start}} - {{end}}</b> of <b>{{hitcount}}</b> Dictionary Entries <span class="far fa-envelope"/></p>
 			</div>
 	</div><!-- /.row -->  
 	  	
@@ -52,12 +52,16 @@
 		<div class="col-sm-8">
 		<!-- Treffer -->
 			{% for indent, pred, hit in hits %}
-			<div class="result-list-item push-{{indent}} {%if pred%}{{pred}}{%endif%}" id="{{hit.id}}">
+			<div class="result-list-item push-{{indent}} {%if pred%}{{pred}}{%endif%}" id="{{hit.id}}" onclick="window.open('/view/lemma/{{hit.id}}','_self')">
 				<!--{% if pred %}
 					<div class="col-1 pt-3"><p class="font-italic">{{pred}}</p></div>
 				{% endif %}-->
 				<!-- Redaktionsstatus -->
-				<div class="red-status ok"><a href="#"><span class="far fa-check-circle"></span></a></div>				
+				<div class="red-status">
+					<a href="#"><span class="far fa-check-circle ok"></span></a>
+					<a><span class="far fa-envelope"/></a>
+					<a><span class="far fa-comment"/></a>
+				</div>	
 				
 				<!-- Lemma -->
 				<a href="/view/lemma/{{hit.id}}" title="{%if pred%}{{pred}}{%endif%}">
@@ -81,11 +85,11 @@
 					{%for translation in hit.translations.de%}
 					<span>{{translation}}
 					{%endfor%}
+				
+					<!-- Bibliografy -->
+				<a class="result-list-bibliography">{{hit.bibliography}}<span class="fas fa-arrow-circle-right"></span></a>
 				</p>
 				
-				<!-- Bibliografy -->
-				<a class="result-list-bibliography">{{hit.bibliography}}<span class="fas fa-arrow-circle-right"></span></a>
-			
 				<!-- Translation EN FR -->
 				<div class="translation-languages hide">
 					<p class="text-muted">{% for translation in hit.translations.en%}<span>{{translation}}</span>{%endfor%}

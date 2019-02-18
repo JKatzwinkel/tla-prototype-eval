@@ -168,18 +168,19 @@ a.navbar-brand {
 	
 .red-status {
 	position: relative;
-    top: 0;
-	left: 98%;
-    height: 0;
-    width: 2rem;
+	top: 0;
+	left: 92%;
+	height: 0;
+	width: 6rem;
+	padding: 0px;
 	}
-.red-status.ok .svg-inline--fa {
+.red-status .svg-inline--fa.ok {
 	color: green;
 	}
-.red-status.pending .svg-inline--fa {
+.red-status .svg-inline--fa.pending {
 	color: orange;
 	}
-.red-status.notok .svg-inline--fa {
+.red-status .svg-inline--fa.notok {
 	color: red;
 	}
 
