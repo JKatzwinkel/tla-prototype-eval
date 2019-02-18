@@ -25,7 +25,11 @@
   <div class="row search-entries detail">
 	<!-- Suchergebnis -->		
 		<div class="col-sm-8 result">				 
-			<div class="red-status ok"><a href="#"><span class="far fa-check-circle"></span></a></div>
+			<div class="red-status">
+				<a href="#"><span class="far fa-check-circle ok"></span></a>
+				<a><span class="far fa-envelope"/></a>
+				<a><span class="far fa-comment"/></a>
+			</div>
 			<h2 class="bbaw-libertine">
 				{% for word in lemma.words %}
 				<mark>
@@ -137,7 +141,12 @@
 
 	<!-- Sidebar -->
 		<div class="col-sm-4">
-			<h6 class="id mt-2 ml-3">ID 550860</h6>
+			<h6 class="id mt-2 ml-3">
+				{{lemma.id}}
+				<a>
+					<span class="fas fa-quote-right"/>
+				</a>
+			</h6>
 			
 			<p class="h6 pt-4 pb-1 pl-3">Bibliography</p>
 			{% for bib in bibl %}
