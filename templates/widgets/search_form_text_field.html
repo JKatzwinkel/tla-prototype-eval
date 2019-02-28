@@ -1,0 +1,6 @@
+{% spaceless %}
+<label for="id_{{widget.name}}" class="col-sm-2 col-form-label">{{widget.attrs.label}}</label>
+<div class="col-sm-10">
+	{% include "django/forms/widgets/text.html" %}
+</div>
+{% endspaceless %}

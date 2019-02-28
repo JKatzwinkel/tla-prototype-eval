@@ -150,13 +150,13 @@ def hit_tree(hits):
 @require_http_methods(["GET"])
 def search(request):
     params = request.GET.copy()
-   return render(
+    return render(
         request,
         'search/i.html',
         {
             'word_classes': WORD_CLASSES,
-            dictform: DictSearchForm(),
-            textwordform: TextWordSearchForm(),
+            'dictform': DictSearchForm(),
+            'textwordform': TextWordSearchForm(),
         }
     )
 
