@@ -1,6 +1,11 @@
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 
+from .forms import (
+    DictSearchForm,
+    TextWordSearchForm,
+)
+
 import store
 
 RESULTS_PER_PAGE = 15
@@ -111,7 +116,7 @@ def dict_search_query(**params):
 
 def hit_tree(hits):
     """ extracts the implicit hierarchical structure among the given objects """
-    structure = {h.get('id'): (hits.index(h), h) 
+    structure = {h.get('id'): (hits.index(h), h)
             for h in hits}
     res = []
     def nest(hit, indent=0, pred=None):
@@ -145,11 +150,15 @@ def hit_tree(hits):
 @require_http_methods(["GET"])
 def search(request):
     params = request.GET.copy()
-    return render(request, 'search/index.html',
-            {
-                'word_classes': WORD_CLASSES,
-                }
-            )
+    return render(
+        request,
+        'search/index.html',
+        {
+            'word_classes': WORD_CLASSES,
+            dictform: DictSearchForm(),
+            textwordform: TextWordSearchForm(),
+        }
+    )
 
 
 def pagination(request, hitcount):
