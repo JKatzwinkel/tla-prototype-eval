@@ -1,6 +1,11 @@
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 
+from .forms import (
+    DictSearchForm,
+    TextWordSearchForm,
+)
+
 import store
 
 RESULTS_PER_PAGE = 15
@@ -145,11 +150,15 @@ def hit_tree(hits):
 @require_http_methods(["GET"])
 def search(request):
     params = request.GET.copy()
-    return render(request, 'search/i.html',
-            {
-                'word_classes': WORD_CLASSES,
-                }
-            )
+   return render(
+        request,
+        'search/i.html',
+        {
+            'word_classes': WORD_CLASSES,
+            dictform: DictSearchForm(),
+            textwordform: TextWordSearchForm(),
+        }
+    )
 
 
 def pagination(request, hitcount):
