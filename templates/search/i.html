@@ -104,8 +104,8 @@ $(window).on('pageshow', function(){
 		  <div class="card">
 			<div class="card-header" id="headingOne">
 			  <h2 class="mb-0">
-				<button class="btn btn-link show-more" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-				  <span class="fas fa-plus-circle"></span>Dictionary Entries
+				<button class="btn btn-link show-more" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" form="dict-search">
+				  <span class="fas fa-minus-circle"></span>Dictionary Entries
 				</button>
 				
 			  </h2>
@@ -234,15 +234,15 @@ $(window).on('pageshow', function(){
 		  <div class="card">
 			<div class="card-header" id="headingTwo">
 			  <h2 class="mb-0">
-				<button class="btn btn-link collapsed show-more" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+				<button form="text-word-search" class="btn btn-link collapsed show-more" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
 				 <span class="fas fa-plus-circle"></span> Words in Texts
 				</button>
 			  </h2>
 			</div>
 			<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-				<form id="text-word-search" name="text-word-search" action="/search/occurences/">
+				<form id="text-word-search" name="text-word-search" action="/search/occurences">
 					{% for field in textwordform %}
-						<div class="form-group row bg-grey">
+					<div class="form-group row bg{% cycle '-grey' '' %}">
 						{{ field }}
 						</div>
 					{% endfor %}
@@ -307,7 +307,7 @@ $(window).on('pageshow', function(){
 				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none">
 					<span class="fas fa-times-circle"></span>Clear all
 				</button>
-				<button type="submit" class="btn btn-block btn-danger text-left text-decoration-none mt-4" form="dict-search" formtarget="_self" formmethod="get" formenctype="application/x-www-form-urlencoded">
+				<button id="submit-search-form" type="submit" class="btn btn-block btn-danger text-left text-decoration-none mt-4" form="dict-search" formtarget="_self" formmethod="get" formenctype="application/x-www-form-urlencoded">
 					<span class="fas fa-arrow-circle-right"></span>Search
 				</button>
 			</div> <!-- .sticky -->

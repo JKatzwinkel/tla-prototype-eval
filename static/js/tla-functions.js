@@ -75,30 +75,27 @@ function init() {
 	
 		$(document).ready(function(){
 			$('.show-more').on('click', function(){
+				let button = $(this);
+				// change icons for show-detail-buttons
+				$("[aria-expanded^=true]").each(function() {
+					$(this)
+						.find("[data-fa-i2svg]")
+						.removeClass("fa-minus-circle")
+						.addClass("fa-plus-circle");
+				});
 				$('html,body').animate({scrollTop: $(this).offset().top}, 800);
+				if (button.is("[aria-expanded^=false]")) {
+					$(this)
+						.find('[data-fa-i2svg]')
+						.removeClass('fa-plus-circle')
+						.addClass('fa-minus-circle');
+					$("#submit-search-form").attr(
+						"form",
+						$(this).attr("form")
+					);
+				}
 			}); 
 		}); 
 	
-	// change icons for show-detail-buttons
-		//$(document).addEventListener('DOMContentLoaded', function () {
-		$(document).ready(function() {			
-			
-			$('.show-detail, .show-more').click('click',function () {
-				$(this)
-				.find('[data-fa-i2svg]')
-				.toggleClass('fas fa-plus-circle')
-				.toggleClass('fas fa-minus-circle');		
-			});
-			/*
-			$('.show-more').on('hide.bs.collapse', function () {
-			  $(this)
-				.find('[data-fa-i2svg]')
-				.toggleClass('fas fa-minus-circle')
-				.toggleClass('fas fa-plus-circle');
-			});*/
-			
-		});
-				
-			
 }
 
