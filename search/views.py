@@ -178,7 +178,6 @@ def pagination(request, hitcount):
     return pages
 
 
-
 @require_http_methods(["GET"])
 def search_dict(request):
     params = request.GET.copy()
@@ -204,4 +203,15 @@ def search_dict(request):
                 })
 
 
-# Create your views here.
+def search_text_words(request):
+    params = request.GET.copy()
+    form = TextWordSearchForm(request.GET)
+    print(dir(form.fields["translation"]))
+    print(params)
+    return render(
+        request,
+        'search/a.html',
+        {
+            'params': params,
+        }
+    )
