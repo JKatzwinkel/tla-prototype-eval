@@ -5,6 +5,20 @@ from glom import glom, Coalesce
 
 import store
 
+def occurence_count(lemma_id):
+    count = store.es.count(
+        index="occurence",
+        doc_type="occurence",
+        body={
+            "query": {
+                "term": {
+                    "lemma": lemma_id,
+                },
+            }
+        }
+    ).get('count', 0)
+    return count
+
 
 require_http_methods(["GET"])
 def lemma_details_page(request, lemma_id):
@@ -17,9 +31,16 @@ def lemma_details_page(request, lemma_id):
                     [str.strip]),
                 default=[])
             )
-    return render(request, 'details/l.html', {
-        'lemma': lemma,
-        'bibl': bibl,
-        })
+    return render(
+        request,
+        'details/l.html',
+        {
+            'lemma': lemma,
+            'bibl': bibl,
+            'occurences': {
+                'corpus': occurence_count(lemma_id),
+            }
+        }
+    )
 
 
