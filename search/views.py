@@ -155,8 +155,8 @@ def search(request):
         'search/index.html',
         {
             'word_classes': WORD_CLASSES,
-            dictform: DictSearchForm(),
-            textwordform: TextWordSearchForm(),
+            'dictform': DictSearchForm(),
+            'textwordform': TextWordSearchForm(),
         }
     )
 
