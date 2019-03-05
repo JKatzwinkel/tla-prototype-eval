@@ -77,33 +77,57 @@ def dict_search_query(**params):
             {
                 "match_phrase_prefix": {
                     "name": transcription,
-                    }
                 },
-            ])
+            }
+        ])
         q['query']['bool']['should'].extend([
             {
                 "term": {
-                    "name": transcription,
-                    }
+                    "name": transcription
                 }
-            ])
+            }
+        ])
     if 'script' in params:
         if ('h' in params.get('script')) ^ ('d' in params.get('script')):
             query = {
                         "prefix": {
-                            "id": "d"
+                            "id": {
+                                "query": "d",
+                                "operator": "and",
                             }
                         }
+                    }
             pred = 'must' if 'd' in params.get('script') else 'must_not'
             q['query']['bool'][pred].append(query)
+    if 'wc_type' in params:
+        q['query']['bool']['must'].extend([
+            {
+                "term": {
+                    "type": params.get("wc_type")[0],
+                }
+            },
+        ])
+    if 'wc_subtype' in params:
+        q['query']['bool']['must'].extend([
+            {
+                "term": {
+                    "subtype": params.get("wc_subtype")[0],
+                }
+            },
+        ])
+
     if 'translation' in params:
         for lang in params.get('lang', ['de']):
             q['query']['bool']['must'].append(
                     {
                         "match": {
-                            "translations.{}".format(lang): params.get('translation')[0]
+                            "translations.{}".format(lang): {
+                                "query": params.get('translation')[0],
+                                "operator": "and",
                             }
-                        })
+                        }
+                    }
+            )
 
 
     return q
@@ -145,7 +169,7 @@ def hit_tree(hits):
 @require_http_methods(["GET"])
 def search(request):
     params = request.GET.copy()
-    return render(request, 'search/i.html',
+    return render(request, 'search/index.html',
             {
                 'word_classes': WORD_CLASSES,
                 }
@@ -183,7 +207,7 @@ def search_dict(request):
     count = hits.get('total')
     hits = store.hits_contents(hits)
     hits = hit_tree(hits)
-    return render(request, 'search/d.html',
+    return render(request, 'search/dict.html',
             {
                 'params': params,
                 'hits': hits,

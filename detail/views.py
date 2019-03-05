@@ -15,7 +15,7 @@ def coins_openurl_kev(doc):
     ctx_rft = [
         ('ctx_ver', "Z39.88-2004"),
         ('ctx_enc', "info.ofi/enc:UTF-8"),
-        ('ctx_tim', datetime.now().isotime()),
+        ('ctx_tim', datetime.now().isoformat()),
         ('rft.language', "en-US"),
         ('rft.au', glom(doc, "edited.name")),
         ('rft.genre', "article"),
@@ -48,7 +48,7 @@ def lemma_details_page(request, lemma_id):
                     [str.strip]),
                 default=[])
             )
-    return render(request, 'details/l.html', {
+    return render(request, 'details/lemma.html', {
         'lemma': lemma,
         'bibl': bibl,
         'coins': coins_openurl_kev(lemma),
