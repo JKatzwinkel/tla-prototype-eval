@@ -1,159 +1,175 @@
-{% extends "../base.html" %}
+{% extends "../b.html" %}
 {% load static %}
+{% load js %}
 
-{% block title %}
-	Search Dictionary for ...
-{% endblock %}
+{% block title %}TLA - Prototyp - Trefferliste{% endblock %}
 
-{% block headcss%}
-	<link rel="stylesheet" type="text/css" href="{% static "css/search.css"%}" />
-{% endblock%}
+{% block content %}
+<!-- Page Content -->
+<div class="container content my-4">
 
-
-{% block headjs %}
-<script type="text/javascript">
-toggleHieroglyphs = function() {
-	$(".hieroglyphs").css("display",
-			$("#toggle-hieroglyphs span").hasClass("plus") ? "block" : "none");
-	$("#toggle-hieroglyphs span").toggleClass("plus minus");
-}
-toggleWordclass = function() {
-	$(".lemma-type").css("display",
-			$("#toggle-wordclass span").hasClass("plus") ? "block" : "none");
-	$("#toggle-wordclass span").toggleClass("plus minus");
-}
-toggleTranslations = function() {
-	$(".lemma-translations").css("display",
-			$("#toggle-translations span").hasClass("plus") ? "block" : "none");
-	$("#toggle-translations span").toggleClass("plus minus");
-}
-</script>
-{% endblock%}
-
-{% block breadcrumbs %}
-<li>
-	<a href="/search">
-		Search TLA
-	</a>
-</li>
-<li>Dictionary Entries</li>
-{% endblock %}
-
-
-{% block content%}
-<h3>{{start}} - {{end}} of {{hitcount}} Dictionary Entries</h3>
-<hr/>
-<div class="stuff">
-	{% for indent, pred, hit in hits %}
-	<div class="hit dict-result {%if pred%}{{pred}}{%endif%}" id="{{hit.id}}" style="border-bottom:1px solid #aaa;padding:5px">
-		<table style="width:100%">
-			<tr>
-				{% for i in indent %}
-				<td class="indentation">
-				</td>
-				{% endfor %}
-				<td>
-					<div class="details-container">
-						<div class="result-head">
-							<table width="100%">
-								<tr>
-									<div class="hieroglyphs" style="display:none">
-										{% for word in hit.words %}
-											{% if word.glyphs %}
-												<span class="glyphbox">
-													<img src="http://tladev.bbaw.de:5000/render?mdc={{word.glyphs}}" 
-															title="{{word.glyphs}}" style="height:32px"/>
-												</span>
-											{%endif%}
-										{% endfor %}
-									</div>
-									<td class="name" style="font-weight:bold;font-size:16px">
-										<a class="transcription" href="/view/lemma/{{hit.id}}">
-											{{hit.name }}
-										</a>
-									</td>
-									<td class="head-bar-reviewstate" style="text-align:right">
-										<span style="color:#bbb">
-											{{hit.id}}
-										</span>
-										{{hit.revisionState}}
-									</td>
-								</tr>
-							</table>
-						</div>
-					</div>
-					<div class="details-container">
-						<div class="translation de" style="font-size:11px">
-							{{hit.translations.de }}
-						</div>
-					</div>
-					<div class="details-container lemma-translations" style="display:none">
-						{% for lang, translation in hit.translations.items %}
-							{% if lang != "de" %}
-								<div class="translation {{lang}}" title="{{lang}}" style="font-size:11px;font-weight:normal;">
-									{{translation}}
-								</div>
+	<div class="row">
+		<!-- Breadcrumbs -->
+		<div class="col-12">
+			<nav aria-label="breadcrumb">
+			  <ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="#">Home</a></li>
+				<li class="breadcrumb-item"><a href="/search">Search</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Search Results</li>
+			  </ol>
+			</nav>
+		</div>
+	</div><!-- /.row -->
+	
+	<!-- Suchergebnis + sortieren-->	
+	<div class="row search-entries">
+		<div class="col-sm-8 result">
+			<h2 class="bbaw-libertine"><mark>{{params.transcription}}</mark></h2>
+		</div>
+		<div class="col-sm-4">
+		 <div class="input-group mb-3">
+			<div class="input-group-append">
+				<label class="input-group-text" for="inputGroupSelect02">Order by</label>
+			  </div>
+			<select class="custom-select" id="inputGroupSelect02">
+				<option selected>alphabetical order</option>
+				<option value="1">option 2</option>
+				<option value="2">option 3</option>
+			  </select>			  
+			</div>
+		</div>		
+    </div><!-- /.row -->
+	
+	<!-- Trefferanzahl-->
+	<div class="row searchresult">		
+			<div class="col-sm-12 pt-3">
+				<p class="result-entries">Results: <b>{{start}} - {{end}}</b> of <b>{{hitcount}}</b> Dictionary Entries <span class="far fa-envelope"/></p>
+			</div>
+	</div><!-- /.row -->  
+	  	
+	<!-- Trefferliste -->
+	<div class="row result-list">	
+		<div class="col-sm-8">
+		<!-- Treffer -->
+			{% for indent, pred, hit in hits %}
+			<div class="result-list-item push-{{indent}} {%if pred%}{{pred}}{%endif%}" id="{{hit.id}}" onclick="window.open('/view/lemma/{{hit.id}}','_self')">
+				<!--{% if pred %}
+					<div class="col-1 pt-3"><p class="font-italic">{{pred}}</p></div>
+				{% endif %}-->
+				<!-- Redaktionsstatus -->
+				<div class="red-status">
+					<a href="#"><span class="far fa-check-circle ok"></span></a>
+					<a><span class="far fa-envelope"/></a>
+					<a><span class="far fa-comment"/></a>
+				</div>	
+				
+				<!-- Lemma -->
+				<a href="/view/lemma/{{hit.id}}" title="{%if pred%}{{pred}}{%endif%}">
+				<h2 class="word bbaw-libertine">
+					{{hit.name}}
+				<!-- Hieroglyph -->
+					<span class="hieroglyph hide">
+						{% for word in hit.words %}
+							{% if word.glyphs %}
+								<span class="glyphbox">
+									<img src="http://tladev.bbaw.de:5000/render?mdc={{word.glyphs}}" title="{{word.glyphs}}" style="height:32px;"/>
+								</span>
 							{% endif %}
 						{% endfor %}
-					</div>
-					<div class="details-container lemma-type" style="display:none">
-						<span id="lemma-type">
-							{{hit.type}}
-						</span>
-						{% if hit.subtype %}
-							<span id="lemma-subtype">
-								({{hit.subtype}})
-							</span>
-						{% endif %}
-					</div>
-					<div class="details-container" style="border: 0 none">
-						<div class="bibliography" style="font-size:11px">
-							{{hit.passport.bibliography.bibliographical_text_field}}
-						</div>
-					</div>
-				</td>
-			</tr>
-		</table>
-	</div>
-	{% endfor %}
-</div>
-<div class="sidebar">
-	<div class="text">
-		Show Properties:
-	</div>
-	<button class="sidebar-button" onclick="toggleHieroglyphs()" id="toggle-hieroglyphs">
-		<span class="icon plus">
-			Hieroglyphs
-		</span>
-	</button>
-	<button class="sidebar-button" onclick="toggleTranslations()" id="toggle-translations">
-		<span class="icon plus">
-			Translations
-		</span>
-	</button>
-	<button class="sidebar-button" onclick="toggleWordclass()" id="toggle-wordclass">
-		<span class="icon plus">
-			Word Class
-		</span>
-	</button>
-</div>
-{% endblock %}
-	
-<hr/>
-{%block pagination%}
-{% if pagination|length > 1 %}
-<div class="stuff" style="text-align:center;">
-	<div class="pagination">
-		{% for pageno, link in pagination %}
-		<a {% ifnotequal pageno '...'%}href="{{link}}"{%endifnotequal%}>
-				<span class="pagelink {%ifequal pageno page%}thispage{%endifequal%}">
-					{{pageno}}
-				</span>
-			</a>
-			</span>
-		{% endfor %}
-	</div>
-</div>
-{%endif%}
-{%endblock%}
+					</span>
+				</h2>
+				</a>
+				
+				<!-- Translation DE -->
+				<p>
+				<span class="translation">{{hit.translations.de}}</span>
+				<!-- Bibliografy -->
+				<span class="result-list-bibliography">({{hit.passport.bibliography.bibliographical_text_field}})</span>
+				</p>
+				
+				
+				<!-- Translation EN FR -->
+				<div class="translation-languages hide">
+					<p class="text-muted">{{hit.translations.en}}
+					<br>
+					<span class="font-italic">{{hit.translations.fr}}</span>
+					</p>
+				</div>
+				
+				<!-- Wordclass -->
+				<div class="word-class hide">
+					<p>
+						<strong>
+							<span class="font-italic">{{hit.type}}</span>
+							{%if hit.subtype%}<span>({{hit.subtype}})</span>{%endif%}
+						</strong>
+					</p>
+				</div>
+				
+				<!-- combination-search -->
+				<div class="combination-search ml-4 my-3 hide">
+					<input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+					  <label class="form-check-label" for="inlineCheckbox2">Select for Combination Search</label>
+				</div>
+			</div> <!-- .Treffer -->
+			{% endfor %}
 
+
+		</div> <!-- .col-sm-8 -->
+	
+	
+		<!-- Sidebar -->
+		<div class="col-sm-4">
+		<div class="sticky-top">
+			<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail hieroglyph-btn "><i class="fas fa-plus-circle"></i>Hieroglyphs</button>
+			
+			<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn "><span class="fas fa-plus-circle"></span>Translation Languages</button>
+			<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-class-btn"><span class="fas fa-plus-circle"></span>Word Class</button>
+			<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail combination-search-btn"><span class="fas fa-plus-circle"></span>Combination Search</button>
+			<br>	
+			<button type="button" class="btn btn-block btn-light text-left text-decoration-none show-detail combination-search-btn"><span class="fas fa-search-plus"></span>Combination Search</button>
+			<a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Modify Search</button></a>
+		</div>
+		</div>
+	</div> <!-- /.row -->	  
+
+</div><!-- /.container Content -->
+{% endblock %}
+
+{% block pagination %} 	
+   <!-- Pagniantion -->
+    <footer class="py-2 mb-4">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-8">
+				   <nav aria-label="Page navigation example">
+					  <ul class="pagination justify-content-center">
+						<li class="page-item disabled">
+						  <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+						</li>
+						<li class="page-item"><a class="page-link" href="#">1</a></li>
+						<li class="page-item"><a class="page-link" href="#">2</a></li>
+						<li class="page-item"><a class="page-link" href="#">3</a></li>
+						<li class="page-item">
+						  <a class="page-link" href="#">Next</a>
+						</li>
+					  </ul>
+					</nav> 
+				</div>
+				
+				<div class="col-sm-4">
+					<div class="input-group-append">
+					<label class="input-group-text" for="inputGroupSelect02">Goto page</label>
+					<input type="gotopage" class="form-control" id="GlobalSearch" aria-describedby="GlobalSearch" placeholder="">
+				  </div>
+					  
+			</div>
+		</div>	  
+				</div>
+				
+						
+			</div>
+		</div>
+      <!-- /.container -->
+    </footer>   
+{% endblock %}
