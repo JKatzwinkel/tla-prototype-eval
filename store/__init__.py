@@ -1,6 +1,10 @@
-from elasticsearch import Elasticsearch, helpers
+from os import environ as env
 
-es = Elasticsearch('http://127.0.0.1:9200')
+from elasticsearch import Elasticsearch
+
+es = Elasticsearch(
+    env.get('ES_URL', 'http://127.0.0.1:9200')
+)
 
 
 def lucenify(params):
