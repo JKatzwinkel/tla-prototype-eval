@@ -12,7 +12,11 @@ def hits_contents(hits):
     """ extracts the _source objects from elasticsearch search result hit list, 
     after copying each hit's _score field into the wrapped _source object. """
     for hit in hits.get('hits', []):
-        hit.get('_source')['score'] = hit.get('_score')
+        hit['_source'] = {
+            **hit.get('_source'),
+            'score': hit.get('_score'),
+            'id': hit.get('_id'),
+        }
     return [hit.get('_source') for hit in hits.get('hits', [])]
 
     
@@ -72,6 +76,29 @@ def resolve_name(index, _id=None, obj=None):
     else:
         print('obj id does not exist: {}'.format(_id))
         return _id
+
+
+def get_mappings(index):
+    """ extract indexed features from a certain index's mappings """
+    mappings = es.indices.get_mapping(index).get(index, {}).get('mappings', {}).get(index)
+    def extract_properties(obj):
+        res = []
+        for key, values in obj.items():
+            if type(values) is dict:
+                if key == "properties":
+                    return extract_properties(values)
+                elif "type" in values and type(values["type"]) is not dict:
+                    res.append(key)
+                else:
+                    res.extend(
+                        [
+                            '{}.{}'.format(key, remainder)
+                            for remainder in extract_properties(values)
+                        ]
+                    )
+        return res
+    properties = extract_properties(mappings)
+    return properties
 
 
 

@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 
+from glom import glom
+
 from .forms import (
     DictSearchForm,
     TextWordSearchForm,
@@ -109,9 +111,141 @@ def dict_search_query(**params):
                             "translations.{}".format(lang): params.get('translation')[0]
                             }
                         })
-
-
     return q
+
+
+def textword_search_query(**params):
+    """ generate elasticsearch query from parameters passed over by a
+    :class:`forms.TextWordSearchForm`.
+    """
+    q = {"query": {"bool": {"must": [], "must_not": [], "should": []}}}
+    if 'lemma' in params:
+        q['query']['bool']['should'].extend(
+            [
+                {
+                    'term': {
+                        'lemma': lemma,
+                    }
+                }
+                for lemma in params['lemma']
+                if len(lemma) > 0
+            ]
+        )
+    if 'translation' in params:
+        if len(params.get('translation')[-1]) > 0:
+            q['query']['bool']['should'].extend(
+                [
+                    {
+                        'match': {
+                            'translations.{}'.format(lang): params.get('translation')[-1]
+                        }
+                    }
+                    for lang in params.get('trans_lang', [])
+                ]
+            )
+    if 'hieroglyphs' in params:
+        if len(params.get('hieroglyphs')[-1]) > 0:
+            q['query']['bool']['must'].extend(
+                [
+                    {
+                        'match': {
+                            'glyphs': params.get('hieroglyphs')[-1]
+                        }
+                    }
+                ]
+            )
+#    if 'passport_0' in params:
+#        if len(params.get('passport_0')[-1]) > 0:
+#            q['query']['bool']['must'].extend(
+#                [
+#                    {
+#                        'term': {
+#                            params.get('passport_1',[""])[-1]: params.get('passport_0')[-1]
+#                        }
+#                    }
+#                ]
+#            )
+#
+    print(q)
+    return q
+
+
+def populate_textword_occurences(hits, **params):
+    occurences = []
+    filters = {
+        k: params.get(k) for k in ["lemma", "transcription", "hieroglyphs"]
+    }
+    for hit in hits:
+        sentence = store.get(
+            'sentence',
+            hit.get('sentence')
+        )
+        for i, token in enumerate(sentence['tokens']):
+            if token.get('id') == hit['token']:
+                token['highlight'] = 1
+            else:
+                match = True
+                for k, vv in filters.items():
+                    if vv:
+                        match = match and any(
+                            map(
+                                lambda v: token.get(k) == v,
+                                vv
+                            )
+                        )
+                if 'translation' in filters:
+                    match = match and any(
+                        map(
+                            lambda l: any(
+                                map(
+                                    lambda t: t in filters.get('translations').get(l,"").lower(),
+                                    filters.get('trans_lang', [])
+                                )
+                            ),
+                            filters.get('translation')
+                        )
+                    )
+                if match:
+                    token['highlight'] = 2
+        #TODO: search for texts with any of the ids featured in the occurence hits
+        text = store.get(
+            'text',
+            hit.get('text'),
+        )
+        if text:
+            print('text id', text['id'])
+            if params.get('passport_0'):
+                print('text passport', glom(
+                    text,
+                    params.get('passport_1',[''])[-1]
+                ))
+                if glom(
+                    text,
+                    params.get('passport_1',[''])[-1]
+                ) != params.get('passport_0',[''])[-1]:
+                    continue
+            if len(params.get('textname',[''])) > 0:
+                if params.get('textname',[''])[-1].lower() not in text.get('name','').lower():
+                    continue
+            for path in text.get('paths', []):
+                for node in path:
+                    node["url"] = "/view/{}/{}".format(
+                        {
+                            "BTSTCObject": "object",
+                            "BTSText": "text",
+                        }.get(node.get('eclass')),
+                        node['id']
+                    )
+            occurences.append(
+                {
+                    "occurence": hit,
+                    "sentence": sentence,
+                    "text": text,
+                }
+            )
+        else:
+            print('text not found: ', hit["text"])
+    return occurences
 
 
 def hit_tree(hits):
@@ -157,6 +291,10 @@ def search(request):
             'word_classes': WORD_CLASSES,
             'dictform': DictSearchForm(),
             'textwordform': TextWordSearchForm(),
+            'passport_fields': filter(
+                lambda property: property.startswith('passport') and property.endswith('id'),
+                store.get_mappings('text')
+            )
         }
     )
 
@@ -205,13 +343,27 @@ def search_dict(request):
 
 def search_text_words(request):
     params = request.GET.copy()
-    form = TextWordSearchForm(request.GET)
-    print(dir(form.fields["translation"]))
+    page = int(params.get('page', 1))
+    offset = (page - 1) * RESULTS_PER_PAGE
+    #form = TextWordSearchForm(request.GET)
     print(params)
+    hits = store.search(
+        'occurence',
+        textword_search_query(**params),
+        offset=offset,
+        size=RESULTS_PER_PAGE,
+    )
+    count = hits.get('total')
+    hits = store.hits_contents(hits)
+    hits = populate_textword_occurences(hits, **params)
     return render(
         request,
         'search/a.html',
         {
             'params': params,
+            'hits': hits,
+            'hitcount': count,
+            'start': offset+1,
+            'end': min(count, offset+RESULTS_PER_PAGE),
         }
     )

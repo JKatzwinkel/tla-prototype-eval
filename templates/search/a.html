@@ -43,7 +43,7 @@
 	<!-- Trefferanzahl-->
 	<div class="row searchresult">		
 			<div class="col-sm-12 pt-3">
-			<p class="result-entries">Results: <b>{{start}} - {{end}}</b> of <b>{{hitcount}}</b> Dictionary Entries</p>
+			<p class="result-entries">Results: <b>{{start}} - {{end}}</b> of <b>{{hitcount}}</b> Words in Texts</p>
 			</div>
 	</div><!-- /.row -->  
 	  	
@@ -51,61 +51,67 @@
 	<div class="row result-list">	
 		<div class="col-sm-8">
 		<!-- Treffer -->
-			{% for indent, pred, hit in hits %}
-			<div class="result-list-item push-{{indent}} {%if pred%}{{pred}}{%endif%}" id="{{hit.id}}">
-				<!--{% if pred %}
-					<div class="col-1 pt-3"><p class="font-italic">{{pred}}</p></div>
-				{% endif %}-->
+			{% for hit in hits %}
+			<div class="result-list-item" id="{{hit.occurence.id}}">
 				<!-- Redaktionsstatus -->
-				<div class="red-status ok"><a href="#"><span class="far fa-check-circle"></span></a></div>				
 				
 				<!-- Lemma -->
-				<a href="/view/lemma/{{hit.id}}" title="{%if pred%}{{pred}}{%endif%}">
-				<h2 class="word bbaw-libertine">
-				<!-- Hieroglyph -->
-					<div class="hieroglyph hide">
-						{% for word in hit.words %}
-							{% if word.glyphs %}
-								<span class="glyphbox">
-									<img src="http://tladev.bbaw.de:5000/render?mdc={{word.glyphs}}" title="{{word.glyphs}}" style="height:32px;"/>
-								<spand>
-							{% endif %}
-						{% endfor %}
-					</div>				
-					{{hit.name}}
-					<span class="fas fa-arrow-circle-right"></span>
-				</h2>
-				</a>
+				<h3 class="word bbaw-libertine">
+					{% for token in hit.sentence.tokens %}
+					<a href="/view/lemma/{{token.lemma}}">
+						<span id="{{token.id}}" class="occ-tok {%if token.highlight%}highlight-{{token.highlight}}{%endif%} bbaw-libertine">
+								{% if token.label %}
+									{{token.label}}
+								{% endif %}
+						</span>
+					</a>
+					{% endfor %}
+				</h3>
+
+				<div class="hieroglyph hide">
+					{%for token in hit.sentence.tokens%}
+					<span class="glyphbox">
+						{%if token.glyphs%}
+						<img src="http://tladev.bbaw.de:5000/render?mdc={{token.glyphs}}" title="{{token.glyphs}}" style="height:24px;" class="occ-tok-glyphs {%if token.highlight%}highlight-{{token.highlight}}{%endif%}"/>
+						{%endif%}
+					</span>
+					{%endfor%}
+				</div>
 				
 				<!-- Translation DE -->
-				<p class="translation">{{hit.translations.de}}</p>
+				<p class="translation">{{hit.sentence.translations.de}}</p>
 				
 				<!-- Translation EN FR -->
 				<div class="translation-languages hide">
-					<p class="text-muted">{{hit.translations.en}}
+					<p class="text-muted">{{hit.sentence.translations.en}}
 					<br>
-					<span class="font-italic">{{hit.translations.fr}}</span>
+					<span class="font-italic">{{hit.sentence.translations.fr}}</span>
 					</p>
 				</div>
-				
-				<!-- Wordclass -->
-				<div class="word-class hide">
-					<p>
-						<strong>
-							<span class="font-italic">{{hit.type}}</span>
-							{%if hit.subtype%}<span>({{hit.subtype}})</span>{%endif%}
-						</strong>
+
+				<div class="corpus-paths">
+					{%for path in hit.text.paths%}
+					<p class="corpus-path">
+					{%for object in path%}
+						<span id="{{hit.text.id}}-{{object.id}}" class="corpus-path-element">
+							<a href="{{object.url}}">
+								{{object.name}}
+							</a>
+							{%if not forloop.last%}
+							<i class="fas fa-arrow-circle-right" style="color:grey"></i>
+							{%endif%}
+						</span>
+						{%endfor%}
+						<a href="/view/occurence/{{hit.occurence.id}}">
+							<span class="lc">
+							 [{{hit.occurence.line}}]
+							</span>
+						</a>
 					</p>
-				</div>
+					{%endfor%}
+				</div>	
 				
-				<!-- Bibliografy -->
-				<a class="result-list-bibliography">{{hit.passport.bibliography.bibliographical_text_field}}<span class="fas fa-arrow-circle-right"></span></a>
-				
-				<!-- combination-search -->
-				<div class="combination-search ml-4 my-3 hide">
-					<input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-					  <label class="form-check-label" for="inlineCheckbox2">Select for Combination Search</label>
-				</div>
+							
 			</div> <!-- .Treffer -->
 			{% endfor %}
 
@@ -119,10 +125,7 @@
 			<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail hieroglyph-btn "><i class="fas fa-plus-circle"></i>Hieroglyphs</button>
 			
 			<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn "><span class="fas fa-plus-circle"></span>Translation Languages</button>
-			<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-class-btn"><span class="fas fa-plus-circle"></span>Word Class</button>
-			<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail combination-search-btn"><span class="fas fa-plus-circle"></span>Combination Search</button>
 			<br>	
-			<button type="button" class="btn btn-block btn-light text-left text-decoration-none show-detail combination-search-btn"><span class="fas fa-search-plus"></span>Combination Search</button>
 			<a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Modify Search</button></a>
 		</div>
 		</div>

@@ -183,6 +183,31 @@ a.navbar-brand {
 	color: red;
 	}
 
+
+
+.result-list-item .occ-tok.highlight-1 {
+	background-color: red;
+	color: white;
+}
+.result-list-item .occ-tok.highlight-2 {
+	background-color: grey;
+	color: white;
+}
+.result-list-item .corpus-path-element a {
+	color: grey;
+}
+
+.result-list-item img.occ-tok-glyphs.highlight-1 {
+	border: 1px solid red;
+	border-radius: 2px;
+}
+
+.result-list-item span.glyphbox img{
+}
+.result-list-item span.glyphbox img:hover {
+	border-bottom: 1px solid red;
+}
+
 /* Pagination */
 .pag-container {
 	border-top: 2px solid #DDD;

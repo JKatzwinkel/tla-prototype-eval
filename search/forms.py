@@ -1,6 +1,11 @@
 from django import forms
+from django.forms.fields import MultiValueField
+from django.core.validators import RegexValidator
 
-from widgets import SearchFormCharFieldWidget, QualifiedSearchFormCharFieldWidget
+
+from widgets import SearchFormCharFieldWidget, QualifiedSearchFormCharFieldWidget, SearchMetadataFieldWidget
+
+import store
 
 SCRIPT_CHOICES = (
         ('hieroglyphic', 'Hieroglyphic/Hieratic'),
@@ -9,10 +14,29 @@ SCRIPT_CHOICES = (
 )
 
 
+
+class SearchMetadataField(MultiValueField):
+    widget = SearchMetadataFieldWidget
+
+    def __init__(self, *args, **kwargs):
+        fields = (
+            forms.ChoiceField(
+                label="predicate",
+            ),
+            SearchFormCharField(
+                label="identifier",
+            )
+        )
+        super().__init__(fields, **kwargs)
+
+    def compress(self, data_list):
+        if data_list:
+            return "{} {}".format(*data_list)
+
+
 class SearchFormCharField(forms.CharField):
 
     def __init__(self, *args, **kwargs):
-        print("field kwargs:", kwargs)
         if "qualifier" in kwargs:
             widget = QualifiedSearchFormCharFieldWidget(
                     qualifier=kwargs.pop("qualifier"),
@@ -20,10 +44,12 @@ class SearchFormCharField(forms.CharField):
                     label=kwargs.get("label")
             )
         else:
-            widget = SearchFormCharFieldWidget(label=kwargs.get("label"))
+            widget = SearchFormCharFieldWidget(
+                label=kwargs.get("label"),
+                required=kwargs.get("required", False),
+            )
         kwargs.setdefault("widget", widget)
         super().__init__(*args, **kwargs)
-        print(self)
 
 
 class DictSearchForm(forms.Form):
@@ -71,6 +97,10 @@ class TextWordSearchForm(forms.Form):
         },
         required=False,
     )
+    passport = SearchMetadataField(
+        required=False
+    )
+
 
 
 
