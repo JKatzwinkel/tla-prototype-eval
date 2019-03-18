@@ -158,7 +158,7 @@ def textword_search_query(**params):
             q['query']['bool']['must'].extend(
                 [
                     {
-                        'term': {
+                        'match': {
                             'glyphs': params.get('hieroglyphs')[-1]
                         }
                     }
@@ -168,7 +168,7 @@ def textword_search_query(**params):
 
 
 def search_textword_occurences(offset=1, size=RESULTS_PER_PAGE, **params):
-    passport_value = params.get('passport_0')[-1]
+    passport_value = params.get('passport_0', [''])[-1]
     objects = None
     if passport_value is not None and len(passport_value.strip()) > 0:
         objects_query = {
@@ -198,7 +198,8 @@ def search_textword_occurences(offset=1, size=RESULTS_PER_PAGE, **params):
         if len(objects) < 1:
             print('no matching objects. so long!')
             return {}
-    if objects is not None or params.get('textname'):
+    texts = None
+    if objects is not None or len(params.get('textname', [''])[-1].strip()) > 0:
         texts_query = {
             '_source': [
                 'id',
