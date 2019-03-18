@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 
@@ -79,7 +80,7 @@ def dict_search_query(**params):
     q = {"query": {"bool": {"must": [], "must_not": [], "should": []}}}
     if 'transcription' in params:
         transcription = params.get('transcription')[0] if type(
-                params.get('transcription')) == list else params.get('transcription')
+            params.get('transcription')) == list else params.get('transcription')
         q['query']['bool']['must'].extend([
             {
                 "match_phrase_prefix": {
@@ -120,54 +121,156 @@ def textword_search_query(**params):
     """
     q = {"query": {"bool": {"must": [], "must_not": [], "should": []}}}
     if 'lemma' in params:
-        q['query']['bool']['should'].extend(
-            [
-                {
-                    'term': {
-                        'lemma': lemma,
-                    }
+        q['query']['bool']['must'].append(
+            {
+                'bool': {
+                    'should': [
+                        {
+                            'term': {
+                                'lemma': lemma
+                            }
+                        }
+                        for lemma in params['lemma']
+                        if len(lemma.strip()) > 0
+                    ]
                 }
-                for lemma in params['lemma']
-                if len(lemma) > 0
-            ]
+            }
         )
     if 'translation' in params:
         if len(params.get('translation')[-1]) > 0:
-            q['query']['bool']['should'].extend(
-                [
-                    {
-                        'match': {
-                            'translations.{}'.format(lang): params.get('translation')[-1]
-                        }
+            q['query']['bool']['must'].append(
+                {
+                    'bool': {
+                        'should': [
+                            {
+                                'match': {
+                                    'translations.{}'.format(lang): params.get('translation')[-1]
+                                }
+                            }
+                            for lang in params.get('trans_lang', [])
+                        ]
                     }
-                    for lang in params.get('trans_lang', [])
-                ]
+                }
             )
     if 'hieroglyphs' in params:
         if len(params.get('hieroglyphs')[-1]) > 0:
             q['query']['bool']['must'].extend(
                 [
                     {
-                        'match': {
+                        'term': {
                             'glyphs': params.get('hieroglyphs')[-1]
                         }
                     }
                 ]
             )
-#    if 'passport_0' in params:
-#        if len(params.get('passport_0')[-1]) > 0:
-#            q['query']['bool']['must'].extend(
-#                [
-#                    {
-#                        'term': {
-#                            params.get('passport_1',[""])[-1]: params.get('passport_0')[-1]
-#                        }
-#                    }
-#                ]
-#            )
-#
-    print(q)
     return q
+
+
+def search_textword_occurences(offset=1, size=RESULTS_PER_PAGE, **params):
+    passport_value = params.get('passport_0')[-1]
+    objects = None
+    if passport_value is not None and len(passport_value.strip()) > 0:
+        objects_query = {
+            "_source": [
+                "id",
+                "name",
+            ],
+            "query": {
+                "bool": {
+                    "must": [
+                        {
+                            "match": {
+                                params.get('passport_1')[-1]: passport_value,
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+        objects = [
+            hit['_source']['id']
+            for hit in store.scroll(
+                'object',
+                objects_query
+            )
+        ]
+        if len(objects) < 1:
+            print('no matching objects. so long!')
+            return {}
+    if objects is not None or params.get('textname'):
+        texts_query = {
+            '_source': [
+                'id',
+                'name',
+            ],
+            'query': {
+                'bool': {
+                    'must': [],
+                    'should': [],
+                }
+            }
+        }
+        if params.get('textname') and len(params.get('textname')[-1].strip()) > 0:
+            texts_query['query']['bool']['must'].append(
+                {
+                    'match': {
+                        'name': params.get('textname')[-1]
+                    }
+                }
+            )
+        if objects:
+            texts_query['query']['bool']['must'].append(
+                {
+                    'bool': {
+                        'should': [
+                            {
+                                'term': {
+                                    'relations.partOf.id': i.lower()
+                                }
+                            }
+                            for i in objects
+                        ]
+                    }
+                }
+            )
+        texts = [
+            hit['_source']['id']
+            for hit in store.scroll(
+                'text',
+                texts_query
+            )
+        ]
+        with open('text_query.json', 'w+') as f:
+            json.dump(texts_query, f, indent=2)
+        if len(texts) < 1:
+            print('no matching texts. bye!')
+            return {}
+    occurences = []
+    occurences_query = textword_search_query(**params)
+    if texts:
+        occurences_query['query']['bool']['must'].append(
+            {
+                'bool': {
+                    'should': [
+                        {
+                            'term': {
+                                'text': i.lower()
+                            }
+                        }
+                        for i in texts
+                    ]
+                }
+            }
+        )
+    with open('occurence_query.json', 'w+') as f:
+        json.dump(occurences_query, f, ensure_ascii=False, indent=2)
+    hits = store.search(
+        'occurence',
+        occurences_query,
+        offset=offset,
+        size=size,
+    )
+    return hits
 
 
 def populate_textword_occurences(hits, **params):
@@ -207,26 +310,12 @@ def populate_textword_occurences(hits, **params):
                     )
                 if match:
                     token['highlight'] = 2
-        #TODO: search for texts with any of the ids featured in the occurence hits
         text = store.get(
             'text',
             hit.get('text'),
         )
         if text:
             print('text id', text['id'])
-            if params.get('passport_0'):
-                print('text passport', glom(
-                    text,
-                    params.get('passport_1',[''])[-1]
-                ))
-                if glom(
-                    text,
-                    params.get('passport_1',[''])[-1]
-                ) != params.get('passport_0',[''])[-1]:
-                    continue
-            if len(params.get('textname',[''])) > 0:
-                if params.get('textname',[''])[-1].lower() not in text.get('name','').lower():
-                    continue
             for path in text.get('paths', []):
                 for node in path:
                     node["url"] = "/view/{}/{}".format(
@@ -293,7 +382,7 @@ def search(request):
             'textwordform': TextWordSearchForm(),
             'passport_fields': filter(
                 lambda property: property.startswith('passport') and property.endswith('id'),
-                store.get_mappings('text')
+                store.get_mappings('object')
             )
         }
     )
@@ -347,13 +436,12 @@ def search_text_words(request):
     offset = (page - 1) * RESULTS_PER_PAGE
     #form = TextWordSearchForm(request.GET)
     print(params)
-    hits = store.search(
-        'occurence',
-        textword_search_query(**params),
+    hits = search_textword_occurences(
         offset=offset,
         size=RESULTS_PER_PAGE,
+        **params,
     )
-    count = hits.get('total')
+    count = hits.get('total', 0)
     hits = store.hits_contents(hits)
     hits = populate_textword_occurences(hits, **params)
     return render(

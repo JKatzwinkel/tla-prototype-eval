@@ -1,4 +1,4 @@
-from elasticsearch import Elasticsearch
+from elasticsearch import Elasticsearch, helpers
 
 es = Elasticsearch('http://127.0.0.1:9200')
 
@@ -9,7 +9,7 @@ def lucenify(params):
 
 
 def hits_contents(hits):
-    """ extracts the _source objects from elasticsearch search result hit list, 
+    """ extracts the _source objects from elasticsearch search result hit list,
     after copying each hit's _score field into the wrapped _source object. """
     for hit in hits.get('hits', []):
         hit['_source'] = {
@@ -19,7 +19,7 @@ def hits_contents(hits):
         }
     return [hit.get('_source') for hit in hits.get('hits', [])]
 
-    
+
 
 def obj_revision_date(obj):
     """ extract latest revision from (json) object """
@@ -101,4 +101,10 @@ def get_mappings(index):
     return properties
 
 
-
+def scroll(index, query):
+    return helpers.scan(
+        es,
+        query=query,
+        index=index,
+        doc_type=index,
+    )
