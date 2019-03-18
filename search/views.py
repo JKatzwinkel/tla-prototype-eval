@@ -14,64 +14,64 @@ import store
 RESULTS_PER_PAGE = 15
 
 WORD_CLASSES = {
-        "substantive": [
-          "substantive_masc",
-          "substantive_fem"],
-        "particle": [
-          "particle_enclitic",
-          "particle_nonenclitic"],
-        "root": [
-          "substantive_fem"],
-        "pronoun": [
-          "personal_pronoun",
-          "demonstrative_pronoun",
-          "interrogative_pronoun",
-          "relative_pronoun"],
-        "numeral": [
-          "cardinal",
-          "ordinal"],
-        "adverb": [
-          "prepositional_adverb"],
-        "preposition": None,
-        "adjective": [
-          "nisbe_adjective_preposition",
-          "nisbe_adjective_substantive"],
-        "epitheton_title": [
-          "epith_king",
-          "epith_god",
-          "title"],
-        "entity_name": [
-          "place_name",
-          "org_name",
-          "person_name",
-          "animal_name",
-          "gods_name",
-          "artifact_name",
-          "kings_name"],
-        "undefined": [
-          "gods_name",
-          "substantive_masc"],
-        "verb": [
-          "verb_caus_3-inf",
-          "verb_5-inf",
-          "verb_3-lit",
-          "verb_3-inf",
-          "verb_6-lit",
-          "verb_caus_3-gem",
-          "verb_5-lit",
-          "verb_2-gem",
-          "verb_caus_4-lit",
-          "verb_caus_2-gem",
-          "verb_4-lit",
-          "verb_caus_5-lit",
-          "verb_caus_3-lit",
-          "verb_3-gem",
-          "verb_caus_2-lit",
-          "verb_irr",
-          "verb_4-inf",
-          "verb_caus_4-inf",
-          "verb_2-lit"],
-        "interjection": None}
+    "substantive": [
+        "substantive_masc",
+        "substantive_fem"],
+    "particle": [
+        "particle_enclitic",
+        "particle_nonenclitic"],
+    "root": [
+        "substantive_fem"],
+    "pronoun": [
+        "personal_pronoun",
+        "demonstrative_pronoun",
+        "interrogative_pronoun",
+        "relative_pronoun"],
+    "numeral": [
+        "cardinal",
+        "ordinal"],
+    "adverb": [
+        "prepositional_adverb"],
+    "preposition": None,
+    "adjective": [
+        "nisbe_adjective_preposition",
+        "nisbe_adjective_substantive"],
+    "epitheton_title": [
+        "epith_king",
+        "epith_god",
+        "title"],
+    "entity_name": [
+        "place_name",
+        "org_name",
+        "person_name",
+        "animal_name",
+        "gods_name",
+        "artifact_name",
+        "kings_name"],
+    "undefined": [
+        "gods_name",
+        "substantive_masc"],
+    "verb": [
+        "verb_caus_3-inf",
+        "verb_5-inf",
+        "verb_3-lit",
+        "verb_3-inf",
+        "verb_6-lit",
+        "verb_caus_3-gem",
+        "verb_5-lit",
+        "verb_2-gem",
+        "verb_caus_4-lit",
+        "verb_caus_2-gem",
+        "verb_4-lit",
+        "verb_caus_5-lit",
+        "verb_caus_3-lit",
+        "verb_3-gem",
+        "verb_caus_2-lit",
+        "verb_irr",
+        "verb_4-inf",
+        "verb_caus_4-inf",
+        "verb_2-lit"],
+    "interjection": None}
 
 
 def dict_search_query(**params):
@@ -98,10 +98,10 @@ def dict_search_query(**params):
     if 'script' in params:
         if ('h' in params.get('script')) ^ ('d' in params.get('script')):
             query = {
-                        "prefix": {
-                            "id": "d"
-                            }
-                        }
+                "prefix": {
+                    "id": "d"
+                }
+            }
             pred = 'must' if 'd' in params.get('script') else 'must_not'
             q['query']['bool'][pred].append(query)
     if 'translation' in params:
@@ -302,7 +302,7 @@ def populate_textword_occurences(hits, **params):
                         map(
                             lambda l: any(
                                 map(
-                                    lambda t: t in filters.get('translations').get(l,"").lower(),
+                                    lambda t: t in filters.get('translations').get(l, "").lower(),
                                     filters.get('trans_lang', [])
                                 )
                             ),
@@ -340,9 +340,12 @@ def populate_textword_occurences(hits, **params):
 
 def hit_tree(hits):
     """ extracts the implicit hierarchical structure among the given objects """
-    structure = {h.get('id'): (hits.index(h), h)
-            for h in hits}
+    structure = {
+        h.get('id'): (hits.index(h), h)
+        for h in hits
+    }
     res = []
+
     def nest(hit, indent=0, pred=None):
         if hit.get('id') in structure:
             structure.pop(hit.get('id'))
@@ -353,16 +356,21 @@ def hit_tree(hits):
         """ generate list of (id,relationtype) tuples representing the search results which
         are directly related to the current search result while preseving order """
         related_hit_ids = sorted([
-                (hid.get('id'),
-                    pred) for pred in [
-                    'rootOf', 'successor', 'referencedBy', 'composedOf'
-                    ] for hid in hit.get('relations', {}).get(
-                        pred, []) if hid.get('id') in structure],
-                    key = lambda t: structure.get(t[0])[0])
+            (hid.get('id'), pred)
+            for pred in [
+                'rootOf',
+                'successor',
+                'referencedBy',
+                'composedOf'
+            ]
+            for hid in hit.get('relations', {}).get(pred, [])
+            if hid.get('id') in structure],
+            key=lambda t: structure.get(t[0])[0]
+        )
         for hid, pred in related_hit_ids:
             if hid in structure:
                 _, obj = structure.get(hid)
-                nest(obj, indent=indent+1, pred=pred)
+                nest(obj, indent=indent + 1, pred=pred)
 
     while len(hits) > 0:
         hit = hits.pop(0)
@@ -398,7 +406,7 @@ def pagination(request, hitcount):
     lastpageno = hitcount // RESULTS_PER_PAGE + 2
     pages = []
     for i in range(1, lastpageno):
-        if i < 3 or i > lastpageno-2 or (i-page)**2<3:
+        if i < 3 or i > lastpageno - 2 or (i - page)**2 < 3:
             if len(pages) > 1:
                 if type(pages[-1][0]) is int and pages[-1][0] < i - 1:
                     pages.append(('...', None))
@@ -411,24 +419,28 @@ def search_dict(request):
     params = request.GET.copy()
     page = int(params.get('page', 1))
     offset = (page - 1) * RESULTS_PER_PAGE
-    hits = store.search('wlist',
-            dict_search_query(**params),
-            offset=offset,
-            size=RESULTS_PER_PAGE,
-            )
+    hits = store.search(
+        'wlist',
+        dict_search_query(**params),
+        offset=offset,
+        size=RESULTS_PER_PAGE,
+    )
     count = hits.get('total')
     hits = store.hits_contents(hits)
     hits = hit_tree(hits)
-    return render(request, 'search/d.html',
-            {
-                'params': params,
-                'hits': hits,
-                'hitcount': count,
-                'page': page,
-                'start': offset+1,
-                'end': min(count, offset+RESULTS_PER_PAGE),
-                'pagination': pagination(request, count),
-                })
+    return render(
+        request,
+        'search/d.html',
+        {
+            'params': params,
+            'hits': hits,
+            'hitcount': count,
+            'page': page,
+            'start': offset + 1,
+            'end': min(count, offset + RESULTS_PER_PAGE),
+            'pagination': pagination(request, count),
+        }
+    )
 
 
 def search_text_words(request):
@@ -452,7 +464,7 @@ def search_text_words(request):
             'params': params,
             'hits': hits,
             'hitcount': count,
-            'start': offset+1,
-            'end': min(count, offset+RESULTS_PER_PAGE),
+            'start': offset + 1,
+            'end': min(count, offset + RESULTS_PER_PAGE),
         }
     )
