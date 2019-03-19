@@ -74,27 +74,60 @@ WORD_CLASSES = {
     "interjection": None}
 
 
+def build_query(*clauses, fields=None):
+    """ Generates an elasticsearch query in conjunctive normal form from the
+    clauses passed as parameters. You can also whitelist the ``_source`` fields to be included
+    in the results.
+
+    Negate an atomic clause by giving it a ``predicate`` field with value ``must_not``.
+    """
+    query = {
+        "query": {
+            "bool": {
+                "must": [],
+                "must_not": [],
+            }
+        }
+    }
+    if fields is not None and type(fields) is list:
+        query["_source"] = fields
+    for clause in clauses:
+        if type(clause) is dict:
+            predicate = clause.pop('predicate', 'must')
+            query['query']['bool'][predicate].append(clause)
+        elif type(clause) is list:
+            query['query']['bool']['must'].append(
+                {
+                    'bool': {
+                        'should': clause
+                    }
+                }
+            )
+    return query
+
+
 def dict_search_query(**params):
     """ generate elasticsearch query object with parameters as would be expected to come from
     the `dict-search` form in the `search/index.html` template. """
     q = {"query": {"bool": {"must": [], "must_not": [], "should": []}}}
+    clauses = []
     if 'transcription' in params:
         transcription = params.get('transcription')[0] if type(
             params.get('transcription')) == list else params.get('transcription')
-        q['query']['bool']['must'].extend([
+        clauses.append(
             {
                 "match_phrase_prefix": {
                     "name": transcription,
                 }
-            },
-        ])
-        q['query']['bool']['must'].extend([
+            }
+        )
+        clauses.append(
             {
                 "term": {
                     "name": transcription,
                 }
             }
-        ])
+        )
     if 'script' in params:
         if ('h' in params.get('script')) ^ ('d' in params.get('script')):
             query = {
@@ -102,17 +135,20 @@ def dict_search_query(**params):
                     "id": "d"
                 }
             }
-            pred = 'must' if 'd' in params.get('script') else 'must_not'
-            q['query']['bool'][pred].append(query)
+            query['predicate'] = 'must' if 'd' in params.get('script') else 'must_not'
+            clauses.append(query)
     if 'translation' in params:
-        for lang in params.get('lang', ['de']):
-            q['query']['bool']['should'].append(
+        clauses.append(
+            [
                 {
                     "match": {
                         "translations.{}".format(lang): params.get('translation')[0]
                     }
                 }
-            )
+                for lang in params.get('lang', ['de'])
+            ]
+        )
+    q = build_query(*clauses)
     return q
 
 
@@ -120,74 +156,55 @@ def textword_search_query(**params):
     """ generate elasticsearch query from parameters passed over by a
     :class:`forms.TextWordSearchForm`.
     """
-    q = {"query": {"bool": {"must": [], "must_not": [], "should": []}}}
+    clauses = []
     if 'lemma' in params:
-        q['query']['bool']['must'].append(
-            {
-                'bool': {
-                    'should': [
-                        {
-                            'term': {
-                                'lemma': lemma
-                            }
-                        }
-                        for lemma in params['lemma']
-                        if len(lemma.strip()) > 0
-                    ]
+        clauses.append(
+            [
+                {
+                    'term': {
+                        'lemma': lemma
+                    }
                 }
-            }
+                for lemma in params['lemma']
+                if len(lemma.strip()) > 0
+            ]
         )
     if 'translation' in params:
         if len(params.get('translation')[-1]) > 0:
-            q['query']['bool']['must'].append(
-                {
-                    'bool': {
-                        'should': [
-                            {
-                                'match': {
-                                    'translations.{}'.format(lang): params.get('translation')[-1]
-                                }
-                            }
-                            for lang in params.get('trans_lang', [])
-                        ]
-                    }
-                }
-            )
-    if 'hieroglyphs' in params:
-        if len(params.get('hieroglyphs')[-1]) > 0:
-            q['query']['bool']['must'].extend(
+            clauses.append(
                 [
                     {
                         'match': {
-                            'glyphs': params.get('hieroglyphs')[-1]
+                            'translations.{}'.format(lang): params.get('translation')[-1]
                         }
                     }
+                    for lang in params.get('trans_lang', [])
                 ]
             )
-    return q
+    if 'hieroglyphs' in params:
+        if len(params.get('hieroglyphs')[-1]) > 0:
+            clauses.append(
+                {
+                    'match': {
+                        'glyphs': params.get('hieroglyphs')[-1]
+                    }
+                }
+            )
+    return build_query(*clauses)
 
 
 def search_textword_occurences(offset=1, size=RESULTS_PER_PAGE, **params):
     passport_value = params.get('passport_0', [''])[-1]
     objects = None
     if passport_value is not None and len(passport_value.strip()) > 0:
-        objects_query = {
-            "_source": [
-                "id",
-                "name",
-            ],
-            "query": {
-                "bool": {
-                    "must": [
-                        {
-                            "match": {
-                                params.get('passport_1')[-1]: passport_value,
-                            }
-                        }
-                    ]
+        objects_query = build_query(
+            {
+                "match": {
+                    params.get('passport_1')[-1]: passport_value,
                 }
-            }
-        }
+            },
+            fields=['id'],
+        )
         objects = [
             hit['_source']['id']
             for hit in store.scroll(
@@ -200,20 +217,9 @@ def search_textword_occurences(offset=1, size=RESULTS_PER_PAGE, **params):
             return {}
     texts = None
     if objects is not None or len(params.get('textname', [''])[-1].strip()) > 0:
-        texts_query = {
-            '_source': [
-                'id',
-                'name',
-            ],
-            'query': {
-                'bool': {
-                    'must': [],
-                    'should': [],
-                }
-            }
-        }
+        clauses = []
         if params.get('textname') and len(params.get('textname')[-1].strip()) > 0:
-            texts_query['query']['bool']['must'].append(
+            clauses.append(
                 {
                     'match': {
                         'name': params.get('textname')[-1]
@@ -221,13 +227,14 @@ def search_textword_occurences(offset=1, size=RESULTS_PER_PAGE, **params):
                 }
             )
         if objects:
-            texts_query['query']['bool']['must'].append(
+            clauses.append(
                 {
                     'terms': {
                         'relations.partOf.id': list(map(str.lower, objects))
                     }
                 }
             )
+        texts_query = build_query(*clauses, fields=['id'])
         texts = [
             hit['_source']['id']
             for hit in store.scroll(
