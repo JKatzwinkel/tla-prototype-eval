@@ -223,15 +223,8 @@ def search_textword_occurences(offset=1, size=RESULTS_PER_PAGE, **params):
         if objects:
             texts_query['query']['bool']['must'].append(
                 {
-                    'bool': {
-                        'should': [
-                            {
-                                'term': {
-                                    'relations.partOf.id': i.lower()
-                                }
-                            }
-                            for i in objects
-                        ]
+                    'terms': {
+                        'relations.partOf.id': list(map(str.lower, objects))
                     }
                 }
             )
@@ -252,15 +245,8 @@ def search_textword_occurences(offset=1, size=RESULTS_PER_PAGE, **params):
     if texts:
         occurences_query['query']['bool']['must'].append(
             {
-                'bool': {
-                    'should': [
-                        {
-                            'term': {
-                                'text': i.lower()
-                            }
-                        }
-                        for i in texts
-                    ]
+                'terms': {
+                    'text': list(map(str.lower, texts))
                 }
             }
         )
