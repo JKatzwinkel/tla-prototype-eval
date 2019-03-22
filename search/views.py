@@ -114,20 +114,21 @@ def dict_search_query(**params):
     if 'transcription' in params:
         transcription = params.get('transcription')[0] if type(
             params.get('transcription')) == list else params.get('transcription')
-        clauses.append(
-            {
-                "match_phrase_prefix": {
-                    "name": transcription,
+        if len(transcription.strip()) > 0:
+            clauses.append(
+                {
+                    "match_phrase_prefix": {
+                        "name": transcription,
+                    }
                 }
-            }
-        )
-        clauses.append(
-            {
-                "term": {
-                    "name": transcription,
+            )
+            clauses.append(
+                {
+                    "term": {
+                        "name": transcription,
+                    }
                 }
-            }
-        )
+            )
     if 'script' in params:
         if ('h' in params.get('script')) ^ ('d' in params.get('script')):
             query = {
@@ -149,6 +150,7 @@ def dict_search_query(**params):
             ]
         )
     q = build_query(*clauses)
+    print(q)
     return q
 
 
