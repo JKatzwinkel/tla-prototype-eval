@@ -52,12 +52,18 @@
 				</span>
 				{% endif %}
 			{% endfor %}
-			<p class="h6">{{ lemma.translations.de }}</p>
+			{% for translation in lemma.translations.de %}
+				<p class="h6">{{ translation }}</p>
+			{% endfor %}
 			<hr>
 		</div>		
 		<div class="translation">
-			<p class="english">{{ lemma.translations.en }}</p>
-			<p class="french font-italic">{{ lemma.translations.fr }}</p>
+			{% for translation in lemma.translations.en %}
+				<p class="english">{{ translation }}</p>
+			{% endfor %}
+			{% for translation in lemma.translations.fr %}
+				<p class="french font-italic">{{ translation }}</p>
+			{% endfor %}
 			<hr>
 		</div>	
 		<div class="grammar">
@@ -123,11 +129,31 @@
 			</div>
 			
 		</div>
-		<div class="annotation">
+		<div class="annotations">
 			<hr>
-			<p class="h6 pb-2">Fachwortschatz</p>	
-			<hr>				
+			{% for anno in annotations %}
+			<div class="annotation pb-4" id="anno.id">
+				<div class="row">
+					<div class="col-md-10 h5 bbaw-libertine">
+						{{anno.title|safe}} 
+					</div>
+				</div>
+				<p class="text-justify">
+					{{anno.body|safe|urlize}}
+				</p>
+				<div class="row">
+					<div class="col-md-10">
+						{{anno.edited.name}}
+					</div>
+					<div class="col-md-2">
+						{{anno.edited.date}}
+					</div>
+				</div>
+				<hr>
+			</div>
+			{% endfor %}
 		</div>
+	
 		<div class="comment pb-4">
 			<p class="h6">Comment:</p>	
 			<p>Es sequi illore ne reptation cone videm fugia dolendu ntectotas nihit rat lit fugiatum doluptatecto que maximpe eaquatin nis rehent quam, corum accatem oluptas inus doloremolo ea volum quibus voluptaque volupta amet optaers piendusae.</p>				

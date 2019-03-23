@@ -79,13 +79,15 @@
 				</div>
 				
 				<!-- Translation DE -->
-				<p class="translation">{{hit.sentence.translations.de}}</p>
+				{% for translation in hit.sentence.translations.de %}
+					<p class="translation">{{translation}}</p>
+				{% endfor %}
 				
 				<!-- Translation EN FR -->
 				<div class="translation-languages hide">
-					<p class="text-muted">{{hit.sentence.translations.en}}
+					<p class="text-muted">{{hit.sentence.translations.en.0}}
 					<br>
-					<span class="font-italic">{{hit.sentence.translations.fr}}</span>
+					<span class="font-italic">{{hit.sentence.translations.fr.0}}</span>
 					</p>
 				</div>
 
