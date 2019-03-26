@@ -145,7 +145,7 @@ def hit_tree(hits):
 @require_http_methods(["GET"])
 def search(request):
     params = request.GET.copy()
-    return render(request, 'search/i.html',
+    return render(request, 'search/index.html',
             {
                 'word_classes': WORD_CLASSES,
                 }
@@ -183,7 +183,7 @@ def search_dict(request):
     count = hits.get('total')
     hits = store.hits_contents(hits)
     hits = hit_tree(hits)
-    return render(request, 'search/d.html',
+    return render(request, 'search/dict.html',
             {
                 'params': params,
                 'hits': hits,

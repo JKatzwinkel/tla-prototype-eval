@@ -1,6 +1,6 @@
 from elasticsearch import Elasticsearch
 
-es = Elasticsearch('http://127.0.0.1:9200')
+es = Elasticsearch('http://tladev.bbaw.de:9200')
 
 
 def lucenify(params):
