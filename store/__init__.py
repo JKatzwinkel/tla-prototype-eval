@@ -1,4 +1,7 @@
+from os import environ as env
+
 from elasticsearch import Elasticsearch
+
 
 es = Elasticsearch('http://tladev.bbaw.de:9200')
 
@@ -9,13 +12,13 @@ def lucenify(params):
 
 
 def hits_contents(hits):
-    """ extracts the _source objects from elasticsearch search result hit list, 
+    """ extracts the _source objects from elasticsearch search result hit list,
     after copying each hit's _score field into the wrapped _source object. """
     for hit in hits.get('hits', []):
         hit.get('_source')['score'] = hit.get('_score')
     return [hit.get('_source') for hit in hits.get('hits', [])]
 
-    
+
 
 def obj_revision_date(obj):
     """ extract latest revision from (json) object """
