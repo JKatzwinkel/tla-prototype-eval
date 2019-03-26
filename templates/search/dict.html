@@ -59,8 +59,8 @@
 				<!-- Redaktionsstatus -->
 				<div class="red-status">
 					<a href="#"><span class="far fa-check-circle ok"></span></a>
-					<a><span class="far fa-envelope"/></a>
-					<a><span class="far fa-comment"/></a>
+					<!--<a><span class="far fa-envelope"/></a>
+					<a><span class="far fa-comment"/></a>-->
 				</div>	
 				
 				<!-- Lemma -->
@@ -72,7 +72,7 @@
 						{% for word in hit.words %}
 							{% if word.glyphs %}
 								<span class="glyphbox">
-									<img src="http://tladev.bbaw.de:5000/render?mdc={{word.glyphs}}" title="{{word.glyphs}}" style="height:32px;"/>
+									<img src="http://tladev.bbaw.de:5000/render?mdc={{word.glyphs}}" title="{{word.glyphs}}" style="height:18px;"/>
 								</span>
 							{% endif %}
 						{% endfor %}
