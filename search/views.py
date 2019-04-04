@@ -1,3 +1,4 @@
+import re
 import json
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
@@ -185,17 +186,26 @@ def textword_search_query(**params):
             )
     if 'hieroglyphs' in params:
         if len(params.get('hieroglyphs')[-1]) > 0:
-            clauses.append(
-                {
-                    'match': {
-                        'glyphs': params.get('hieroglyphs')[-1]
+            glyphs = params.get('hieroglyphs')[-1]
+            for glyph in re.split(r'[ :*-]', glyphs):
+                clauses.append(
+                    {
+                        'match': {
+                            'glyphs': glyph
+                        }
                     }
-                }
-            )
-    return build_query(*clauses)
+                )
+    q = build_query(*clauses)
+    print(q)
+    return q
 
 
 def search_textword_occurences(offset=1, size=RESULTS_PER_PAGE, **params):
+    """ builds queries according to the parameters obtained from the :class:`forms.TextWordSearchForm` textword occurence search form.
+    Passes the final occurence query to function :meth:`store.search` an returns the results.
+
+    :rtype: list
+    """
     passport_value = params.get('passport_0', [''])[-1]
     objects = None
     if passport_value is not None and len(passport_value.strip()) > 0:
@@ -271,6 +281,11 @@ def search_textword_occurences(offset=1, size=RESULTS_PER_PAGE, **params):
 
 
 def populate_textword_occurences(hits, **params):
+    """ take text word search results and the original search parameters and
+    enrich the results with like highlighting and stuff.
+
+    :rtype: list
+    """
     occurences = []
     filters = {
         k: params.get(k) for k in ["lemma", "transcription", "hieroglyphs"]
