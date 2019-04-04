@@ -12,7 +12,7 @@ from .forms import (
 
 import store
 
-RESULTS_PER_PAGE = 15
+RESULTS_PER_PAGE = 24
 
 WORD_CLASSES = {
     "substantive": [
@@ -430,6 +430,14 @@ def pagination(request, hitcount):
     return pages
 
 
+def request_url_without_page(request):
+    url = request.get_full_path()
+    page = int(request.GET.get('page', 1))
+    if 'page=' in url:
+        url = url.replace('page={}'.format(page), '')
+    return url
+
+
 @require_http_methods(["GET"])
 def search_dict(request):
     params = request.GET.copy()
@@ -482,5 +490,7 @@ def search_text_words(request):
             'hitcount': count,
             'start': offset + 1,
             'end': min(count, offset + RESULTS_PER_PAGE),
+            'pagination': pagination(request, count),
+            'url': request_url_without_page(request),
         }
     )
