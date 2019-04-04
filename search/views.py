@@ -362,6 +362,11 @@ def hit_tree(hits):
             structure.pop(hit.get('id'))
         else:
             return
+        hit['bibliography'] = glom(
+            hit,
+            'passport.bibliography.0.bibliographical_text_field.0',
+            default=''
+            )
         """ append hit to result list (represented as tuple containing indentation and rel type """
         res.append((indent, pred, hit))
         """ generate list of (id,relationtype) tuples representing the search results which

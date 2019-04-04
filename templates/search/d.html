@@ -78,13 +78,17 @@
 				</a>
 				
 				<!-- Translation DE -->
-				<p class="translation">{{hit.translations.de}}</p>
+				<p class="translation">
+					{%for translation in hit.translations.de%}
+					<span>{{translation}}
+					{%endfor%}
+				</p>
 				
 				<!-- Translation EN FR -->
 				<div class="translation-languages hide">
-					<p class="text-muted">{{hit.translations.en}}
+					<p class="text-muted">{% for translation in hit.translations.en%}<span>{{translation}}</span>{%endfor%}
 					<br>
-					<span class="font-italic">{{hit.translations.fr}}</span>
+					<span class="font-italic">{%for translation in hit.translations.fr%}<span>{{translation}}</span>{%endfor%}</span>
 					</p>
 				</div>
 				
@@ -99,7 +103,7 @@
 				</div>
 				
 				<!-- Bibliografy -->
-				<a class="result-list-bibliography">{{hit.passport.bibliography.bibliographical_text_field}}<span class="fas fa-arrow-circle-right"></span></a>
+				<a class="result-list-bibliography">{{hit.bibliography}}<span class="fas fa-arrow-circle-right"></span></a>
 				
 				<!-- combination-search -->
 				<div class="combination-search ml-4 my-3 hide">
