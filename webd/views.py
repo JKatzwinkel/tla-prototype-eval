@@ -21,5 +21,4 @@ def es_get(request, index, _id):
     return JsonResponse(
             store.get(index, _id),
             safe=False)
-    
 

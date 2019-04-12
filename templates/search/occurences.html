@@ -1,0 +1,138 @@
+{% extends "../search_results.html" %}
+{% load static %}
+{% load js %}
+
+{% block title %}TLA - Prototyp - Belegstellen{% endblock %}
+
+{% block content %}
+<!-- Page Content -->
+<div class="container content my-4">
+
+	<div class="row">
+		<!-- Breadcrumbs -->
+		<div class="col-12">
+			<nav aria-label="breadcrumb">
+			  <ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="#">Home</a></li>
+				<li class="breadcrumb-item"><a href="/search">Search</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Search Results</li>
+			  </ol>
+			</nav>
+		</div>
+	</div><!-- /.row -->
+	
+	<!-- Suchergebnis + sortieren-->	
+	<div class="row search-entries">
+		<div class="col-sm-8 result">
+			<h2 class="bbaw-libertine"><mark>{{params.transcription}}</mark></h2>
+		</div>
+		<div class="col-sm-4">
+		 <div class="input-group mb-3">
+			<div class="input-group-append">
+				<label class="input-group-text" for="inputGroupSelect02">Order by</label>
+			  </div>
+			<select class="custom-select" id="inputGroupSelect02">
+				<option selected>alphabetical order</option>
+				<option value="1">option 2</option>
+				<option value="2">option 3</option>
+			  </select>			  
+			</div>
+		</div>		
+    </div><!-- /.row -->
+	
+	<!-- Trefferanzahl-->
+	<div class="row searchresult">		
+			<div class="col-sm-12 pt-3">
+			<p class="result-entries">Results: <b>{{start}} - {{end}}</b> of <b>{{hitcount}}</b> Words in Texts</p>
+			</div>
+	</div><!-- /.row -->  
+	  	
+	<!-- Trefferliste -->
+	<div class="row result-list">	
+		<div class="col-sm-8">
+		<!-- Treffer -->
+			{% for hit in hits %}
+			<div class="result-list-item" id="{{hit.occurence.id}}">
+				<!-- Redaktionsstatus -->
+				
+				<!-- Lemma -->
+				<h3 class="word bbaw-libertine">
+					{% for token in hit.sentence.tokens %}
+					<a href="/view/lemma/{{token.lemma}}">
+						<span id="{{token.id}}" class="occ-tok {%if token.highlight%}highlight-{{token.highlight}}{%endif%} bbaw-libertine">
+								{% if token.label %}
+									{{token.label}}
+								{% endif %}
+						</span>
+					</a>
+					{% endfor %}
+				</h3>
+
+				<div class="hieroglyph hide">
+					{%for token in hit.sentence.tokens%}
+					<span class="glyphbox">
+						{%if token.glyphs%}
+						<img src="http://tladev.bbaw.de:5000/render?mdc={{token.glyphs}}" title="{{token.glyphs}}" style="height:24px;" class="occ-tok-glyphs {%if token.highlight%}highlight-{{token.highlight}}{%endif%}"/>
+						{%endif%}
+					</span>
+					{%endfor%}
+				</div>
+				
+				<!-- Translation DE -->
+				{% for translation in hit.sentence.translations.de %}
+					<p class="translation">{{translation}}</p>
+				{% endfor %}
+				
+				<!-- Translation EN FR -->
+				<div class="translation-languages hide">
+					<p class="text-muted">{{hit.sentence.translations.en.0}}
+					<br>
+					<span class="font-italic">{{hit.sentence.translations.fr.0}}</span>
+					</p>
+				</div>
+
+				<div class="corpus-paths">
+					{%for path in hit.text.paths%}
+					<p class="corpus-path">
+					{%for object in path%}
+						<span id="{{hit.text.id}}-{{object.id}}" class="corpus-path-element">
+							<a href="{{object.url}}">
+								{{object.name}}
+							</a>
+							{%if not forloop.last%}
+							<i class="fas fa-arrow-circle-right" style="color:grey"></i>
+							{%endif%}
+						</span>
+						{%endfor%}
+						<a href="/view/occurence/{{hit.occurence.id}}">
+							<span class="lc">
+							 [{{hit.occurence.line}}]
+							</span>
+						</a>
+					</p>
+					{%endfor%}
+				</div>	
+				
+							
+			</div> <!-- .Treffer -->
+			{% endfor %}
+
+
+		</div> <!-- .col-sm-8 -->
+	
+	
+		<!-- Sidebar -->
+		<div class="col-sm-4">
+		<div class="sticky-top">
+			<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail hieroglyph-btn "><i class="fas fa-plus-circle"></i>Hieroglyphs</button>
+			
+			<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn "><span class="fas fa-plus-circle"></span>Translation Languages</button>
+			<br>	
+			<a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Modify Search</button></a>
+		</div>
+		</div>
+	</div> <!-- /.row -->	  
+
+</div><!-- /.container Content -->
+{% endblock %}
+

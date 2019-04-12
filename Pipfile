@@ -12,6 +12,3 @@ glom = "*"
 [dev-packages]
 ipython = "*"
 bpython = "*"
-
-[requires]
-python_version = "3.5"

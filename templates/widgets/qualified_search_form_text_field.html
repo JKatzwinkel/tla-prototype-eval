@@ -1,0 +1,14 @@
+{% spaceless %}
+<label for="id_{{widget.name}}" class="col-sm-2 col-form-label">{{widget.attrs.label}}</label>
+<div class="col-sm-10">
+	{% include "django/forms/widgets/text.html" %}
+	{% for key, choice in widget.attrs.qualifier.choices.items %}
+	<div class="form-check form-check-inline">
+		<input class="form-check-input" type="checkbox" 
+				name="{{widget.attrs.qualifier.name}}" value="{{key}}"
+				checked="{{choice.checked}}" id="{{widgets.attrs.qualifier.name}}_{{key}}"/>
+		<label class="form-check-label" for="{{widgets.attrs.qualifier.name}}_{{key}}">{{choice.label}}</label>
+	</div>
+	{% endfor %}
+</div>
+{% endspaceless %}
