@@ -111,7 +111,7 @@ def lemma_details_page(request, lemma_id):
     }
     return render(
         request,
-        'details/l.html',
+        'details/lemma.html',
         {
             'lemma': lemma,
             'bibl': bibl,

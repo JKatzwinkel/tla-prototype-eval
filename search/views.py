@@ -400,7 +400,7 @@ def search(request):
     params = request.GET.copy()
     return render(
         request,
-        'search/i.html',
+        'search/index.html',
         {
             'word_classes': WORD_CLASSES,
             'dictform': DictSearchForm(),
@@ -454,7 +454,7 @@ def search_dict(request):
     hits = hit_tree(hits)
     return render(
         request,
-        'search/d.html',
+        'search/dictionary.html',
         {
             'params': params,
             'hits': hits,
@@ -483,7 +483,7 @@ def search_text_words(request):
     hits = populate_textword_occurences(hits, **params)
     return render(
         request,
-        'search/a.html',
+        'search/occurences.html',
         {
             'params': params,
             'hits': hits,
