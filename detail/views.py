@@ -89,21 +89,6 @@ def coins_openurl_kev(doc):
 @require_http_methods(["GET"])
 def lemma_details_page(request, lemma_id):
     lemma = store.get('wlist', lemma_id)
-    bibl = glom(lemma,
-            Coalesce(
-                'passport.annotation.0.lemma.0',
-                default=''
-            )
-    return render(request, 'details/l.html', {
-        'lemma': lemma,
-        'bibl': bibl,
-        'coins': coins_openurl_kev(lemma),
-        })
-
-
-@require_http_methods(["GET"])
-def lemma_details_page(request, lemma_id):
-    lemma = store.get('wlist', lemma_id)
     bibl = glom(
         lemma,
         Coalesce(
@@ -130,6 +115,7 @@ def lemma_details_page(request, lemma_id):
         {
             'lemma': lemma,
             'bibl': bibl,
+            'coins': coins_openurl_kev(lemma),
             'occurences': {
                 'corpus': occurence_count(lemma_id),
             },
