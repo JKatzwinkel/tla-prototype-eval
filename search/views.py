@@ -454,7 +454,7 @@ def search_dict(request):
     hits = hit_tree(hits)
     return render(
         request,
-        'search/dictionary.html',
+        'search/dict.html',
         {
             'params': params,
             'hits': hits,

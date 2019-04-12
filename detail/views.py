@@ -126,4 +126,3 @@ def lemma_details_page(request, lemma_id):
             ),
         }
     )
-

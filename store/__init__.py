@@ -6,7 +6,6 @@ es = Elasticsearch(
     env.get('ES_URL', 'http://127.0.0.1:9200')
 )
 
-
 def lucenify(params):
     """ return a string that can be used as a lucene query """
     return ' '.join(['{}:{}'.format(k, v) for k, v in params.items()])

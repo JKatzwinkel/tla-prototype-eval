@@ -16,6 +16,7 @@
 a, p, h1, h2, h3 {
 	font-family: "roboto", arial, sans-serif;
 	font-weight: 300;
+	margin-bottom: 0.2rem;
 	}
 	
 a {color:red;}	
@@ -92,9 +93,9 @@ a.navbar-brand {
 	background-color: #888;
 	}
 .result-list-item h2 {
-	padding: 5px 10px;
+	padding: 1px 10px;
 	display: inline-block;
-	margin-left: -0.3em;
+	margin-left: -0.4em;
 	}
 .result-list-item h2:hover{
     background-color: red;
@@ -155,6 +156,7 @@ a.navbar-brand {
 	}
 .result-list-item h2{	
 	color: red;
+	font-size: 1.4em;
 	}
 .result-list-item span.translation{
 	font-weight: 500;
