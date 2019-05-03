@@ -82,8 +82,14 @@ def resolve_name(index, _id=None, obj=None):
 
 
 def get_mappings(index):
-    """ extract indexed features from a certain index's mappings """
-    mappings = es.indices.get_mapping(index).get(index, {}).get('mappings', {}).get(index)
+    """ extract indexed features from a certain index's mappings
+
+    :rtype: list
+    """
+    try:
+        mappings = es.indices.get_mapping(index).get(index, {}).get('mappings', {}).get(index)
+    except:
+        return []
     def extract_properties(obj):
         res = []
         for key, values in obj.items():

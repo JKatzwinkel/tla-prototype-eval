@@ -130,3 +130,5 @@ STATICFILES_DIRS = [
         ]
 
 CORPUS_OBJECT_MAPPING_FILE = 'object/mapping.json'
+
+MEDIA_ROOT = 'resources'

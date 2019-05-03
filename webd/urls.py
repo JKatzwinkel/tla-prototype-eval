@@ -22,7 +22,7 @@ from search.views import search
 urlpatterns = [
         path('es/<str:index>/get/<str:_id>', views.es_get),
         path('es/<str:index>/search/<str:query>', views.es_search),
-        re_path(r'^/?$', search),
+        re_path(r'^$', search),
         path('admin/', admin.site.urls),
         path('lemma/', include('lemma.urls')),
         path('object/', include('object.urls')),
