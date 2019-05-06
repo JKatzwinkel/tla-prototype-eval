@@ -1,6 +1,9 @@
 from os import environ as env
 
-from elasticsearch import Elasticsearch
+from elasticsearch import (
+    Elasticsearch,
+    helpers,
+)
 
 es = Elasticsearch(
     env.get('ES_URL', 'http://127.0.0.1:9200')
