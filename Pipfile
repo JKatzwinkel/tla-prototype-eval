@@ -6,7 +6,7 @@ name = "pypi"
 [packages]
 django-extensions = "==2.0.7"
 django = "*"
-elasticsearch = "*"
+elasticsearch = ">=6.0.0,<7.0.0"
 glom = "*"
 
 [dev-packages]
