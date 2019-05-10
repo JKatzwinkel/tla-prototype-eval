@@ -200,9 +200,9 @@ def textword_search_query(**params):
     return q
 
 
-def search_textword_occurences(offset=1, size=RESULTS_PER_PAGE, **params):
-    """ builds queries according to the parameters obtained from the :class:`forms.TextWordSearchForm` textword occurence search form.
-    Passes the final occurence query to function :meth:`store.search` an returns the results.
+def search_textword_occurrences(offset=1, size=RESULTS_PER_PAGE, **params):
+    """ builds queries according to the parameters obtained from the :class:`forms.TextWordSearchForm` textword occurrence search form.
+    Passes the final occurrence query to function :meth:`store.search` an returns the results.
 
     :rtype: list
     """
@@ -259,34 +259,34 @@ def search_textword_occurences(offset=1, size=RESULTS_PER_PAGE, **params):
         if len(texts) < 1:
             print('no matching texts. bye!')
             return {}
-    occurences = []
-    occurences_query = textword_search_query(**params)
+    occurrences = []
+    occurrences_query = textword_search_query(**params)
     if texts:
-        occurences_query['query']['bool']['must'].append(
+        occurrences_query['query']['bool']['must'].append(
             {
                 'terms': {
                     'text': list(map(str.lower, texts))
                 }
             }
         )
-    with open('occurence_query.json', 'w+') as f:
-        json.dump(occurences_query, f, ensure_ascii=False, indent=2)
+    with open('occurrence_query.json', 'w+') as f:
+        json.dump(occurrences_query, f, ensure_ascii=False, indent=2)
     hits = store.search(
-        'occurence',
-        occurences_query,
+        'occurrence',
+        occurrences_query,
         offset=offset,
         size=size,
     )
     return hits
 
 
-def populate_textword_occurences(hits, **params):
+def populate_textword_occurrences(hits, **params):
     """ take text word search results and the original search parameters and
     enrich the results with like highlighting and stuff.
 
     :rtype: list
     """
-    occurences = []
+    occurrences = []
     filters = {
         k: params.get(k) for k in ["lemma", "transcription", "hieroglyphs"]
     }
@@ -337,16 +337,16 @@ def populate_textword_occurences(hits, **params):
                         }.get(node.get('eclass')),
                         node['id']
                     )
-            occurences.append(
+            occurrences.append(
                 {
-                    "occurence": hit,
+                    "occurrence": hit,
                     "sentence": sentence,
                     "text": text,
                 }
             )
         else:
             print('text not found: ', hit["text"])
-    return occurences
+    return occurrences
 
 
 def hit_tree(hits):
@@ -473,17 +473,17 @@ def search_text_words(request):
     offset = (page - 1) * RESULTS_PER_PAGE
     #form = TextWordSearchForm(request.GET)
     print(params)
-    hits = search_textword_occurences(
+    hits = search_textword_occurrences(
         offset=offset,
         size=RESULTS_PER_PAGE,
         **params,
     )
     count = hits.get('total', 0)
     hits = store.hits_contents(hits)
-    hits = populate_textword_occurences(hits, **params)
+    hits = populate_textword_occurrences(hits, **params)
     return render(
         request,
-        'search/occurences.html',
+        'search/occurrences.html',
         {
             'params': params,
             'hits': hits,

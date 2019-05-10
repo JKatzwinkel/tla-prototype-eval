@@ -18,10 +18,10 @@ def tag_transcription(string):
     )
 
 
-def occurence_count(lemma_id):
+def occurrence_count(lemma_id):
     count = store.es.count(
-        index="occurence",
-        doc_type="occurence",
+        index="occurrence",
+        doc_type="occurrence",
         body={
             "query": {
                 "term": {
@@ -130,8 +130,8 @@ def lemma_details_page(request, lemma_id):
             'lemma': lemma,
             'bibl': bibl,
             'coins': coins_openurl_kev(lemma),
-            'occurences': {
-                'corpus': occurence_count(lemma_id),
+            'occurrences': {
+                'corpus': occurrence_count(lemma_id),
             },
             'annotations': render_annotations(
                 lemma_annotations(
