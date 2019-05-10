@@ -1,4 +1,5 @@
 import os
+import json
 from os import environ as env
 
 from django.conf import settings
@@ -11,17 +12,27 @@ from elasticsearch.helpers import streaming_bulk
 
 
 es = Elasticsearch(
-    env.get('ES_URL')
+    env.get('ES_URL', 'http://es:9200')
 )
 
 
 class Indexer(object):
     def __init__(self, index):
         self.index = index
-        self.cache = []
+        self.queue = []
+        print(
+            'create indexer for index {} at ES instance {} ({}:{})'.format(
+                index,
+                env.get('ES_URL'),
+                env.get('ES_HOST'),
+                env.get('ES_PORT'),
+            )
+        )
+        if not es.indices.exists(index):
+            es.indices.create(index)
 
-    def index(self, doc):
-        self.cache.append(
+    def add(self, doc):
+        self.queue.append(
             {
                 "_op_type": "index",
                 "_index": self.index,
@@ -30,16 +41,18 @@ class Indexer(object):
                 '_source': doc,
             }
         )
-        if len(self.cache) > 100:
+        if len(self.queue) > 100:
             self.bulk()
 
     def bulk(self):
-        streaming_bulk(
-            es,
-            self.cache,
-            chunk_size=len(self.cache),
-        )
-        self.cache.clear()
+        [
+            res for res in streaming_bulk(
+                es,
+                self.queue,
+                chunk_size=len(self.queue),
+            )
+        ]
+        self.queue.clear()
 
     def __del__(self):
         self.bulk()
@@ -47,29 +60,37 @@ class Indexer(object):
 
 def index_folder_contents(path):
     """ """
+    index = path.split(os.path.sep)[-1]
+    print(index)
+    indexer = Indexer(index)
     for fn in os.listdir(
         os.path.join(
             settings.MEDIA_ROOT,
             path
         )
     ):
-        doc = default_storage.open(
-            os.path.join(path, fn)
-        ).read()
-        print(doc.get('_id'))
+        doc = json.loads(
+            default_storage.open(
+                os.path.join(path, fn)
+            ).read().decode(
+                'utf8'
+            )
+        )
+        indexer.add(doc)
+    indexer.bulk()
 
 
 class Command(BaseCommand):
     help = 'Populates the Elasticsearch instance at $ES_URL'
 
     def handle(self, *args, **options):
-        print(
-            default_storage.exists('test.json')
-        )
         for path in [
             'wlist',
             'text',
             'occurrence',
+            'annotation',
+            'object',
+            'sentence',
         ]:
             index_folder_contents(
                 os.path.join(

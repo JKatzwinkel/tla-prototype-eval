@@ -6,7 +6,7 @@ from elasticsearch import (
 )
 
 es = Elasticsearch(
-    env.get('ES_URL', 'http://127.0.0.1:9200')
+    env.get('ES_URL', 'http://es:9200')
 )
 
 def lucenify(params):
@@ -129,6 +129,8 @@ def get_mappings(index):
         return []
     def extract_properties(obj):
         res = []
+        if obj is None:
+            return res
         for key, values in obj.items():
             if type(values) is dict:
                 if key == "properties":

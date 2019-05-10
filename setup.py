@@ -13,5 +13,6 @@ setup(
             "elasticsearch",
             "glom",
             "django",
+            "django-extensions",
             ],
         )
