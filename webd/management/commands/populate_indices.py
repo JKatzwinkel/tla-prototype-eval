@@ -12,7 +12,7 @@ from elasticsearch.helpers import streaming_bulk
 
 
 es = Elasticsearch(
-    env.get('ES_URL', 'http://es:9200')
+    env.get('ES_URL', 'http://localhost:9200')
 )
 
 
@@ -21,11 +21,9 @@ class Indexer(object):
         self.index = index
         self.queue = []
         print(
-            'create indexer for index {} at ES instance {} ({}:{})'.format(
+            'create indexer for index {} at ES instance {} '.format(
                 index,
                 env.get('ES_URL'),
-                env.get('ES_HOST'),
-                env.get('ES_PORT'),
             )
         )
         if not es.indices.exists(index):

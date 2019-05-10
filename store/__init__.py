@@ -6,7 +6,7 @@ from elasticsearch import (
 )
 
 es = Elasticsearch(
-    env.get('ES_URL', 'http://es:9200')
+    env.get('ES_URL', 'http://localhost:9200')
 )
 
 def lucenify(params):
