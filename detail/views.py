@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 from django.utils.http import urlencode
 
-from glom import glom, Coalesce
+from glom import glom, Coalesce, flatten
 
 import store
 
@@ -45,8 +45,22 @@ def lemma_annotations(lemma_id):
 
 def render_annotations(annos):
     for anno in annos:
-        textcontent = glom(
-            anno,
+        textcontent = '\n'.join(
+            glom(
+                anno,
+                Coalesce(
+                    (
+                        (
+                            'passport.annotation',
+                            [
+                                'lemma',
+                            ]
+                        ),
+                        flatten
+                    ),
+                    default=[],
+                )
+            )
         )
         textcontent = re.sub(
             r'\n',
