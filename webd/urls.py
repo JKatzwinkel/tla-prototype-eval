@@ -23,10 +23,6 @@ urlpatterns = [
         path('es/<str:index>/get/<str:_id>', views.es_get),
         path('es/<str:index>/search/<str:query>', views.es_search),
         re_path(r'^$', search),
-        path('admin/', admin.site.urls),
-        path('lemma/', include('lemma.urls')),
-        path('object/', include('object.urls')),
-        path('ths/', include('ths.urls')),
         path('search/', include('search.urls')),
         path('view/', include('detail.urls')),
 ]
