@@ -6,18 +6,20 @@ services:
     ports:
       - ${ES_PORT}:9200
     environment:
-      discovery.type: single-node
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     stdin_open: true
     tty: true
-
 
   tla:
     build:
       context: .
+      args:
+        sample_url: ${SAMPLE_URL}
     depends_on:
       - es
     ports:
       - ${LISTEN_PORT}:8000
     environment:
       ES_URL: http://es:9200
- 
