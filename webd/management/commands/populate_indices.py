@@ -35,8 +35,8 @@ class Indexer(object):
                 "_op_type": "index",
                 "_index": self.index,
                 "_type": self.index,
-                "_id": doc.get('_id'),
-                '_source': doc,
+                "_id": doc.get("id"),
+                "_source": doc,
             }
         )
         if len(self.queue) > 100:
@@ -82,7 +82,7 @@ class Command(BaseCommand):
     help = 'Populates the Elasticsearch instance at $ES_URL'
 
     def handle(self, *args, **options):
-        for path in [
+        for doc_type in [
             'wlist',
             'text',
             'occurrence',
@@ -92,7 +92,8 @@ class Command(BaseCommand):
         ]:
             index_folder_contents(
                 os.path.join(
-                    'download',
-                    path
+                    'corpus',
+                    'sample',
+                    doc_type
                 )
             )
