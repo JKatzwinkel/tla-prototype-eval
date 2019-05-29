@@ -72,7 +72,9 @@
 						{% for word in hit.words %}
 							{% if word.glyphs %}
 								<span class="glyphbox">
-									<img src="http://tladev.bbaw.de:5000/render?mdc={{word.glyphs}}" title="{{word.glyphs}}" style="height:18px;"/>
+									<canvas class="res" title="{{word.glyphs}}">
+										{{word.glyphs}}
+									</canvas>
 								</span>
 							{% endif %}
 						{% endfor %}

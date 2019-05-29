@@ -200,7 +200,8 @@ a.navbar-brand {
 	color: grey;
 }
 
-.result-list-item img.occ-tok-glyphs.highlight-1 {
+.result-list-item img.occ-tok-glyphs.highlight-1,
+.result-list-item canvas.res.occ-tok-glyphs.highlight-1 {
 	border: 1px solid red;
 	border-radius: 2px;
 }

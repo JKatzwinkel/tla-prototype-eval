@@ -72,7 +72,9 @@
 					{%for token in hit.sentence.tokens%}
 					<span class="glyphbox">
 						{%if token.glyphs%}
-						<img src="http://tladev.bbaw.de:5000/render?mdc={{token.glyphs}}" title="{{token.glyphs}}" style="height:24px;" class="occ-tok-glyphs {%if token.highlight%}highlight-{{token.highlight}}{%endif%}"/>
+						<canvas class="res occ-tok-glyphs {%if token.highlight%}highlight-{{token.highlight}}{%endif%}" title="{{token.glyphs}}">
+							{{token.glyphs}}
+						</canvas>
 						{%endif%}
 					</span>
 					{%endfor%}
