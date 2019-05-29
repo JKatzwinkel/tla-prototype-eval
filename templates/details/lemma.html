@@ -175,8 +175,8 @@
 			{% endfor %}
 			<hr>
 			<p class="h6 pt-1 pb-1 pl-3">Occurrences</p>
-			{% for where, count in occurences.items %}
-			<a href="/search/occurences?lemma={{lemma.id}}">
+			{% for where, count in occurrences.items %}
+			<a href="/search/occurrences?lemma={{lemma.id}}">
 				<button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-right"></span>{{where}}: {{count}}</button>
 			</a>
 			{% endfor %}
