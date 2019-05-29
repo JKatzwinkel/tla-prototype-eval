@@ -14,4 +14,5 @@ while true; do
 done
 
 python manage.py populate_indices
+rm -r resources/corpus/
 python manage.py runserver 0.0.0.0:8000
