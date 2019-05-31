@@ -13,6 +13,9 @@ while true; do
 	sleep 4
 done
 
-python manage.py populate_indices
-rm -r resources/corpus/
+if [ -e "resources/corpus/" ]; then
+	python manage.py populate_indices
+	rm -r resources/corpus/
+fi
+
 python manage.py runserver 0.0.0.0:8000
