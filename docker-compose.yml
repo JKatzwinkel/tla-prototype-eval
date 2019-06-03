@@ -23,3 +23,10 @@ services:
       - ${LISTEN_PORT}:8000
     environment:
       ES_URL: http://es:9200
+    volumes:
+      - type: bind
+        source: "./webd"
+        target: /app/webd
+        volume:
+          nocopy: true
+          consistency: consistent

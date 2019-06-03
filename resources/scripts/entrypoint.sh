@@ -14,8 +14,9 @@ while true; do
 done
 
 if [ -e "resources/corpus/" ]; then
-	python manage.py populate_indices
+	python webd/manage.py populate_indices
 	rm -r resources/corpus/
 fi
 
-python manage.py runserver 0.0.0.0:8000
+python webd/manage.py migrate
+python webd/manage.py runserver 0.0.0.0:8000
