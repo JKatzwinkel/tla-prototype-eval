@@ -11,6 +11,8 @@ from .forms import (
 )
 
 import store
+from detail import views as detail_views
+
 
 RESULTS_PER_PAGE = 24
 
@@ -351,6 +353,10 @@ def populate_textword_occurrences(hits, **params):
 
 def hit_tree(hits):
     """ extracts the implicit hierarchical structure among the given objects """
+    for hit in hits:
+        hit["occurrences"] = detail_views.occurrence_count(
+            hit.get('id')
+        )
     structure = {
         h.get('id'): (hits.index(h), h)
         for h in hits
@@ -467,6 +473,7 @@ def search_dict(request):
     )
 
 
+@require_http_methods(["GET"])
 def search_text_words(request):
     params = request.GET.copy()
     page = int(params.get('page', 1))

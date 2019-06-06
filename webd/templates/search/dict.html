@@ -59,6 +59,9 @@
 				<!-- Redaktionsstatus -->
 				<div class="red-status">
 					<a href="#"><span class="far fa-check-circle ok"></span></a>
+					{% if hit.occurrences > 0 %}
+					{{hit.occurrences}}
+					{% endif %}
 					<!--<a><span class="far fa-envelope"/></a>
 					<a><span class="far fa-comment"/></a>-->
 				</div>	
