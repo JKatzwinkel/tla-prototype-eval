@@ -1,3 +1,3 @@
-[submodule "webd/static/resjs"]
-	path = webd/static/resjs
+[submodule "webd/static/vendor/resjs"]
+	path = webd/static/vendor/resjs
 	url = https://github.com/nederhof/resjs.git
