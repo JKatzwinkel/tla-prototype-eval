@@ -21,7 +21,6 @@ def tag_transcription(string):
 def occurrence_count(lemma_id):
     count = store.es.count(
         index="occurrence",
-        doc_type="occurrence",
         body={
             "query": {
                 "term": {
