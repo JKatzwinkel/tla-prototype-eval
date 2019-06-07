@@ -1,0 +1,83 @@
+[
+  0,
+  null,
+  {
+    "id": "69830",
+    "name": "mn.t",
+    "revisionState": "published-obsolete",
+    "type": "substantive",
+    "subtype": "substantive_fem",
+    "translations": {
+      "de": [
+        "Ursprungsort des Wasser"
+      ]
+    },
+    "passport": {
+      "lemma": [
+        {
+          "main_group": [
+            {
+              "word_class": [
+                "WS"
+              ],
+              "wclassnum": [
+                "1020"
+              ],
+              "woart": [
+                "1002"
+              ],
+              "comment": [
+                "Referenz unklar"
+              ],
+              "arb_vermerk": [
+                "nur Sperrverm."
+              ],
+              "lsort": [
+                "YZ2n"
+              ]
+            }
+          ]
+        }
+      ],
+      "bibliography": [
+        {
+          "bibliographical_text_field": [
+            "Wb 2, 69.6"
+          ]
+        }
+      ]
+    },
+    "relations": {
+      "referencing": [
+        {
+          "name": "mn.tj",
+          "id": "69900",
+          "type": "substantive",
+          "eclass": "BTSLemmaEntry"
+        }
+      ]
+    },
+    "externalReferences": {
+      "aaew_wcn": [
+        "69830"
+      ],
+      "vega": [
+        "5718"
+      ]
+    },
+    "words": [
+      {
+        "transcription": "mn.t",
+        "glyphs": "Y5-N35-X1-Z4-N26-N26"
+      }
+    ],
+    "edited": {
+      "name": "Altägyptisches Wörterbuch",
+      "type": "user",
+      "date": "01/07/19"
+    },
+    "score": 18.555498,
+    "occurrences": 0,
+    "bibliography": "Wb 2, 69.6"
+  }
+]

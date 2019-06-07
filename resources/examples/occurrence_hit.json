@@ -1,0 +1,1342 @@
+{
+  "occurrence": {
+    "lemma": "69780",
+    "id": "IBUBd4uJikQ8t0SSqq9qABm9k4M",
+    "token": "IBUBd4uJikQ8t0SSqq9qABm9k4M",
+    "text": "YCRP74OC4NF3LKSKH7DUUUZEWE",
+    "sentence": "IBUBd54vV9HJa0nFgkUhtL3IRUs",
+    "line": "lc [20,21]",
+    "flexcode": "3",
+    "transcription": "mn,t",
+    "translations": {
+      "de": [
+        "Schwalbe"
+      ]
+    },
+    "glyphs": "Y5-N35-W24-X1-G41",
+    "score": 8.509887
+  },
+  "sentence": {
+    "id": "IBUBd54vV9HJa0nFgkUhtL3IRUs",
+    "text": "YCRP74OC4NF3LKSKH7DUUUZEWE",
+    "type": "HS",
+    "translations": {
+      "de": [
+        "Spruchrezitation dessen, was die Schwalbe gesagt hat: \"Oh, Aufgehender\" rezitieren, \"Oh, Leuchtender\" rezitieren, \"Der, dessen Haarlocke aus Gold ist\" rezitieren, \" 'Der durch den Nun fährt', befiehl (nun) in deiner Gnade, (denn) zebrochen ist dein Ei in deiner Gegenwart, ich bin es!\""
+      ]
+    },
+    "tokens": [
+      {
+        "id": "IBUBd56zyNtWqkTWgGhSnrSZgWU",
+        "type": "lc",
+        "label": "[20,21]"
+      },
+      {
+        "id": "IBUBd8ucUD1uSka8nkZcNtqyHlo",
+        "type": "word",
+        "label": "rʾ-ḏd",
+        "lemma": "853632",
+        "flexcode": "3",
+        "glossing": "unverändert zu BWL",
+        "glyphs": "D21-Z1-I10-D46-Y1-Z2",
+        "translations": {
+          "de": [
+            "Spruchrezitation"
+          ]
+        }
+      },
+      {
+        "id": "IBUBd51QxypIk0tpsYXsi1A6Gac",
+        "type": "word",
+        "label": "ḏd.t.n",
+        "lemma": "185810",
+        "flexcode": "40020",
+        "glossing": "relf.n-.sg.f.nom_subj",
+        "glyphs": "I10-D46-X1-N35",
+        "translations": {
+          "de": [
+            "sagen"
+          ]
+        }
+      },
+      {
+        "id": "IBUBd4uJikQ8t0SSqq9qABm9k4M",
+        "type": "word",
+        "label": "mn,t",
+        "lemma": "69780",
+        "flexcode": "3",
+        "glossing": "unverändert zu BWL",
+        "glyphs": "Y5-N35-W24-X1-G41",
+        "translations": {
+          "de": [
+            "Schwalbe"
+          ]
+        },
+        "highlight": 1
+      },
+      {
+        "id": "IBUBdWYrUZTF5E7PgQTONX2zo6M",
+        "type": "word",
+        "label": "j",
+        "lemma": "20030",
+        "flexcode": "3",
+        "glossing": "unverändert zu BWL",
+        "glyphs": "A26",
+        "translations": {
+          "de": [
+            "[Interjektion]"
+          ]
+        }
+      },
+      {
+        "id": "IBUBdQcxnGL3i0HzhhWkVaIIQaQ",
+        "type": "word",
+        "label": "wbn",
+        "lemma": "45150",
+        "flexcode": "3",
+        "glossing": "unverändert zu BWL",
+        "glyphs": "Z7-D58-N35-N5",
+        "translations": {
+          "de": [
+            "der Aufgehende (Sonnengott)"
+          ]
+        }
+      },
+      {
+        "id": "IBUBdzxS0g1SPUGQvs8jlUQnxN0",
+        "type": "word",
+        "label": "ḏdw",
+        "lemma": "852969",
+        "flexcode": "61000",
+        "glossing": "inf",
+        "glyphs": "I10-D46-Z7",
+        "translations": {
+          "de": [
+            "Worte sprechen, zu zitieren (als Verbform)"
+          ]
+        }
+      },
+      {
+        "id": "IBUBdQtP7cyEF010omuRYtcYDI8",
+        "type": "word",
+        "label": "j",
+        "lemma": "20030",
+        "flexcode": "3",
+        "glossing": "unverändert zu BWL",
+        "glyphs": "A26",
+        "translations": {
+          "de": [
+            "[Interjektion]"
+          ]
+        }
+      },
+      {
+        "id": "IBUBd809Deek7Eujqy0aj4vQN2Y",
+        "type": "word",
+        "label": "psḏ",
+        "lemma": "854201",
+        "flexcode": "3",
+        "glossing": "unverändert zu BWL",
+        "glyphs": "Q3-O34-D46-N5",
+        "translations": {
+          "de": [
+            "der Leuchtende"
+          ]
+        }
+      },
+      {
+        "id": "IBUBd0afOoFAGEXnrK1P2DC5gr0",
+        "type": "word",
+        "label": "ḏdw",
+        "lemma": "852969",
+        "flexcode": "61000",
+        "glossing": "inf",
+        "glyphs": "[",
+        "translations": {
+          "de": [
+            "Worte sprechen, zu zitieren (als Verbform)"
+          ]
+        }
+      },
+      {
+        "id": "IBUBdQEn3dK3n032iwArK5xEcbc",
+        "type": "word",
+        "label": "pꜣ-n,tj-ḥnsk≡f-m-nbw",
+        "lemma": "854282",
+        "flexcode": "3",
+        "glossing": "unverändert zu BWL",
+        "glyphs": "G41-G1-N35-X1-Z4-V28-M2-N35-V31-S29-D3A-I9-G17-S12",
+        "translations": {
+          "de": [
+            "der, dessen Haarlocke aus Gold ist"
+          ]
+        }
+      },
+      {
+        "id": "IBUBd39u0WuAl0pEsdnyT6RqlrY",
+        "type": "word",
+        "label": "ḏdw",
+        "lemma": "852969",
+        "flexcode": "61000",
+        "glossing": "inf",
+        "glyphs": "I10-D46-Z7",
+        "translations": {
+          "de": [
+            "Worte sprechen, zu zitieren (als Verbform)"
+          ]
+        }
+      },
+      {
+        "id": "IBUBdyOdjdqoJ0zovAah5x1voyI",
+        "type": "word",
+        "label": "ḫnt.j-m-nw,w",
+        "lemma": "854202",
+        "flexcode": "3",
+        "glossing": "unverändert zu BWL",
+        "glyphs": "W18-N35-X1-Z4-P1-G17-W24-W24-W24-N1-N35A-N36-Z1-N23",
+        "translations": {
+          "de": [
+            "der durch den Nun navigiert"
+          ]
+        }
+      },
+      {
+        "id": "IBUBdx0u5hrBBk7ciTtgZYWBS5E",
+        "type": "word",
+        "label": "wḏ",
+        "lemma": "51970",
+        "flexcode": "50010",
+        "glossing": "imp.sg",
+        "glyphs": "V25-Z7-X1-Y1",
+        "translations": {
+          "de": [
+            "befehlen"
+          ]
+        }
+      },
+      {
+        "id": "IBUBdws4hHAfjUA3mkGWDY4PaOw",
+        "type": "word",
+        "label": "m",
+        "lemma": "64362",
+        "flexcode": "3",
+        "glossing": "unverändert zu BWL",
+        "glyphs": "G17",
+        "translations": {
+          "de": [
+            "[modal]"
+          ]
+        }
+      },
+      {
+        "id": "IBUBdxJUBAMBqEayspyAHNkdFog",
+        "type": "word",
+        "label": "ḥtp",
+        "lemma": "111250",
+        "flexcode": "70052",
+        "glossing": "subst.st_pr.sg2m",
+        "glyphs": "R4-X1-Q3-X4F-Z2",
+        "translations": {
+          "de": [
+            "Gnade"
+          ]
+        }
+      },
+      {
+        "id": "IBUBd2ROphQG70ffiAVN5HcWR5w",
+        "type": "word",
+        "label": "=k",
+        "lemma": "10110",
+        "flexcode": "3",
+        "glossing": "unverändert zu BWL",
+        "glyphs": "V31",
+        "translations": {
+          "de": [
+            "[Suffix Pron. sg.2.m.]"
+          ]
+        }
+      },
+      {
+        "id": "IBUBdWllLiTDIUOiow88dNchDkc",
+        "type": "word",
+        "label": "sḏ",
+        "lemma": "150110",
+        "flexcode": "30070",
+        "glossing": "partz.pass.sg.m",
+        "glyphs": "S29-I10-N21-A24",
+        "translations": {
+          "de": [
+            "zerbrechen"
+          ]
+        }
+      },
+      {
+        "id": "IBUBd3Gc07xLCEnklTMZepxNUis",
+        "type": "word",
+        "label": "swḥ,t",
+        "lemma": "130630",
+        "flexcode": "70052",
+        "glossing": "subst.st_pr.sg2m",
+        "glyphs": "F40-X1-H8",
+        "translations": {
+          "de": [
+            "Ei"
+          ]
+        }
+      },
+      {
+        "id": "IBUBd8BSMuaCtEQtsdjQQSsJeQ8",
+        "type": "word",
+        "label": "=k",
+        "lemma": "10110",
+        "flexcode": "3",
+        "glossing": "unverändert zu BWL",
+        "glyphs": "V31",
+        "translations": {
+          "de": [
+            "[Suffix Pron. sg.2.m.]"
+          ]
+        }
+      },
+      {
+        "id": "IBUBdz5vmboio0geg83yIHmRFrc",
+        "type": "word",
+        "label": "r-gs",
+        "lemma": "92391",
+        "flexcode": "93002",
+        "glossing": "präp.st_pr.sg2m",
+        "glyphs": "D21-Aa15-Z1",
+        "translations": {
+          "de": [
+            "in Gegenwart von (einer höher gestellten Person)"
+          ]
+        }
+      },
+      {
+        "id": "IBUBd8uix11dFU5Fpx8f2ba0WVs",
+        "type": "word",
+        "label": "=k",
+        "lemma": "10110",
+        "flexcode": "3",
+        "glossing": "unverändert zu BWL",
+        "glyphs": "[",
+        "translations": {
+          "de": [
+            "[Suffix Pron. sg.2.m.]"
+          ]
+        }
+      },
+      {
+        "id": "IBUBdydvkgbHvUE9iS8xjqfZr5w",
+        "type": "word",
+        "label": "⸢jnk⸣",
+        "lemma": "27940",
+        "flexcode": "3",
+        "glossing": "unverändert zu BWL",
+        "glyphs": "[",
+        "translations": {
+          "de": [
+            "ich [Selbst. Pron. sg.1.c]"
+          ]
+        }
+      },
+      {
+        "id": "IBUBd8LsDQWseUyOooOnJNVQSWc",
+        "type": "word",
+        "label": "⸢pw⸣",
+        "lemma": "59741",
+        "flexcode": "3",
+        "glossing": "unverändert zu BWL",
+        "glyphs": null,
+        "translations": {
+          "de": [
+            "[Zweitnomen (zweigliedriger NS)]"
+          ]
+        }
+      }
+    ],
+    "line": "(1)"
+  },
+  "text": {
+    "id": "YCRP74OC4NF3LKSKH7DUUUZEWE",
+    "name": "2. Die Zeremonien zum Lobpreis des Horus, \"der das Erbe verleiht\"",
+    "revisionState": "published",
+    "type": "Text",
+    "subtype": null,
+    "relations": {
+      "contains": [
+        {
+          "name": null,
+          "id": "IBUBd01Jva6HM0WqisrE0J7HkCM",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd03v3N6weEqYh6qxDm0M6So",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd0CotuWOskyhpLiIuuC7LCA",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd0Q5vv9nk0zou02fOQWYhWU",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd0TCcdHxMEArlX63Ocem0K8",
+          "type": null,
+          "eclass": "BTSComment"
+        },
+        {
+          "name": null,
+          "id": "IBUBd0hEFZvk8E5hsi163yVszG8",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd0jzVIpE5Um4kp7XClxJktg",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd0ljr3dRbU82nKEMSd1Swk0",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd0nk5zR3TEveh0ksLd5nNo0",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd0ppcHmDpEQekvRPujGzKgI",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd0s5xKMoQkQBuOQ5ybrz7Xg",
+          "type": null,
+          "eclass": "BTSComment"
+        },
+        {
+          "name": null,
+          "id": "IBUBd0t4fwuxdk9aioDP6vFnCMk",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd11OixvhRUw6ljMC57YCDEI",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd14QsshYo0CvqywWBteoUPc",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd1AY1x1o20rbuMZAfThQHWU",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd1FvQBN360XUvs23PTQFtv8",
+          "type": null,
+          "eclass": "BTSComment"
+        },
+        {
+          "name": null,
+          "id": "IBUBd1MfA4MqmUGfrWq4o3hguOQ",
+          "type": null,
+          "eclass": "BTSComment"
+        },
+        {
+          "name": null,
+          "id": "IBUBd1TWGxA0zkeFiWejVA0px1I",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd1g7x724A0IQpHpDDIfqQQM",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd1mBAKWvZkjeswkd0EZtEJo",
+          "type": null,
+          "eclass": "BTSComment"
+        },
+        {
+          "name": null,
+          "id": "IBUBd1qx1vRf3kpmhCeasx4ha4A",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd1sZznLSbEs7udqyRoFXjbM",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd22or3CFxUgThB6vkBijhdA",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd2B8i6u4TkkgjFyPdXOLcjU",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd2Guo58OQEo3kGiEO2WkJqo",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd2LqEeD1dkvvig20CI1YVpM",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd2WQzwt9n0ACorOYNZBveTA",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd2cJWb6YMUGLrndeTzQYU0w",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd2hlniSZP09sqj5S3QoQKbg",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd2iFfGu6vE6ti1axXedAa4w",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd2qsugh2Y0angXlWkHrRqHQ",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd3AHYAf8JEmUmOOLhEPWToE",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd3BzmzO5b0mBgM9IHnHUS3c",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd3FN2ifUh0cjtBEcj2p0qSg",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd3TSo6m0jEvQsbjGb6EKu8s",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd3egcmW96ESpmNxPsBIE1JA",
+          "type": null,
+          "eclass": "BTSComment"
+        },
+        {
+          "name": null,
+          "id": "IBUBd43GkVQauURbqjpMV6qqpTw",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd47fQu8xV0EWpaOiF6grEzY",
+          "type": null,
+          "eclass": "BTSComment"
+        },
+        {
+          "name": null,
+          "id": "IBUBd4GPQv1iqkZ6snpWdNrlAYM",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd4V5bdb5Hk3XibX1qwkysQo",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd4ZgmMLV6knzlHiDIm3L4Zg",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd4aFqentP0HbqSKrzeJO1Lk",
+          "type": null,
+          "eclass": "BTSComment"
+        },
+        {
+          "name": null,
+          "id": "IBUBd4dpkwtAtkNovvu6QkHadBI",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd4mpytQpDkYbm2Y35hGqO7Y",
+          "type": null,
+          "eclass": "BTSComment"
+        },
+        {
+          "name": null,
+          "id": "IBUBd5BtTftCTEuHkZsQtCEufjc",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd5DA2IsxlEBLvhJ5PpHWAQw",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd5EEwLy2SUMfgmYazvqaF4Q",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd5FgOcLBTkngmAfOQb9aMeo",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd5HSmz73WEnWlNQCt5dTIr8",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd5RaHQlTjEKfsDrbUpDdsdk",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd5XqhlbKt008mdJCmwsgrDM",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd5gpsMUj0EMVryeFQ4rt2iI",
+          "type": null,
+          "eclass": "BTSComment"
+        },
+        {
+          "name": null,
+          "id": "IBUBd5knX1wqikuWjkAkfuIM4sA",
+          "type": null,
+          "eclass": "BTSComment"
+        },
+        {
+          "name": null,
+          "id": "IBUBd5viWxyGCUuWs5BZFEbwISU",
+          "type": null,
+          "eclass": "BTSComment"
+        },
+        {
+          "name": null,
+          "id": "IBUBd6YbzQnQpUxWhcnOx497SZ4",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd6bapHVdgUg0uQtAqRfX4CQ",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd6pF4TVaFUeQhPa0z7OxLmE",
+          "type": null,
+          "eclass": "BTSComment"
+        },
+        {
+          "name": null,
+          "id": "IBUBd6rVBOgqz00Uh32GkDJiWHQ",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd70LhXFhVUPepSDZTagpEJg",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd75aRQHAUkSbt8jHqLO0ukA",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd7XmIg2Q1034qVsyFVRcmE4",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd7amonzVM0rrrdpnPb4F5i8",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd7nAlhQygE68nFaXPWXe2Ac",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd808WZIsX0duhkeT1PGkJ5w",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd89XCqDqZE1vguP2qCSwu4Y",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd8QuH4kJj0zRlXmsfQVxdGQ",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd8V7F5E8N05PlVdajaNOpy0",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd8uCrha4108fk4nZFHLxvDY",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd8ug372WP0Gpk4Kx53cHLFI",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd9G76hg8h0CBlZUExQNojxg",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd9IGeBWgXEpOmpWaDigcXLQ",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd9Tg78tX5ESbtYe1dVJFtvk",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd9WDoS3WuEMtsFGCJMb7qi0",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBd9iqXTuo80m2vF4QNXGjbOE",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBdQCGyO2mmElVu6gYYM7NYFI",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBdQJ3Zu7ab0StqbzinFdFWfw",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBdQJnJphlpkAQjmfPr47CE3U",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBdQgZ7f2mX0B5sKdTrp7u7iw",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBdQxK8SnVYEZcrHW0XhHRnZk",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBdQy6WQhoSk2ChHLCrc1R2HU",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBdQzFHhdVT0ofoNUWhJdDFCY",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBdW5odNzhzU5YiID9P1rN9MU",
+          "type": null,
+          "eclass": "BTSComment"
+        },
+        {
+          "name": null,
+          "id": "IBUBdW7y8xLBn0ZYppVejGFYFdQ",
+          "type": null,
+          "eclass": "BTSComment"
+        },
+        {
+          "name": null,
+          "id": "IBUBdWDiuQi0SkCJkT5GAzCwdOE",
+          "type": null,
+          "eclass": "BTSComment"
+        },
+        {
+          "name": null,
+          "id": "IBUBdWIc6EciJ0x0kNQaq3WCQMM",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBdWV7YVcGB0dSgeJ8dvx1Ip0",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBdWWuA23tS06ZlJSgK7OQRAM",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBdWesuiuOwkAktfTfdDWtT9w",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBdWpkO1SD0kfJmNaGHWgSbeQ",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBdw2wPq4Wh0UHvXl4IWcFoWI",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBdwGI1o19TUrgtLT2gv9T5tU",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBdwXEru3PiEhTnN36I5EQPyM",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBdwnhEajPeUeblB3w3TMIFXs",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBdwv5V6aDc0ybkWcLjQEavJ4",
+          "type": null,
+          "eclass": "BTSComment"
+        },
+        {
+          "name": null,
+          "id": "IBUBdxFT6EXHzExZs15MUaqKPvk",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBdxWdJx7EhELEgrWN7qqXI3U",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBdxbjFFBp8UVPvdMaUi92beU",
+          "type": null,
+          "eclass": "BTSComment"
+        },
+        {
+          "name": null,
+          "id": "IBUBdxdHGZfTHUWhmXWMISLpgdk",
+          "type": null,
+          "eclass": "BTSComment"
+        },
+        {
+          "name": null,
+          "id": "IBUBdxjRaK1YH0FciKSiloOj4DY",
+          "type": null,
+          "eclass": "BTSComment"
+        },
+        {
+          "name": null,
+          "id": "IBUBdxyF7lOiyU72rH1OrANqDuo",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBdy3pqCtM6ESlv7TkzKYKTWA",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBdyAdXNEgpkaQig6xviuqWdM",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBdyDCesSeEkzKgi5SmSYUuGg",
+          "type": null,
+          "eclass": "BTSComment"
+        },
+        {
+          "name": null,
+          "id": "IBUBdynUhQrowUwYlWpgXn8OBuc",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBdyqM1Akdw0FQgYJT3gu5Oa4",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBdyqXpQHr6kJCgZ1QsgKGWVI",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBdywA960nNEQllHRtOwSrWIs",
+          "type": null,
+          "eclass": "BTSComment"
+        },
+        {
+          "name": null,
+          "id": "IBUBdywpMt5HREBpju8y0yK3Vss",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBdyzLLiQ9r0OvvAxznFx26k0",
+          "type": null,
+          "eclass": "BTSComment"
+        },
+        {
+          "name": null,
+          "id": "IBUBdz229BjIPkevnnAP75Cv8Ds",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBdz8UIjmQJUBgsHXXe36Eoac",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBdzRXwF7JeEXyt0nNm7PW3qo",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBdzdCUq3dJEfgggQUQgQ8EzI",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBdznKDpO3Jkdtp8IXZVghWqE",
+          "type": null,
+          "eclass": "BTSComment"
+        },
+        {
+          "name": null,
+          "id": "IBUBdzx7yt4HDkI1nX5swMSQy08",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        },
+        {
+          "name": null,
+          "id": "IBUBdzzdgO5oS0h9juRmWsC4xfE",
+          "type": "rubrum",
+          "eclass": "BTSAnnotation"
+        }
+      ],
+      "partOf": [
+        {
+          "name": "pBrooklyn 47.218.50 (\"Confirmation du pouvoir royal au nouvel an\")",
+          "id": "ZT23CNYBWZGBPAQHOPKGMDA54Y",
+          "type": "TCObject",
+          "eclass": "BTSTCObject"
+        }
+      ]
+    },
+    "paths": [
+      [
+        {
+          "name": "〈Tempelbibliotheken〉",
+          "id": "I3LXUBADERGW5AXR3QDSMDJDOU",
+          "type": "Caption",
+          "eclass": "BTSTCObject",
+          "url": "/view/object/I3LXUBADERGW5AXR3QDSMDJDOU"
+        },
+        {
+          "name": "Bibliothek eines Tempels in Elephantine (?)",
+          "id": "EPTWS2ZQGRGOHPVZEIFT2R2O7A",
+          "type": "Group",
+          "eclass": "BTSTCObject",
+          "url": "/view/object/EPTWS2ZQGRGOHPVZEIFT2R2O7A"
+        },
+        {
+          "name": "pBrooklyn 47.218.50 (\"Confirmation du pouvoir royal au nouvel an\")",
+          "id": "ZT23CNYBWZGBPAQHOPKGMDA54Y",
+          "type": "TCObject",
+          "eclass": "BTSTCObject",
+          "url": "/view/object/ZT23CNYBWZGBPAQHOPKGMDA54Y"
+        },
+        {
+          "name": "2. Die Zeremonien zum Lobpreis des Horus, \"der das Erbe verleiht\"",
+          "id": "YCRP74OC4NF3LKSKH7DUUUZEWE",
+          "type": "Text",
+          "eclass": "BTSText",
+          "url": "/view/text/YCRP74OC4NF3LKSKH7DUUUZEWE"
+        }
+      ]
+    ],
+    "passport": {
+      "definition": [
+        {
+          "main_group": [
+            {
+              "line_count": [
+                "Goyon, Confirmation du pouvoir royal"
+              ],
+              "protocol": [
+                "Feder 10.06-02.07"
+              ]
+            }
+          ]
+        }
+      ],
+      "bibliography": [
+        {
+          "bibliographical_text_field": [
+            "J.-C. Goyon, Confirmation du pouvoir royal au nouvel an, BdE 52 (1972) [Ü,K];\nidem in: Wilbour Monographs VII, The Brooklyn Museum et L'Institut Francais d'Archéologie Orientale 1974 [P,T].\n\nU. Verhoeven, Untersuchungen zur späthieratischen Buchschrift, OLA 99 (2001), 308-318."
+          ]
+        }
+      ],
+      "object": [
+        {
+          "description_of_object": [
+            {
+              "type": [
+                {
+                  "id": "5QIW3ZRHQFGINHBP4GI2GI4LFA",
+                  "name": "Schriftrolle",
+                  "type": "objecttype",
+                  "eclass": "BTSThsEntry"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "find_spot": [
+        {
+          "find_spot": [
+            {
+              "place": [
+                {
+                  "place": [
+                    {
+                      "id": "6NJP62ZOOVGENAF3BKE3OR7CG4",
+                      "name": "(unbestimmt)",
+                      "type": "findSpot",
+                      "eclass": "BTSThsEntry"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "text": [
+        {
+          "textual_metadata": [
+            {
+              "egytextname": [
+                "Thesaurus Linguae Aegyptiae, Bibliothek eines Tempels in Elephantine (?), pBrooklyn 47.218.50 (\"Confirmation du pouvoir royal au nouvel an\"), 2. Die Zeremonien zum Lobpreis des Horus, \"der das Erbe verleiht\""
+              ],
+              "script": [
+                {
+                  "id": "Z35DNIOFZ5G3VJN6XHP2CTCUBQ",
+                  "name": "Späthieratische Buchschrift",
+                  "type": "script",
+                  "eclass": "BTSThsEntry"
+                }
+              ],
+              "texttype": [
+                {
+                  "id": "S6TT23BYFJAWBEURQQIZYVRFXI",
+                  "name": "11 = Textsorten",
+                  "type": "textType",
+                  "eclass": "BTSThsEntry"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "date": [
+        {
+          "date": [
+            {
+              "date": [
+                {
+                  "id": "7WVJGW33WFHVZI2UBOIDWIKIPI",
+                  "name": "1. Hälfte 6. Jhdt. v.Chr.",
+                  "type": "date",
+                  "eclass": "BTSThsEntry"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "corpus": "bbawtempelbib",
+    "edited": {
+      "name": "F. Feder",
+      "type": "user",
+      "date": "05/21/19"
+    },
+    "sentences": [
+      "IBUBd4JfUGLHNUQgn1HMypLPLsE",
+      "IBUBd7rQkbSdqEf7vGOPSIs8VQc",
+      "IBUBdwPIhWKfCU98uAVKuCmw0QY",
+      "IBUBd1hY4pgPwUbwuYKojR5ThBw",
+      "IBUBdzgrfPcaI0f6lcEY8SDASsw",
+      "IBUBdyEDHPCHI08lrEd7Y4lpaBM",
+      "IBUBd4yveEKIjE4Zq7bYAeQLXkY",
+      "IBUBd0wm5lCEPEQSgjXNWR4LOKs",
+      "IBUBd00nopS0Ck3znvfWRAUsYm4",
+      "IBUBd9q3VUuhwU8tkI3gQ4uVgkI",
+      "IBUBd4rtl83goUWRgVQk64FtwTo",
+      "IBUBd260N5I37E0HqGnNvIKQaSA",
+      "IBUBdQHpZwlVW0QNvNzk9ihOomk",
+      "IBUBd1BdXLX29EQCnWbFCNOxUKw",
+      "IBUBd7FRwxJq8EpKq6LcvJnn920",
+      "IBUBdWJnEQO5tkYjprH9SGLQQow",
+      "IBUBd5U6qvGl10DHtAQQYfFpsBM",
+      "IBUBdWukiKH4FkjvrFqKyJcbEOQ",
+      "IBUBdQELw6Yf4k0UrN5cqLlWDJs",
+      "IBUBdwv3DQjLHUwggHVLDqBM0hM",
+      "IBUBdw1HS6ncAEOMvtCqU33JXqE",
+      "IBUBd4Bxw8wSnU1WnxQ4AMWMGd8",
+      "IBUBd1k8s0UQkEbLoJBxQVAXfoU",
+      "IBUBdQb98qrqV0PBgWcRayIQZjI",
+      "IBUBd031t84mZ0Ngql2bE0QzZdw",
+      "IBUBd2OJMqx4G0pElbq8LaMH8nU",
+      "IBUBdQ7bqQTT7EMelKHqfsk478U",
+      "IBUBdQjbFP5R5Usrp5ZU6eUhkr8",
+      "IBUBdyvPHd07l05hrajDNHLuSaw",
+      "IBUBdzdImfNRbUVMhM1x83FeQTI",
+      "IBUBd3UafRpSRUrZicDH9UtjvTM",
+      "IBUBd9pSrHVGxUu5sfCdYLX05ao",
+      "IBUBd3QQqtGYDkIohSuQsDOzqPE",
+      "IBUBd6zOxcMSZEMWlGTkqgCxmTg",
+      "IBUBdwFJpSoK2Eofjn2IhMch2Yo",
+      "IBUBd4xYrQ6ROEppkVONJtmXFvU",
+      "IBUBd5JRAJRDVUYOsJnzcwlIJRs",
+      "IBUBd30RWhWz9k9nqpV9Yp8yOfk",
+      "IBUBd7mju2GHeURJtSVkMVYTwao",
+      "IBUBd3ZED1QuQEeUusAzpmDl4hU",
+      "IBUBd4WiW3QNZURXo2aJ4ROaQgs",
+      "IBUBd2sUtPtyVECFoLg5bwW2UZk",
+      "IBUBdx9KMFQZAELxikeJ0Rl3mI0",
+      "IBUBd5fH2wWDF0q0gGaKIuu6BDk",
+      "IBUBdzSNJ9o83UWYiwQ50fMWiJE",
+      "IBUBd47e4CjTQknwsChOgYQ1tT4",
+      "IBUBd4NSPWgc5EPCoYSlZ4blJGE",
+      "IBUBdxsvb42XoklLiILY8XjTk7w",
+      "IBUBdwUW5e25AkqlieBTfzrPWXQ",
+      "IBUBd37WECfjPUZqt0gFyZRwhKc",
+      "IBUBd3Cos1GcqEAbsvq1bVNkTuI",
+      "IBUBd6OiiqNFB0kxkCXyEaFnfrk",
+      "IBUBd5nFFlPWu0qykQbb5FWXmlc",
+      "IBUBd830eCWvKUDfinwGWQWMMZA",
+      "IBUBd1y4WfPPHkwWuQVj3iAIElI",
+      "IBUBdyWycTdEUUo1oOaKeWxmWOo",
+      "IBUBdWPDBHF5g0WXhs1z5pulqBI",
+      "IBUBd73Q5ltHTksAow7ZnpUdHmA",
+      "IBUBd0JHU78jCkUKrKvvo0LyNA4",
+      "IBUBdQEM8Gl3N0PTqOEXaRXCuO4",
+      "IBUBd5uBQ4XhMktQnCG6gNgMpk8",
+      "IBUBd7W6YOHRQEitn4W6RykV2k8",
+      "IBUBdxGd6KA1e0F7gAnd8L1B02Y",
+      "IBUBdzcgHhQGM0bFgbFdF4H2PAA",
+      "IBUBdzCdIe85rEiJmMbh2WHlkho",
+      "IBUBdwWQAp1GlklUr3gDenPj3rU",
+      "IBUBd7tir1YZw0Q8pOJQe8S9YoA",
+      "IBUBd0jQawRksUqMuJX4NvMT4Cc",
+      "IBUBdQE8qEOClk7fsaqSATCMBTo",
+      "IBUBd17Q4jphIUfemwup9XWNzXY",
+      "IBUBd7SOBn3GFkFrrcz7jXsxWaU",
+      "IBUBd5zRyhGwL0KTiXbBiYLSnOk",
+      "IBUBd7x02YAxrkBQlWFQYDe8FQM",
+      "IBUBdxl2KVbgi06NoPcg4G1gDDQ",
+      "IBUBd5yoOiGXhkivml1MSH5owNM",
+      "IBUBd6cUXUTsxUK2lArUqwTEod0",
+      "IBUBd61rudbjRUrRrVQK3ogGwaE",
+      "IBUBdzBepNLfBkUMpc3nbFJP6ck",
+      "IBUBd5RX0cnW80TLrCU8GUvsDjI",
+      "IBUBdQLd2WuXqE6ytLpXQN71sjc",
+      "IBUBdwEoZu0xkkJ3qsjtVkfa4QA",
+      "IBUBd95G9ehzV0Jrnl4RS58v7eg",
+      "IBUBd52SYx0Jhkw7i8IuUWHLepY",
+      "IBUBd9mJxUVoE0rQm1QymzWGk9I",
+      "IBUBd0WqSrWKCkfWiRVMu6cn0RA",
+      "IBUBdW4u0QPeXktJpjF9auZ8jPU",
+      "IBUBd4KF9FPTi0tMv2e9larW4uA",
+      "IBUBdzknE5Hd30lkqAInPRcxVz8",
+      "IBUBd3sbDv8J204lnc0VLvYqNhU",
+      "IBUBd6rV3BcHgkEQoegNeD4ipck",
+      "IBUBd5HAQAc2M0WelkuYyICqG5c",
+      "IBUBd9bEqPrVzUTaoTBE4KzGG2w",
+      "IBUBd8mqsy0ShkCCr0toQysIDSc",
+      "IBUBd75C88Tw2kOylRLJ0zReWGI",
+      "IBUBd3hS0lyJi0m9va98QMXC3d8",
+      "IBUBd4Zw8tNLEUrAimidRTOZvxE",
+      "IBUBdy6lcrW0OUdevEvspi92SSo",
+      "IBUBdwzeQ82YFUpQpRUJNCt2B7g",
+      "IBUBd6EgqJkYkUjctaFZJNzElfA",
+      "IBUBdzMiTezL0EIIojhanxGDQtI",
+      "IBUBdWqpSnnv80ftiaggdY1DLM4",
+      "IBUBd40gDRy4BkqEg4I94HitiOk",
+      "IBUBd1TQUHWQlEHci7NtCMmYPyU",
+      "IBUBd511TJFOvURdjyCQq5sQQ5U",
+      "IBUBd10jiDMKw0OspBZryP7bbW4",
+      "IBUBd1lVSHNn4ULXtxavruLixuY",
+      "IBUBd7HdTUmOlUQQvRV4JNsyjCQ",
+      "IBUBd6aG590VQ0QOu4CEFWLPoRc",
+      "IBUBdQrQliqMQkOzrfkpwmQe02s",
+      "IBUBd8wqmsqvjEfGjAqgTMJWso8",
+      "IBUBd2KdlZ551k7MhjwWwwdJ9Ag",
+      "IBUBd6fCtcSxLkQjvFUqkSbY2ww",
+      "IBUBd0TB3kwET0v3mGwfaJdzWJE",
+      "IBUBd7lJG8a1YUVUrfzzndls4LY",
+      "IBUBd058E5G6rEe8vLOEWJ6h6xA",
+      "IBUBd3eklLUc5k1MhWVryDhJgoc",
+      "IBUBd54vV9HJa0nFgkUhtL3IRUs",
+      "IBUBd25E7joDJkC4ltE9QA7PFp8",
+      "IBUBd6V3JAHOtE8FhZ9PnZX6AWs",
+      "IBUBdww9CYyRTEKfiUrpQvonUQQ",
+      "IBUBdWC2mLZZokQ5mAGvip7QJeA",
+      "IBUBd1Rnz1xMD0YoqKfQZtJDo0c",
+      "IBUBd8oPCLP4W0xJunLNJT7Oyfs",
+      "IBUBdW1jprQE9EfooJvFBgLqgyI",
+      "IBUBd9JesEQLjkuVuWOg22WTWzY"
+    ]
+  }
+}

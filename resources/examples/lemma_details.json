@@ -1,0 +1,112 @@
+{
+  "id": "69780",
+  "name": "mn.t",
+  "revisionState": "published",
+  "type": "substantive",
+  "subtype": "substantive_fem",
+  "translations": {
+    "de": [
+      "Schwalbe; Taube (?)"
+    ],
+    "en": [
+      "swallow"
+    ]
+  },
+  "passport": {
+    "lemma": [
+      {
+        "main_group": [
+          {
+            "word_class": [
+              "WS"
+            ],
+            "wclassnum": [
+              "1020"
+            ],
+            "woart": [
+              "1002"
+            ],
+            "comment": [
+              "vgl. AEO II, 257* : eventl. auch mnw.t Taube, so Lesko und Wilson"
+            ],
+            "lsort": [
+              "YZ2n"
+            ],
+            "english_comment": [
+              "Wilson, Ptol. Lex. 438 also has pigeon"
+            ]
+          }
+        ]
+      }
+    ],
+    "bibliography": [
+      {
+        "bibliographical_text_field": [
+          "Wb 2, 68.2-4; FCD 107; Lesko, Dictionary I, 216; Wilson, Ptol. Lexikon, 438; KoptHWb 24; LÄ V, 754"
+        ]
+      }
+    ]
+  },
+  "relations": {
+    "root": [
+      {
+        "name": "mnw",
+        "id": "864752",
+        "type": "root",
+        "eclass": "BTSLemmaEntry"
+      }
+    ],
+    "contains": [],
+    "successor": [
+      {
+        "name": "bnj(.t)",
+        "id": "d1723",
+        "type": "substantive",
+        "eclass": "BTSLemmaEntry"
+      },
+      {
+        "name": "mnṱ",
+        "id": "d2441",
+        "type": "substantive",
+        "eclass": "BTSLemmaEntry"
+      },
+      {
+        "name": "mnw",
+        "id": "d2461",
+        "type": "substantive",
+        "eclass": "BTSLemmaEntry"
+      },
+      {
+        "name": "mnw.t",
+        "id": "d2462",
+        "type": "substantive",
+        "eclass": "BTSLemmaEntry"
+      },
+      {
+        "name": "mnt.t",
+        "id": "d2482",
+        "type": "undefined",
+        "eclass": "BTSLemmaEntry"
+      }
+    ]
+  },
+  "externalReferences": {
+    "aaew_wcn": [
+      "69780"
+    ],
+    "vega": [
+      "5662"
+    ]
+  },
+  "words": [
+    {
+      "transcription": "mn.t",
+      "glyphs": "Y5-N35-X1-G36"
+    }
+  ],
+  "edited": {
+    "name": "Altägyptisches Wörterbuch",
+    "type": "user",
+    "date": "01/07/19"
+  }
+}
