@@ -15,7 +15,7 @@ done
 
 if [ -e "resources/corpus/" ]; then
 	python webd/manage.py populate_indices
-	rm -r resources/corpus/
+	#rm -r resources/corpus/
 fi
 
 python webd/manage.py migrate

@@ -8,7 +8,7 @@ from django.core.files.base import ContentFile
 from django.core.management.base import BaseCommand, CommandError
 
 from elasticsearch import Elasticsearch
-from elasticsearch.helpers import streaming_bulk
+from elasticsearch.helpers import streaming_bulk, BulkIndexError
 
 
 es = Elasticsearch(
@@ -16,10 +16,25 @@ es = Elasticsearch(
 )
 
 
+def put_field_value(obj, field_path, field_value):
+    """ makes sure that within the object, the field specified by its path
+    has the specified value.
+    """
+    element = obj
+    segments = field_path.split('.')
+    for segment in segments[:-1]:
+        if segment not in element:
+            element[segment] = {}
+        element = element[segment]
+    element[segments[-1]] = field_value
+    
+
 class Indexer(object):
-    def __init__(self, index):
+    def __init__(self, index, path):
         self.index = index
         self.queue = []
+        self.path = path
+        self.fail = False
         print(
             'create indexer for index {} at ES instance {} '.format(
                 index,
@@ -39,18 +54,64 @@ class Indexer(object):
                 "_source": doc,
             }
         )
-        if len(self.queue) > 100:
+        if len(self.queue) > 100 and not self.fail:
             self.bulk()
 
+
     def bulk(self):
-        [
-            res for res in streaming_bulk(
-                es,
-                self.queue,
-                chunk_size=len(self.queue),
+        try:
+            [
+                res for res in streaming_bulk(
+                    es,
+                    self.queue,
+                    chunk_size=len(self.queue),
+                )
+            ]
+            self.clear_queue()
+            return True
+        except BulkIndexError as e:
+            print(
+                'error during population of {} index!'.format(
+                    self.index,
+                )
             )
-        ]
-        self.queue.clear()
+            self.fail = True
+            self.fix_index()
+            return False
+
+    def fix_index(self):
+        settings = es.indices.get_settings(
+            index=self.index
+        )
+        settings_path = '{}.settings.index.block.read_only_allow_delete'.format(
+            self.index
+        )
+        put_field_value(
+            settings,
+            settings_path,
+            'false'
+        )
+        try:
+            es.indices.put_settings(
+                settings,
+                index=self.index
+            )
+            self.fail = False
+        except:
+            pass
+
+
+    def clear_queue(self):
+        while len(self.queue) > 0:
+            doc = self.queue.pop()
+            i = doc.get('id')
+            fn = os.path.join(
+                self.path,
+                '{}.json'.format(
+                    i
+                )
+            )
+            os.remove(fn)
 
     def __del__(self):
         self.bulk()
@@ -59,8 +120,7 @@ class Indexer(object):
 def index_folder_contents(path):
     """ """
     index = path.split(os.path.sep)[-1]
-    print(index)
-    indexer = Indexer(index)
+    indexer = Indexer(index, path)
     for fn in os.listdir(
         os.path.join(
             settings.MEDIA_ROOT,
