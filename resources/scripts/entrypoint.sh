@@ -7,7 +7,7 @@ echo $ES_HOST
 echo $ES_PORT
 
 while true; do
-	resp=$(curl -s "http://es:9200")
+	resp=$(curl -s "$ES_URL")
 	[ "$?" -eq "0" ] && break
 	echo "no connection to ES instance"
 	sleep 4
