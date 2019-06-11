@@ -85,6 +85,12 @@ Navigieren Sie (das Laufwerk `C:\` ist in Cygwin unter `/cygdrive/c` erreichbar,
 und wo sich die Datei `Pipfile` befindet. Installieren Sie die Softwareabhaengigkeiten mit Pipenv:
 
 	pipenv install
+
+Wegen einer Inkompatibilitaet zwischen Pipenv und den letzten Versionen von Pip kann es sein, dasz Sie Pip auf die Version 18.0
+zurueckspulen muessen. Dazu fuehren Sie folgenden Befehl aus und versuchen danach die Installation der Abhaengigkeiten nochmal:
+
+	pipenv run pip install pip=-18.0
+	pipenv install
 	
 Danach konnen die Beispieldaten heruntergeladen und in die zuvor gestartete Elasticsearch-Instanz eingespielt werden.
 Zuvor musz jedoch die URL, unter der die lokale Elasticsearch-Instanz angesprochen werden kann, in der bereits oben
@@ -98,6 +104,13 @@ dann die Webanwendung starten:
 
 	pipenv run bash resources/scripts/dl-sample.sh 
 	pipenv run bash resources/scripts/entrypoint.sh
+
+Der zweite Befehl konfiguriert den lokalen Elasticsearch-Cluster, legt einzelne Indices fuer die verschiedenen Kategorien von Corpusdaten
+an, und laedt die zuvor heruntergeladenen Beispieldaten dort hinein. Das kann zu Problemen fuehren, wenn nicht ausreichend Festplattenplatz
+zur Verfuegung steht. Sie koennen das Ergebnis des Indexierungsvorgangs pruefen, indem Sie in `resources/corpus/sample/` nachsehen,
+ob dort noch `JSON`-Dateien uebrig sind, welche nicht indexiert werden konnten, und/oder index Sie im Browser die URL `ES_URL` mit dem Pfad
+`/_cat/indices?v` aufrufen (also z.B. `http://localhost:9200/_cat/indices?v`) und sichergehen, dasz alle Werte in der Spalte `docs.count`
+ueber Null liegen.
 
 Die Webanwendung sollte jetzt unter `http://localhost:8000` im Browser erreichbar sein. Sie kann in der Cygwin-Session mit `Ctrl+C` beendet werden.
 
@@ -208,3 +221,12 @@ Ein Beispiel fuer ein an das Template ausgeliefertes Einzellemma findet sich in 
 
 
 #### `webd/store/`
+
+Das `store`-package bietet selbst einen HTTP-Endpunkt an, der bei der Arbeit mit den Beispieldaten hilfreich sein koennte,
+und zwar unter dem URL-Pfad `/es/<index>/get/<id>`.
+Bei Ansteuern der URL `http://localhost:8000/es/wlist/get/83800` etwa erhaelt man als Ergbnis das Lemma-Objekt mit der ID `83800`
+direkt aus der Datenbank (die URL gilt unter der Annahme dasz Sie die Anwendung per Hand installiert haben; bei Installation in
+Docker hingegen waere die Port-Nummer natuerlich diejenige, die als `LISTEN_PORT` in `.env` definiert wurde).
+Wie die uebrigen Indices heiszen, die statt `wlist` eingesetzt werden koennen, erfahren Sie unter der bereits oben erwaehnten URL
+`http://localhost:9200/_cat/indices?v`.
+
