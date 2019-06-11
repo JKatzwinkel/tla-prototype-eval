@@ -11,7 +11,7 @@ setup(
             ],
         install_requires=[
             "elasticsearch>=6.0.0,<7.0.0",
-            "glom",
+            "glom>=19.2.0",
             "django",
             "django-extensions",
             ],

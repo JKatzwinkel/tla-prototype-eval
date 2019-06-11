@@ -73,11 +73,50 @@ Unter https://www.elastic.co/guide/en/elasticsearch/reference/6.5/windows.html f
 die Anleitung zur Installation von Elasticsearch unter Windows. Zur Sicherheit sollte die Version 
 6.5.4 verwendet werden: https://www.elastic.co/de/downloads/past-releases/elasticsearch-6-5-4
 
-Eine komfortable Moeglichkeit zur Einrichtung einer Python3-Umgebung ist cygwin https://cygwin.com/install.html
-Bei der Installation von cygwin kann man im Wizard-Dialog die Pakete python3 und python3-pip 
-auswaehlen.
+Eine komfortable Moeglichkeit zur Einrichtung einer Python3-Umgebung ist Cygwin https://cygwin.com/install.html
+Im cygwin-Setup-Dialog kann der Python-Paketmanager `pip` fuer die Python-Version 3.6 ueber das Paket `python36-pip` 
+installiert werden. Zudem sollten `wget` und `tar` installiert werden.
+Wenn Cygwin installiert ist, oeffnen Sie Cygwin und installieren Sie Pipenv mit folgendem Befehl:
 
+	pip install pipenv
 
+Navigieren Sie (das Laufwerk `C:\` ist in Cygwin unter `/cygdrive/c` erreichbar, das Benutzerverzeichnis befindet sich unter 
+`/cygdrive/c/Users`) nun in das Verzeichnis, in welchem Sie das TLA-Softwareprojekt abgelegt haben, zu welchem diese Datei gehoert,
+und wo sich die Datei `Pipfile` befindet. Installieren Sie die Softwareabhaengigkeiten mit Pipenv:
+
+	pipenv install
+
+Wegen einer Inkompatibilitaet zwischen Pipenv und den letzten Versionen von Pip kann es sein, dasz Sie Pip auf die Version 18.0
+zurueckspulen muessen. Dazu fuehren Sie folgenden Befehl aus und versuchen danach die Installation der Abhaengigkeiten nochmal:
+
+	pipenv run pip install pip=-18.0
+	pipenv install
+	
+Danach konnen die Beispieldaten heruntergeladen und in die zuvor gestartete Elasticsearch-Instanz eingespielt werden.
+Zuvor musz jedoch die URL, unter der die lokale Elasticsearch-Instanz angesprochen werden kann, in der bereits oben
+erwaehnten Umgebungsvariablen-Datei `.env` angegeben werden, und zwar unter der Variable `ES_URL`. Die Variablen
+`ES_PORT` und `LISTEN_PORT` hingegen sind fuer die Installation per Docker und spielen bei dieser Installationsmethode
+keine Rolle.
+
+Nachdem der Wert der Umgebungsvariable `ES_URL` gesetzt wurde (z.B. auf `http://127.0.0.1:9200`), koennen die beiden
+Skripte durchgefuehrt werden, die sich um das Herunterladen und Einspeisen der Beispielcorpusdaten kuemmern und
+dann die Webanwendung starten:
+
+	pipenv run bash resources/scripts/dl-sample.sh 
+	pipenv run bash resources/scripts/entrypoint.sh
+
+Der zweite Befehl konfiguriert den lokalen Elasticsearch-Cluster, legt einzelne Indices fuer die verschiedenen Kategorien von Corpusdaten
+an, und laedt die zuvor heruntergeladenen Beispieldaten dort hinein. Das kann zu Problemen fuehren, wenn nicht ausreichend Festplattenplatz
+zur Verfuegung steht. Sie koennen das Ergebnis des Indexierungsvorgangs pruefen, indem Sie in `resources/corpus/sample/` nachsehen,
+ob dort noch `JSON`-Dateien uebrig sind, welche nicht indexiert werden konnten, und/oder index Sie im Browser die URL `ES_URL` mit dem Pfad
+`/_cat/indices?v` aufrufen (also z.B. `http://localhost:9200/_cat/indices?v`) und sichergehen, dasz alle Werte in der Spalte `docs.count`
+ueber Null liegen.
+
+Die Webanwendung sollte jetzt unter `http://localhost:8000` im Browser erreichbar sein. Sie kann in der Cygwin-Session mit `Ctrl+C` beendet werden.
+
+Beim naechsten Mal, wenn Sie die Anwendung starten moechten, brauchen Sie nur das zweite Skript auszufuehren:
+
+	pipenv run bash resources/scripts/entrypoint.sh
 
 ### Inhaltsuebersicht
 
@@ -182,3 +221,12 @@ Ein Beispiel fuer ein an das Template ausgeliefertes Einzellemma findet sich in 
 
 
 #### `webd/store/`
+
+Das `store`-package bietet selbst einen HTTP-Endpunkt an, der bei der Arbeit mit den Beispieldaten hilfreich sein koennte,
+und zwar unter dem URL-Pfad `/es/<index>/get/<id>`.
+Bei Ansteuern der URL `http://localhost:8000/es/wlist/get/83800` etwa erhaelt man als Ergbnis das Lemma-Objekt mit der ID `83800`
+direkt aus der Datenbank (die URL gilt unter der Annahme dasz Sie die Anwendung per Hand installiert haben; bei Installation in
+Docker hingegen waere die Port-Nummer natuerlich diejenige, die als `LISTEN_PORT` in `.env` definiert wurde).
+Wie die uebrigen Indices heiszen, die statt `wlist` eingesetzt werden koennen, erfahren Sie unter der bereits oben erwaehnten URL
+`http://localhost:9200/_cat/indices?v`.
+
