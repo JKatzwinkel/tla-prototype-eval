@@ -16,20 +16,6 @@ es = Elasticsearch(
 )
 
 
-def put_field_value(obj, field_path, field_value):
-    """ makes sure that within the object, the field specified by its path
-    has the specified value.
-    :note: We actually don't need this because ES settings APi does the same thing
-    """
-    element = obj
-    segments = field_path.split('.')
-    for segment in segments[:-1]:
-        if segment not in element:
-            element[segment] = {}
-        element = element[segment]
-    element[segments[-1]] = field_value
-
-
 def configure_cluster():
     # make cluster less restrictive about disk space so
     # that it doesnt put indices in read-only mode when there's like
@@ -56,8 +42,8 @@ def configure_cluster():
     # just to be safe
     es.indices.put_settings(
         {
-            'index.block.read_only_allow_delete': 'false',
-        }
+            'index.blocks.read_only_allow_delete': 'false',
+        },
         index='_all',
     )
 
@@ -90,7 +76,6 @@ class Indexer(object):
         if len(self.queue) > 100 and not self.fail:
             self.bulk()
 
-
     def bulk(self):
         try:
             [
@@ -113,24 +98,16 @@ class Indexer(object):
             return False
 
     def fix_index(self):
-        settings = es.indices.get_settings(
-            index=self.index
-        )
-        settings_path = 'index.block.read_only_allow_delete'
-        put_field_value(
-            settings,
-            settings_path,
-            'false'
-        )
         try:
             es.indices.put_settings(
-                settings,
+                {
+                    'index.blocks.read_only_allow_delete': 'false'
+                },
                 index=self.index
             )
             self.fail = False
         except:
             pass
-
 
     def clear_queue(self):
         while len(self.queue) > 0:
