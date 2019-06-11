@@ -1,0 +1,173 @@
+<h2 id="tla-webdesign-demo">TLA Webdesign Demo</h2>
+<p>Die TLA Webdesign-Demo besteht aus einer Django-Webapplikation zur Simulation unterschiedlicher geplanter Suchfunktionen des im Aufbau befindlichen Thesaurus Linguae Aegyptiae inklusive Darstellung aktueller Corpusdaten im neuen Webdesign.</p>
+<h3 id="installationsanleitung">Installationsanleitung</h3>
+<p>Die Webapplikation arbeitet mit einer Elasticsearch-Suchmaschine, die mit einem Auszug aus den Projektcorpusdaten befuellt wird. Es gibt zwei Moeglichkeiten zur Installation:</p>
+<h4 id="mit-docker-bzw.-docker-compose">1. Mit Docker bzw. docker-compose</h4>
+<p>Die bevorzugte Methode zur Installation der Anwendung ist die Verwendung von <code>docker-compose</code>. Dazu musz folgende Software vorhanden sein:</p>
+<ul>
+<li><a href="https://docs.docker.com/install/#desktop">Docker</a></li>
+<li><a href="https://docs.docker.com/compose/install/">docker-compose</a></li>
+</ul>
+<p><code>Docker-compose</code> verwendet Docker, um zwei Container zu starten; der erste enthaelt eine Instanz der Suchmaschine Elasticsearch mit den notwendigen Daten, der zweite enthaelt die Webapplikation.</p>
+<p>Dieses Projektverzeichnis enthaelt die Datei <code>.env</code>, in der mittels Umgebungsvariablen angegeben werden kann, wo diese beiden Dienste erreichbar sind und wo die Beispieldaten heruntergeladen werden:</p>
+<pre><code>    SAMPLE_URL=http://aaew64.bbaw.de/resources/sample/sample-xy.tar.gz
+    ES_PORT=9202
+    LISTEN_PORT=9005</code></pre>
+<p>Die hier gesetzten Werte der Umgebungsvariablen <code>ES_PORT</code> und <code>LISTEN_PORT</code> bedeuten, dasz bei laufenden Containern die Elasticsearch-Instanz unter <a href="http://localhost:9202"><code>http://localhost:9202</code></a> und die Webanwendung unter <a href="http://localhost:9005"><code>http://localhost:9005</code></a> erreichbar sind.</p>
+<p>Waehrend der Installation wird eine Verbindung zum Internet benoetigt.</p>
+<p>Um die Webdesign-Demo zu starten, navigieren Sie bitte in der Kommandozeilenumgebung Ihres Systems in das Projektverzeichnis (wo <code>docker-compose.yml</code> liegt) und fuehren dort aus:</p>
+<pre class="shell"><code>    docker-compose up</code></pre>
+<p>Docker wird nun beginnen, die fuer den Betrieb der beiden Container benoetigten Images herunterzuladen und das Image fuer den Container mit der Webanwendung zu erstellen. Dieser Schritt beinhaltet das Herunterladen von Beispieldaten von einem Server der BBAW.</p>
+<p>Sie koennen diese Vorgaenge in der Ausgabe Ihrer Kommandozeile verfolgen.</p>
+<p>Beim ersten Starten des Containers mit der Webdesign-Demo werden die Beispieldaten in der Suchmaschine im Elasticsearch-Container abgespeichert. Das kann eine Weile in Anspruch nehmen, musz aber beim naechsten Starten des Containers nicht wiederholt werden.</p>
+<p>Als letztes startet im Container der Webanwendung (<code>tla_1</code>) ein Django-Server. Die Webdesign-Demo ist nun unter der dem in <code>.env</code> definierten Port <code>LISTEN_PORT</code> erreichbar, z.B. <a href="http://localhost:9005">http://localhost:9005/</a>.</p>
+<p>Obwohl die Anwendung innerhalb des Containers ausgefuehrt wird, werden Aenderungen an Programmcode, HTML-Templates und Assets sofort sichtbar, da das Quellverzeichnis <code>webd</code> direkt vom Dateisystem des Hosts in das des Containers gemounted wird.</p>
+<h4 id="manuelle-einrichtung-von-es-und-installation-mit-pipenv">2. Manuelle Einrichtung von ES und Installation mit pipenv</h4>
+<p>Wenn die containerisierte Installation mittels Docker keine Option ist, koennen die Komponenten auch einzeln per Hand installiert werden. Dazu wird benoetigt:</p>
+<ul>
+<li>Elasticsearch 6.5.4</li>
+<li>Python</li>
+<li>pipenv</li>
+</ul>
+<p>Unter <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.5/windows.html"><code>www.elastic.co</code></a> findet sich die Anleitung zur Installation von Elasticsearch unter Windows. Zur Sicherheit sollte die Version 6.5.4 verwendet werden: <a href="https://www.elastic.co/de/downloads/past-releases/elasticsearch-6-5-4" class="uri">https://www.elastic.co/de/downloads/past-releases/elasticsearch-6-5-4</a></p>
+<p>Eine komfortable Moeglichkeit zur Einrichtung einer Python3-Umgebung ist <a href="https://cygwin.com/install.html">Cygwin</a>. Im cygwin-Setup-Dialog kann der Python-Paketmanager <code>pip</code> fuer die Python-Version 3.6 ueber das Paket <code>python36-pip</code> installiert werden. Zudem sollten <code>wget</code> und <code>tar</code> installiert werden. Wenn Cygwin installiert ist, oeffnen Sie Cygwin und installieren Sie Pipenv mit folgendem Befehl:</p>
+<pre class="shell"><code>    pip install pipenv</code></pre>
+<p>Navigieren Sie (das Laufwerk <code>C:\</code> ist in Cygwin unter <code>/cygdrive/c</code> erreichbar, das Benutzerverzeichnis befindet sich unter <code>/cygdrive/c/Users</code>) nun in das Verzeichnis, in welchem Sie das TLA-Softwareprojekt abgelegt haben, zu welchem <em>diese Datei</em> gehoert, und wo sich die Datei <code>Pipfile</code> befindet. Installieren Sie die Softwareabhaengigkeiten mit Pipenv:</p>
+<pre class="shell"><code>    pipenv install</code></pre>
+<p>Wegen einer Inkompatibilitaet zwischen Pipenv und den letzten Versionen von Pip kann es sein, dasz Sie Pip auf die Version 18.0 zurueckspulen muessen. Dazu fuehren Sie folgenden Befehl aus und versuchen danach die Installation der Abhaengigkeiten nochmal:</p>
+<pre class="shell"><code>    pipenv run pip install pip==18.0
+    pipenv install</code></pre>
+<p>Danach konnen die Beispieldaten heruntergeladen und in die zuvor gestartete Elasticsearch-Instanz eingespielt werden. Zuvor musz jedoch die URL, unter der die lokale Elasticsearch-Instanz angesprochen werden kann, in der bereits oben erwaehnten Umgebungsvariablen-Datei <code>.env</code> angegeben werden, und zwar unter der Variable <code>ES_URL</code>. Die Variablen <code>ES_PORT</code> und <code>LISTEN_PORT</code> hingegen sind fuer die Installation per Docker und spielen bei dieser Installationsmethode keine Rolle.</p>
+<p>Nachdem der Wert der Umgebungsvariable <code>ES_URL</code> gesetzt wurde (z.B. auf <code>http://127.0.0.1:9200</code>), koennen die beiden Skripte durchgefuehrt werden, die sich um das Herunterladen und Einspeisen der Beispielcorpusdaten kuemmern und dann die Webanwendung starten:</p>
+<pre class="shell"><code>    pipenv run bash resources/scripts/dl-sample.sh 
+    pipenv run bash resources/scripts/entrypoint.sh</code></pre>
+<p>Der zweite Befehl konfiguriert den lokalen Elasticsearch-Cluster, legt einzelne Indices fuer die verschiedenen Kategorien von Corpusdaten an, und laedt die zuvor heruntergeladenen Beispieldaten dort hinein. Das kann zu Problemen fuehren, wenn nicht ausreichend Festplattenplatz zur Verfuegung steht. Sie koennen das Ergebnis des Indexierungsvorgangs pruefen, indem Sie in <code>resources/corpus/sample/</code> nachsehen, ob dort noch <code>JSON</code>-Dateien uebrig sind, welche nicht indexiert werden konnten, und/oder index Sie im Browser die URL <code>ES_URL</code> mit dem Pfad <code>/_cat/indices?v</code> aufrufen (also z.B. <a href="http://localhost:9200/_cat/indices?v"><code>http://localhost:9200/_cat/indices?v</code></a>) und sichergehen, dasz alle Werte in der Spalte <code>docs.count</code> ueber Null liegen.</p>
+<p>Die Webanwendung sollte jetzt unter <code>http://localhost:8000</code> im Browser erreichbar sein. Sie kann in der Cygwin-Session mit <code>Ctrl+C</code> beendet werden.</p>
+<p>Beim naechsten Mal, wenn Sie die Anwendung starten moechten, brauchen Sie nur das zweite Skript auszufuehren:</p>
+<pre class="shell"><code>    pipenv run bash resources/scripts/entrypoint.sh</code></pre>
+<h3 id="inhaltsuebersicht">Inhaltsuebersicht</h3>
+<p>Saemtlicher Programmcode, die HTML-Templates und assets wie Fonts, Grafiken, Styles und Javascript-Bibliotheken befinden sich im Unterverzeichnis <code>webd/</code>. Die wichtigsten Verzeichnisse darin sind die folgenden:</p>
+<ul>
+<li><code>templates/</code>: Hier befinden sich die HTML-Templates. Diese stehen ueber den Django-Tag <code>{% extends %}</code> untereinander in Vererbungsbeziehung</li>
+<li><code>static/</code>: Das asset-Verzeichnis der Anwendung. Es enthaelt Fonts, Grafiken, Styles und JS-Bibliotheken</li>
+<li><code>search/</code>: Enthaelt URL-Mappings und Handler fuer die Suchseiten</li>
+<li><code>detail/</code>: Enthaelt URL-Mappings und Handler fuer die Detailseiten</li>
+<li><code>store/</code>: Darin sind die Suchanfragen an Elasticsearch implementiert</li>
+</ul>
+<p>Im folgenden wird auf die einzelnen Bereiche genauer eingegangen:</p>
+<h4 id="webdtemplates"><code>webd/templates/</code></h4>
+<p>Dieses Verzeichnis enthaelt die Template-Dateien, die durch Verarbeitung von Django-Template-Tags mit dynamischen Inhalten gefuellt werden. Das Basis-Template liegt in der Datei <code>webd/templates/base.html</code>. Die Templates fuer die konkreten einzelnen Webseiten erben von diesem Basis-Template und muessen deshalb bestimmte wiederkehrende Inhalte nicht selber definieren. So kuemmert sich das Basis-Template z.B. um die Einbindung von Ressourcen wie JQuery, Bootstrap, fontawesome, den Akademiefont, ResJS und so weiter im HTML-Header. Die erbenden Templates koennen allerdings auch bestimmte Bereiche des Basis-Templates ueberschreiben. Die Bereiche, die dafuer zugelassen sind, werden im Basis-Template mit dem Template-Tag <code>{% block xy %}...{%endblock%}</code> ausgewiesen.</p>
+<p>Die Unterverzeichnisse <code>webd/templates/details/</code> und <code>webd/templates/search/</code> enthalten Templates fuer Detailansicht- bzw. Such- und Suchergebnisseiten.</p>
+<p>Vom Basis-Template direkt erben die Templates <code>webd/templates/details/lemma.html</code> und <code>webd/templates/search/index.html</code>. Auch das Template <code>webd/templates/search_results.html</code> erbt direkt vom Basis-Template, ist aber genau wie dieses kein Template fuer eine eigenstaendige Seite, sondern dient ebenfalls der Vererbung, und zwar fuer die Suchergebnisseiten-Templates <code>webd/templates/search/dict.html</code> und <code>/webd/templates/search/occurrences.html</code>.</p>
+<p>Die HTML-Templates, welche im Handler referenziert werden, werden durch die Django-Templating-Engine mit vom Handler mitgegebenen Inhalten gefuellt. Die Syntax der Templating Language, mit welcher diese Inhalte im Template evaluiert werden, ist beschrieben in der <a href="https://docs.djangoproject.com/en/2.2/topics/templates/#syntax">Django-Dokumentation</a>.</p>
+<h4 id="webdstatic"><code>webd/static/</code></h4>
+<p>Im assets-Verzeichnis <code>webd/static/</code> befinden sich allerlei Ressourcen, welche extern in die Webseiten eingebunden werden, also Bilder, Javascript, CSS und so weiter. Dazu ist die Verwendung des Django-Tags <code>{%static &quot;../pfad/datei.ext&quot;%}</code> noetig, wie zum Beispiel bei der Einbindung des Webseiten-spezifischen Stylesheets im <code>&lt;head&gt;</code>-Element des Basis-Templates <code>base.html</code>:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb8-1" data-line-number="1">    <span class="kw">&lt;link</span><span class="ot"> href=</span><span class="st">&quot;{% static &quot;</span><span class="er">css/tla-styles.css&quot;</span> <span class="er">%}&quot;</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="ot"> type=</span><span class="st">&quot;text/css&quot;</span><span class="kw">&gt;</span></a></code></pre></div>
+<h4 id="webdsearch"><code>webd/search/</code></h4>
+<p>Im <code>search</code>-package befinden sich die handler fuer Woerterbuch- und Belegstellensuche. Beide sind im Modul <code>webd/search/views.py</code>, und zwar in Form der beiden Funktionen <code>search_dict</code> bzw. <code>search_text_words</code>. Welche Funktionen fuer die Behandlung von Anfragen an welchen URL-Pfad verantwortlich sind, kann man in den verschiedenen <code>urls.py</code> Modulen des Projekts nachvollziehen. Zum Beispiel sieht man in <code>webd/search/urls.py</code>, dasz URLS, deren letztes Pfadsegment <code>dict</code> lautet, von der Funktion <code>search_dict</code> behandelt werden. Dasz dabei das erste Pfadsegment <code>search</code> sein musz, sieht man an der Einbindung des <code>webd/search/urls.py</code> Moduls in <code>/webd/webd/urls.py</code> mithilfe von <code>include('search.urls</code>)`.</p>
+<p>Die Request-Handler-Funktionen <code>search_dict</code> und <code>search_text_words</code> geben bei ihrer Rueckgabe jeweils das HTML-Template an, welches sie mit entsprechenden Inhalten befuellen wollen. Das gleiche macht der Handler <code>search</code>, der aber nur die Suchseite mit den Suchformularen ausliefert. Daraus ergibt sich folgende Zuordnung von URLs zu HTML-Template-Dateien:</p>
+<table>
+<thead>
+<tr class="header">
+<th>URL-Pfad</th>
+<th>Template-Datei</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>/search</code></td>
+<td><code>webd/templates/search/index.html</code></td>
+</tr>
+<tr class="even">
+<td><code>/search/dict</code></td>
+<td><code>webd/templates/search/dict.html</code></td>
+</tr>
+<tr class="odd">
+<td><code>/search/occurrences</code></td>
+<td><code>webd/templates/search/occurrences.html</code></td>
+</tr>
+</tbody>
+</table>
+<p>Die HTML-Templates, welche im Handler referenziert werden, werden durch die Django-Templating-Engine mit vom Handler mitgegebenen Inhalten gefuellt. Die Syntax der Templating Language, mit welcher diese Inhalte im Template evaluiert werden, ist beschrieben in der <a href="https://docs.djangoproject.com/en/2.2/topics/templates/#syntax">Django-Dokumentation</a>.</p>
+<h5 id="woerterbuchsuche">Woerterbuchsuche</h5>
+<p>Das Template <code>search/dict.html</code> bekommt folgende Daten geliefert:</p>
+<table>
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 91%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Inhalt</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>hitcount</code></td>
+<td>Anzahl der Suchergebnisse</td>
+</tr>
+<tr class="even">
+<td><code>page</code></td>
+<td>Die Nummer der aktuell aufgeblaetterten Seite mit Suchergebnissen auf Basis der Paginierung</td>
+</tr>
+<tr class="odd">
+<td><code>start</code></td>
+<td>Position des ersten auf der aktuellen Seite angezeigten Suchergebnisses innerhalb der Suchergebnisliste</td>
+</tr>
+<tr class="even">
+<td><code>end</code></td>
+<td>Position des letzten auf der aktuellen Seite angezeigte Suchergebnisses innerhalb der Suchergebnisliste</td>
+</tr>
+<tr class="odd">
+<td><code>pagination</code></td>
+<td>Eine Liste von Listen mit jeweils zwei Elementen, von denen das erste eine Seitenzahl und das zweite den Link zu dieser Suchergebnisseite darstellt</td>
+</tr>
+<tr class="even">
+<td><code>hits</code></td>
+<td>Die tatsaechlichen Suchergebnisse im Woerterbuch die auf der aktuell aufgeblaetterten Seite (as in Paginierung) angezeigt werden sollen</td>
+</tr>
+</tbody>
+</table>
+<p>Die einzelnen Eintraege in der <code>hits</code>-Liste der Woerterbuchsuche bestehen jeweils aus drei Werten: dem Grad der Einrueckung (<code>0</code>-<code>2</code>), die optionale Beziehung, welche fuer die Einrueckung verantwortlich ist (z.b. <code>rootOf</code>), und als drittes schlieszlich das tatsaechliche Lemma. Zur Veranschaulichung dieser Struktur befindet sich ein solches Suchergebnis in der Datei <code>resources/examples/lemma_hit.json</code>.</p>
+<h5 id="belegstellensuche">Belegstellensuche</h5>
+<p>Die Daten, welche in das Template <code>search/occurrences.html</code> eingetragen werden, aehneln denen in der Woerterbuchsuche. Sie unterscheiden sich aber natuerlich in der Struktur der einzelnen Suchergebnisse. Jedes einzelne Suchergebnis besteht aus einem <code>occurrence</code>, einem <code>sentence</code> und einem <code>text</code> Objekt. Wie das ungefaehr aussieht, veranschaulicht das Beispielsuchergebnis in der Datei <code>resources/examples/occurrence_hit.json</code>.</p>
+<h4 id="webddetail"><code>webd/detail/</code></h4>
+<p>Im Paket <code>detail</code> befindet sich der Handler fuer die Lemmadetailseite, und zwar in der Funktion <code>lemma_details_page</code> im Modul <code>views.py</code>. Die Daten, die der Handler an das HTML-Template in <code>webd/templates/details/lemma.html</code> liefert, wo sie ueber die Django-Template-Language eingebunden werden koennen, beinhalten die folgenden Felder:</p>
+<table>
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 91%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Inhalt</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>lemma</code></td>
+<td>Der Woerterbucheintrag, der angezeigt werden soll</td>
+</tr>
+<tr class="even">
+<td><code>bibl</code></td>
+<td>Eine Liste von bibliographischen Angaben</td>
+</tr>
+<tr class="odd">
+<td><code>coins</code></td>
+<td>COinS-Metadaten im KEV-Format (https://helpful.knobs-dials.com/index.php/OpenURL_notes#Serialization)</td>
+</tr>
+<tr class="even">
+<td><code>occurrences</code></td>
+<td>Eine Datenstruktur, welche die Anzahl der Vorkommen dieses Lemmas in verschiedenen Bereichen enthaelt, z.B. im Bereich <code>corpus</code></td>
+</tr>
+<tr class="odd">
+<td><code>annotations</code></td>
+<td>Eine Liste der zu diesem Lemmaeintrag gehoerenden Annotationen in vorformatiertem HTML. Jede Annotation besteht aus <code>title</code>, <code>body</code>, <code>edited.name</code> und <code>edited.date</code></td>
+</tr>
+</tbody>
+</table>
+<p>Ein Beispiel fuer ein an das Template ausgeliefertes Einzellemma findet sich in <code>resources/examples/lemma_details.json</code>.</p>
+<h4 id="webdstore"><code>webd/store/</code></h4>
+<p>Das <code>store</code>-package bietet selbst einen HTTP-Endpunkt an, der bei der Arbeit mit den Beispieldaten hilfreich sein koennte, und zwar unter dem URL-Pfad <code>/es/&lt;index&gt;/get/&lt;id&gt;</code>. Bei Ansteuern der URL <a href="http://localhost:8000/es/wlist/83800"><code>http://localhost:8000/es/wlist/get/83800</code></a> etwa erhaelt man als Ergbnis das Lemma-Objekt mit der ID <code>83800</code> direkt aus der Datenbank (die URL gilt unter der Annahme dasz Sie die Anwendung per Hand installiert haben; bei Installation in Docker hingegen waere die Port-Nummer natuerlich diejenige, die als <code>LISTEN_PORT</code> in <code>.env</code> definiert wurde). Wie die uebrigen Indices heiszen, die statt <code>wlist</code> eingesetzt werden koennen, erfahren Sie unter der bereits oben erwaehnten URL <a href="http://localhost:920/_cat/indices"><code>http://localhost:9200/_cat/indices?v</code></a>.</p>
