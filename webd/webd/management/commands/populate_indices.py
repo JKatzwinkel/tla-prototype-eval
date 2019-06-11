@@ -19,6 +19,7 @@ es = Elasticsearch(
 def put_field_value(obj, field_path, field_value):
     """ makes sure that within the object, the field specified by its path
     has the specified value.
+    :note: We actually don't need this because ES settings APi does the same thing
     """
     element = obj
     segments = field_path.split('.')
@@ -27,6 +28,38 @@ def put_field_value(obj, field_path, field_value):
             element[segment] = {}
         element = element[segment]
     element[segments[-1]] = field_value
+
+
+def configure_cluster():
+    # make cluster less restrictive about disk space so
+    # that it doesnt put indices in read-only mode when there's like
+    # 6 GB of disk space available
+    es.cluster.put_settings(
+        {
+            'transient': {
+                'cluster': {
+                    'routing': {
+                        'allocation': {
+                            'disk': {
+                                'watermark': {
+                                    'low': env.get('ES_DISK_WATERMARK_LOW', '4G'),
+                                    'high': env.get('ES_DISK_WATERMARK_HIGH', '3G'),
+                                    'flood_stage': env.get('ES_DISK_WATERMARK_FLOOD', '2G'),
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    )
+    # just to be safe
+    es.indices.put_settings(
+        {
+            'index.block.read_only_allow_delete': 'false',
+        }
+        index='_all',
+    )
 
 
 class Indexer(object):
@@ -83,9 +116,7 @@ class Indexer(object):
         settings = es.indices.get_settings(
             index=self.index
         )
-        settings_path = '{}.settings.index.block.read_only_allow_delete'.format(
-            self.index
-        )
+        settings_path = 'index.block.read_only_allow_delete'
         put_field_value(
             settings,
             settings_path,
@@ -149,6 +180,7 @@ class Command(BaseCommand):
     help = 'Populates the Elasticsearch instance at $ES_URL'
 
     def handle(self, *args, **options):
+        configure_cluster()
         for doc_type in [
             'wlist',
             'text',
