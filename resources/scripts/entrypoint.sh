@@ -1,11 +1,5 @@
 #!/bin/bash
 
-echo $LISTEN_HOST
-echo $LISTEN_PORT
-echo $ES_URL
-echo $ES_HOST
-echo $ES_PORT
-
 while true; do
 	resp=$(curl -s "$ES_URL")
 	[ "$?" -eq "0" ] && break
