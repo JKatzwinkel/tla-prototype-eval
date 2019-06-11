@@ -27,7 +27,7 @@ def put_field_value(obj, field_path, field_value):
             element[segment] = {}
         element = element[segment]
     element[segments[-1]] = field_value
-    
+
 
 class Indexer(object):
     def __init__(self, index, path):
@@ -103,15 +103,16 @@ class Indexer(object):
 
     def clear_queue(self):
         while len(self.queue) > 0:
-            doc = self.queue.pop()
-            i = doc.get('id')
+            action = self.queue.pop()
+            i = action.get('_id')
             fn = os.path.join(
                 self.path,
                 '{}.json'.format(
                     i
                 )
             )
-            os.remove(fn)
+            if os.path.exists(fn):
+                os.remove(fn)
 
     def __del__(self):
         self.bulk()
@@ -120,7 +121,13 @@ class Indexer(object):
 def index_folder_contents(path):
     """ """
     index = path.split(os.path.sep)[-1]
-    indexer = Indexer(index, path)
+    indexer = Indexer(
+        index,
+        os.path.join(
+            settings.MEDIA_ROOT,
+            path
+        )
+    )
     for fn in os.listdir(
         os.path.join(
             settings.MEDIA_ROOT,
