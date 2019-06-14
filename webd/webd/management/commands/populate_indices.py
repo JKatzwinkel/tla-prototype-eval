@@ -157,7 +157,10 @@ class Command(BaseCommand):
     help = 'Populates the Elasticsearch instance at $ES_URL'
 
     def handle(self, *args, **options):
-        configure_cluster()
+        try:
+            configure_cluster()
+        except:
+            pass
         for doc_type in [
             'wlist',
             'text',
