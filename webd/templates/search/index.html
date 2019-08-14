@@ -50,6 +50,16 @@ $(window).on('pageshow', function(){
 });
 </script>
 
+<script type="text/javascript">
+ 
+    $(document).ready(function() {
+ 
+        $('#multi-select-demo').multiselect();
+ 
+    });
+ 
+</script>
+
 {% endblock %}
 
 {% block title %}TLA - Prototyp - Search{% endblock %}
@@ -144,7 +154,7 @@ $(window).on('pageshow', function(){
 					</div>
 				  </div>
 				  
-				 <!-- Translation -->			  
+				 <!-- Translation 			  
 				  <div class="form-group row bg-grey">
 					<label for="Translation" class="col-sm-2 col-form-label">Translation</label>
 					<div class="col-sm-10">
@@ -161,6 +171,24 @@ $(window).on('pageshow', function(){
 						  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="lang" value="fr">
 						  <label class="form-check-label" for="inlineCheckbox2">French</label>
 						</div>
+					</div>
+				  </div> -->
+             
+              <!-- Translation -->			  
+				  <div class="form-group row bg-grey">
+					<label for="Translation" class="col-sm-2 col-form-label">Translation</label>
+					<div class="col-sm-10">
+                        <input type="text" class="form-control mb-3 mdb-select colorful-select dropdown-primary md-form" id="dict-search-translation" name="translation" multiple searchable="Search here.."></input>
+                        <select class="form-control" id="dict-search-translation" name="translation"> 						
+						    <option value="substantive">German</option>						
+						    <option value="particle">English</option>						
+						    <option value="root">French</option>                            
+                            <option value="root">Italian</option>
+                            <option value="root">Arabic</option>
+						</select>       
+                       
+
+                     
 					</div>
 				  </div>
 				  
@@ -216,7 +244,7 @@ $(window).on('pageshow', function(){
 					</div>					
 				  </div>
 				  
-				  <!-- ID -->			  
+				  <!-- ID			  
 				  <div class="form-group row bg-secondary text-white mb-4">
 					<label for="ID" class="col-sm-2 col-form-label">ID</label>
 					<div class="col-sm-10">
@@ -226,7 +254,7 @@ $(window).on('pageshow', function(){
 						</select>					  
 					</div>					
 				  </div>  
-				  
+				  -->
 				</form>			  
 			</div>
 		  </div> <!--  -->

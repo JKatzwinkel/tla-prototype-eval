@@ -8,9 +8,9 @@
 		<div class="container">
 			<div class="row">
 				{% if pagination|length > 1 %}
-				<div class="col-sm-8">
+				<div class="col-sm-12">
 					 <nav aria-label="Page navigation example">
-						<ul class="pagination justify-content-center">
+						<ul class="pagination ">
 							{% for pageno, link in pagination %}
 								<li class="page-item {%ifequal pageno page%}disabled{%endifequal%}">
 									<a class="page-link" {% ifnotequal pageno '...'%}href="{{link}}"{%endifnotequal%}>
@@ -20,16 +20,10 @@
 						{% endfor %}
 						</ul>
 					</nav> 
-				</div>
-				
-				<div class="col-sm-4">
-					<div class="input-group-append">
-					<label class="input-group-text" for="gotopage">Goto page</label>
-					<input type="gotopage" class="form-control" id="gotopage" name="page" aria-describedby="GlobalSearch" placeholder="">
-					</div>
-				</div>
+				</div>				
 				{% endif %}
 			</div>
 		</div>
 	</footer>	 
 {% endblock %}
+
