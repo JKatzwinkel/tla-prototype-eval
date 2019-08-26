@@ -95,11 +95,10 @@ a.navbar-brand {
 .result-list-item h2 {
 	padding: 1px 10px;
 	display: inline-block;
-	margin-left: -0.4em;
+	margin-left: -0.25em;
 	}
-.result-list-item h2:hover{
-    background-color: red;
-	color: white;
+.result-list-item:hover{
+   
 	cursor: pointer;
 	}
 .result-list-item:hover h2 .hieroglyph .res{
@@ -142,13 +141,15 @@ a.navbar-brand {
 	font-size: 1.5em;
 	}
 
-.result-list-item {
-	padding: 0px 10px 0px;
-	border-top: 2px solid #DDD;
-	margin-top:-4px;
+.result-list-item:first-child {
+		border-top: 2px solid #DDD;
+	 }
+
+.result-bg {
+    padding: 0px 6px 1px;	
     }
 
-.result-list-item:hover, .bg-grey{
+.result-bg:hover, .bg-grey{
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0.1+0,0+100 */
 	background: -moz-linear-gradient(left, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
 	background: -webkit-linear-gradient(left, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
@@ -162,21 +163,17 @@ a.navbar-brand {
 .result-list-item span.translation{
 	font-weight: 500;
 	}
-.result-list-item.push-1{
-	margin-left: 5%;
+
+.result-list .indent-1{
+	padding-left: 4em;
 	}
-.result-list-item.push-2{
-	margin-left: 10%;
+.result-list .indent-2{
+	padding-left: 8em;
 	}
-.functional-icons {}	
-.red-status {
-	/*position: relative;
-	top: 0;
-	left: 98%;
-	height: 0;
-	width: 6rem;
-	padding: 0px;*/
+.result-list .indent-3{
+	padding-left: 12em;
 	}
+
 .red-status .svg-inline--fa.ok, .red-status.ok {
 	color: green!important;
 	}
@@ -214,6 +211,7 @@ a.share-results:hover {color: red;}
 	border-bottom: 1px solid red;
 }
 
+.result-list hr {margin:0!important;}
 
 /* Pagination */
 .pag-container {
@@ -463,11 +461,13 @@ span.multiselect-native-select select {
 
 .lemma-rel {
     position: absolute;    
-    margin: 2.2em  0 0 -3em;
+    margin: .62em 0 0 -3.8em;
     font-style: italic;
+    font-size: .9em;
+    color: grey;
     }
 
 .rootOf:before {content: "Root";}
 .successor:before {content: "Succ.";}     
-.referencedBy:before {content: "Ref. by";}
-.composedOf:before {content: "Comp. of";}
+.referencedBy:before {content: "Ref.";}
+.composedOf:before {content: "Comp.";}

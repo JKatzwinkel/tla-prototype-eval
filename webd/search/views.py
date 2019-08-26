@@ -257,7 +257,7 @@ def search_textword_occurrences(offset=1, size=RESULTS_PER_PAGE, **params):
             )
         ]
         with open('text_query.json', 'w+') as f:
-            json.dump(texts_query, f, indent=2)
+            json.dump(texts_query, f, indent=1)
         if len(texts) < 1:
             print('no matching texts. bye!')
             return {}
@@ -272,7 +272,7 @@ def search_textword_occurrences(offset=1, size=RESULTS_PER_PAGE, **params):
             }
         )
     with open('occurrence_query.json', 'w+') as f:
-        json.dump(occurrences_query, f, ensure_ascii=False, indent=2)
+        json.dump(occurrences_query, f, ensure_ascii=False, indent=1)
     hits = store.search(
         'occurrence',
         occurrences_query,

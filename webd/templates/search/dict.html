@@ -43,23 +43,25 @@
 	<!-- Trefferanzahl-->
 	<div class="row searchresult">		
 			<div class="col-8 pt-3">
-                <p class="result-entries">Results: <b>{{start}} - {{end}}</b> of <b>{{hitcount}}</b> Dictionary Entries <a href="#" title="share results"><span class="float-right fa fa-share-alt share-results"/></a>
-                </p>
+                <p class="result-entries">Results: <b>{{start}} - {{end}}</b> of <b>{{hitcount}}</b> Dictionary Entries 
+                    <a href="#" class="btn btn-light solo-icon float-right mr-1" role="button" data-toggle="modal" data-target="#modal_sharing"><span class="fa fa-share-alt share-results"/></a>
+                </p>                
 			</div>
 	</div><!-- /.row -->  
 	  	
 	<!-- Trefferliste -->
 	<div class="row result-list">	
-		<div class="col-8">
+		<div class="col-8 ">
 		<!-- Treffer -->
-			{% for indent, pred, hit in hits %}
-			<div class="result-list-item push-{{indent}} {%if pred%}{{pred}}{%endif%}" id="{{hit.id}}" onclick="window.open('/view/lemma/{{hit.id}}','_self')">
-				<!-- indent in views.py -->
+            {% for indent, pred, hit in hits %}        
+			<div class="result-list-item indent-{{indent}}">
+				<!-- indent in views.py  --><!--{%if pred%}{{pred}}{%endif%}-->
                 
-                <!--{% if pred %}
-					<div class="col-1 pt-3"><p class="font-italic">{{pred}}</p></div>
-				{% endif %}-->
+                {% if pred %}
+					<div class="lemma-rel {{pred}}"></div> <!-- lemma-beziehung -->
+				{% endif %}
                 
+                <div class="result-bg" id="{{hit.id}}" onclick="window.open('/view/lemma/{{hit.id}}','_self')">
 				<!-- Redaktionsstatus & Anzahl Occurences-->
 				<div class="pt-1">
 					<div class="red-status float-right ml-2">
@@ -79,6 +81,7 @@
 				<a href="/view/lemma/{{hit.id}}" title="{%if pred%}{{pred}}{%endif%}"> <!-- lemma-beziehung -->
 				<h2 class="word bbaw-libertine">
 					{{hit.name}}
+                </h2>
 				<!-- Hieroglyph -->
 					<span class="hieroglyph hide">
 						{% for word in hit.words %}
@@ -91,7 +94,7 @@
 							{% endif %}
 						{% endfor %}
 					</span>
-				</h2>
+				
 				</a>
 				
 				<!-- Translation DE -->
@@ -120,33 +123,56 @@
 						</strong>
 					</p>
 				</div>
-				
+			</div> <!-- /. result-bg  -->	
 				<!-- combination-search -->
-				<div class="combination-search ml-4 my-3 hide">
+				<div class="combination-search ml-4 my-1 hide">
 					<input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
 					  <label class="form-check-label" for="inlineCheckbox2">Select for Combination Search</label>
 				</div>
-			</div> <!-- .Treffer -->
-			{% endfor %}
-
-
-		</div> <!-- .col-sm-8 -->
+            <hr>
+            </div> <!-- /. result-bg -->
+			
+            {% endfor %}
+            
+        </div> <!-- .col-8 -->    
+       	
 	
 	
 		<!-- Sidebar -->
-		<div class="col-sm-4">
-		<div class="sticky-top">
-			<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail hieroglyph-btn "><i class="fas fa-plus-circle"></i>Hieroglyphs</button>
-			
-			<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn "><span class="fas fa-plus-circle"></span>Translation Languages</button>
-			<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-class-btn"><span class="fas fa-plus-circle"></span>Word Class</button>
-			<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail combination-search-btn"><span class="fas fa-plus-circle"></span>Combination Search</button>
-			<br>	
-			<button type="button" class="btn btn-block btn-light text-left text-decoration-none show-detail combination-search-btn"><span class="fas fa-search-plus"></span>Combination Search</button>
-			<a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Modify Search</button></a>
-		</div>
+		<div class="col-4">
+            <div class="sticky-top">
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail hieroglyph-btn "><i class="fas fa-plus-circle"></i>Hieroglyphs</button>
+
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn "><span class="fas fa-plus-circle"></span>Translation Languages</button>
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-class-btn"><span class="fas fa-plus-circle"></span>Word Class</button>
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail combination-search-btn"><span class="fas fa-plus-circle"></span>Combination Search</button>
+                <br>	
+                <button type="button" class="btn btn-block btn-light text-left text-decoration-none show-detail combination-search-btn"><span class="fas fa-search-plus"></span>Combination Search</button>
+                <a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Modify Search</button></a>
+            </div>
 		</div>
 	</div> <!-- /.row -->	  
-
+    
+     <!-- Modal for Sharing-->
+    <div class="modal fade" id="modal_sharing" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Share these Results</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">            
+              <a href="#" class="btn btn-block btn-info" role="button"><span class="far fa-envelope"></span>E-Mail</a> 
+              <a href="#" class="btn btn-block btn-info" role="button"><span class="fab fa-twitter"></span>Twitter</a> 
+              <a href="#" class="btn btn-block btn-info" role="button"><span class="fab fa-facebook"></span>Facebook</a> 
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    <!-- /. Modal -->
+    
 </div><!-- /.container Content -->
 {% endblock %}
