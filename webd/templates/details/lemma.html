@@ -37,7 +37,7 @@
 		<div class="col-md-4 align-right align-baseline">
             <div class="functional-icons ml-3 float-left">
               <a href="#" class="btn btn-light solo-icon red-status ok" role="button"><span class="far fa-check-circle"/></a>
-              <a href="#" class="btn btn-light solo-icon" role="button"><span class="fa fa-share-alt share-results"/></a>
+              <a href="#" class="btn btn-light solo-icon" role="button" data-toggle="modal" data-target="#modal_sharing"><span class="fa fa-share-alt share-results"/></a>
               <a href="#" class="btn btn-light solo-icon" role="button" data-toggle="modal" data-target="#modal_comments"><span class="far fa-comment"/></a>
             </div>
             <div class="functional-icons mr-0 ">
@@ -211,6 +211,8 @@
 			<hr>
 			
 			<button type="button" class="btn btn-block btn-light text-left text-decoration-none"><span class="fas fa-search-plus"></span>Select for Combination Search</button>
+            <a href="javascript:history.back()"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Back to search results</button></a>
+            <!-- anstelle des historyBack sollte u.U. der Search-String verwendet werden -->
 			<a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Modify Search</button></a>
 			
 		</div>		
@@ -222,23 +224,50 @@
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">comment this article</h5>
+            <h5 class="modal-title" id="exampleModalLongTitle">Comment this article</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <div class="input-group">
-             
-             
-              <textarea class="form-control" aria-label="With textarea"></textarea>
+             <div class="input-group mb-2">
+                <input type="text" class="form-control" placeholder="Your Name" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+             <div class="input-group mb-2">
+                <input type="text" class="form-control" placeholder="Your E-mailadress" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+              
+            <div class="input-group">           
+              <textarea class="form-control" aria-label="With textarea" placeholder="Your Comments"></textarea>
             </div>
+              
           </div>
+            
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Send</button>
+            <button type="button" class="btn btn-info">Send</button>
             <p>Thanks for helping us! Your comment will be evaluated and edited.</p>
           </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Modal for Sharing-->
+    <div class="modal fade" id="modal_sharing" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Share this article</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">            
+              <a href="#" class="btn btn-block btn-info" role="button"><span class="far fa-envelope"></span>E-Mail</a> 
+              <a href="#" class="btn btn-block btn-info" role="button"><span class="fab fa-twitter"></span>Twitter</a> 
+              <a href="#" class="btn btn-block btn-info" role="button"><span class="fab fa-facebook"></span>Facebook</a> 
+          </div>
+          
         </div>
       </div>
     </div>
