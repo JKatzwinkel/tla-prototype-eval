@@ -24,12 +24,7 @@
   
   <div class="row search-entries detail">
 	<!-- Suchergebnis -->		
-		<div class="col-sm-8 result">				 
-			<div class="red-status">
-				<a href="#"><span class="far fa-check-circle ok"></span></a>
-				<a><span class="far fa-envelope"/></a>
-				<a><span class="far fa-comment"/></a>
-			</div>
+		<div class="col-md-8 result">				 
 			<h2 class="bbaw-libertine">
 				{% for word in lemma.words %}
 				<mark>
@@ -37,10 +32,17 @@
 				</mark>
 				{% endfor %}
 				<span class="Z3988" title="{{coins}}"></span>
-			</h2>
+			</h2> 
 		</div>
-		<div class="col-sm-4 align-right align-baseline">
-			<button type="button" class="btn btn-red text-left text-decoration-none">Show&nbsp;&nbsp;<span class="fas fa-info-circle fa-lg"></span></button>
+		<div class="col-md-4 align-right align-baseline">
+            <div class="functional-icons ml-3 float-left">
+              <a href="#" class="btn btn-light solo-icon red-status ok" role="button"><span class="far fa-check-circle"/></a>
+              <a href="#" class="btn btn-light solo-icon" role="button"><span class="fa fa-share-alt share-results"/></a>
+              <a href="#" class="btn btn-light solo-icon" role="button" data-toggle="modal" data-target="#modal_comments"><span class="far fa-comment"/></a>
+            </div>
+            <div class="functional-icons mr-0 ">
+                <a href="#" class="btn btn-red text-left text-decoration-none float-right" role="button">Show&nbsp;&nbsp;<span class="fas fa-info-circle fa-lg"></span></a>
+            </div>
 		</div>		
   </div>
   <!-- /.row -->
@@ -134,8 +136,23 @@
 					{% endif %}
 				</p>					
 			</div>
-			
+			<hr>
 		</div>
+        
+        <div class="row">
+			<div class="col-6">
+				<p class="editor"><strong>Date:&nbsp;<a href="#">{{ lemma.xxx }}</a></strong>
+				<br><strong>Protocoll:</strong> {{ lemma.xxx }}
+				</p>										
+			</div>
+            <div class="col-6">
+				<p class="editor"><strong>Language:&nbsp;<a href="#">{{ lemma.xxx }}</a></strong>
+				<br><strong>Script:</strong> {{ lemma.xxx }}
+				</p>										
+			</div>
+            <hr>
+        </div>
+        
 		<div class="annotations">
 			<hr>
 			{% for anno in annotations %}
@@ -199,6 +216,32 @@
 		</div>		
   </div>
   <!-- /.row -->
+    
+    <!-- Modal for Comments-->
+    <div class="modal fade" id="modal_comments" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">comment this article</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="input-group">
+             
+             
+              <textarea class="form-control" aria-label="With textarea"></textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Send</button>
+            <p>Thanks for helping us! Your comment will be evaluated and edited.</p>
+          </div>
+        </div>
+      </div>
+    </div>
   
 </div>
  <!-- /.container -->  	

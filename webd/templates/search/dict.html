@@ -42,32 +42,41 @@
 	
 	<!-- Trefferanzahl-->
 	<div class="row searchresult">		
-			<div class="col-sm-12 pt-3">
-				<p class="result-entries">Results: <b>{{start}} - {{end}}</b> of <b>{{hitcount}}</b> Dictionary Entries <span class="far fa-envelope"/></p>
+			<div class="col-8 pt-3">
+                <p class="result-entries">Results: <b>{{start}} - {{end}}</b> of <b>{{hitcount}}</b> Dictionary Entries <a href="#" title="share results"><span class="float-right fa fa-share-alt share-results"/></a>
+                </p>
 			</div>
 	</div><!-- /.row -->  
 	  	
 	<!-- Trefferliste -->
 	<div class="row result-list">	
-		<div class="col-sm-8">
+		<div class="col-8">
 		<!-- Treffer -->
 			{% for indent, pred, hit in hits %}
 			<div class="result-list-item push-{{indent}} {%if pred%}{{pred}}{%endif%}" id="{{hit.id}}" onclick="window.open('/view/lemma/{{hit.id}}','_self')">
-				<!--{% if pred %}
+				<!-- indent in views.py -->
+                
+                <!--{% if pred %}
 					<div class="col-1 pt-3"><p class="font-italic">{{pred}}</p></div>
 				{% endif %}-->
-				<!-- Redaktionsstatus -->
-				<div class="red-status">
-					<a href="#"><span class="far fa-check-circle ok"></span></a>
-					{% if hit.occurrences > 0 %}
-					{{hit.occurrences}}
-					{% endif %}
+                
+				<!-- Redaktionsstatus & Anzahl Occurences-->
+				<div class="pt-1">
+					<div class="red-status float-right ml-2">
+                        <a href="#"><span class="far fa-check-circle ok"></span></a>
+                    </div>
+                    {% if hit.occurrences > 0 %}
+					   <div class="number_occurences float-right">
+                            <p>Occ.:&nbsp;{{hit.occurrences}}</p>
+                        </div>
+                    {% endif %}
+                    
 					<!--<a><span class="far fa-envelope"/></a>
 					<a><span class="far fa-comment"/></a>-->
 				</div>	
 				
 				<!-- Lemma -->
-				<a href="/view/lemma/{{hit.id}}" title="{%if pred%}{{pred}}{%endif%}">
+				<a href="/view/lemma/{{hit.id}}" title="{%if pred%}{{pred}}{%endif%}"> <!-- lemma-beziehung -->
 				<h2 class="word bbaw-libertine">
 					{{hit.name}}
 				<!-- Hieroglyph -->

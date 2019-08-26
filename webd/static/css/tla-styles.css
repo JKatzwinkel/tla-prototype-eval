@@ -146,7 +146,8 @@ a.navbar-brand {
 	padding: 0px 10px 0px;
 	border-top: 2px solid #DDD;
 	margin-top:-4px;
-	}
+    }
+
 .result-list-item:hover, .bg-grey{
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0.1+0,0+100 */
 	background: -moz-linear-gradient(left, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
@@ -167,26 +168,27 @@ a.navbar-brand {
 .result-list-item.push-2{
 	margin-left: 10%;
 	}
-	
+.functional-icons {}	
 .red-status {
-	position: relative;
+	/*position: relative;
 	top: 0;
 	left: 98%;
 	height: 0;
 	width: 6rem;
-	padding: 0px;
+	padding: 0px;*/
 	}
-.red-status .svg-inline--fa.ok {
-	color: green;
+.red-status .svg-inline--fa.ok, .red-status.ok {
+	color: green!important;
 	}
 .red-status .svg-inline--fa.pending {
-	color: orange;
+	color: orange!important;
 	}
 .red-status .svg-inline--fa.notok {
-	color: red;
+	color: red!important;
 	}
 
-
+a.share-results {color: grey!important;}
+a.share-results:hover {color: red;}
 
 .result-list-item .occ-tok.highlight-1 {
 	background-color: red;
@@ -212,11 +214,13 @@ a.navbar-brand {
 	border-bottom: 1px solid red;
 }
 
+
 /* Pagination */
 .pag-container {
 	border-top: 2px solid #DDD;
 	
 	}
+
 
 /* OffCanvas Sidebar */
 
@@ -322,6 +326,10 @@ a.navbar-brand {
     color: white;
     background-color: red;
 }
+
+.solo-icon {padding: .2em .2em .2em .6em;
+            }
+
 .svg-inline--fa{
 	margin-right: 0.5rem;
 	vertical-align: -.1em;
@@ -357,6 +365,7 @@ a.navbar-brand {
 .headroom--pinned {top: 0;}
 .headroom--pinned > .sticky-top {
        top: 90px;}
+
 /*
 .headroom, .page-head {
   will-change: transform;
@@ -449,3 +458,16 @@ span.multiselect-native-select select {
  margin-left:-20px;
  margin-right:0
 }
+
+/* lemma-relations */
+
+.lemma-rel {
+    position: absolute;    
+    margin: 2.2em  0 0 -3em;
+    font-style: italic;
+    }
+
+.rootOf:before {content: "Root";}
+.successor:before {content: "Succ.";}     
+.referencedBy:before {content: "Ref. by";}
+.composedOf:before {content: "Comp. of";}
