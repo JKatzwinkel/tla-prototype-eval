@@ -14,6 +14,18 @@ function init() {
             $('.hieroglyph').slideToggle('slow');
         });	
 		
+	// .result-list-lemma-id
+		$('html').not('.result-list-lemma-id').click(function (e) {
+		        //console.log($(e.target).parent());
+		 if ($('.result-list-lemma-id').is(':visible') && !e.target == '.result-list-lemma-id') {
+                $('.result-list-lemma-id').slideUp('ease-out');
+            }
+        });
+        $('.lemma-id-btn').click(function (e) {
+			e.preventDefault();
+            $('.result-list-lemma-id').slideToggle('slow');
+        });	
+
 	// .result-list-bibliography
 		$('html').not('.result-list-bibliography').click(function (e) {
 		        //console.log($(e.target).parent());
