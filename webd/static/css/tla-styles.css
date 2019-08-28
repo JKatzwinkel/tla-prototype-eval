@@ -3,7 +3,7 @@
  */
 
 
-.container {max-width: 1300px!important;}
+.container {max-width: 1300!important;}
 
 
 /* Typography */
@@ -13,7 +13,7 @@
 		src: url(../font/BBAWLibertine_ah.ttf);
 }
 
-a, p, h1, h2, h3 {
+a, p, h1, h2, h3, ul, li {
 	font-family: "roboto", arial, sans-serif;
 	font-weight: 300;
 	margin-bottom: 0.2rem;
@@ -269,8 +269,17 @@ a.share-results:hover {color: red;}
 	font-style: italic;
 	font-weight: bold;
 	padding-left: .5rem;
-	}	
-	
+	}
+
+/* Citation */
+.citation {  
+    padding: 1em;    
+}
+.citation li, .citation button {
+    font-size: .75em;    
+}
+
+
 /* Search */
 
 .global-search .btn-danger {
