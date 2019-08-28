@@ -100,11 +100,12 @@
 				
 				<!-- Translation DE -->
 				<p class="translation">
+					<span class="word-class font-italic hide">[{{hit.type}}]</span>
 					{%for translation in hit.translations.de%}
 					<span class="translation">{{translation}}</span>
 					{%endfor%}
-					<!-- Bibliografy -->
-					<span class="result-list-bibliography">({{hit.bibliography}})</span>
+					<!-- Bibliography -->
+					<span class="result-list-bibliography hide">({{hit.bibliography}})</span>
 				</p>
 				
 				<!-- Translation EN FR -->
@@ -115,7 +116,7 @@
 					</p>
 				</div>
 				
-				<!-- Wordclass -->
+				<!-- Wordclass 
 				<div class="word-class hide">
 					<p>
 						<strong>
@@ -123,7 +124,8 @@
 							{%if hit.subtype%}<span>({{hit.subtype}})</span>{%endif%}
 						</strong>
 					</p>
-				</div>
+				</div>-->
+				
 			</div> <!-- /. result-bg  -->	
 				<!-- combination-search -->
 				<div class="combination-search ml-4 my-1 hide">
@@ -145,7 +147,7 @@
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail hieroglyph-btn "><i class="fas fa-plus-circle"></i>Hieroglyphs</button>
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-class-btn"><span class="fas fa-plus-circle"></span>Word Class</button>
                  <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail bibliografical-btn "><i class="fas fa-plus-circle"></i>Bibliographical references </button>
-                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail runtime-btn "><i class="fas fa-plus-circle"></i>Runtime specifications</button>
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestationtime-btn "><i class="fas fa-plus-circle"></i>Attestation time</button>
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn "><span class="fas fa-plus-circle"></span>Translation Languages</button>
                 
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail combination-search-btn"><span class="fas fa-plus-circle"></span>Combination Search</button>

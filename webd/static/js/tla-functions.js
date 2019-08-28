@@ -14,6 +14,18 @@ function init() {
             $('.hieroglyph').slideToggle('slow');
         });	
 		
+	// .result-list-bibliography
+		$('html').not('.result-list-bibliography').click(function (e) {
+		        //console.log($(e.target).parent());
+		 if ($('.result-list-bibliography').is(':visible') && !e.target == '.result-list-bibliography') {
+                $('.result-list-bibliography').slideUp('ease-out');
+            }
+        });
+        $('.bibliografical-btn').click(function (e) {
+			e.preventDefault();
+            $('.result-list-bibliography').slideToggle('slow');
+        });	
+		
 	// .translation-languages
 		$('html').not('.translation-languages').click(function (e) {
 		        //console.log($(e.target).parent());
