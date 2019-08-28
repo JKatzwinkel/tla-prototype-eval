@@ -83,11 +83,12 @@
 					{{hit.name}}
                 </h2>
 				<!-- Hieroglyph -->
-					<span class="hieroglyph hide">
+					<span class="hieroglyph">
 						{% for word in hit.words %}
 							{% if word.glyphs %}
 								<span class="glyphbox">
-									<canvas class="res" title="{{word.glyphs}}">
+									<!-- TODO font-size: 20px; vertical-align: -5px; in css verschieben -->
+									<canvas class="res" style="font-size: 20px; vertical-align: -5px;" title="{{word.glyphs}}">
 										{{word.glyphs}}
 									</canvas>
 								</span>
