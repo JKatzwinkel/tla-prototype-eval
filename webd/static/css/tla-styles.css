@@ -476,7 +476,11 @@ span.multiselect-native-select select {
     color: grey;
     }
 
-.rootOf:before {content: "Root";}
+.root:before {content: "Root";}
+.rootOf:before {content: "Root of";}
+.predecessor:before {content: "Pred.";}
 .successor:before {content: "Succ.";}     
-.referencedBy:before {content: "Ref.";}
-.composedOf:before {content: "Comp.";}
+.referencing:before {content: "Now";}
+.referencedBy:before {content: "Prev.";}
+.composedOf:before {content: "Part";}
+.composes:before {content: "Part of";}
