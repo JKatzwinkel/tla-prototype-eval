@@ -380,11 +380,11 @@ def hit_tree(hits):
         related_hit_ids = sorted([
             (hid.get('id'), pred)
             for pred in [
-                'composes',
+                'rootOf',
+                'referencing',
                 'successor',
                 'predecessor',
-                'referencing',
-                'rootOf'
+                'composes'
             ]
             for hid in hit.get('relations', {}).get(pred, [])
             if hid.get('id') in structure],

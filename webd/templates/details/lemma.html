@@ -2,7 +2,7 @@
 {% load static %}
 {% load js %}
 
-{% block title %}TLA - Prototyp - Detail{% endblock %}
+{% block title %}TLA lemma ID {{lemma.id}} ({% for word in lemma.words %}{{word.transcription}}{% endfor %}){% endblock %}
 
 {% block content %}
 <!-- Page Content -->
@@ -244,11 +244,11 @@
         <div class="bg-light citation mt-3 mb-4">
             <p class="h6">Please cite as</p>			
                 <ul class="list-unstyled mt-3 mb-4">
-                    <li><strong>TLA lemma ID ... (lemma)</strong></li>
-                    <li>http://tla.bbaw.de/view/lemma/83470 in in: Thesaurus Linguae Aegyptiae</li>
-                    <li>http://tla.bbaw.de</li>
-                    <li>Version 16.0, 30.10.2019, ed. by Berlin-Brandenburgische Akademie der Wissenschaften & Sächsische Akademie der Wissenschaften     </li>
-                    <li>(accessed: 2.2.2020)</li>
+                    <li>TLA lemma ID {{lemma.id}} ({% for word in lemma.words %}{{word.transcription}}{% endfor %}), &lt;http://tla.bbaw.de/view/lemma/{{lemma.id}}&gt;, 
+					in: <i>Thesaurus Linguae Aegyptiae</i> &lt;http://tla.bbaw.de&gt;, 
+					Version ##16.0##, ##30.10.2019##, 
+					ed. by Berlin-Brandenburgische Akademie der Wissenschaften & Sächsische Akademie der Wissenschaften 
+					(accessed: ##DATUM##)</li>
                 </ul>
            
             <button type="button" class="btn btn-light text-left text-decoration-none"><span class="fa fa-clipboard"></span>Copy citation</button>
