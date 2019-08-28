@@ -85,13 +85,17 @@
 			<hr>				
 		</div>
 	
-		<div class="row">
-			<div class="col-6">
-				<p class="editor"><strong>TLA-Editor:&nbsp;<a href="#">{{ lemma.edited.name }}</a></strong>
-				<br><strong>Last Revision:</strong> {{ lemma.edited.date }}
-				<br><strong>Review State:</strong> {{ lemma.revisionState }}
-				</p>										
-			</div>
+		<p class="editor"><strong>TLA-Editor:&nbsp;<a href="#">{{ lemma.edited.name }}</a></strong>
+        <br><strong>Last Revision:</strong> {{ lemma.edited.date }}
+        <br><strong>Review State:</strong> {{ lemma.revisionState }}
+        <br><strong>Date:&nbsp;<a href="#">{{ lemma.xxx }}</a></strong>
+        <br><strong>Protocoll:</strong> {{ lemma.xxx }}
+        <br><strong>Language:&nbsp;<a href="#">{{ lemma.xxx }}</a></strong>
+        <br><strong>Script:</strong> {{ lemma.xxx }}
+        </p>
+														
+			
+            <!--
 			<div class="col-6">						
 				<p class="relations"><strong>TLA-Relations</strong>
 					{% if lemma.relations.root %}
@@ -135,61 +139,75 @@
 						{% endfor %}
 					{% endif %}
 				</p>					
-			</div>
-			<hr>
-		</div>
+			</div>-->
         
-        <div class="row">
-			<div class="col-6">
-				<p class="editor"><strong>Date:&nbsp;<a href="#">{{ lemma.xxx }}</a></strong>
-				<br><strong>Protocoll:</strong> {{ lemma.xxx }}
-				</p>										
-			</div>
-            <div class="col-6">
-				<p class="editor"><strong>Language:&nbsp;<a href="#">{{ lemma.xxx }}</a></strong>
-				<br><strong>Script:</strong> {{ lemma.xxx }}
-				</p>										
-			</div>
-            <hr>
-        </div>
+        <hr>      
         
-		<div class="annotations">
-			<hr>
-			{% for anno in annotations %}
-			<div class="annotation pb-4" id="anno.id">
-				<div class="row">
-					<div class="col-md-10 h5 bbaw-libertine">
-						{{anno.title|safe}} 
-					</div>
-				</div>
-				<p class="text-justify">
-					{{anno.body|safe|urlize}}
-				</p>
-				<div class="row">
-					<div class="col-md-10">
-						{{anno.edited.name}}
-					</div>
-					<div class="col-md-2">
-						{{anno.edited.date}}
-					</div>
-				</div>
-				<hr>
-			</div>
-			{% endfor %}
-		</div>
+		
 	   
         <!-- Kommentar -->  
 		<div class="comment pb-4">
-			<p class="h6">Comment:</p>	
-			<p>Es sequi illore ne reptation cone videm fugia dolendu ntectotas nihit rat lit fugiatum doluptatecto que maximpe eaquatin nis rehent quam, corum accatem oluptas inus doloremolo ea volum quibus voluptaque volupta amet optaers piendusae.</p>	
-            
-		</div>
+			<p class="h5 comment-title">Comment-Title</p>
+            <p class="h6 comment-title">Comment-Subtitle</p>
+			<p class="comment-content">Es sequi illore ne reptation cone videm fugia dolendu ntectotas nihit rat lit fugiatum doluptatecto que maximpe eaquatin nis rehent quam, corum accatem oluptas inus doloremolo ea volum quibus voluptaque volupta amet optaers piendusae.</p>
+            <p class="comment-author">Edited by&nbsp;<strong>Vorname Name</strong>&nbsp;on
+                <span class="comment-date"><strong>20.08.2019</strong></span></p>
+            <hr>
+		</div>        
         
-           
+        <div class="relations">
+			<p class="relations"><strong>TLA-Relations</strong>
+					{% if lemma.relations.root %}
+						<br>Root:
+						{% for root in lemma.relations.root %}
+							<span>
+								<a href="/view/lemma/{{root.id}}" title="{{root.id}} (Root)" class="bbaw-libertine">
+									{{root.name}}
+								</a>
+							</span>
+						{% endfor %}
+					{% endif %}
+					{% if lemma.relations.partOf %}
+						<br>Superordinate Items:
+						{% for item in lemma.relations.partOf %}
+							<span>
+								<a href="/view/lemma/{{item.id}}" title="{{item.id}} (Superordinate)" class="bbaw-libertine">
+									{{item.name}}
+								</a>
+							</span>
+						{% endfor %}
+					{% endif %}
+					{% if lemma.relations.contains %}
+						<br>Subordinate Items:
+						{% for item in lemma.relations.contains %}
+							<span>
+								<a href="/view/lemma/{{item.id}}" title="{{item.id}} (Subordinate)" class="bbaw-libertine">
+									{{item.name}}
+								</a>
+							</span>
+						{% endfor %}
+					{% endif %}
+					{% if lemma.relations.successor %}
+						<br>Historical Successor:
+						{% for item in lemma.relations.successor %}
+							<span>
+								<a href="/view/lemma/{{item.id}}" title="{{item.id}} (Successor)" class="bbaw-libertine">
+									{{item.name}}
+								</a>
+							</span>
+						{% endfor %}
+					{% endif %}
+				</p>
+            
+            <p>Das dynamische Einfügen von Treffern hat bisher noch nicht funktioniert.
+            
+            
+            </p>
+		</div>          
        
         
         
-	</div>	
+	</div> <! -- close content col-8 -->	
 
 	<!-- Sidebar -->
 		<div class="col-sm-4">
@@ -226,11 +244,11 @@
         <div class="bg-light citation mt-3 mb-4">
             <p class="h6">Please cite as</p>			
                 <ul class="list-unstyled mt-3 mb-4">
-                  <li>TLA lemma ID 83470 (nfr) </li>
-                  <li>http://tla.bbaw.de/view/lemma/83470 in in: Thesaurus Linguae Aegyptiae</li>
-                  <li>http://tla.bbaw.de</li>
-                  <li>Version 16.0, 30.10.2019, ed. by Berlin-Brandenburgische Akademie der Wissenschaften & Sächsische Akademie der Wissenschaften     </li>
-                  <li>(accessed: 2.2.2020)</li>
+                    <li><strong>TLA lemma ID ... (lemma)</strong></li>
+                    <li>http://tla.bbaw.de/view/lemma/83470 in in: Thesaurus Linguae Aegyptiae</li>
+                    <li>http://tla.bbaw.de</li>
+                    <li>Version 16.0, 30.10.2019, ed. by Berlin-Brandenburgische Akademie der Wissenschaften & Sächsische Akademie der Wissenschaften     </li>
+                    <li>(accessed: 2.2.2020)</li>
                 </ul>
            
             <button type="button" class="btn btn-light text-left text-decoration-none"><span class="fa fa-clipboard"></span>Copy citation</button>
