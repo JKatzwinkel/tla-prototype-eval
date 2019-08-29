@@ -65,7 +65,7 @@
 				<!-- Redaktionsstatus & Anzahl Occurences-->
 				<div class="pt-1">
 					<div class="red-status float-right ml-2">
-                        <a href="#"><span class="far fa-check-circle ok"></span></a>
+                        <a href="#"><span class="far fa-check-circle {% if hit.occurrences > 0 %}ok{% else %}pending{% endif %}"></span></a>
                     </div>
                     {% if hit.occurrences > 0 %}
 					   <div class="number_occurences float-right">
