@@ -554,9 +554,14 @@ span.multiselect-native-select select {
     color: grey;
     }
 
-.rootOf:before {content: "Root";}
-.successor:before {content: "Succ.";}  
-.predecessor:before {content: "Pred.";} 
-.referencedBy:before {content: "Ref.";}
-.composedOf:before {content: "part";}
-.referencing:before {content: "now";}
+
+.root:before {content: "Root";}
+.rootOf:before {content: "Root of";}
+.predecessor:before {content: "Pred.";}
+.successor:before {content: "Succ.";}     
+.referencing:before {content: "Now";}
+.referencedBy:before {content: "Prev.";}
+.composedOf:before {content: "Part";}
+.composes:before {content: "Part of";}
+.contains:before {content: "Part";}
+.partOf:before {content: "Part of";}
