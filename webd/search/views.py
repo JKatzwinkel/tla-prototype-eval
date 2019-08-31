@@ -381,9 +381,13 @@ def hit_tree(hits):
             (hid.get('id'), pred)
             for pred in [
                 'rootOf',
+                'referencing',
                 'successor',
                 'referencedBy',
                 'composedOf'
+                'predecessor',
+                'composes',
+                'partOf'
             ]
             for hid in hit.get('relations', {}).get(pred, [])
             if hid.get('id') in structure],
