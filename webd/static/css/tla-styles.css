@@ -141,15 +141,19 @@ a.navbar-brand {
 	font-size: 1.5em;
 	}
 
-.result-list-item:first-child {
-		border-top: 2px solid #DDD;
+.result-list-item:first-child, .occ-list-item:first-child  {
+		border-top: 2px solid #BBB;
+	 }
+
+.occ-list-item  {
+		border-bottom: 2px solid #BBB;
 	 }
 
 .result-bg {
     padding: 0px 6px 1px;	
     }
 
-.result-bg:hover, .bg-grey{
+.result-bg:hover, .bg-grey {
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0.1+0,0+100 */
 	background: -moz-linear-gradient(left, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
 	background: -webkit-linear-gradient(left, rgba(0,0,0,0.1) 0%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
@@ -160,10 +164,6 @@ a.navbar-brand {
 	color: red;
 	font-size: 1.4em;
 	}
-.result-list-item span.translation{
-	font-weight: 500;
-	}
-
 .result-list .indent-1{
 	padding-left: 4em;
 	}
@@ -195,10 +195,20 @@ a.share-results:hover {color: red;}
 	background-color: grey;
 	color: white;
 }
-.result-list-item .corpus-path-element a {
-	color: grey;
+.corpus-path-element a {
+	color: grey!important;
+}
+.corpus-path-element a:hover {
+	color: red!important;
 }
 
+a span.lc {
+	font-weight: 500!important;
+    color: grey!important;
+}
+a span.lc:hover {
+	color: red!important;
+}
 .result-list-item img.occ-tok-glyphs.highlight-1,
 .result-list-item canvas.res.occ-tok-glyphs.highlight-1 {
 	border: 1px solid red;
@@ -212,6 +222,74 @@ a.share-results:hover {color: red;}
 }
 
 .result-list hr {margin:0!important;}
+
+
+/* -- Annotations / Occurencies-Trefferliste --*/
+
+.container-annotation-switch {display: block;}
+.container-annotation {
+    display: flex;
+    flex-flow: row wrap;    
+    }
+
+ul.annotation-block  {   
+    padding: 0;
+    text-align: center;
+    margin: 0 .5em 1em 0!important;
+    border-bottom: 1px solid #aaa;
+    }
+ul.annotation-block:hover {   
+    background-color: #EEE;
+    cursor: pointer;
+    }
+.annotation-block.active {
+    background-color: #aaa;
+    opacity: .75;
+}
+.annotation-block.active:hover {
+    opacity: 1;
+    background-color: red;
+}
+.annotation-block.active li{
+    color: white!important;
+    border-bottom: 1px solid white;
+}
+.annotation-block.active li res{
+    color: white!important;
+}
+
+ul.annotation-block li {
+    border-bottom: 1px solid #aaa;
+    padding: .2em .5em;
+    list-style: none;
+    }
+ul.annotation-block li:last-child {
+    border-bottom: 0;
+    }
+.annotation-block .transcription {
+    font-family: "BBAWLibertine", serif;
+    font-size: 1.2em;
+    color: red;
+}
+
+.annotation-block .word-class, .annotation-block .grammar  {
+    font-style: italic;    
+}
+
+.annotation-block .grammar  {
+    color: grey; 
+    font-size: .85em;
+}
+
+.translation  {
+    font-weight: 500;    
+}
+
+.translation .result-list-bibliography {
+    font-weight: 100!important; 
+}
+
+
 
 /* Pagination */
 .pag-container {
@@ -477,6 +555,8 @@ span.multiselect-native-select select {
     }
 
 .rootOf:before {content: "Root";}
-.successor:before {content: "Succ.";}     
+.successor:before {content: "Succ.";}  
+.predecessor:before {content: "Pred.";} 
 .referencedBy:before {content: "Ref.";}
-.composedOf:before {content: "Comp.";}
+.composedOf:before {content: "part";}
+.referencing:before {content: "now";}
