@@ -48,38 +48,107 @@
 	</div><!-- /.row -->  
 	  	
 	<!-- Trefferliste -->
-	<div class="row result-list">	
+	<div class="row occ-list">	
 		<div class="col-sm-8">
 		<!-- Treffer -->
-			{% for hit in hits %}
-			<div class="result-list-item" id="{{hit.occurence.id}}">
-				<!-- Redaktionsstatus -->
-				
-				<!-- Lemma -->
-				<h3 class="word bbaw-libertine">
-					{% for token in hit.sentence.tokens %}
-					<a href="/view/lemma/{{token.lemma}}">
-						<span id="{{token.id}}" class="occ-tok {%if token.highlight%}highlight-{{token.highlight}}{%endif%} bbaw-libertine">
-								{% if token.label %}
-									{{token.label}}
-								{% endif %}
-						</span>
-					</a>
-					{% endfor %}
-				</h3>
+            
+        {% for hit in hits %}
+        <div class="occ-list-item pt-1 pb-1" id="{{hit.occurence.id}}">
+        <div class="container-annotation-switch hide">
+            <div class="container-annotation mt-2 mb-2">
+                <ul class="annotation-block" onclick="window.open('/view/lemma/XXX','_self')">
+                    <li class="hieroglyph">
+                        <canvas class="res inline" width="197" height="44">F35-F35
+                    </canvas>
+                    </li>
+                    <li class="transcription">Transkription</li>
+                    <li class="word-class">Wortart</li>
+                    <li class="grammar">gramm. Annotation</li>
+                    <li class="translation">Übersetzung</li>               
+                </ul> 
+                <ul class="annotation-block">
+                    <li class="hieroglyph">
+                        <canvas class="res inline" width="197" height="44">M23*[sep=0.5](X1:N35)-insert[t](G39,Z1)-N12[rotate=180]-F31*[sep=0.5]S29
+                    </canvas>
+                    </li>
+                    <li class="transcription">Transkription</li>
+                    <li class="word-class">Wortart</li>
+                    <li class="grammar">gramm. Annotation</li>
+                    <li class="translation">Übersetzung</li>               
+                </ul>
+                <ul class="annotation-block active">
+                    <li class="hieroglyph">
+                        <canvas class="res inline" width="197" height="44">F35-I9-D21
+                    </canvas>
+                    </li>
+                    <li class="transcription">Transkription</li>
+                    <li class="word-class">Wortart</li>
+                    <li class="grammar">gramm. Annotation</li>
+                    <li class="translation">Übersetzung</li>               
+                </ul> 
+                <ul class="annotation-block">
+                    <li class="hieroglyph">
+                        <canvas class="res inline" width="197" height="44">F35-W22-Z2
+                    </canvas>
+                    </li>
+                    <li class="transcription">Transkription</li>
+                    <li class="word-class">Wortart</li>
+                    <li class="grammar">gramm. Annotation</li>
+                    <li class="translation">Übersetzung</li>               
+                </ul> 
+                <ul class="annotation-block">
+                    <li class="hieroglyph">
+                        <canvas class="res inline" width="197" height="44">F35-I9-D21
+                    </canvas>
+                    </li>
+                    <li class="transcription">Transkription</li>
+                    <li class="word-class">Wortart</li>
+                    <li class="grammar">gramm. Annotation</li>
+                    <li class="translation">Übersetzung</li>               
+                </ul> 
+                <ul class="annotation-block">
+                    <li class="hieroglyph">
+                        <canvas class="res inline" width="197" height="44">F35-W22-Z2
+                    </canvas>
+                    </li>
+                    <li class="transcription">Transkription</li>
+                    <li class="word-class">Wortart</li>
+                    <li class="grammar">gramm. Annotation</li>
+                    <li class="translation">Übersetzung</li>               
+                </ul>          
+               
+                </div> <!-- container-annotation clode -->
+            </div> <!-- container-switch close -->           
+			
+            <div class="container-annotation-switch">
+                
+                    <!-- Lemma -->
+                    <h3 class="word bbaw-libertine">
+                        {% for token in hit.sentence.tokens %}
+                        <a href="/view/lemma/{{token.lemma}}">
+                            <span id="{{token.id}}" class="occ-tok {%if token.highlight%}highlight-{{token.highlight}}{%endif%} bbaw-libertine">
+                                    {% if token.label %}
+                                        {{token.label}}
+                                    {% endif %}
+                            </span>
+                        </a>
+                        {% endfor %}
+                    </h3>
 
-				<div class="hieroglyph">
-					{%for token in hit.sentence.tokens%}
-					<span class="glyphbox">
-						{%if token.glyphs%}
-						<canvas class="res occ-tok-glyphs {%if token.highlight%}highlight-{{token.highlight}}{%endif%}" title="{{token.glyphs}}">
-							{{token.glyphs}}
-						</canvas>
-						{%endif%}
-					</span>
-					{%endfor%}
-				</div>
-				
+                    <div class="hieroglyph mb-1">
+                        {%for token in hit.sentence.tokens%}
+                        <span class="glyphbox">
+                            {%if token.glyphs%}
+                            <canvas class="res occ-tok-glyphs {%if token.highlight%}highlight-{{token.highlight}}{%endif%}" title="{{token.glyphs}}">
+                                {{token.glyphs}}
+                            </canvas>
+                            {%endif%}
+                        </span>
+                        {%endfor%}
+                    </div>
+                
+            </div> <!-- container-switch close -->
+            
 				<!-- Translation DE -->
 				{% for translation in hit.sentence.translations.de %}
 					<p class="translation">{{translation}}</p>
@@ -100,9 +169,10 @@
 						<span id="{{hit.text.id}}-{{object.id}}" class="corpus-path-element">
 							<a href="{{object.url}}">
 								{{object.name}}
+                                <i class="fas fa-arrow-circle-right"></i>
 							</a>
 							{%if not forloop.last%}
-							<i class="fas fa-arrow-circle-right" style="color:grey"></i>
+							
 							{%endif%}
 						</span>
 						{%endfor%}
@@ -116,7 +186,8 @@
 				</div>	
 				
 							
-			</div> <!-- .Treffer -->
+			
+         </div> <!--.Treffer -->
 			{% endfor %}
 
 
@@ -127,11 +198,16 @@
 		<div class="col-sm-4">
 		<div class="sticky-top">
 			<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail hieroglyph-btn "><i class="fas fa-plus-circle"></i>Hieroglyphs</button>
-        
+            
+            <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail anno-block-btn"><i class="fas fa-plus-circle"></i>Switch Annotation/Block-View</button>
 			
 			<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn "><span class="fas fa-plus-circle"></span>Translation Languages</button>
-			<br>	
-			<a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Modify Search</button></a>
+			<br>
+            
+            <a href="javascript:history.back()"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Back </button></a>
+            <!-- anstelle des historyBack sollte u.U. der Search-String verwendet werden -->
+			
+            <a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Modify Search</button></a>
 		</div>
 		</div>
 	</div> <!-- /.row -->

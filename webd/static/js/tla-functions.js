@@ -50,6 +50,20 @@ function init() {
 			e.preventDefault();
             $('.combination-search').slideToggle('slow');
         });	
+    
+        
+    // .anno-block-btn
+		$('html').not('.anno-block-btn').click(function (e) {
+		        //console.log($(e.target).parent());
+		 if ($('.container-annotation-switch').is(':visible') && !e.target == '.container-annotation-switch') {
+                $('.container-annotation-switch').slideUp('ease-out');
+            }
+        });
+        $('.anno-block-btn').click(function (e) {
+			e.preventDefault();
+            $('.container-annotation-switch').slideToggle('slow');
+        });	
+    
 		
 	// Headroom 
 	    $(function() {
