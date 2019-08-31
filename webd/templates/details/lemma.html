@@ -2,7 +2,7 @@
 {% load static %}
 {% load js %}
 
-{% block title %}TLA - Prototyp - Detail{% endblock %}
+{% block title %}TLA lemma ID {{lemma.id}} ({% for word in lemma.words %}{{word.transcription}}{% endfor %}){% endblock %}
 
 {% block content %}
 <!-- Page Content -->
@@ -36,7 +36,6 @@
 		</div>
 		<div class="col-md-4 align-right align-baseline">
             <div class="functional-icons ml-3 float-left">
-              <a href="#" class="btn btn-light solo-icon red-status ok" role="button"><span class="far fa-check-circle"/></a>
               <a href="#" class="btn btn-light solo-icon" role="button" data-toggle="modal" data-target="#modal_sharing"><span class="fa fa-share-alt share-results"/></a>
               <a href="#" class="btn btn-light solo-icon" role="button" data-toggle="modal" data-target="#modal_comments"><span class="far fa-comment"/></a>
             </div>
@@ -61,20 +60,8 @@
 				</span>
 				{% endif %}
 			{% endfor %}
-			{% for translation in lemma.translations.de %}
-				<p class="h6">{{ translation }}</p>
-			{% endfor %}
 			<hr>
-		</div>		
-		<div class="translation">
-			{% for translation in lemma.translations.en %}
-				<p class="english">{{ translation }}</p>
-			{% endfor %}
-			{% for translation in lemma.translations.fr %}
-				<p class="french font-italic">{{ translation }}</p>
-			{% endfor %}
-			<hr>
-		</div>	
+		</div>
 		<div class="grammar">
 			<p class="font-italic">
 				{{lemma.type}}
@@ -84,15 +71,44 @@
 			</p>
 			<hr>				
 		</div>
+		<div class="translation">
+			{% for translation in lemma.translations.de %}
+				<p class="h6">(Ger.) {{ translation }}</p>
+			{% endfor %}
+			{% for translation in lemma.translations.en %}
+				<p class="english">(Engl.) {{ translation }}</p>
+			{% endfor %}
+			{% for translation in lemma.translations.fr %}
+				<p class="french">(Fr.) {{ translation }}</p>
+			{% endfor %}
+		</div>	
 	
-		<p class="editor"><strong>TLA-Editor:&nbsp;<a href="#">{{ lemma.edited.name }}</a></strong>
-        <br><strong>Last Revision:</strong> {{ lemma.edited.date }}
-        <br><strong>Review State:</strong> {{ lemma.revisionState }}
-        <br><strong>Date:&nbsp;<a href="#">{{ lemma.xxx }}</a></strong>
-        <br><strong>Protocoll:</strong> {{ lemma.xxx }}
-        <br><strong>Language:&nbsp;<a href="#">{{ lemma.xxx }}</a></strong>
+        <!-- Beleglage -->  
+		<div>
+			<hr>
+			<strong>Attestation</strong>&nbsp;<a href="#" class="btn btn-light solo-icon red-status {% if xxx > 0 %}ok{% else %}pending{% endif %}" role="button"><span class="far fa-check-circle"/></a>
+			<br><strong>Occurences:</strong>&nbsp;
+				{% for where, count in occurrences.items %} {{count}} &nbsp; {% endfor %} <!-- besser: aufsummieren -->
+			<br><strong>Time:</strong>&nbsp;<a href="#">{{ lemma.xxx }}</a>
+		</div> 
+
+        <!-- Kommentar -->  
+		<div class="comment pb-4">
+			<hr>
+			<p class="h5 comment-title">Comment-Title</p>
+            <p class="h6 comment-title">Comment-Subtitle</p>
+			<p class="comment-content">Es sequi illore ne reptation cone videm fugia dolendu ntectotas nihit rat lit fugiatum doluptatecto que maximpe eaquatin nis rehent quam, corum accatem oluptas inus doloremolo ea volum quibus voluptaque volupta amet optaers piendusae.</p>
+            <p class="comment-author float-right">Edited by&nbsp;<strong>Vorname Name</strong>&nbsp;on <span class="comment-date"><strong>20.08.2019</strong></span></p>
+		</div>     
+
+        <!-- Weitere Annotationen -->  
+		<div>
+		<hr>
+		<strong>Annotations</strong>
+        <br><strong>Language:</strong>&nbsp;<a href="#">{{ lemma.xxx }}</a>
         <br><strong>Script:</strong> {{ lemma.xxx }}
-        </p>
+		<hr>
+        </div>
 														
 			
             <!--
@@ -139,24 +155,10 @@
 						{% endfor %}
 					{% endif %}
 				</p>					
-			</div>-->
-        
-        <hr>      
-        
-		
-	   
-        <!-- Kommentar -->  
-		<div class="comment pb-4">
-			<p class="h5 comment-title">Comment-Title</p>
-            <p class="h6 comment-title">Comment-Subtitle</p>
-			<p class="comment-content">Es sequi illore ne reptation cone videm fugia dolendu ntectotas nihit rat lit fugiatum doluptatecto que maximpe eaquatin nis rehent quam, corum accatem oluptas inus doloremolo ea volum quibus voluptaque volupta amet optaers piendusae.</p>
-            <p class="comment-author">Edited by&nbsp;<strong>Vorname Name</strong>&nbsp;on
-                <span class="comment-date"><strong>20.08.2019</strong></span></p>
-            <hr>
-		</div>        
+			</div>-->  
         
         <div class="relations">
-			<p class="relations"><strong>TLA-Relations</strong>
+			<p class="relations"><strong>Lemma relations</strong>
 					{% if lemma.relations.root %}
 						<br>Root:
 						{% for root in lemma.relations.root %}
@@ -199,10 +201,15 @@
 					{% endif %}
 				</p>
             
-            <p>Das dynamische Einfügen von Treffern hat bisher noch nicht funktioniert.
-            
-            
-            </p>
+            <p>###Das dynamische Einfügen von Treffern hat bisher noch nicht funktioniert.###</p>
+			
+			<div class="editor">
+			<hr>	
+			<strong>TLA Editor:&nbsp;<a href="#">{{ lemma.edited.name }}</a></strong>			
+			<br><strong>Last Revision:</strong> {{ lemma.edited.date }}
+			<br><strong>Protocoll:</strong> {{ lemma.xxx }}
+			<br><strong>Review State:</strong> {{ lemma.revisionState }}
+			</div>
 		</div>          
        
         
@@ -244,11 +251,11 @@
         <div class="bg-light citation mt-3 mb-4">
             <p class="h6">Please cite as</p>			
                 <ul class="list-unstyled mt-3 mb-4">
-                    <li><strong>TLA lemma ID ... (lemma)</strong></li>
-                    <li>http://tla.bbaw.de/view/lemma/83470 in in: Thesaurus Linguae Aegyptiae</li>
-                    <li>http://tla.bbaw.de</li>
-                    <li>Version 16.0, 30.10.2019, ed. by Berlin-Brandenburgische Akademie der Wissenschaften & Sächsische Akademie der Wissenschaften     </li>
-                    <li>(accessed: 2.2.2020)</li>
+                    <li>TLA lemma ID {{lemma.id}} ({% for word in lemma.words %}{{word.transcription}}{% endfor %}), &lt;http://tla.bbaw.de/view/lemma/{{lemma.id}}&gt;, 
+					in: <i>Thesaurus Linguae Aegyptiae</i> &lt;http://tla.bbaw.de&gt;, 
+					Version ##16.0##, ##30.10.2019##, 
+					ed. by Berlin-Brandenburgische Akademie der Wissenschaften & Sächsische Akademie der Wissenschaften 
+					(accessed: ##DATUM##)</li>
                 </ul>
            
             <button type="button" class="btn btn-light text-left text-decoration-none"><span class="fa fa-clipboard"></span>Copy citation</button>

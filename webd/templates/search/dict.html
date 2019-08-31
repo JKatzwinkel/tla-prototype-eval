@@ -65,14 +65,14 @@
 				<!-- Redaktionsstatus & Anzahl Occurences-->
 				<div class="pt-1">
 					<div class="red-status float-right ml-2">
-                        <a href="#"><span class="far fa-check-circle ok"></span></a>
+                        <a href="#"><span class="far fa-check-circle {% if hit.occurrences > 0 %}ok{% else %}pending{% endif %}"></span></a>
                     </div>
                     {% if hit.occurrences > 0 %}
 					   <div class="number_occurences float-right">
                             <p>Occ.:&nbsp;{{hit.occurrences}}</p>
                         </div>
-                    {% endif %}
-                    
+                    {% endif %} 
+					
 					<!--<a><span class="far fa-envelope"/></a>
 					<a><span class="far fa-comment"/></a>-->
 				</div>	
@@ -83,27 +83,32 @@
 					{{hit.name}}
                 </h2>
 				<!-- Hieroglyph -->
-					<span class="hieroglyph hide">
+					<span class="hieroglyph">
 						{% for word in hit.words %}
 							{% if word.glyphs %}
 								<span class="glyphbox">
-									<canvas class="res" title="{{word.glyphs}}">
+									<!-- TODO font-size: 20px; vertical-align: -5px; in css verschieben -->
+									<canvas class="res" style="font-size: 20px; vertical-align: -5px;" title="{{word.glyphs}}">
 										{{word.glyphs}}
 									</canvas>
 								</span>
 							{% endif %}
 						{% endfor %}
 					</span>
-				
+				<!-- Lemma ID -->
+				<span class="result-list-lemma-id hide">
+                    &nbsp; (ID {{hit.id}})
+                </span>
 				</a>
 				
 				<!-- Translation DE -->
 				<p class="translation">
+					<span class="word-class font-italic hide">[{{hit.type}}]</span>
 					{%for translation in hit.translations.de%}
 					<span class="translation">{{translation}}</span>
 					{%endfor%}
-					<!-- Bibliografy -->
-					<span class="result-list-bibliography">({{hit.bibliography}})</span>
+					<!-- Bibliography -->
+					<span class="result-list-bibliography hide">({{hit.bibliography}})</span>
 				</p>
 				
 				<!-- Translation EN FR -->
@@ -114,7 +119,7 @@
 					</p>
 				</div>
 				
-				<!-- Wordclass -->
+				<!-- Wordclass 
 				<div class="word-class hide">
 					<p>
 						<strong>
@@ -122,7 +127,8 @@
 							{%if hit.subtype%}<span>({{hit.subtype}})</span>{%endif%}
 						</strong>
 					</p>
-				</div>
+				</div>-->
+				
 			</div> <!-- /. result-bg  -->	
 				<!-- combination-search -->
 				<div class="combination-search ml-4 my-1 hide">
@@ -142,9 +148,10 @@
 		<div class="col-4">
             <div class="sticky-top">
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail hieroglyph-btn "><i class="fas fa-plus-circle"></i>Hieroglyphs</button>
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail lemma-id-btn "><i class="fas fa-plus-circle"></i>Lemma ID</button>
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-class-btn"><span class="fas fa-plus-circle"></span>Word Class</button>
                  <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail bibliografical-btn "><i class="fas fa-plus-circle"></i>Bibliographical references </button>
-                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail runtime-btn "><i class="fas fa-plus-circle"></i>Runtime specifications</button>
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestationtime-btn "><i class="fas fa-plus-circle"></i>Attestation time</button>
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn "><span class="fas fa-plus-circle"></span>Translation Languages</button>
                 
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail combination-search-btn"><span class="fas fa-plus-circle"></span>Combination Search</button>
