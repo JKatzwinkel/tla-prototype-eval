@@ -3,7 +3,7 @@
  */
 
 
-.container {max-width: 1300!important;}
+.container {max-width: 85%!important;}
 
 
 /* Typography */
@@ -15,7 +15,7 @@
 
 a, p, h1, h2, h3, ul, li {
 	font-family: "roboto", arial, sans-serif;
-	font-weight: 300;
+	font-weight: 400;
 	margin-bottom: 0.2rem;
 	}
 	
@@ -93,9 +93,7 @@ a.navbar-brand {
 	background-color: #888;
 	}
 .result-list-item h2 {
-	padding: 1px 10px;
-	display: inline-block;
-	margin-left: -0.25em;
+	display: inline-block;	
 	}
 .result-list-item:hover{
    
@@ -281,7 +279,7 @@ ul.annotation-block li:last-child {
     font-size: .85em;
 }
 
-.translation  {
+p.translation-de span  {
     font-weight: 500;    
 }
 
@@ -289,7 +287,17 @@ ul.annotation-block li:last-child {
     font-weight: 100!important; 
 }
 
+.word-class {float: left;}
 
+.word-class-type {
+    font-style: italic;
+    font-weight: 100;
+}
+.word-class-subtype {
+    font-weight: 100;
+    font-family: "Roboto Condensed"
+}
+.translations {clear: xleft;}
 
 /* Pagination */
 .pag-container {
