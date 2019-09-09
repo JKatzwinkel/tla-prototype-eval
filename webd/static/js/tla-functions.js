@@ -37,20 +37,52 @@ function init() {
 			e.preventDefault();
             $('.result-list-bibliography').slideToggle('slow');
         });	
-		
-	// .translation-languages
-		$('html').not('.translation-languages').click(function (e) {
+	
+    
+    // Translation Languages
+	// .translation-languages DE
+		$('html').not('.translation-languages-btn-de').click(function (e) {
 		        //console.log($(e.target).parent());
-		 if ($('.translation-languages').is(':visible') && !e.target == '.translation-languages') {
-                $('.translation-languages').slideUp('ease-out');
+		 if ($('.translation-de').is(':visible') && !e.target == '.translation-de') {
+                $('.translation-de').slideUp('ease-out');
             }
         });
 
-        $('.translation-languages-btn').click(function (e) {
+        $('.translation-languages-btn-de').click(function (e) {
 			e.preventDefault();
-            $('.translation-languages').slideToggle('slow');
+            $('.translation-de').slideToggle('slow');
+        });	
+    
+    // .translation-languages EN
+		$('html').not('.translation-languages-btn-en').click(function (e) {
+		        //console.log($(e.target).parent());
+		 if ($('.translation-en').is(':visible') && !e.target == '.translation-en') {
+                $('.translation-en').slideUp('ease-out');
+            }
+        });
+
+        $('.translation-languages-btn-en').click(function (e) {
+			e.preventDefault();
+            $('.translation-en').slideToggle('slow');
+        });	
+    
+    // .translation-languages FR
+		$('html').not('.translation-languages-btn-fr').click(function (e) {
+		        //console.log($(e.target).parent());
+		 if ($('.translation-fr').is(':visible') && !e.target == '.translation-fr') {
+                $('.translation-fr').slideUp('ease-out');
+            }
+        });
+
+        $('.translation-languages-btn-fr').click(function (e) {
+			e.preventDefault();
+            $('.translation-fr').slideToggle('slow');
         });	
 	
+    
+    
+    
+    
 	// .word-class
 		$('html').not('.word-class').click(function (e) {
 		        //console.log($(e.target).parent());
@@ -88,7 +120,12 @@ function init() {
             $('.container-annotation-switch').slideToggle('slow');
         });	
     
-		
+    
+	// Copy-Text-Button
+    
+   // muss noch geschrieben werden
+    
+    
 	// Headroom 
 	    $(function() {
 		var header = new Headroom(document.querySelector("#header"), {
