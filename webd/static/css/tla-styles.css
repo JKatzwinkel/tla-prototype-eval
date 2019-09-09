@@ -297,7 +297,8 @@ p.translation-de span  {
     font-weight: 100;
     font-family: "Roboto Condensed"
 }
-.translations {clear: xleft;}
+
+.translations {display:block;}
 
 /* Pagination */
 .pag-container {

@@ -78,56 +78,82 @@
 				</div>	
 				
 				<!-- Lemma -->
-				<a href="/view/lemma/{{hit.id}}" title="{%if pred%}{{pred}}{%endif%}"> <!-- lemma-beziehung -->
-				<h2 class="word bbaw-libertine">
-					{{hit.name}}
-                </h2>
-				<!-- Hieroglyph -->
-					<span class="hieroglyph">
-						{% for word in hit.words %}
-							{% if word.glyphs %}
-								<span class="glyphbox">
-									<!-- TODO font-size: 20px; vertical-align: -5px; in css verschieben -->
-									<canvas class="res" style="font-size: 20px; vertical-align: -5px;" title="{{word.glyphs}}">
-										{{word.glyphs}}
-									</canvas>
-								</span>
-							{% endif %}
-						{% endfor %}
-					</span>
-				<!-- Lemma ID -->
-				<span class="result-list-lemma-id hide">
-                    &nbsp; (ID {{hit.id}})
-                </span>
-				</a>
-				
-				<!-- Translation DE -->
-				<p class="translation">
-					<span class="word-class font-italic hide">[{{hit.type}}]</span>
-					{%for translation in hit.translations.de%}
-					<span class="translation">{{translation}}</span>
-					{%endfor%}
-					<!-- Bibliography -->
-					<span class="result-list-bibliography hide">({{hit.bibliography}})</span>
-				</p>
-				
-				<!-- Translation EN FR -->
-				<div class="translation-languages hide">
+                <div>
+                    <a href="/view/lemma/{{hit.id}}" title="{%if pred%}{{pred}}{%endif%}"> <!-- lemma-beziehung -->
+                    <h2 class="word bbaw-libertine">
+                        {{hit.name}}
+                    </h2>
+                    <!-- Hieroglyph -->
+                        <span class="hieroglyph">
+                            {% for word in hit.words %}
+                                {% if word.glyphs %}
+                                    <span class="glyphbox">
+                                        <!-- TODO font-size: 20px; vertical-align: -5px; in css verschieben -->
+                                        <canvas class="res" style="font-size: 20px; vertical-align: -5px;" title="{{word.glyphs}}">
+                                            {{word.glyphs}}
+                                        </canvas>
+                                    </span>
+                                {% endif %}
+                            {% endfor %}
+                        </span>
+
+                    <!-- Lemma ID -->
+                    <span class="result-list-lemma-id hide">
+                        &nbsp; (ID {{hit.id}})
+                    </span>
+                    </a>
+                </div>
+                
+                
+                <!-- Wordclass -->
+				<div class="word-class hide mr-2">
+					<p>
+						<strong>
+							<span class="font-italic word-class-type">[{{hit.type}}]</span>
+							{%if hit.subtype%}<span class="word-class-subtype">({{hit.subtype}})</span>{%endif%}
+						</strong>
+					</p>
+				</div>
+                
+                <!-- Translations -->
+                <div class="translations">    
+                    <!-- Translation DE -->
+                    <p class="translation-de">
+                        <span class="font-italic hide">[{{hit.type}}]</span>
+                        {%for translation in hit.translations.de%}
+                        <span class="translation">{{translation}}</span>
+                        {%endfor%}
+                        <!-- Bibliography -->
+                        <span class="result-list-bibliography hide">({{hit.bibliography}})</span>
+                    </p>
+
+                    <!-- Translation EN -->
+                    <p class="translation-en hide">
+                        <span class="font-italic hide">[{{hit.type}}]</span>
+                        {%for translation in hit.translations.en%}
+                        <span>{{translation}}</span>
+                        {%endfor%}					
+                    </p>
+
+                    <!-- Translation FR -->
+                    <p class="translation-fr hide">
+                        <span class="font-italic hide">[{{hit.type}}]</span>
+                        {%for translation in hit.translations.fr%}
+                        <span>{{translation}}</span>
+                        {%endfor%}					
+                    </p>
+                </div>  
+                
+                    
+				<!-- Translation EN FR 
+				<div class="translation-language-en hide">
 					<p class="text-muted">{% for translation in hit.translations.en%}<span>{{translation}}</span>{%endfor%}
 					<br>
 					<span class="font-italic">{%for translation in hit.translations.fr%}<span>{{translation}}</span>{%endfor%}</span>
 					</p>
-				</div>
+				</div> -->
+                    
 				
-				<!-- Wordclass 
-				<div class="word-class hide">
-					<p>
-						<strong>
-							<span class="font-italic">{{hit.type}}</span>
-							{%if hit.subtype%}<span>({{hit.subtype}})</span>{%endif%}
-						</strong>
-					</p>
-				</div>-->
 				
 			</div> <!-- /. result-bg  -->	
 				<!-- combination-search -->
@@ -152,9 +178,18 @@
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-class-btn"><span class="fas fa-plus-circle"></span>Word Class</button>
                  <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail bibliografical-btn "><i class="fas fa-plus-circle"></i>Bibliographical references </button>
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestationtime-btn "><i class="fas fa-plus-circle"></i>Attestation time</button>
-                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn "><span class="fas fa-plus-circle"></span>Translation Languages</button>
+                
+                <div class="dropdown">
+                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail" id="languages" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-plus-circle"></span>Translation Languages</button>
+                    <div class="dropdown-menu" aria-labelledby="languages">
+                        <button class="dropdown-item translation-languages-btn-de" type="button">German</button>
+                        <button class="dropdown-item translation-languages-btn-en" type="button">English</button>
+                        <button class="dropdown-item translation-languages-btn-fr" type="button">French</button>
+                      </div>
+                </div>
                 
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail combination-search-btn"><span class="fas fa-plus-circle"></span>Combination Search</button>
+                
                 <br>	
                 <button type="button" class="btn btn-block btn-light text-left text-decoration-none show-detail combination-search-btn"><span class="fas fa-search-plus"></span>Combination Search</button>
                 
