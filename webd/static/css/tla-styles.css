@@ -432,8 +432,6 @@ ul.annotation-block li:last-child {
 
 .hide {display: none;}
 
-
-
 .sticky-top {
     position: -webkit-sticky;
     position: sticky;
@@ -471,6 +469,15 @@ ul.annotation-block li:last-child {
 	.page-head {transform: translateY(-100%)}
 
 	}
+
+/* buttons */
+
+.content .dropdown {
+    margin: .5rem 0;
+}
+.dropdown-menu {
+    width: 100%;
+}
 
 /* multiselect */
 
