@@ -2993,7 +2993,7 @@ input[type="button"].btn-block {
 .dropright,
 .dropdown,
 .dropleft {
-  position: relative;
+  position: relative;    
 }
 
 .dropdown-toggle::after {
