@@ -2,7 +2,7 @@
 {% load static %}
 {% load js %}
 
-{% block title %}TLA - Prototyp - Belegstellen{% endblock %}
+{% block title %}TLA - Occurences: Lemma ###lemmaID###{% endblock %}
 
 {% block content %}
 <!-- Page Content -->
@@ -33,8 +33,8 @@
 			  </div>
 			<select class="custom-select" id="inputGroupSelect02">
 				<option selected>alphabetical order</option>
-				<option value="1">option 2</option>
-				<option value="2">option 3</option>
+				<option value="1">###option 2</option>
+				<option value="2">###option 3</option>
 			  </select>			  
 			</div>
 		</div>		
@@ -56,66 +56,75 @@
         <div class="occ-list-item pt-1 pb-1" id="{{hit.occurence.id}}">
         <div class="container-annotation-switch hide">
             <div class="container-annotation mt-2 mb-2">
-                <ul class="annotation-block" onclick="window.open('/view/lemma/XXX','_self')">
+                {% for token in hit.sentence.tokens %}
+						    <!-- verfügbar in token aktuell, Beispiel
+							'id': 'IBUBd7OVlOhfKUiumxJHEQfNPHc', 
+							'type': 'word', 
+							'label': 'jn', 
+							'lemma': '26660', 
+							'flexcode': '3', 
+							'glossing':	'unverändert zu BWL', 
+							'glyphs': 'M17-N35', 
+							'translations': {'de': ['seitens (jmds.)']
+							####KEIN highlight verfügbar, vgl. unten -->
+                <ul class="annotation-block" onclick="window.open('/view/lemma/{{token.lemma}}','_blank')">
                     <li class="hieroglyph">
-                        <canvas class="res inline" width="197" height="44">F35-F35
-                    </canvas>
-                    </li>
-                    <li class="transcription">Transkription</li>
-                    <li class="word-class">Wortart</li>
-                    <li class="grammar">gramm. Annotation</li>
-                    <li class="translation">Übersetzung</li>               
-                </ul> 
-                <ul class="annotation-block">
-                    <li class="hieroglyph">
-                        <canvas class="res inline" width="197" height="44">M23*[sep=0.5](X1:N35)-insert[t](G39,Z1)-N12[rotate=180]-F31*[sep=0.5]S29
-                    </canvas>
-                    </li>
-                    <li class="transcription">Transkription</li>
-                    <li class="word-class">Wortart</li>
-                    <li class="grammar">gramm. Annotation</li>
-                    <li class="translation">Übersetzung</li>               
+                        <canvas class="res occ-tok-glyphs {%if token.highlight%}highlight-{{token.highlight}}{%endif%}" title="{{token.glyphs}}">
+                        {% if token.glyphs %}
+                            {{token.glyphs}}
+                        {% else %}
+                            .. <!-- leeres Quadrat zur Höhenangleichung; ## funtioniert nicht -->
+                        {% endif %}
+                       </canvas>
+					</li>
+                    <li class="transcription">
+					    {% if token.label %}
+                           {{token.label}}
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+					</li>
+                    <li> <!-- class="word-class" does not work -->
+					    {% if token.type %}
+                           {{token.type}}
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+					</li>
+                    <li class="grammar">
+					    {% if token.glossing %}
+                           {{token.glossing}}
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+					</li>
+                    <li class="translation">
+					    {% if token.translations.de %}
+                           {{token.translations.de}}
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+					</li>               
+                    <li> <!-- Lemma ID ### add class ### -->
+					    {% if token.lemma %}
+                           {{token.lemma}}
+						{% else %}
+							{% if token.flexcode %}
+								{{token.flexcode}}
+							{% else %}
+								&nbsp;
+							{% endif %}
+                        {% endif %}
+					</li>
+                    <li> <!-- Word ID ### add class ### -->
+					    {% if token.id %}
+                           {{token.id}}
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+					</li>
                 </ul>
-                <ul class="annotation-block active">
-                    <li class="hieroglyph">
-                        <canvas class="res inline" width="197" height="44">F35-I9-D21
-                    </canvas>
-                    </li>
-                    <li class="transcription">Transkription</li>
-                    <li class="word-class">Wortart</li>
-                    <li class="grammar">gramm. Annotation</li>
-                    <li class="translation">Übersetzung</li>               
-                </ul> 
-                <ul class="annotation-block">
-                    <li class="hieroglyph">
-                        <canvas class="res inline" width="197" height="44">F35-W22-Z2
-                    </canvas>
-                    </li>
-                    <li class="transcription">Transkription</li>
-                    <li class="word-class">Wortart</li>
-                    <li class="grammar">gramm. Annotation</li>
-                    <li class="translation">Übersetzung</li>               
-                </ul> 
-                <ul class="annotation-block">
-                    <li class="hieroglyph">
-                        <canvas class="res inline" width="197" height="44">F35-I9-D21
-                    </canvas>
-                    </li>
-                    <li class="transcription">Transkription</li>
-                    <li class="word-class">Wortart</li>
-                    <li class="grammar">gramm. Annotation</li>
-                    <li class="translation">Übersetzung</li>               
-                </ul> 
-                <ul class="annotation-block">
-                    <li class="hieroglyph">
-                        <canvas class="res inline" width="197" height="44">F35-W22-Z2
-                    </canvas>
-                    </li>
-                    <li class="transcription">Transkription</li>
-                    <li class="word-class">Wortart</li>
-                    <li class="grammar">gramm. Annotation</li>
-                    <li class="translation">Übersetzung</li>               
-                </ul>          
+                {% endfor %}          
                
                 </div> <!-- container-annotation clode -->
             </div> <!-- container-switch close -->           
