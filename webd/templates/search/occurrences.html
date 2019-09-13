@@ -180,16 +180,16 @@
             
 				<!-- Translation DE -->
 				{% for translation in hit.sentence.translations.de %}
-					<p class="translation">{{translation}}</p>
+					<p class="translation translation-de">{{translation}}</p>
 				{% endfor %}
-				
-				<!-- Translation EN FR -->
-				<div class="translation-languages hide">
-					<p class="text-muted">{{hit.sentence.translations.en.0}}
-					<br>
-					<span class="font-italic">{{hit.sentence.translations.fr.0}}</span>
-					</p>
-				</div>
+				<!-- Translation EN, werten  -->
+				{% for translation in hit.sentence.translations.de %}
+					<p class="translation translation-en hide">{{translation}}</p>
+				{% endfor %}
+				<!-- Translation FR -->
+				{% for translation in hit.sentence.translations.de %}
+					<p class="translation translation-fr hide">{{translation}}</p>
+				{% endfor %}
 
 				<div class="corpus-paths">
 					{%for path in hit.text.paths%}
