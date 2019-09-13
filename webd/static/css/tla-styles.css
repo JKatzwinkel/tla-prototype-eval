@@ -18,7 +18,9 @@ a, p, h1, h2, h3, ul, li {
 	font-weight: 400;
 	margin-bottom: 0.2rem;
 	}
-	
+
+.condenesed {font-familiy:"Roboto Condensed"}
+
 a {color:red;}	
 a:hover {
 	text-decoration: none;
@@ -227,6 +229,7 @@ a span.lc:hover {
 .occ-list-item .translation-fr,
 .occ-list-item .glossing {
     font-size: 0.8em;
+    
 }
 
 
@@ -317,7 +320,7 @@ p.translation-de span  {
 }
 .word-class-subtype {
     font-weight: 100;
-    font-family: "Roboto Condensed"
+    font-family: "Roboto Condensed";
 }
 
 .translations {display:block;}
