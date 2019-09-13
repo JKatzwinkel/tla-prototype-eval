@@ -38,8 +38,55 @@ function init() {
             $('.result-list-bibliography').slideToggle('slow');
         });	
 	
-    
-    // Translation Languages
+	// .lemma-id
+		$('html').not('.lemma-id').click(function (e) {
+		        //console.log($(e.target).parent());
+		 if ($('.lemma-id').is(':visible') && !e.target == '.lemma-id') {
+                $('.lemma-id').slideUp('ease-out');
+            }
+        });
+        $('.lemma-id-btn').click(function (e) {
+			e.preventDefault();
+            $('.lemma-id').slideToggle('slow');
+        });	
+
+ 	// .word-id
+		$('html').not('.word-id').click(function (e) {
+		        //console.log($(e.target).parent());
+		 if ($('.word-id').is(':visible') && !e.target == '.word-id') {
+                $('.word-id').slideUp('ease-out');
+            }
+        });
+        $('.word-id-btn').click(function (e) {
+			e.preventDefault();
+            $('.word-id').slideToggle('slow');
+        });	
+
+ 	// .part-of-speech
+		$('html').not('.part-of-speech').click(function (e) {
+		        //console.log($(e.target).parent());
+		 if ($('.part-of-speech').is(':visible') && !e.target == '.part-of-speech') {
+                $('.part-of-speech').slideUp('ease-out');
+            }
+        });
+        $('.part-of-speech-btn').click(function (e) {
+			e.preventDefault();
+            $('.part-of-speech').slideToggle('slow');
+        });	
+		
+  	// .glossing
+		$('html').not('.glossing').click(function (e) {
+		        //console.log($(e.target).parent());
+		 if ($('.glossing').is(':visible') && !e.target == '.glossing') {
+                $('.glossing').slideUp('ease-out');
+            }
+        });
+        $('.glossing-btn').click(function (e) {
+			e.preventDefault();
+            $('.glossing').slideToggle('slow');
+        });	
+		
+   // Translation Languages
 	// .translation-languages DE
 		$('html').not('.translation-languages-btn-de').click(function (e) {
 		        //console.log($(e.target).parent());

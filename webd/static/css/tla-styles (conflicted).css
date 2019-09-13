@@ -224,8 +224,7 @@ a span.lc:hover {
 
 .occ-list-item .translation-de,
 .occ-list-item .translation-en,
-.occ-list-item .translation-fr,
-.occ-list-item .glossing {
+.occ-list-item .translation-fr {
     font-size: 0.8em;
 }
 

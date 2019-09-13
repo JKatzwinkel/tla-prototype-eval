@@ -67,13 +67,20 @@
 							'glyphs': 'M17-N35', 
 							'translations': {'de': ['seitens (jmds.)']
 							####KEIN highlight verfügbar, vgl. unten -->
-                <ul class="annotation-block" onclick="window.open('/view/lemma/{{token.lemma}}','_blank')">
+                <ul class="annotation-block {%if token.highlight%}highlight-{{token.highlight}}{%endif%}" onclick="window.open('/view/lemma/{{token.lemma}}','_blank')">
+                    <li class="word-id hide">  <!-- ### add class ### -->
+					    {% if token.id %}
+                           {{token.id}}
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+					</li>
                     <li class="hieroglyph">
-                        <canvas class="res occ-tok-glyphs {%if token.highlight%}highlight-{{token.highlight}}{%endif%}" title="{{token.glyphs}}">
+                        <canvas class="res occ-tok-glyphs" style="font-size: 20px; vertical-align: -5px;"  title="{{token.glyphs}}">
                         {% if token.glyphs %}
                             {{token.glyphs}}
                         {% else %}
-                            .. <!-- leeres Quadrat zur Höhenangleichung; ## funtioniert nicht -->
+                            empty
                         {% endif %}
                        </canvas>
 					</li>
@@ -84,28 +91,7 @@
                             &nbsp;
                         {% endif %}
 					</li>
-                    <li> <!-- class="word-class" does not work -->
-					    {% if token.type %}
-                           {{token.type}}
-                        {% else %}
-                            &nbsp;
-                        {% endif %}
-					</li>
-                    <li class="grammar">
-					    {% if token.glossing %}
-                           {{token.glossing}}
-                        {% else %}
-                            &nbsp;
-                        {% endif %}
-					</li>
-                    <li class="translation">
-					    {% if token.translations.de %}
-                           {{token.translations.de}}
-                        {% else %}
-                            &nbsp;
-                        {% endif %}
-					</li>               
-                    <li> <!-- Lemma ID ### add class ### -->
+                    <li class="lemma-id hide">
 					    {% if token.lemma %}
                            {{token.lemma}}
 						{% else %}
@@ -116,13 +102,47 @@
 							{% endif %}
                         {% endif %}
 					</li>
-                    <li> <!-- Word ID ### add class ### -->
-					    {% if token.id %}
-                           {{token.id}}
+                    <li class="part-of-speech hide"> <!-- ##vorläufig Inhalt von type, letzendlich muss hier POS-Inhalt rein  -->
+					    {% if token.type %}
+                           {{token.type}}
                         {% else %}
                             &nbsp;
                         {% endif %}
 					</li>
+                    <li class="glossing hide">
+					    {% if token.glossing %}
+                           {{token.glossing}}
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+					</li>
+                    <li class="translation-de">
+					    {% if token.translations.de %}
+ 							{%for translation in token.translations.de %}
+								{{translation}}
+							{%endfor%}
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+					</li>               
+                    <li class="translation-en hide"> <!-- ##Inhalt aktuell noch nicht in token mitgeliefert  -->
+					    {% if token.translations.en %}
+							{%for translation in token.translations.en %}
+								{{translation}}
+							{%endfor%}
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+					</li>               
+                    <li class="translation-fr hide"> <!-- ##Inhalt aktuell noch nicht in token mitgeliefert  -->
+					    {% if token.translations.fr %}
+							{%for translation in token.translations.fr %}
+								{{translation}}
+							{%endfor%}
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+					</li>               
                 </ul>
                 {% endfor %}          
                
@@ -206,11 +226,24 @@
 		<!-- Sidebar -->
 		<div class="col-sm-4">
 		<div class="sticky-top">
-			<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail hieroglyph-btn "><i class="fas fa-plus-circle"></i>Hieroglyphs</button>
-            
             <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail anno-block-btn"><i class="fas fa-plus-circle"></i>Switch Annotation/Block-View</button>
 			
-			<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn "><span class="fas fa-plus-circle"></span>Translation Languages</button>
+            <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-id-btn "><i class="fas fa-plus-circle"></i>Word ID</button><!--new-->
+			<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail hieroglyph-btn "><i class="fas fa-plus-circle"></i>Hieroglyphs</button>
+            <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail lemma-id-btn "><i class="fas fa-plus-circle"></i>Lemma ID</button>
+            <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail part-of-speech-btn"><span class="fas fa-plus-circle"></span>Part of Speech</button>
+            <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail glossing-btn"><span class="fas fa-plus-circle"></span>Glossing</button>
+			
+			<div class="dropdown">
+				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn" id="languages" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-plus-circle"></span>Translation Languages</button>
+				<div class="dropdown-menu" aria-labelledby="languages">
+					<button class="dropdown-item translation-languages-btn-de" type="button">German</button>
+					<button class="dropdown-item translation-languages-btn-en" type="button">English</button>
+					<button class="dropdown-item translation-languages-btn-fr" type="button">French</button>
+				  </div>
+			</div>
+			<!--<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn "><span class="fas fa-plus-circle"></span>Translation Languages</button>-->
+			
 			<br>
             
             <a href="javascript:history.back()"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Back </button></a>

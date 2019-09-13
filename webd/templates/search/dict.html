@@ -133,6 +133,8 @@
                         {%for translation in hit.translations.en%}
                         <span>{{translation}}</span>
                         {%endfor%}					
+                        <!-- Bibliography -->
+                        <span class="result-list-bibliography hide">({{hit.bibliography}})</span>
                     </p>
 
                     <!-- Translation FR -->
@@ -141,6 +143,8 @@
                         {%for translation in hit.translations.fr%}
                         <span>{{translation}}</span>
                         {%endfor%}					
+                        <!-- Bibliography -->
+                        <span class="result-list-bibliography hide">({{hit.bibliography}})</span>
                     </p>
                 </div>  
                 
