@@ -70,7 +70,6 @@ def render_annotations(annos):
         anno['title'] = tag_transcription(anno['title'])
     return annos
 
-
 def coins_openurl_kev(doc):
     # generate a contextobject referent
     # https://groups.niso.org/apps/group_public/download.php/14833/z39_88_2004_r2010.pdf

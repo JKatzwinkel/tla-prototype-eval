@@ -309,7 +309,7 @@ p.translation-de span  {
     font-weight: 100!important; 
 }
 
-.word-class {float: left;}
+/*.word-class {float: left;}*/
 
 .word-class-type {
     font-style: italic;
@@ -320,7 +320,7 @@ p.translation-de span  {
     font-family: "Roboto Condensed"
 }
 
-.translations {display:block;}
+/*.translations {display:block;}*/
 
 /* Pagination */
 .pag-container {

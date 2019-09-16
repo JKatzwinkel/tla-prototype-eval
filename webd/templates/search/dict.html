@@ -77,8 +77,8 @@
 					<a><span class="far fa-comment"/></a>-->
 				</div>	
 				
-				<!-- Lemma -->
-                <div>
+				<!-- erste Zeile -->
+                <div> 
                     <a href="/view/lemma/{{hit.id}}" title="{%if pred%}{{pred}}{%endif%}"> <!-- lemma-beziehung -->
                     <h2 class="word bbaw-libertine">
                         {{hit.name}}
@@ -104,58 +104,45 @@
                     </a>
                 </div>
                 
-                
-                <!-- Wordclass -->
-				<div class="word-class hide mr-2">
-					<p>
+                 <!-- zweite Zeile -->
+				 <div>
+					<!-- Wordclass -->
+					<span class="word-class hide">
 						<strong>
 							<span class="font-italic word-class-type">[{{hit.type}}]</span>
 							{%if hit.subtype%}<span class="word-class-subtype">({{hit.subtype}})</span>{%endif%}
 						</strong>
-					</p>
+					</span>
+					
+					<!-- Translations -->
+					<!-- Translation DE -->
+					<span class="translations translation-de">
+						<span class="font-italic hide">[{{hit.type}}]</span>
+						{%for translation in hit.translations.de%}
+						<span class="translation">{{translation}}</span>
+						{%endfor%}
+					</span>
+					<!-- Translation EN -->
+					<span class="translations translation-en hide">
+						<span class="font-italic hide">[{{hit.type}}]</span>
+						{%for translation in hit.translations.en%}
+						<span>{{translation}}</span>
+						{%endfor%}					
+					</span>
+					<!-- Translation FR -->
+					<span class="translations translation-fr hide">
+						<span class="font-italic hide">[{{hit.type}}]</span>
+						{%for translation in hit.translations.fr%}
+						<span>{{translation}}</span>
+						{%endfor%}					
+					</span>
+		   
+					<!-- Attestation time -->
+					<span class="result-list-attestation-time hide">(##att.time##{{hit.xxx}})</span> <!-- ##Variable noch nicht verfügbar -->
+					
+					<!-- Bibliography -->
+					<span class="result-list-bibliography hide">({{hit.bibliography}})</span>
 				</div>
-                
-                <!-- Translations -->
-                <div class="translations">    
-                    <!-- Translation DE -->
-                    <p class="translation-de">
-                        <span class="font-italic hide">[{{hit.type}}]</span>
-                        {%for translation in hit.translations.de%}
-                        <span class="translation">{{translation}}</span>
-                        {%endfor%}
-                        <!-- Bibliography -->
-                        <span class="result-list-bibliography hide">({{hit.bibliography}})</span>
-                    </p>
-
-                    <!-- Translation EN -->
-                    <p class="translation-en hide">
-                        <span class="font-italic hide">[{{hit.type}}]</span>
-                        {%for translation in hit.translations.en%}
-                        <span>{{translation}}</span>
-                        {%endfor%}					
-                        <!-- Bibliography -->
-                        <span class="result-list-bibliography hide">({{hit.bibliography}})</span>
-                    </p>
-
-                    <!-- Translation FR -->
-                    <p class="translation-fr hide">
-                        <span class="font-italic hide">[{{hit.type}}]</span>
-                        {%for translation in hit.translations.fr%}
-                        <span>{{translation}}</span>
-                        {%endfor%}					
-                        <!-- Bibliography -->
-                        <span class="result-list-bibliography hide">({{hit.bibliography}})</span>
-                    </p>
-                </div>  
-                
-                    
-				<!-- Translation EN FR 
-				<div class="translation-language-en hide">
-					<p class="text-muted">{% for translation in hit.translations.en%}<span>{{translation}}</span>{%endfor%}
-					<br>
-					<span class="font-italic">{%for translation in hit.translations.fr%}<span>{{translation}}</span>{%endfor%}</span>
-					</p>
-				</div> -->
                     
 				
 				
@@ -181,7 +168,7 @@
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail lemma-id-btn "><i class="fas fa-plus-circle"></i>Lemma ID</button>
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-class-btn"><span class="fas fa-plus-circle"></span>Word Class</button>
                  <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail bibliografical-btn "><i class="fas fa-plus-circle"></i>Bibliographical references </button>
-                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestationtime-btn "><i class="fas fa-plus-circle"></i>Attestation time</button>
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestation-time-btn "><i class="fas fa-plus-circle"></i>Attestation time</button>
                 
                 <div class="dropdown">
                     <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail" id="languages" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-plus-circle"></span>Translation Languages</button>

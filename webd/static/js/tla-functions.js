@@ -37,7 +37,19 @@ function init() {
 			e.preventDefault();
             $('.result-list-bibliography').slideToggle('slow');
         });	
-	
+
+	// .result-list-attestation-time
+		$('html').not('.result-list-attestation-time').click(function (e) {
+		        //console.log($(e.target).parent());
+		 if ($('.result-list-attestation-time').is(':visible') && !e.target == '.result-list-attestation-time') {
+                $('.result-list-attestation-time').slideUp('ease-out');
+            }
+        });
+        $('.attestation-time-btn').click(function (e) {
+			e.preventDefault();
+            $('.result-list-attestation-time').slideToggle('slow');
+        });	
+		
 	// .lemma-id
 		$('html').not('.lemma-id').click(function (e) {
 		        //console.log($(e.target).parent());
