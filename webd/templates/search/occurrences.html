@@ -32,9 +32,10 @@
 				<label class="input-group-text" for="inputGroupSelect02">Order by</label>
 			  </div>
 			<select class="custom-select" id="inputGroupSelect02">
-				<option selected>alphabetical order</option>
-				<option value="1">###option 2</option>
-				<option value="2">###option 3</option>
+				<option selected>alphabetical</option>
+				<option value="1">attestation time, start</option>
+				<option value="2">attestation time, middle</option>
+				<option value="3">attestation time, end</option>
 			  </select>			  
 			</div>
 		</div>		
@@ -43,7 +44,7 @@
 	<!-- Trefferanzahl-->
 	<div class="row searchresult">		
 			<div class="col-sm-12 pt-3">
-			<p class="result-entries">Results: <b>{{start}} - {{end}}</b> of <b>{{hitcount}}</b> Words in Texts</p>
+			<p class="result-entries">Results: <b>{{start}} - {{end}}</b> of <b>{{hitcount}}</b> occurences in texts</p>
 			</div>
 	</div><!-- /.row -->  
 	  	
@@ -226,14 +227,14 @@
 		<!-- Sidebar -->
 		<div class="col-sm-4">
 		<div class="sticky-top">
-            <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail anno-block-btn"><i class="fas fa-plus-circle"></i>Switch Annotation/Block-View</button>
-			
-            <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-id-btn "><i class="fas fa-plus-circle"></i>Word ID</button><!--new-->
 			<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail hieroglyph-btn "><i class="fas fa-plus-circle"></i>Hieroglyphs</button>
+
+            <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail anno-block-btn"><i class="fas fa-plus-circle"></i>Switch Annotation/Block-View</button>	
+			<!-- start indented buttons -->
+            <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-id-btn "><i class="fas fa-plus-circle"></i>Word ID</button><!--new-->
             <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail lemma-id-btn "><i class="fas fa-plus-circle"></i>Lemma ID</button>
             <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail part-of-speech-btn"><span class="fas fa-plus-circle"></span>Part of Speech</button>
             <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail glossing-btn"><span class="fas fa-plus-circle"></span>Glossing</button>
-            <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestation-time-btn"><span class="fas fa-plus-circle"></span>Attestation time</button>
 			
 			<div class="dropdown">
 				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn" id="languages" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-plus-circle"></span>Translation Languages</button>
@@ -244,6 +245,9 @@
 				  </div>
 			</div>
 			<!--<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn "><span class="fas fa-plus-circle"></span>Translation Languages</button>-->
+			<!-- end indented buttons -->
+
+            <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestation-time-btn"><span class="fas fa-plus-circle"></span>Attestation time</button>
 			
 			<br>
             

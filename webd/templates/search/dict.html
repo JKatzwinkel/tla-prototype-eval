@@ -32,9 +32,10 @@
 				<label class="input-group-text" for="inputGroupSelect02">Order by</label>
 			  </div>
 			<select class="custom-select" id="inputGroupSelect02">
-				<option selected>alphabetical order</option>
-				<option value="1">option 2</option>
-				<option value="2">option 3</option>
+				<option selected>alphabetical</option>
+				<option value="1">attestation time, start</option>
+				<option value="2">attestation time, middle</option>
+				<option value="3">attestation time, end</option>
 			  </select>			  
 			</div>
 		</div>		
@@ -167,8 +168,6 @@
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail hieroglyph-btn "><i class="fas fa-plus-circle"></i>Hieroglyphs</button>
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail lemma-id-btn "><i class="fas fa-plus-circle"></i>Lemma ID</button>
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-class-btn"><span class="fas fa-plus-circle"></span>Word Class</button>
-                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail bibliografical-btn "><i class="fas fa-plus-circle"></i>Bibliographical references </button>
-                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestation-time-btn "><i class="fas fa-plus-circle"></i>Attestation time</button>
                 
                 <div class="dropdown">
                     <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail" id="languages" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-plus-circle"></span>Translation Languages</button>
@@ -178,10 +177,11 @@
                         <button class="dropdown-item translation-languages-btn-fr" type="button">French</button>
                       </div>
                 </div>
-                
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestation-time-btn "><i class="fas fa-plus-circle"></i>Attestation time</button>
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail bibliografical-btn "><i class="fas fa-plus-circle"></i>Bibliographical references </button>                
+                <br>	                
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail combination-search-btn"><span class="fas fa-plus-circle"></span>Combination Search</button>
-                
-                <br>	
+
                 <button type="button" class="btn btn-block btn-light text-left text-decoration-none show-detail combination-search-btn"><span class="fas fa-search-plus"></span>Combination Search</button>
                 
                 <a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Modify Search</button></a>
