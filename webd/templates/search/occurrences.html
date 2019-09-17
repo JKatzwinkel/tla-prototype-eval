@@ -2,7 +2,7 @@
 {% load static %}
 {% load js %}
 
-{% block title %}TLA - Occurences: Lemma ###lemmaID###{% endblock %}
+{% block title %}TLA - Occurences - {{params.transcription}} (Lemma ID {{params.lemma}}){% endblock %}
 
 {% block content %}
 <!-- Page Content -->
@@ -24,7 +24,8 @@
 	<!-- Suchergebnis + sortieren-->	
 	<div class="row search-entries">
 		<div class="col-sm-8 result">
-			<h2 class="bbaw-libertine"><mark>{{params.transcription}}</mark></h2>
+			<h2 class="bbaw-libertine"><mark>{{params.transcription}}</mark></h2> <!--## transcription wird nicht mitgeliefert -->
+			<p class="lemma-id">(Lemma ID {{params.lemma}})</p>
 		</div>
 		<div class="col-sm-4">
 		 <div class="input-group mb-3">
