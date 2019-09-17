@@ -63,12 +63,13 @@
 			<hr>
 		</div>
 		<div class="grammar">
-			<p class="font-italic">
+			<strong>Part of Speech:</strong>&nbsp;
+			<span class="font-italic">
 				{{lemma.type}}
 				{% if lemma.subtype %}
 					({{ lemma.subtype }})
 				{% endif %}
-			</p>
+			</span>
 			<hr>				
 		</div>
 		<div class="translation">
@@ -86,9 +87,13 @@
         <!-- Beleglage -->  
 		<div>
 			<hr>
-			<strong>Attestation</strong>&nbsp;<a href="#" class="btn btn-light solo-icon red-status {% if xxx > 0 %}ok{% else %}pending{% endif %}" role="button"><span class="far fa-check-circle"/></a>
+			<strong>Attestation</strong>&nbsp;<a href="#" class="btn btn-light solo-icon red-status" role="button"><span class="far fa-check-circle {% if occurrences.corpus > 0 %}ok{% elif lemma.revisionState == "published" %}pending{% else %}notok{% endif %}"/></a>
 			<br><strong>Occurences:</strong>&nbsp;
-				{% for where, count in occurrences.items %} {{count}} &nbsp; {% endfor %} <!-- besser: aufsummieren -->
+			{% for where, count in occurrences.items %}
+			<a href="/search/occurrences?lemma={{lemma.id}}">
+				<button type="button" class="btn btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-right"></span>{{where}}: {{count}}</button>
+			</a>
+			{% endfor %}
 			<br><strong>Time:</strong>&nbsp;<a href="#">{{ lemma.xxx }}</a>
 		</div> 
 
@@ -214,7 +219,7 @@
        
         
         
-	</div> <! -- close content col-8 -->	
+	</div> <!-- close content col-8 -->	
 
 	<!-- Sidebar -->
 		<div class="col-sm-4">
@@ -224,13 +229,13 @@
 			{% for bib in bibl %}
 				<button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-right"></span>{{ bib }}</button>
 			{% endfor %}
-			<hr>
+			<!--<hr>
 			<p class="h6 pt-1 pb-1 pl-3">Occurrences</p>
 			{% for where, count in occurrences.items %}
 			<a href="/search/occurrences?lemma={{lemma.id}}">
 				<button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-right"></span>{{where}}: {{count}}</button>
 			</a>
-			{% endfor %}
+			{% endfor %}-->
 			<hr>
 			<p class="h6 pt-1 pb-1 pl-3">External Identifiers</p>
 			{% for provider, identifiers in lemma.externalReferences.items %}
@@ -248,23 +253,19 @@
 			<a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Modify Search</button></a>
             
             <!-- Zitationsfeld -->        
-        <div class="bg-light citation mt-3 mb-4">
-            
-            <p class="h6">Please cite as</p>
-            <div id="citation-text">
-                <ul class="list-unstyled mt-3 mb-4">
-                    <li>TLA lemma ID {{lemma.id}} ({% for word in lemma.words %}{{word.transcription}}{% endfor %}), &lt;http://tla.bbaw.de/view/lemma/{{lemma.id}}&gt;, 
-					in: <i>Thesaurus Linguae Aegyptiae</i> &lt;http://tla.bbaw.de&gt;, 
-					Version ##19.1##, ##30.10.2019##, 
-					ed. by Berlin-Brandenburgische Akademie der Wissenschaften & Sächsische Akademie der Wissenschaften 
-					(accessed: ##DATUM##)</li>
-                </ul>
-            </div>
-            <button type="button" class="btn btn-light text-left text-decoration-none"><span class="fa fa-clipboard"></span>Copy citation</button>
-              
-		</div>  
-            
-            
+			<div class="bg-light citation mt-3 mb-4">         
+				<p class="h6">Please cite as</p>
+				<div id="citation-text">
+					<p> <!-- Version, Issue, Release-Date, heutiges Datum noch per globaler Variable holen -->
+						TLA lemma ID {{lemma.id}} ({% for word in lemma.words %}{{word.transcription}}{% endfor %}), &lt;http://tla.bbaw.de/view/lemma/{{lemma.id}}&gt;, 
+						in: <i>Thesaurus Linguae Aegyptiae</i> &lt;http://tla.bbaw.de&gt;, 
+						Version ##19.1##, ##30.10.2019##, 
+						ed. by Berlin-Brandenburgische Akademie der Wissenschaften & Sächsische Akademie der Wissenschaften 
+						(accessed: ##DATUM##)
+					</p>
+				</div>
+				<button type="button" class="btn btn-light text-left text-decoration-none"><span class="fa fa-clipboard"></span>Copy citation</button>
+			</div>  
 			
 		</div>		
   </div>
