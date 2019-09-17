@@ -56,7 +56,7 @@
 		<div class="col-8 ">
 		<!-- Treffer -->
             {% for indent, pred, hit in hits %}        
-			<div class="result-list-item indent-{{indent}} {% if hit.revisionState != "published" %}notok{% endif %}">
+			<div class="result-list-item indent-{{indent}} {% if hit.revisionState != 'published' %}notok{% endif %}">
 				<!-- indent in views.py  --><!--{%if pred%}{{pred}}{%endif%}-->
                 
                 {% if pred %}
@@ -64,98 +64,96 @@
 				{% endif %}
                 
                 <div class="result-bg" id="{{hit.id}}" onclick="window.open('/view/lemma/{{hit.id}}','_self')">
-				<!-- Redaktionsstatus & Anzahl Occurences-->
-				<div class="pt-1">
-					<div class="red-status float-right ml-2">
-                        <span class="far fa-check-circle {% if hit.occurrences > 0 %}ok{% elif hit.revisionState == "published" %}pending{% else %}notok{% endif %}"></span>
-                    </div>
-                    {% if hit.occurrences > 0 %}
-					   <div class="number_occurences float-right">
-                            <p>Occ.:&nbsp;{{hit.occurrences}}</p>
-                        </div>
-                    {% endif %} 
+					<!-- Redaktionsstatus & Anzahl Occurences-->
+					<div class="pt-1">
+						<div class="red-status float-right ml-2">
+							<span class="far fa-check-circle {% if hit.occurrences > 0 %}ok{% elif hit.revisionState == "published" %}pending{% else %}notok{% endif %}"></span>
+						</div>
+						{% if hit.occurrences > 0 %}
+						   <div class="number_occurences float-right">
+								<p>Occ.:&nbsp;{{hit.occurrences}}</p>
+							</div>
+						{% endif %} 
+						
+						<!--<a><span class="far fa-envelope"/></a>
+						<a><span class="far fa-comment"/></a>-->
+					</div>	
 					
-					<!--<a><span class="far fa-envelope"/></a>
-					<a><span class="far fa-comment"/></a>-->
-				</div>	
-				
-				<!-- erste Zeile -->
-                <div> 
-                    <a href="/view/lemma/{{hit.id}}" title="{%if pred%}{{pred}}{%endif%}"> <!-- lemma-beziehung -->
-                    <h2 class="word bbaw-libertine">
-                        {{hit.name}}
-                    </h2>
-                    <!-- Hieroglyph -->
-                        <span class="hieroglyph">
-                            {% for word in hit.words %}
-                                {% if word.glyphs %}
-                                    <span class="glyphbox">
-                                        <!-- TODO font-size: 20px; vertical-align: -5px; in css verschieben -->
-                                        <canvas class="res" style="font-size: 20px; vertical-align: -5px;" title="{{word.glyphs}}">
-                                            {{word.glyphs}}
-                                        </canvas>
-                                    </span>
-                                {% endif %}
-                            {% endfor %}
-                        </span>
+					<!-- erste Zeile -->
+					<div> 
+						<a href="/view/lemma/{{hit.id}}" title="{%if pred%}{{pred}}{%endif%}"> <!-- lemma-beziehung -->
+						<h2 class="word bbaw-libertine">
+							{{hit.name}}
+						</h2>
+						<!-- Hieroglyph -->
+							<span class="hieroglyph">
+								{% for word in hit.words %}
+									{% if word.glyphs %}
+										<span class="glyphbox">
+											<!-- TODO font-size: 20px; vertical-align: -5px; in css verschieben -->
+											<canvas class="res" style="font-size: 20px; vertical-align: -5px;" title="{{word.glyphs}}">
+												{{word.glyphs}}
+											</canvas>
+										</span>
+									{% endif %}
+								{% endfor %}
+							</span>
 
-                    <!-- Lemma ID -->
-                    <span class="result-list-lemma-id hide">
-                        &nbsp; (ID {{hit.id}})
-                    </span>
-                    </a>
-                </div>
-                
-                 <!-- zweite Zeile -->
-				 <div>
-					<!-- Wordclass -->
-					<span class="word-class hide">
-						<strong>
-							<span class="font-italic word-class-type">[{{hit.type}}]</span>
-							{%if hit.subtype%}<span class="word-class-subtype">({{hit.subtype}})</span>{%endif%}
-						</strong>
-					</span>
+						<!-- Lemma ID -->
+						<span class="result-list-lemma-id hide">
+							&nbsp; (ID {{hit.id}})
+						</span>
+						</a>
+					</div>
 					
-					<!-- Translations -->
-					<!-- Translation DE -->
-					<span class="translations translation-de">
-						<span class="font-italic hide">[{{hit.type}}]</span>
-						{%for translation in hit.translations.de%}
-						<span class="translation">{{translation}}</span>
-						{%endfor%}
-					</span>
-					<!-- Translation EN -->
-					<span class="translations translation-en hide">
-						<span class="font-italic hide">[{{hit.type}}]</span>
-						{%for translation in hit.translations.en%}
-						<span>{{translation}}</span>
-						{%endfor%}					
-					</span>
-					<!-- Translation FR -->
-					<span class="translations translation-fr hide">
-						<span class="font-italic hide">[{{hit.type}}]</span>
-						{%for translation in hit.translations.fr%}
-						<span>{{translation}}</span>
-						{%endfor%}					
-					</span>
-		   
-					<!-- Attestation time -->
-					<span class="result-list-attestation-time hide">(##att.time##{{hit.xxx}})</span> <!-- ##Variable noch nicht verfügbar -->
-					
-					<!-- Bibliography -->
-					<span class="result-list-bibliography hide">({{hit.bibliography}})</span>
-				</div>
-                    
-				
-				
-			</div> <!-- /. result-bg  -->	
+					 <!-- zweite Zeile -->
+					<div>
+						<!-- Wordclass -->
+						<span class="word-class hide">
+							<strong>
+								<span class="font-italic word-class-type">[{{hit.type}}]</span>
+								{%if hit.subtype%}<span class="word-class-subtype">({{hit.subtype}})</span>{%endif%}
+							</strong>
+						</span>
+						
+						<!-- Translations -->
+						<!-- Translation DE -->
+						<span class="translations translation-de">
+							<span class="font-italic hide">[{{hit.type}}]</span>
+							{%for translation in hit.translations.de%}
+							<span class="translation">{{translation}}</span>
+							{%endfor%}
+						</span>
+						<!-- Translation EN -->
+						<span class="translations translation-en hide">
+							<span class="font-italic hide">[{{hit.type}}]</span>
+							{%for translation in hit.translations.en%}
+							<span>{{translation}}</span>
+							{%endfor%}					
+						</span>
+						<!-- Translation FR -->
+						<span class="translations translation-fr hide">
+							<span class="font-italic hide">[{{hit.type}}]</span>
+							{%for translation in hit.translations.fr%}
+							<span>{{translation}}</span>
+							{%endfor%}					
+						</span>
+			   
+						<!-- Attestation time -->
+						<span class="result-list-attestation-time hide">(##att.time##{{hit.xxx}})</span> <!-- ##Variable noch nicht verfügbar -->
+						
+						<!-- Bibliography -->
+						<span class="result-list-bibliography hide">({{hit.bibliography}})</span>
+					</div>
+				</div> <!-- /. result-bg --> 
+			
 				<!-- combination-search -->
 				<div class="combination-search ml-4 my-1 hide">
 					<input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
 					  <label class="form-check-label" for="inlineCheckbox2">Select for Combination Search</label>
 				</div>
-            <hr>
-            </div> <!-- /. result-bg -->
+				<hr>
+            </div> <!-- /. result-list-item -->
 			
             {% endfor %}
             
