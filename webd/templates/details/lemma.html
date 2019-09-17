@@ -119,7 +119,7 @@
 			<!-- Lemma Relations -->
 			<div class="relations">
 				<p class="relations"><strong>Lemma Relations</strong></p><!-- ## Werden schon alle Relationen mitgeliefert? -->
-				{% if lemma.relations.root %}
+				{% if lemma.relations %} <!--# Abfrage, ob überhaupt welche enthalten sind, stimmt nicht -->
 					{% for where, hits in lemma.relations.items %}
 					<p><strong>{{where}}</strong></p>
 						{% for hit in hits %}
@@ -275,11 +275,13 @@
 			<h6 class="id mt-2">Lemma ID {{lemma.id}}</h6>
 			
 			<!-- Verweise -->
+			<!-- ## in Hauptfeld verschieben, dann rechte Kolumne immer nur mit Buttons/Navi -->
 			<p class="h6 pt-4 pb-1 pl-3">Bibliography</p>
 			{% for bib in bibl %}
 				<button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-right"></span>{{ bib }}</button>
 			{% endfor %}
-			<!--<hr>
+			<!-- in Hauptfeld zum Attestation-Block verschoben
+			<hr>
 			<p class="h6 pt-1 pb-1 pl-3">Occurrences</p>
 			{% for where, count in occurrences.items %}
 			<a href="/search/occurrences?lemma={{lemma.id}}">
