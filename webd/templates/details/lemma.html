@@ -64,7 +64,7 @@
 		</div>
 		<div class="grammar">
 			<strong>Part of Speech:</strong>&nbsp;
-			<span class="font-italic">
+			<span>
 				{{lemma.type}}
 				{% if lemma.subtype %}
 					({{ lemma.subtype }})
@@ -73,6 +73,7 @@
 			<hr>				
 		</div>
 		<div class="translation">
+			<p><strong>Translation</strong></p>
 			{% for translation in lemma.translations.de %}
 				<p class="h6">(Ger.) {{ translation }}</p>
 			{% endfor %}
@@ -87,7 +88,7 @@
         <!-- Beleglage -->  
 		<div>
 			<hr>
-			<strong>Attestation</strong>&nbsp;<a href="#" class="btn btn-light solo-icon red-status" role="button"><span class="far fa-check-circle {% if occurrences.corpus > 0 %}ok{% elif lemma.revisionState == "published" %}pending{% else %}notok{% endif %}"/></a>
+			<strong>Attestation</strong>&nbsp;<span class="solo-icon red-status"><span class="far fa-check-circle {% if occurrences.corpus > 0 %}ok{% elif lemma.revisionState == "published" %}pending{% else %}notok{% endif %}"/></span>
 			<br><strong>Occurences:</strong>&nbsp;
 			{% for where, count in occurrences.items %}
 			<a href="/search/occurrences?lemma={{lemma.id}}">

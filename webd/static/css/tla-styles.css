@@ -131,6 +131,10 @@ a.navbar-brand {
 .result-list-item a.result-list-bibliography:hover .svg-inline--fa{
 	color: white;
 	}
+	
+.result-list-item.notok {
+	color: #A9A9A9;
+	}
 
 .result-list-item.successor  {opacity: .4;}
 .result-list-item.successor  h2 {color: #333;}
