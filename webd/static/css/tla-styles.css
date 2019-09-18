@@ -459,9 +459,9 @@ p.translation-de span  {
 	padding: 1rem;
 	background-color: #CCC;
 	color: white;}
-.details-content  .btn-block+.btn-block {
-    margin-top: 0!important;	
-}
+/*.details-content  .btn-block+.btn-block {
+    margin-top: 0!important;
+}	*/
 
 /* Show/Hide */
 

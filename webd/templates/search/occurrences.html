@@ -27,17 +27,13 @@
 			<h2 class="bbaw-libertine"><mark>{{params.transcription}}</mark></h2> <!--## transcription wird nicht mitgeliefert -->
 			<p class="lemma-id">(Lemma ID {{params.lemma}})</p>
 		</div>
-		<div class="col-sm-4">
-		 <div class="input-group mb-3">
-			<div class="input-group-append">
-				<label class="input-group-text" for="inputGroupSelect02">Order by</label>
-			  </div>
-			<select class="custom-select" id="inputGroupSelect02">
-				<option value="1">attestation time, start</option>
-				<option value="2" selected>attestation time, middle</option>
-				<option value="3">attestation time, end</option>
-			  </select>			  
-			</div>
+		<div class="col-md-4 align-right align-baseline">
+            <div class="functional-icons ml-3 float-left">
+              <a href="#" class="btn btn-light solo-icon" role="button" data-toggle="modal" data-target="#modal_sharing"><span class="fa fa-share-alt share-results"/></a>
+            </div>
+            <div class="functional-icons mr-0 ">
+                <a href="#" class="btn btn-red text-left text-decoration-none float-right" role="button">Help&nbsp;&nbsp;<span class="fas fa-info-circle fa-lg"></span></a>
+            </div>
 		</div>		
     </div><!-- /.row -->
 	
@@ -226,36 +222,47 @@
 	
 		<!-- Sidebar -->
 		<div class="col-sm-4">
-		<div class="sticky-top">
-			<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail hieroglyph-btn "><i class="fas fa-plus-circle"></i>Hieroglyphs</button>
+			<div class="sticky-top">
+				<div class="input-group mb-3">
+					<div class="input-group-append">
+						<label class="input-group-text" for="inputGroupSelect02">Order by</label>
+					</div>
+					<select class="custom-select" id="inputGroupSelect02">
+						<option value="1">attestation time, start</option>
+						<option value="2" selected>attestation time, middle</option>
+						<option value="3">attestation time, end</option>
+					</select>			  
+				</div>
 
-            <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail anno-block-btn"><i class="fas fa-plus-circle"></i>Switch Annotation/Block-View</button>	
-			<!-- start indented buttons -->
-            <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-id-btn "><i class="fas fa-plus-circle"></i>Word ID</button><!--new-->
-            <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail lemma-id-btn "><i class="fas fa-plus-circle"></i>Lemma ID</button>
-            <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail part-of-speech-btn"><span class="fas fa-plus-circle"></span>Part of Speech</button>
-            <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail glossing-btn"><span class="fas fa-plus-circle"></span>Glossing</button>
-			
-			<div class="dropdown">
-				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn" id="languages" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-plus-circle"></span>Translation Languages</button>
-				<div class="dropdown-menu" aria-labelledby="languages">
-					<button class="dropdown-item translation-languages-btn-de" type="button">German</button>
-					<button class="dropdown-item translation-languages-btn-en" type="button">English</button>
-					<button class="dropdown-item translation-languages-btn-fr" type="button">French</button>
-				  </div>
+				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail hieroglyph-btn "><i class="fas fa-plus-circle"></i>Hieroglyphs</button>
+
+				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail anno-block-btn"><i class="fas fa-plus-circle"></i>Switch Annotation/Block-View</button>	
+				<!-- start indented buttons -->
+				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-id-btn "><i class="fas fa-plus-circle"></i>Word ID</button><!--new-->
+				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail lemma-id-btn "><i class="fas fa-plus-circle"></i>Lemma ID</button>
+				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail part-of-speech-btn"><span class="fas fa-plus-circle"></span>Part of Speech</button>
+				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail glossing-btn"><span class="fas fa-plus-circle"></span>Glossing</button>
+				
+				<div class="dropdown">
+					<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn" id="languages" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-plus-circle"></span>Translation Languages</button>
+					<div class="dropdown-menu" aria-labelledby="languages">
+						<button class="dropdown-item translation-languages-btn-de" type="button">German</button>
+						<button class="dropdown-item translation-languages-btn-en" type="button">English</button>
+						<button class="dropdown-item translation-languages-btn-fr" type="button">French</button>
+					  </div>
+				</div>
+				<!--<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn "><span class="fas fa-plus-circle"></span>Translation Languages</button>-->
+				<!-- end indented buttons -->
+
+				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestation-time-btn"><span class="fas fa-plus-circle"></span>Attestation time</button>
+				
+				<br>
+				
+				<a href="javascript:history.back()"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Back to lemma</button></a>
+				<!-- anstelle des historyBack sollte u.U. der Search-String verwendet werden -->
+				
+				<a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Modify Search</button></a>
 			</div>
-			<!--<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn "><span class="fas fa-plus-circle"></span>Translation Languages</button>-->
-			<!-- end indented buttons -->
-
-            <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestation-time-btn"><span class="fas fa-plus-circle"></span>Attestation time</button>
-			
-			<br>
-            
-            <a href="javascript:history.back()"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Back to lemma</button></a>
-            <!-- anstelle des historyBack sollte u.U. der Search-String verwendet werden -->
-			
-            <a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Modify Search</button></a>
-		</div>
 		</div>
 	</div> <!-- /.row -->
     

@@ -27,18 +27,13 @@
 			<h2 class="bbaw-libertine"><mark>{{params.transcription}}</mark></h2> <!--## um Hieroglyphen ergänzen -->
 			<p class="lemma-id">(Lemma ID {{params.lemma}})</p>
 		</div>
-		<div class="col-sm-4">
-		 <div class="input-group mb-3">
-			<div class="input-group-append">
-				<label class="input-group-text" for="inputGroupSelect02">Order by</label>
-			  </div>
-			<select class="custom-select" id="inputGroupSelect02">
-				<option selected>alphabetical</option>
-				<option value="1">attestation time, start</option>
-				<option value="2">attestation time, middle</option>
-				<option value="3">attestation time, end</option>
-			  </select>			  
-			</div>
+		<div class="col-md-4 align-right align-baseline">
+            <div class="functional-icons ml-3 float-left">
+              <a href="#" class="btn btn-light solo-icon" role="button" data-toggle="modal" data-target="#modal_sharing"><span class="fa fa-share-alt share-results"/></a>
+            </div>
+            <div class="functional-icons mr-0 ">
+                <a href="#" class="btn btn-red text-left text-decoration-none float-right" role="button">Help&nbsp;&nbsp;<span class="fas fa-info-circle fa-lg"></span></a>
+            </div>
 		</div>		
     </div><!-- /.row -->
 	
@@ -46,7 +41,7 @@
 	<div class="row searchresult">		
 			<div class="col-8 pt-3">
                 <p class="result-entries">Results: <b>{{start}} - {{end}}</b> of <b>{{hitcount}}</b> Dictionary Entries 
-                    <a href="#" class="btn btn-light solo-icon float-right mr-1" role="button" data-toggle="modal" data-target="#modal_sharing"><span class="fa fa-share-alt share-results"/></a>
+                    <!--<a href="#" class="btn btn-light solo-icon float-right mr-1" role="button" data-toggle="modal" data-target="#modal_sharing"><span class="fa fa-share-alt share-results"/></a>-->
                 </p>                
 			</div>
 	</div><!-- /.row -->  
@@ -159,11 +154,21 @@
             
         </div> <!-- .col-8 -->    
        	
-	
-	
 		<!-- Sidebar -->
-		<div class="col-4">
+		<div class="col-sm-4">
             <div class="sticky-top">
+				<div class="input-group mb-3">
+					<div class="input-group-append">
+						<label class="input-group-text" for="inputGroupSelect02">Order by</label>
+					</div>
+					<select class="custom-select" id="inputGroupSelect02">
+						<option value="0" selected>alphabetical</option>
+						<option value="1">attestation time, start</option>
+						<option value="2">attestation time, middle</option>
+						<option value="3">attestation time, end</option>
+					</select>			  
+				</div>
+			
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail hieroglyph-btn "><i class="fas fa-plus-circle"></i>Hieroglyphs</button>
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail lemma-id-btn "><i class="fas fa-plus-circle"></i>Lemma ID</button>
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-class-btn"><span class="fas fa-plus-circle"></span>Word Class</button>
