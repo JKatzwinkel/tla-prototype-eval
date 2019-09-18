@@ -67,7 +67,7 @@
 				<hr>
 				<strong>Persistent Identifiers</strong>
 				<br><strong>Persistent lemma ID:</strong> {{lemma.id}}  <button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{{lemma.id}}')"><span class="fa fa-clipboard"></span>Copy ID</button>
-				<br><strong>Persistent URL:</strong> http://tla.bbaw.de/view/lemma/{{lemma.id}} <button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('TLA lemma ID {{lemma.id}} ({% for word in lemma.words %}{{word.transcription}}{% endfor %}), &lt;http://tla.bbaw.de/view/lemma/{{lemma.id}}&gt;, in: Thesaurus Linguae Aegyptiae &lt;http://tla.bbaw.de&gt;, Version ##19.1##, ##30.10.2019##, ed. by Berlin-Brandenburgische Akademie der Wissenschaften & Sächsische Akademie der Wissenschaften (accessed: ##DATUM##)');"><span class="fa fa-clipboard"></span>Copy citation</button>
+				<br><strong>Persistent URL:</strong> {{tlaBaseURL}}/view/lemma/{{lemma.id}} <button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('TLA lemma ID {{lemma.id}} ({% for word in lemma.words %}{{word.transcription}}{% endfor %}), &lt;{{tlaBaseURL}}/view/lemma/{{lemma.id}}&gt;, in: {{tlaTitle}} &lt;{{tlaBaseURL}}&gt;, Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, ed. by {{tlaEditor}} (accessed: {{dateToday}})');"><span class="fa fa-clipboard"></span>Copy citation</button>
 			</div>
 			<div class="grammar">
 				<hr>
@@ -353,14 +353,14 @@
 	<div class="row">	
 		<!-- Zitationsfeld -->        
 		<div class="bg-light citation mt-3 mb-4">         
-			<p class="h6">Please cite as</p>
+			<p class="h6"><strong>Please cite as:</strong></p>
 				<!-- Version, Issue, Release-Date, heutiges Datum noch per globaler Variable holen -->
-			<blockquote>TLA lemma ID {{lemma.id}} ({% for word in lemma.words %}{{word.transcription}}{% endfor %}), &lt;http://tla.bbaw.de/view/lemma/{{lemma.id}}&gt;, 
-				in: <i>Thesaurus Linguae Aegyptiae</i> &lt;http://tla.bbaw.de&gt;, 
-				Version ##19.1##, ##30.10.2019##, 
-				ed. by Berlin-Brandenburgische Akademie der Wissenschaften & Sächsische Akademie der Wissenschaften 
-				(accessed: ##DATUM##)</blockquote>
-			<button type="button" class="btn btn-secondary btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('TLA lemma ID {{lemma.id}} ({% for word in lemma.words %}{{word.transcription}}{% endfor %}), &lt;http://tla.bbaw.de/view/lemma/{{lemma.id}}&gt;, in: Thesaurus Linguae Aegyptiae &lt;http://tla.bbaw.de&gt;, Version ##19.1##, ##30.10.2019##, ed. by Berlin-Brandenburgische Akademie der Wissenschaften & Sächsische Akademie der Wissenschaften (accessed: ##DATUM##)');"><span class="fa fa-clipboard"></span>Copy citation</button>
+			<blockquote>TLA lemma ID {{lemma.id}} ({% for word in lemma.words %}{{word.transcription}}{% endfor %}), &lt;{{tlaBaseURL}}/view/lemma/{{lemma.id}}&gt;, 
+				in: <i>{{tlaTitle}}</i> &lt;{{tlaBaseURL}}&gt;, 
+				Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, 
+				ed. by {{tlaEditor}} 
+				(accessed: {{dateToday}})</blockquote>
+			<button type="button" class="btn btn-secondary btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('TLA lemma ID {{lemma.id}} ({% for word in lemma.words %}{{word.transcription}}{% endfor %}), &lt;{{tlaBaseURL}}/view/lemma/{{lemma.id}}&gt;, in: {{tlaTitle}} &lt;{{tlaBaseURL}}&gt;, Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, ed. by {{tlaEditor}} (accessed: {{dateToday}})');"><span class="fa fa-clipboard"></span>Copy citation</button>
 		</div>  
 	</div> <!-- /.row -->		
     

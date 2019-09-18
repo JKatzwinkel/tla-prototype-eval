@@ -69,6 +69,14 @@ def render_annotations(annos):
         anno['body'] = tag_transcription(textcontent)
         anno['title'] = tag_transcription(anno['title'])
     return annos
+    
+tlaTitle = "Thesaurus Linguae Aegyptiae"
+tlaVersion = "19"
+tlaIssue = "1"
+tlaReleaseDate = "30.10.2019"
+tlaEditor = "Berlin-Brandenburgische Akademie der Wissenschaften & Sächsische Akademie der Wissenschaften"
+tlaPublisher = "Berlin-Brandenburgische Akademie der Wissenschaften"
+tlaBaseURL = "http://tla.bbaw.de"
 
 def coins_openurl_kev(doc):
     # generate a contextobject referent
@@ -84,13 +92,13 @@ def coins_openurl_kev(doc):
             doc.get("id"),
             doc.get("name"),
         )),
-        ('rft.jtitle', "Thesaurus Linguae Aegyptiae"),
+        ('rft.jtitle', tlaTitle),
         ('rft.stitle', "TLA"),
-        ('rft.volume', "19"),
-        ('rft.issue', "1"),
+        ('rft.volume', tlaVersion),
+        ('rft.issue', tlaIssue),
         ('rft.date', glom(doc, "edited.date")),
         ('rft.place', 'Berlin'),
-        ('rft.publisher', 'Berlin-Brandenburgische Akademie der Wissenschaften'),
+        ('rft.publisher', tlaPublisher),
         ('rft_val_fmt', 'info:ofi/fmt:kev:mtx:journal'),
         ('url_ver', "Z39.88-2004"),
     ]
@@ -136,5 +144,13 @@ def lemma_details_page(request, lemma_id):
                     lemma_id
                 )
             ),
+            'tlaVersion': tlaVersion,
+            'tlaTitle': tlaTitle,
+            'tlaVersion': tlaVersion,
+            'tlaIssue': tlaIssue,
+            'tlaReleaseDate': tlaReleaseDate,
+            'tlaEditor': tlaEditor,
+            'tlaBaseURL': tlaBaseURL,
+            'dateToday': datetime.now().strftime("%d.%m.%Y"),
         }
     )
