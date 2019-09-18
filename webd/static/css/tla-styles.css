@@ -596,6 +596,9 @@ span.multiselect-native-select select {
     color: grey;
     }
 
+.copy-to-clipboard-btn {
+	/**/
+}
 
 .root:before {content: "Root";}
 .rootOf:before {content: "Root of";}
