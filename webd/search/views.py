@@ -16,6 +16,7 @@ from detail import views as detail_views
 
 RESULTS_PER_PAGE = 24
 
+""" ## DW: auxiliary fehlt?? """
 WORD_CLASSES = {
     "substantive": [
         "substantive_masc",
