@@ -178,15 +178,28 @@ a.navbar-brand {
 	padding-left: 12em;
 	}
 
-.red-status .svg-inline--fa.ok, .red-status.ok {
-	color: green!important;
-	}
-.red-status .svg-inline--fa.pending {
-	color: orange!important;
-	}
-.red-status .svg-inline--fa.notok {
-	color: red!important;
-	}
+
+.red-status span {
+   font-family: "Font Awesome 5 Free";  
+   display: inline-block;
+   padding-right: 3px;
+   vertical-align: middle;
+   font-weight: 200;
+    }
+
+.red-status span.ok:before {  
+   content: "ok \f05d"; 
+    color: green!important;
+    }
+.red-status span.pending:before {  
+   content: "pending \f058"; 
+    color: orange!important;
+    }
+.red-status span.notok:before {  
+   content: "notok \f05e"; 
+    color: red!important;
+    }
+
 
 a.share-results {color: grey!important;}
 a.share-results:hover {color: red;}
@@ -224,17 +237,15 @@ a span.lc:hover {
 	border-radius: 2px;
 }*/
 .occ-list-item .highlight-1 {
-	border: 1px solid red;
-	border-radius: 2px;
+	background-color: lightgrey;
 }
 
-.occ-list-item .translation-de,
-.occ-list-item .translation-en,
-.occ-list-item .translation-fr,
-.occ-list-item .glossing {
-    font-size: 0.8em;
-    
-}
+.container-annotation .translation-de,
+.container-annotation .translation-en,
+.container-annotation .translation-fr,
+.container-annotation .glossing {
+    font-size: 0.8em;    
+    	}
 
 
 .result-list-item span.glyphbox img{
@@ -258,7 +269,7 @@ ul.annotation-block  {
     padding: 0;
     text-align: center;
     margin: 0 .5em 1em 0!important;
-    border-bottom: 1px solid #aaa;
+    border-bottom: 2px solid #aaa;
     }
 ul.annotation-block:hover {   
     background-color: #EEE;
@@ -285,9 +296,11 @@ ul.annotation-block li {
     padding: .2em .5em;
     list-style: none;
     }
-ul.annotation-block li:last-child {
-    border-bottom: 0;
+
+ul.annotation-block li.translations {
+    border-bottom: 0!important;
     }
+
 .annotation-block .transcription {
     font-family: "BBAWLibertine", serif;
     font-size: 1.2em;
@@ -303,13 +316,23 @@ ul.annotation-block li:last-child {
     font-size: .85em;
 }
 
+.indented-buttons {margin-top: .5em;}
+.indented-buttons .btn-secondary {
+    background-color: #999;
+    border-color: #999;
+    }
+.indented-buttons .btn-secondary:hover {
+    background-color: #777;
+    border-color: #777;
+    }
+
 .word-id  {
     color: grey; 
     font-size: .65em;
 }
 
-p.translation-de span  {
-    font-weight: 500;    
+.translations {
+    font-weight: 600;    
 }
 
 .translation .result-list-bibliography {
@@ -598,7 +621,7 @@ span.multiselect-native-select select {
     font-size: .9em;
     color: grey;
     }
-
+.lemma-id {color:red;}
 .copy-to-clipboard-btn {
 	/**/
 }

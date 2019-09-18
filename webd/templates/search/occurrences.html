@@ -25,7 +25,7 @@
 	<div class="row search-entries">
 		<div class="col-sm-8 result">
 			<h2 class="bbaw-libertine"><mark>{{params.transcription}}</mark></h2> <!--## transcription wird nicht mitgeliefert -->
-			<p class="lemma-id">(Lemma ID {{params.lemma}})</p>
+			<p class="lemma">(Lemma ID {{params.lemma}})</p>
 		</div>
 		<div class="col-md-4 align-right align-baseline">
             <div class="functional-icons ml-3 float-left">
@@ -113,7 +113,7 @@
                             &nbsp;
                         {% endif %}
 					</li>
-                    <li class="translation-de">
+                    <li class="translations translation-de">
 					    {% if token.translations.de %}
  							{%for translation in token.translations.de %}
 								{{translation}}
@@ -122,7 +122,7 @@
                             &nbsp;
                         {% endif %}
 					</li>               
-                    <li class="translation-en hide"> <!-- ##Inhalt aktuell noch nicht in token mitgeliefert  -->
+                    <li class="translations translation-en hide"> <!-- ##Inhalt aktuell noch nicht in token mitgeliefert  -->
 					    {% if token.translations.en %}
 							{%for translation in token.translations.en %}
 								{{translation}}
@@ -131,7 +131,7 @@
                             &nbsp;
                         {% endif %}
 					</li>               
-                    <li class="translation-fr hide"> <!-- ##Inhalt aktuell noch nicht in token mitgeliefert  -->
+                    <li class="translations translation-fr hide"> <!-- ##Inhalt aktuell noch nicht in token mitgeliefert  -->
 					    {% if token.translations.fr %}
 							{%for translation in token.translations.fr %}
 								{{translation}}
@@ -177,15 +177,15 @@
             
 				<!-- Translation DE -->
 				{% for translation in hit.sentence.translations.de %}
-					<p class="translation translation-de">{{translation}}</p>
+					<p class="translations translation-de">{{translation}}</p>
 				{% endfor %}
 				<!-- Translation EN, werten  -->
 				{% for translation in hit.sentence.translations.de %}
-					<p class="translation translation-en hide">{{translation}}</p>
+					<p class="translations translation-en hide">{{translation}}</p>
 				{% endfor %}
 				<!-- Translation FR -->
 				{% for translation in hit.sentence.translations.de %}
-					<p class="translation translation-fr hide">{{translation}}</p>
+					<p class="translations translation-fr hide">{{translation}}</p>
 				{% endfor %}
 
 				<div class="corpus-paths">
@@ -235,27 +235,24 @@
 				</div>
 
 				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail hieroglyph-btn "><i class="fas fa-plus-circle"></i>Hieroglyphs</button>
-
-				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail anno-block-btn"><i class="fas fa-plus-circle"></i>Switch Annotation/Block-View</button>	
+                
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail anno-block-btn"><i class="fas fa-plus-circle"></i>Switch Annotation/Block-View</button>	
 				<!-- start indented buttons -->
-				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-id-btn "><i class="fas fa-plus-circle"></i>Word ID</button><!--new-->
-				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail lemma-id-btn "><i class="fas fa-plus-circle"></i>Lemma ID</button>
-				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail part-of-speech-btn"><span class="fas fa-plus-circle"></span>Part of Speech</button>
-				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail glossing-btn"><span class="fas fa-plus-circle"></span>Glossing</button>
-				
-				<div class="dropdown">
-					<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn" id="languages" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-plus-circle"></span>Translation Languages</button>
-					<div class="dropdown-menu" aria-labelledby="languages">
-						<button class="dropdown-item translation-languages-btn-de" type="button">German</button>
-						<button class="dropdown-item translation-languages-btn-en" type="button">English</button>
-						<button class="dropdown-item translation-languages-btn-fr" type="button">French</button>
-					  </div>
-				</div>
-				<!--<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn "><span class="fas fa-plus-circle"></span>Translation Languages</button>-->
-				<!-- end indented buttons -->
-
-				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestation-time-btn"><span class="fas fa-plus-circle"></span>Attestation time</button>
-				
+                <div class="indented-buttons hide">
+                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail lemma-id-btn "><i class="fas fa-plus-circle"></i>Lemma ID</button>
+                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-id-btn "><i class="fas fa-plus-circle"></i>Word ID</button><!--new-->
+                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail part-of-speech-btn"><span class="fas fa-plus-circle"></span>Part of Speech</button>
+                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail glossing-btn"><span class="fas fa-plus-circle"></span>Glossing</button>
+                    <div class="dropdown">
+                        <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn" id="languages" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-plus-circle"></span>Translation Languages</button>
+                        <div class="dropdown-menu" aria-labelledby="languages">
+                            <button class="dropdown-item translation-languages-btn-de" type="button">German</button>
+                            <button class="dropdown-item translation-languages-btn-en" type="button">English</button>
+                            <button class="dropdown-item translation-languages-btn-fr" type="button">French</button>
+                          </div>
+                    </div>				
+				    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestation-time-btn"><span class="fas fa-plus-circle"></span>Attestation time</button>
+				</div>	
 				<br>
 				
 				<a href="javascript:history.back()"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Back to lemma</button></a>

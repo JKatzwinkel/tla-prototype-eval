@@ -121,26 +121,30 @@ function init() {
 		$('html').not('.translation-languages-btn-de').click(function (e) {
 		        //console.log($(e.target).parent());
 		 if ($('.translation-de').is(':visible') && !e.target == '.translation-de') {
-                $('.translation-de').slideUp('ease-out');
+                $('.translation-de').slideUp('ease-out');                
             }
         });
 
         $('.translation-languages-btn-de').click(function (e) {
 			e.preventDefault();
             $('.translation-de').slideToggle('slow');
+            $('.translation-en').slideUp('ease-out');
+            $('.translation-fr').slideUp('ease-out');
         });	
     
     // .translation-languages EN
 		$('html').not('.translation-languages-btn-en').click(function (e) {
 		        //console.log($(e.target).parent());
 		 if ($('.translation-en').is(':visible') && !e.target == '.translation-en') {
-                $('.translation-en').slideUp('ease-out');
+                $('.translation-en').slideUp('ease-out');               
             }
         });
 
         $('.translation-languages-btn-en').click(function (e) {
 			e.preventDefault();
             $('.translation-en').slideToggle('slow');
+            $('.translation-de').slideUp('ease-out');
+            $('.translation-fr').slideUp('ease-out');
         });	
     
     // .translation-languages FR
@@ -154,6 +158,8 @@ function init() {
         $('.translation-languages-btn-fr').click(function (e) {
 			e.preventDefault();
             $('.translation-fr').slideToggle('slow');
+            $('.translation-en').slideUp('ease-out');
+            $('.translation-de').slideUp('ease-out');
         });	
 	
     
@@ -196,7 +202,17 @@ function init() {
 			e.preventDefault();
             $('.container-annotation-switch').slideToggle('slow');
         });	
-    
+        // Buttons
+        $('html').not('.anno-block-btn').click(function (e) {
+		        //console.log($(e.target).parent());
+		 if ($('.indented-buttons').is(':visible') && !e.target == '.indented-buttons') {
+                $('.indented-buttons').slideUp('ease-out');
+            }
+        });
+        $('.anno-block-btn').click(function (e) {
+			e.preventDefault();
+            $('.indented-buttons').slideToggle('slow');
+        });
     
 	// Copy-Text-Button
     
