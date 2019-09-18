@@ -8,31 +8,31 @@
 <!-- Page Content -->
 <div class="container content my-4">
 
-  <div class="row">
-	<!-- Breadcrumbs -->
-	<div class="col-12">
-		<nav aria-label="breadcrumb">
-		  <ol class="breadcrumb">
-			<li class="breadcrumb-item"><a href="#">Home</a></li>
-			<li class="breadcrumb-item"><a href="/search">Search</a></li>
-			<li class="breadcrumb-item active" aria-current="page">Details: Dictionary Entry</li>
-		  </ol>
-		</nav>
-	</div>
-  </div>
-  <!-- /.row -->
+	<div class="row">
+		<!-- Breadcrumbs -->
+		<div class="col-12">
+			<nav aria-label="breadcrumb">
+			  <ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="#">Home</a></li>
+				<li class="breadcrumb-item"><a href="/search">Search</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Details: Dictionary Entry</li>
+			  </ol>
+			</nav>
+		</div>
+	</div><!-- /.row -->
   
-  <div class="row search-entries detail">
+	<div class="row search-entries detail">
 	<!-- Suchergebnis -->		
 		<div class="col-md-8 result">				 
 			<h2 class="bbaw-libertine">
-				{% for word in lemma.words %}
 				<mark>
+				{% for word in lemma.words %}
 					{{ word.transcription }}
-				</mark>
 				{% endfor %}
+				</mark>
 				<span class="Z3988" title="{{coins}}"></span>
 			</h2> 
+			<p class="lemma-id">(Lemma ID {{lemma.id}})</p>
 		</div>
 		<div class="col-md-4 align-right align-baseline">
             <div class="functional-icons ml-3 float-left">
@@ -40,235 +40,329 @@
               <a href="#" class="btn btn-light solo-icon" role="button" data-toggle="modal" data-target="#modal_comments"><span class="far fa-comment"/></a>
             </div>
             <div class="functional-icons mr-0 ">
-                <a href="#" class="btn btn-red text-left text-decoration-none float-right" role="button">Show&nbsp;&nbsp;<span class="fas fa-info-circle fa-lg"></span></a>
+                <a href="#" class="btn btn-red text-left text-decoration-none float-right" role="button">Help&nbsp;&nbsp;<span class="fas fa-info-circle fa-lg"></span></a>
             </div>
 		</div>		
-  </div>
-  <!-- /.row -->
+	</div>
+	<!-- /.row -->
   
   	
-<!-- Content Details -->
-<div class="row details-content">	
-	<div class="col-sm-8">
-		<div class="lemma pt-3">
-			{% for word in lemma.words %}
-				{% if word.glyphs %}
-				<span class="glyphbox">
-					<canvas class="res" title="{{word.glyphs}}">
-						{{word.glyphs}}
-					</canvas>
-				</span>
-				{% endif %}
-			{% endfor %}
-			<hr>
-		</div>
-		<div class="grammar">
-			<p class="font-italic">
-				{{lemma.type}}
-				{% if lemma.subtype %}
-					({{ lemma.subtype }})
-				{% endif %}
-			</p>
-			<hr>				
-		</div>
-		<div class="translation">
-			{% for translation in lemma.translations.de %}
-				<p class="h6">(Ger.) {{ translation }}</p>
-			{% endfor %}
-			{% for translation in lemma.translations.en %}
-				<p class="english">(Engl.) {{ translation }}</p>
-			{% endfor %}
-			{% for translation in lemma.translations.fr %}
-				<p class="french">(Fr.) {{ translation }}</p>
-			{% endfor %}
-		</div>	
-	
-        <!-- Beleglage -->  
-		<div>
-			<hr>
-			<strong>Attestation</strong>&nbsp;<a href="#" class="btn btn-light solo-icon red-status {% if xxx > 0 %}ok{% else %}pending{% endif %}" role="button"><span class="far fa-check-circle"/></a>
-			<br><strong>Occurences:</strong>&nbsp;
-				{% for where, count in occurrences.items %} {{count}} &nbsp; {% endfor %} <!-- besser: aufsummieren -->
-			<br><strong>Time:</strong>&nbsp;<a href="#">{{ lemma.xxx }}</a>
-		</div> 
-
-        <!-- Kommentar -->  
-		<div class="comment pb-4">
-			<hr>
-			<p class="h5 comment-title">Comment-Title</p>
-            <p class="h6 comment-title">Comment-Subtitle</p>
-			<p class="comment-content">Es sequi illore ne reptation cone videm fugia dolendu ntectotas nihit rat lit fugiatum doluptatecto que maximpe eaquatin nis rehent quam, corum accatem oluptas inus doloremolo ea volum quibus voluptaque volupta amet optaers piendusae.</p>
-            <p class="comment-author float-right">Edited by&nbsp;<strong>Vorname Name</strong>&nbsp;on <span class="comment-date"><strong>20.08.2019</strong></span></p>
-		</div>     
-
-        <!-- Weitere Annotationen -->  
-		<div>
-		<hr>
-		<strong>Annotations</strong>
-        <br><strong>Language:</strong>&nbsp;<a href="#">{{ lemma.xxx }}</a>
-        <br><strong>Script:</strong> {{ lemma.xxx }}
-		<hr>
-        </div>
-														
-			
-            <!--
-			<div class="col-6">						
-				<p class="relations"><strong>TLA-Relations</strong>
-					{% if lemma.relations.root %}
-						<br>Root:
-						{% for root in lemma.relations.root %}
-							<span>
-								<a href="/view/lemma/{{root.id}}" title="{{root.id}} (Root)" class="bbaw-libertine">
-									{{root.name}}
-								</a>
-							</span>
-						{% endfor %}
+	<!-- Content Details -->
+	<div class="row details-content">	
+		<div class="col-sm-8">
+			<div class="lemma pt-3">
+				<strong>Hieroglyphic spellings:</strong>
+				{% for word in lemma.words %}
+					{% if word.glyphs %}
+					<span class="glyphbox">
+						<canvas class="res" title="{{word.glyphs}}">
+							{{word.glyphs}}
+						</canvas>
+					</span>
 					{% endif %}
-					{% if lemma.relations.partOf %}
-						<br>Superordinate Items:
-						{% for item in lemma.relations.partOf %}
-							<span>
-								<a href="/view/lemma/{{item.id}}" title="{{item.id}} (Superordinate)" class="bbaw-libertine">
-									{{item.name}}
-								</a>
-							</span>
-						{% endfor %}
-					{% endif %}
-					{% if lemma.relations.contains %}
-						<br>Subordinate Items:
-						{% for item in lemma.relations.contains %}
-							<span>
-								<a href="/view/lemma/{{item.id}}" title="{{item.id}} (Subordinate)" class="bbaw-libertine">
-									{{item.name}}
-								</a>
-							</span>
-						{% endfor %}
-					{% endif %}
-					{% if lemma.relations.successor %}
-						<br>Historical Successor:
-						{% for item in lemma.relations.successor %}
-							<span>
-								<a href="/view/lemma/{{item.id}}" title="{{item.id}} (Successor)" class="bbaw-libertine">
-									{{item.name}}
-								</a>
-							</span>
-						{% endfor %}
-					{% endif %}
-				</p>					
-			</div>-->  
-        
-        <div class="relations">
-			<p class="relations"><strong>Lemma relations</strong>
-					{% if lemma.relations.root %}
-						<br>Root:
-						{% for root in lemma.relations.root %}
-							<span>
-								<a href="/view/lemma/{{root.id}}" title="{{root.id}} (Root)" class="bbaw-libertine">
-									{{root.name}}
-								</a>
-							</span>
-						{% endfor %}
-					{% endif %}
-					{% if lemma.relations.partOf %}
-						<br>Superordinate Items:
-						{% for item in lemma.relations.partOf %}
-							<span>
-								<a href="/view/lemma/{{item.id}}" title="{{item.id}} (Superordinate)" class="bbaw-libertine">
-									{{item.name}}
-								</a>
-							</span>
-						{% endfor %}
-					{% endif %}
-					{% if lemma.relations.contains %}
-						<br>Subordinate Items:
-						{% for item in lemma.relations.contains %}
-							<span>
-								<a href="/view/lemma/{{item.id}}" title="{{item.id}} (Subordinate)" class="bbaw-libertine">
-									{{item.name}}
-								</a>
-							</span>
-						{% endfor %}
-					{% endif %}
-					{% if lemma.relations.successor %}
-						<br>Historical Successor:
-						{% for item in lemma.relations.successor %}
-							<span>
-								<a href="/view/lemma/{{item.id}}" title="{{item.id}} (Successor)" class="bbaw-libertine">
-									{{item.name}}
-								</a>
-							</span>
-						{% endfor %}
-					{% endif %}
-				</p>
-            
-            <p>###Das dynamische Einfügen von Treffern hat bisher noch nicht funktioniert.###</p>
-			
-			<div class="editor">
-			<hr>	
-			<strong>TLA Editor:&nbsp;<a href="#">{{ lemma.edited.name }}</a></strong>			
-			<br><strong>Last Revision:</strong> {{ lemma.edited.date }}
-			<br><strong>Protocoll:</strong> {{ lemma.xxx }}
-			<br><strong>Review State:</strong> {{ lemma.revisionState }}
+				{% endfor %}
 			</div>
-		</div>          
-       
-        
-        
-	</div> <! -- close content col-8 -->	
+			<!-- persistente URL / ID -->
+			<div>
+				<hr>
+				<strong>Persistent Identifiers</strong>
+				<br><strong>Persistent lemma ID:</strong> {{lemma.id}}  <button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{{lemma.id}}')"><span class="fa fa-clipboard"></span>Copy ID</button>
+				<br><strong>Persistent URL:</strong> {{tlaBaseURL}}/view/lemma/{{lemma.id}} <button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('TLA lemma ID {{lemma.id}} ({% for word in lemma.words %}{{word.transcription}}{% endfor %}), &lt;{{tlaBaseURL}}/view/lemma/{{lemma.id}}&gt;, in: {{tlaTitle}} &lt;{{tlaBaseURL}}&gt;, Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, ed. by {{tlaEditor}} (accessed: {{dateToday}})');"><span class="fa fa-clipboard"></span>Copy citation</button>
+			</div>
+			<div class="grammar">
+				<hr>
+				<strong>Part of Speech:</strong>&nbsp;
+				<span>
+					{{lemma.type}}
+					{% if lemma.subtype %}
+						({{ lemma.subtype }})
+					{% endif %}
+				</span>
+			</div>
+			<div class="translation">
+				<hr>				
+				<p><strong>Translation</strong></p>
+				{% for translation in lemma.translations.de %}
+					<p class="h6">(Ger.) {{ translation }}</p>
+				{% endfor %}
+				{% for translation in lemma.translations.en %}
+					<p class="english">(Engl.) {{ translation }}</p>
+				{% endfor %}
+				{% for translation in lemma.translations.fr %}
+					<p class="french">(Fr.) {{ translation }}</p>
+				{% endfor %}
+			</div>	
+		
+			<!-- Beleglage -->  
+			<div>
+				<hr>
+				<strong>Attestation</strong>&nbsp;<span class="solo-icon red-status"><span class="far fa-check-circle {% if occurrences.corpus > 0 %}ok{% elif lemma.revisionState == "published" %}pending{% else %}notok{% endif %}"/></span>
+				<br><strong>Occurences:</strong>&nbsp;
+				{% for where, count in occurrences.items %}
+				<a href="/search/occurrences?lemma={{lemma.id}}">
+					<button type="button" class="btn btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-right"></span>{{where}}: {{count}}</button>
+				</a>
+				{% endfor %}
+				<br><strong>Time:</strong>&nbsp;<a href="#">{{ lemma.xxx }}</a> <!--## Werte noch nicht mitgeliefert -->
+			</div> 
+			
+			<!-- Bibliographie -->
+			<div>
+				<hr>
+				<strong>Bibliography</strong>
+				<br>
+				{% for bib in bibl %}
+					<button type="button" class="btn btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-right"></span>{{ bib }}</button>
+				{% endfor %}
+				<hr>
+			<div>
+			
+			<!-- Verweise -->
+			</div>
+				<strong>External Identifiers</strong>
+				<br>
+				{% for provider, identifiers in lemma.externalReferences.items %}
+					<button type="button" class="btn btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-right"></span>{{provider}} 
+						{% for identifier in identifiers %}
+							<em>{{identifier}}</em>
+						{% endfor %}
+					</button>
+				{% endfor %}
+			</div>
 
-	<!-- Sidebar -->
-		<div class="col-sm-4">
-			<h6 class="id mt-2 ml-3">ID {{lemma.id}}</h6>
-			
-			<p class="h6 pt-4 pb-1 pl-3">Bibliography</p>
-			{% for bib in bibl %}
-				<button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-right"></span>{{ bib }}</button>
-			{% endfor %}
-			<hr>
-			<p class="h6 pt-1 pb-1 pl-3">Occurrences</p>
-			{% for where, count in occurrences.items %}
-			<a href="/search/occurrences?lemma={{lemma.id}}">
-				<button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-right"></span>{{where}}: {{count}}</button>
-			</a>
-			{% endfor %}
-			<hr>
-			<p class="h6 pt-1 pb-1 pl-3">External Identifiers</p>
-			{% for provider, identifiers in lemma.externalReferences.items %}
-				<button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-right"></span>{{provider}} 
-					{% for identifier in identifiers %}
-						<em>{{identifier}}</em>
+			<!-- Kommentar -->  
+			<div class="comment pb-4">
+				<hr>
+				<p class="h5 comment-title">Comment-Title</p>
+				<p class="h6 comment-title">Comment-Subtitle</p>
+				<p class="comment-content">Es sequi illore ne reptation cone videm fugia dolendu ntectotas nihit rat lit fugiatum doluptatecto que maximpe eaquatin nis rehent quam, corum accatem oluptas inus doloremolo ea volum quibus voluptaque volupta amet optaers piendusae.</p>
+				<p class="comment-author float-right">Edited by&nbsp;<strong>Vorname Name</strong>&nbsp;on <span class="comment-date"><strong>20.08.2019</strong></span></p>
+			</div>     
+
+			<!-- Weitere Annotationen -->  
+			<div>
+				<hr>
+				<strong>Annotations</strong>
+				<br><strong>Language:</strong> {{ lemma.xxx }}  <!--## Wert noch nicht mitgeliefert -->
+				<br><strong>Script:</strong> {{ lemma.xxx }}  <!--## Wert noch nicht mitgeliefert -->
+			</div>
+															 
+			<!-- Lemma Relations -->
+			<div class="relations">
+				<hr>
+				<p class="relations"><strong>Lemma Relations</strong></p><!-- ## Werden schon alle Relationen mitgeliefert? -->
+				{% if lemma.relations %} <!--# Abfrage, ob überhaupt welche enthalten sind, stimmt nicht -->
+					{% for where, hits in lemma.relations.items %}
+					<p><strong>{{where}}</strong></p>
+						{% for hit in hits %}
+						<div class="result-list"> <!-- ##identisch mit der in dict.html => ausgliedern? -->						
+							<div class="result-list-item indent-1 {% if hit.revisionState != 'published' %}notok{% endif %}"> <!-- indent functioniert nicht -->
+								
+								<div class="lemma-rel {{where}}"></div> <!-- lemma-beziehung -->
+								
+								<div class="result-bg" id="{{hit.id}}" onclick="window.open('/view/lemma/{{hit.id}}','_self')">
+									<!-- Redaktionsstatus & Anzahl Occurences-->
+									<div class="pt-1">
+										<div class="red-status float-right ml-2">
+											<span class="far fa-check-circle {% if hit.occurrences > 0 %}ok{% elif hit.revisionState == "published" %}pending{% else %}notok{% endif %}"></span>
+										</div>
+										{% if hit.occurrences > 0 %}
+										   <div class="number_occurences float-right">
+												<p>Occ.:&nbsp;{{hit.occurrences}}</p>
+											</div>
+										{% endif %} 
+									</div>	
+									
+									<!-- erste Zeile -->
+									<div> 
+										<a href="/view/lemma/{{hit.id}}" title="{%if pred%}{{pred}}{%endif%}"> <!-- lemma-beziehung -->
+										<h2 class="word bbaw-libertine">
+											{{hit.name}}
+										</h2>
+										<!-- Hieroglyph -->
+											<span class="hieroglyph">
+												{% for word in hit.words %}
+													{% if word.glyphs %}
+														<span class="glyphbox">
+															<!-- TODO font-size: 20px; vertical-align: -5px; in css verschieben -->
+															<canvas class="res" style="font-size: 20px; vertical-align: -5px;" title="{{word.glyphs}}">
+																{{word.glyphs}}
+															</canvas>
+														</span>
+													{% endif %}
+												{% endfor %}
+											</span>
+
+										<!-- Lemma ID -->
+										<span class="result-list-lemma-id hide">
+											&nbsp; (ID {{hit.id}})
+										</span>
+										</a>
+									</div>
+									
+									 <!-- zweite Zeile -->
+									 <div>
+										<!-- Wordclass -->
+										<span class="word-class hide">
+											<strong>
+												<span class="font-italic word-class-type">[{{hit.type}}]</span>
+												{%if hit.subtype%}<span class="word-class-subtype">({{hit.subtype}})</span>{%endif%}
+											</strong>
+										</span>
+										
+										<!-- Translations -->
+										<!-- Translation DE -->
+										<span class="translations translation-de">
+											<span class="font-italic hide">[{{hit.type}}]</span>
+											{%for translation in hit.translations.de%}
+											<span class="translation">{{translation}}</span>
+											{%endfor%}
+										</span>
+										<!-- Translation EN -->
+										<span class="translations translation-en hide">
+											<span class="font-italic hide">[{{hit.type}}]</span>
+											{%for translation in hit.translations.en%}
+											<span>{{translation}}</span>
+											{%endfor%}					
+										</span>
+										<!-- Translation FR -->
+										<span class="translations translation-fr hide">
+											<span class="font-italic hide">[{{hit.type}}]</span>
+											{%for translation in hit.translations.fr%}
+											<span>{{translation}}</span>
+											{%endfor%}					
+										</span>
+							   
+										<!-- Attestation time -->
+										<span class="result-list-attestation-time hide">(##att.time##{{hit.xxx}})</span> <!-- ##Variable noch nicht verfügbar -->
+										
+										<!-- Bibliography -->
+										<span class="result-list-bibliography hide">({{hit.bibliography}})</span>
+									</div>
+								</div> 
+							<hr>
+							</div> <!-- /. result-list-item -->
+						</div>  <!-- /. result-list -->
+						{% endfor %}
 					{% endfor %}
-				</button>
-			{% endfor %}
-			<hr>
-			
-			<button type="button" class="btn btn-block btn-light text-left text-decoration-none"><span class="fas fa-search-plus"></span>Select for Combination Search</button>
-            <a href="javascript:history.back()"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Back to search results</button></a>
-            <!-- anstelle des historyBack sollte u.U. der Search-String verwendet werden -->
-			<a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Modify Search</button></a>
-            
-            <!-- Zitationsfeld -->        
-        <div class="bg-light citation mt-3 mb-4">
-            
-            <p class="h6">Please cite as</p>
-            <div id="citation-text">
-                <ul class="list-unstyled mt-3 mb-4">
-                    <li>TLA lemma ID {{lemma.id}} ({% for word in lemma.words %}{{word.transcription}}{% endfor %}), &lt;http://tla.bbaw.de/view/lemma/{{lemma.id}}&gt;, 
-					in: <i>Thesaurus Linguae Aegyptiae</i> &lt;http://tla.bbaw.de&gt;, 
-					Version ##16.0##, ##30.10.2019##, 
-					ed. by Berlin-Brandenburgische Akademie der Wissenschaften & Sächsische Akademie der Wissenschaften 
-					(accessed: ##DATUM##)</li>
-                </ul>
-            </div>
-            <button type="button" class="btn btn-light text-left text-decoration-none"><span class="fa fa-clipboard"></span>Copy citation</button>
-              
-		</div>  
-            
-            
-			
+				{% endif %}
+							
+				<!-- alte Auflistung -->			
+				<!--<p>			
+				{% if lemma.relations.root %}
+					<br>Root:
+					{% for root in lemma.relations.root %}
+						<span>
+							<a href="/view/lemma/{{root.id}}" title="{{root.id}} (Root)" class="bbaw-libertine">
+								{{root.name}}
+							</a>
+						</span>
+					{% endfor %}
+				{% endif %}
+				{% if lemma.relations.partOf %}
+					<br>Superordinate Items:
+					{% for item in lemma.relations.partOf %}
+						<span>{{item}}
+							<a href="/view/lemma/{{item.id}}" title="{{item.id}} (Superordinate)" class="bbaw-libertine">
+								{{item.name}}
+							</a>
+						</span>
+					{% endfor %}
+				{% endif %}
+				{% if lemma.relations.contains %}
+					<br>Subordinate Items:
+					{% for item in lemma.relations.contains %}
+						<span>{{item}}
+							<a href="/view/lemma/{{item.id}}" title="{{item.id}} (Subordinate)" class="bbaw-libertine">
+								{{item.name}}
+							</a>
+						</span>
+					{% endfor %}
+				{% endif %}
+				{% if lemma.relations.successor %}
+					<br>Historical Successor:
+					{% for item in lemma.relations.successor %}
+						<span>{{item}}
+							<a href="/view/lemma/{{item.id}}" title="{{item.id}} (Successor)" class="bbaw-libertine">
+								{{item.name}}
+							</a>
+						</span>
+					{% endfor %}
+				{% endif %}
+				</p>-->
+				
+				<div class="editor">
+				<hr>	
+				<strong>TLA Editor:&nbsp;<a href="#">{{ lemma.edited.name }}</a></strong>			
+				<br><strong>Last Revision:</strong> {{ lemma.edited.date }}
+				<br><strong>Protocoll:</strong> {{ lemma.xxx }} <!--## Wert noch nicht mitgeliefert -->
+				<br><strong>Review State:</strong> {{ lemma.revisionState }}
+				</div>
+			</div>    
+		</div> <!-- close content col-sm-8 -->	
+
+		<!-- Sidebar -->
+		<div class="col-sm-4">
+            <div class="sticky-top">
+				<!-- Lemma ID feld -->
+				<!--<h6 class="id mt-2">Lemma ID {{lemma.id}}</h6> 
+				<button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{{lemma.id}}')"><span class="fa fa-clipboard"></span>Copy ID</button>-->
+				
+				<!-- Verweise -->
+				<!-- ## in Hauptfeld verschieben, dann rechte Kolumne immer nur mit Buttons/Navi -->
+				<!--<p class="h6 pt-4 pb-1 pl-3">Bibliography</p>
+				{% for bib in bibl %}
+					<button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-right"></span>{{ bib }}</button>
+				{% endfor %}
+				<hr>
+				<p class="h6 pt-1 pb-1 pl-3">External Identifiers</p>
+				{% for provider, identifiers in lemma.externalReferences.items %}
+					<button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-right"></span>{{provider}} 
+						{% for identifier in identifiers %}
+							<em>{{identifier}}</em>
+						{% endfor %}
+					</button>
+				{% endfor %}-->
+				
+				<!-- Buttons -->
+				<br>
+				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail hieroglyph-btn "><i class="fas fa-plus-circle"></i>Hieroglyphs</button>
+				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail lemma-id-btn "><i class="fas fa-plus-circle"></i>Lemma ID</button>
+				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-class-btn"><span class="fas fa-plus-circle"></span>Word Class</button>
+				<div class="dropdown">
+					<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail" id="languages" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-plus-circle"></span>Translation Languages</button>
+					<div class="dropdown-menu" aria-labelledby="languages">
+						<button class="dropdown-item translation-languages-btn-de" type="button">German</button>
+						<button class="dropdown-item translation-languages-btn-en" type="button">English</button>
+						<button class="dropdown-item translation-languages-btn-fr" type="button">French</button>
+					  </div>
+				</div>
+				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestation-time-btn "><i class="fas fa-plus-circle"></i>Attestation time</button>
+				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail bibliografical-btn "><i class="fas fa-plus-circle"></i>Bibliographical references </button>  
+				
+				<!-- Navigation -->
+				<br>
+				<button type="button" class="btn btn-block btn-light text-left text-decoration-none"><span class="fas fa-search-plus"></span>Select for Combination Search</button>
+				<a href="javascript:history.back()"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Back to search results</button></a>
+				<!-- anstelle des historyBack sollte u.U. der Search-String verwendet werden -->
+				<a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Modify Search</button></a>
+            </div>    
 		</div>		
-  </div>
-  <!-- /.row -->
+	</div> <!-- /.row -->
+	
+	<div class="row">	
+		<!-- Zitationsfeld -->        
+		<div class="bg-light citation mt-3 mb-4">         
+			<p class="h6"><strong>Please cite as:</strong></p>
+				<!-- Version, Issue, Release-Date, heutiges Datum noch per globaler Variable holen -->
+			<blockquote>TLA lemma ID {{lemma.id}} ({% for word in lemma.words %}{{word.transcription}}{% endfor %}), &lt;{{tlaBaseURL}}/view/lemma/{{lemma.id}}&gt;, 
+				in: <i>{{tlaTitle}}</i> &lt;{{tlaBaseURL}}&gt;, 
+				Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, 
+				ed. by {{tlaEditor}} 
+				(accessed: {{dateToday}})</blockquote>
+			<button type="button" class="btn btn-secondary btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('TLA lemma ID {{lemma.id}} ({% for word in lemma.words %}{{word.transcription}}{% endfor %}), &lt;{{tlaBaseURL}}/view/lemma/{{lemma.id}}&gt;, in: {{tlaTitle}} &lt;{{tlaBaseURL}}&gt;, Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, ed. by {{tlaEditor}} (accessed: {{dateToday}})');"><span class="fa fa-clipboard"></span>Copy citation</button>
+		</div>  
+	</div> <!-- /.row -->		
     
     <!-- Modal for Comments-->
     <div class="modal fade" id="modal_comments" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -318,7 +412,6 @@
               <a href="#" class="btn btn-block btn-info" role="button"><span class="fab fa-twitter"></span>Twitter</a> 
               <a href="#" class="btn btn-block btn-info" role="button"><span class="fab fa-facebook"></span>Facebook</a> 
           </div>
-          
         </div>
       </div>
     </div>

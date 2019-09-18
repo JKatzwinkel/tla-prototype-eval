@@ -133,6 +133,10 @@ a.navbar-brand {
 .result-list-item a.result-list-bibliography:hover .svg-inline--fa{
 	color: white;
 	}
+	
+.result-list-item.notok {
+	color: #A9A9A9;
+	}
 
 .result-list-item.successor  {opacity: .4;}
 .result-list-item.successor  h2 {color: #333;}
@@ -312,7 +316,7 @@ p.translation-de span  {
     font-weight: 100!important; 
 }
 
-.word-class {float: left;}
+/*.word-class {float: left;}*/
 
 .word-class-type {
     font-style: italic;
@@ -323,7 +327,7 @@ p.translation-de span  {
     font-family: "Roboto Condensed";
 }
 
-.translations {display:block;}
+/*.translations {display:block;}*/
 
 /* Pagination */
 .pag-container {
@@ -458,9 +462,9 @@ p.translation-de span  {
 	padding: 1rem;
 	background-color: #CCC;
 	color: white;}
-.details-content  .btn-block+.btn-block {
-    margin-top: 0!important;	
-}
+/*.details-content  .btn-block+.btn-block {
+    margin-top: 0!important;
+}	*/
 
 /* Show/Hide */
 
@@ -595,6 +599,9 @@ span.multiselect-native-select select {
     color: grey;
     }
 
+.copy-to-clipboard-btn {
+	/**/
+}
 
 .root:before {content: "Root";}
 .rootOf:before {content: "Root of";}

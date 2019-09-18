@@ -1,8 +1,26 @@
 $(window).on('pageshow', init);
 
+
+function copyStringToClipboard (str) {
+       // Create new element
+       var el = document.createElement('textarea');
+       // Set value (string to be copied)
+       el.value = str;
+       // Set non-editable to avoid focus and move outside of view
+       el.setAttribute('readonly', '');
+       el.style = {position: 'absolute', left: '-9999px'};
+       document.body.appendChild(el);
+       // Select text inside element
+       el.select();
+       // Copy text to clipboard
+       document.execCommand('copy');
+       // Remove temporary element
+       document.body.removeChild(el);
+    }
+	
 function init() {	
 // Show/Hide - Buttons
-	// .hieroglyph
+		// .hieroglyph
 		$('html').not('.hieroglyph').click(function (e) {
 		        //console.log($(e.target).parent());
 		 if ($('.hieroglyph').is(':visible') && !e.target == '.hieroglyph') {
@@ -37,7 +55,19 @@ function init() {
 			e.preventDefault();
             $('.result-list-bibliography').slideToggle('slow');
         });	
-	
+
+	// .result-list-attestation-time
+		$('html').not('.result-list-attestation-time').click(function (e) {
+		        //console.log($(e.target).parent());
+		 if ($('.result-list-attestation-time').is(':visible') && !e.target == '.result-list-attestation-time') {
+                $('.result-list-attestation-time').slideUp('ease-out');
+            }
+        });
+        $('.attestation-time-btn').click(function (e) {
+			e.preventDefault();
+            $('.result-list-attestation-time').slideToggle('slow');
+        });	
+		
 	// .lemma-id
 		$('html').not('.lemma-id').click(function (e) {
 		        //console.log($(e.target).parent());
@@ -171,8 +201,24 @@ function init() {
 	// Copy-Text-Button
     
    // muss noch geschrieben werden
-    
-    
+   
+
+	
+    // .copy-to-clipboard-btn
+
+/* braucht input oder textarea-element
+$('.copy-to-clipboard-btn').click(function(e) {
+			e.preventDefault();
+  var copyText = document.getElementById('citation-text');
+  alert(copyText);
+  copyText.focus();
+  copyText.select();
+  copyText.setSelectionRange(0, 99999);
+  document.execCommand('copy');
+  alert("Copied to clipboard" + copyText);
+        });*/
+		
+		    
 	// Headroom 
 	    $(function() {
 		var header = new Headroom(document.querySelector("#header"), {
