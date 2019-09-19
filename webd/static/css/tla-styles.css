@@ -12,6 +12,13 @@
 		font-family: BBAWLibertine;
 		src: url(../font/BBAWLibertine_ah.ttf);
 }
+/*
+@font-face {
+		font-family: "Font Awesome 5 Free";
+		font-weight: 900;
+}*/
+
+.fas, .far {margin-right: .5rem;}
 
 a, p, h1, h2, h3, ul, li {
 	font-family: "roboto", arial, sans-serif;
@@ -178,25 +185,35 @@ a.navbar-brand {
 	padding-left: 12em;
 	}
 
+.icon:before {
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+  }
 
 .red-status span {
-   font-family: "Font Awesome 5 Free";  
-   display: inline-block;
-   padding-right: 3px;
-   vertical-align: middle;
-   font-weight: 200;
-    }
+    padding-right: 3px;
+   }
 
-.red-status span.ok:before {  
-   content: "ok \f05d"; 
-    color: green!important;
-    }
-.red-status span.pending:before {  
-   content: "pending \f058"; 
+.red-status span.ok:before {
+    font-family: "Font Awesome 5 Free"!important;
+    font-weight: 900;
+    content: "\f058";
+    color: green;
+  }
+
+.red-status span.pending:before { 
+    font-family: "Font Awesome 5 Free"!important;
+    font-weight: 900;
+    content: "\f058";
     color: orange!important;
     }
-.red-status span.notok:before {  
-   content: "notok \f05e"; 
+.red-status span.notok:before {
+    font-family: "Font Awesome 5 Free"!important;
+    font-weight: 900;
+   content: "\f05e"; 
     color: red!important;
     }
 
@@ -316,7 +333,9 @@ ul.annotation-block li.translations {
     font-size: .85em;
 }
 
-.indented-buttons {margin-top: .5em;}
+.languages-btn {margin-bottom: .5em;}
+
+.indented-buttons {margin: .5em 0;}
 .indented-buttons .btn-secondary {
     background-color: #999;
     border-color: #999;
@@ -539,7 +558,14 @@ ul.annotation-block li.translations {
 .dropdown-menu {
     width: 100%;
 }
+.dropdown-menu {
+    background-clip: unset;
+}
+.dropdown-item:hover {
+    text-decoration: none;
+    background-color: #ccc;
 
+}
 /* multiselect */
 
 span.multiselect-native-select {

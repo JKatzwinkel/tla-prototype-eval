@@ -66,8 +66,8 @@
 			<div>
 				<hr>
 				<strong>Persistent Identifiers</strong>
-				<br><strong>Persistent lemma ID:</strong> {{lemma.id}}  <button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{{lemma.id}}')"><span class="fa fa-clipboard"></span>Copy ID</button>
-				<br><strong>Persistent URL:</strong> {{tlaBaseURL}}/view/lemma/{{lemma.id}} <button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('TLA lemma ID {{lemma.id}} ({% for word in lemma.words %}{{word.transcription}}{% endfor %}), &lt;{{tlaBaseURL}}/view/lemma/{{lemma.id}}&gt;, in: {{tlaTitle}} &lt;{{tlaBaseURL}}&gt;, Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, ed. by {{tlaEditor}} (accessed: {{dateToday}})');"><span class="fa fa-clipboard"></span>Copy citation</button>
+				<br><strong>Persistent lemma ID:</strong> {{lemma.id}}  <button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{{lemma.id}}')"><span class="far fa-clipboard"></span>Copy ID</button>
+				<br><strong>Persistent URL:</strong> {{tlaBaseURL}}/view/lemma/{{lemma.id}} <button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('TLA lemma ID {{lemma.id}} ({% for word in lemma.words %}{{word.transcription}}{% endfor %}), &lt;{{tlaBaseURL}}/view/lemma/{{lemma.id}}&gt;, in: {{tlaTitle}} &lt;{{tlaBaseURL}}&gt;, Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, ed. by {{tlaEditor}} (accessed: {{dateToday}})');"><span class="fas fa-clipboard"></span>Copy citation</button>
 			</div>
 			<div class="grammar">
 				<hr>
@@ -329,13 +329,14 @@
 				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail hieroglyph-btn "><i class="fas fa-plus-circle"></i>Hieroglyphs</button>
 				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail lemma-id-btn "><i class="fas fa-plus-circle"></i>Lemma ID</button>
 				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-class-btn"><span class="fas fa-plus-circle"></span>Word Class</button>
-				<div class="dropdown">
-					<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail" id="languages" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-plus-circle"></span>Translation Languages</button>
-					<div class="dropdown-menu" aria-labelledby="languages">
-						<button class="dropdown-item translation-languages-btn-de" type="button">German</button>
-						<button class="dropdown-item translation-languages-btn-en" type="button">English</button>
-						<button class="dropdown-item translation-languages-btn-fr" type="button">French</button>
-					  </div>
+				<!-- start LANGUAGE buttons -->
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail languages-btn"><i class="fas fa-plus-circle">
+                </i>Translation Languages</button>                 
+				
+                <div class="indented-buttons indented-buttons-lang hide">
+                     <button class="btn btn-block btn-secondary text-left translation-languages-btn-de" type="button">German</button>
+                    <button class="btn btn-block btn-secondary text-left translation-languages-btn-en" type="button">English</button>
+                    <button class="btn btn-block btn-secondary text-left translation-languages-btn-fr" type="button">French</button>
 				</div>
 				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestation-time-btn "><i class="fas fa-plus-circle"></i>Attestation time</button>
 				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail bibliografical-btn "><i class="fas fa-plus-circle"></i>Bibliographical references </button>  
@@ -360,7 +361,7 @@
 				Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, 
 				ed. by {{tlaEditor}} 
 				(accessed: {{dateToday}})</blockquote>
-			<button type="button" class="btn btn-secondary btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('TLA lemma ID {{lemma.id}} ({% for word in lemma.words %}{{word.transcription}}{% endfor %}), &lt;{{tlaBaseURL}}/view/lemma/{{lemma.id}}&gt;, in: {{tlaTitle}} &lt;{{tlaBaseURL}}&gt;, Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, ed. by {{tlaEditor}} (accessed: {{dateToday}})');"><span class="fa fa-clipboard"></span>Copy citation</button>
+			<button type="button" class="btn btn-secondary btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('TLA lemma ID {{lemma.id}} ({% for word in lemma.words %}{{word.transcription}}{% endfor %}), &lt;{{tlaBaseURL}}/view/lemma/{{lemma.id}}&gt;, in: {{tlaTitle}} &lt;{{tlaBaseURL}}&gt;, Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, ed. by {{tlaEditor}} (accessed: {{dateToday}})');"><span class="fas fa-clipboard"></span>Copy citation</button>
 		</div>  
 	</div> <!-- /.row -->		
     

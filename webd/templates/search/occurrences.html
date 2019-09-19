@@ -67,7 +67,7 @@
                 <ul class="annotation-block {%if token.highlight%}highlight-{{token.highlight}}{%endif%}">
                     <li class="word-id hide">  <!-- ### add class ### -->
 					    {% if token.id %}
-						   <button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{{token.id}}')"><span class="fa fa-clipboard"></span>Copy word ID</button>
+						   <button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{{token.id}}')"><span class="fas fa-clipboard"></span>Copy word ID</button>
                         {% else %}
                             &nbsp;
                         {% endif %}
@@ -143,7 +143,7 @@
                 </ul>
                 {% endfor %}          
                
-                </div> <!-- container-annotation clode -->
+                </div> <!-- container-annotation close -->
             </div> <!-- container-switch close -->           
 			
             <div class="container-annotation-switch">
@@ -236,21 +236,27 @@
 
 				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail hieroglyph-btn "><i class="fas fa-plus-circle"></i>Hieroglyphs</button>
                 
-                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail anno-block-btn"><i class="fas fa-plus-circle"></i>Switch Annotation/Block-View</button>	
-				<!-- start indented buttons -->
-                <div class="indented-buttons hide">
+                <!-- start LANGUAGE buttons -->
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail languages-btn"><i class="fas fa-plus-circle">
+                </i>Translation Languages</button>                 
+				
+                <div class="indented-buttons indented-buttons-lang hide">
+                     <button class="btn btn-block btn-secondary text-left translation-languages-btn-de" type="button">German</button>
+                    <button class="btn btn-block btn-secondary text-left translation-languages-btn-en" type="button">English</button>
+                    <button class="btn btn-block btn-secondary text-left translation-languages-btn-fr" type="button">French</button>
+				</div>
+                
+                <!-- start ANNOTATION buttons -->
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail anno-block-btn"><i class="fas fa-plus-circle">
+                </i>Switch Annotation/Block-View</button>
+                 
+				
+                <div class="indented-buttons indented-buttons-annotation hide">
                     <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail lemma-id-btn "><i class="fas fa-plus-circle"></i>Lemma ID</button>
                     <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-id-btn "><i class="fas fa-plus-circle"></i>Word ID</button><!--new-->
                     <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail part-of-speech-btn"><span class="fas fa-plus-circle"></span>Part of Speech</button>
                     <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail glossing-btn"><span class="fas fa-plus-circle"></span>Glossing</button>
-                    <div class="dropdown">
-                        <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn" id="languages" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-plus-circle"></span>Translation Languages</button>
-                        <div class="dropdown-menu" aria-labelledby="languages">
-                            <button class="dropdown-item translation-languages-btn-de" type="button">German</button>
-                            <button class="dropdown-item translation-languages-btn-en" type="button">English</button>
-                            <button class="dropdown-item translation-languages-btn-fr" type="button">French</button>
-                          </div>
-                    </div>				
+                    				
 				    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestation-time-btn"><span class="fas fa-plus-circle"></span>Attestation time</button>
 				</div>	
 				<br>

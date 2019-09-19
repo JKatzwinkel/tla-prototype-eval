@@ -160,9 +160,7 @@ function init() {
             $('.translation-fr').slideToggle('slow');
             $('.translation-en').slideUp('ease-out');
             $('.translation-de').slideUp('ease-out');
-        });	
-	
-    
+        });	 
     
     
     
@@ -202,16 +200,29 @@ function init() {
 			e.preventDefault();
             $('.container-annotation-switch').slideToggle('slow');
         });	
-        // Buttons
+    
+    // Indented Annotation-Buttons
         $('html').not('.anno-block-btn').click(function (e) {
 		        //console.log($(e.target).parent());
-		 if ($('.indented-buttons').is(':visible') && !e.target == '.indented-buttons') {
-                $('.indented-buttons').slideUp('ease-out');
+		 if ($('.indented-buttons-annotation').is(':visible') && !e.target == '.indented-buttons-annotation') {
+                $('.indented-buttons-annotation').slideUp('ease-out');
             }
         });
         $('.anno-block-btn').click(function (e) {
 			e.preventDefault();
-            $('.indented-buttons').slideToggle('slow');
+            $('.indented-buttons-annotation').slideToggle('slow');
+        });
+    
+    // Indented Lanuage-Buttons
+        $('html').not('.languages-btn').click(function (e) {
+		        //console.log($(e.target).parent());
+		 if ($('.indented-buttons-lang').is(':visible') && !e.target == '.indented-buttons-lang') {
+                $('.indented-buttons-lang').slideUp('ease-out');
+            }
+        });
+        $('.languages-btn').click(function (e) {
+			e.preventDefault();
+            $('.indented-buttons-lang').slideToggle('slow');
         });
     
 	// Copy-Text-Button

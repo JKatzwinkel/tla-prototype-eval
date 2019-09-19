@@ -28,7 +28,7 @@
 		</div>
 		<div class="col-md-4 align-right align-baseline">
             <div class="functional-icons ml-3 float-left">
-              <a href="#" class="btn btn-light solo-icon" role="button" data-toggle="modal" data-target="#modal_sharing"><span class="fa fa-share-alt share-results"/></a>
+              <a href="#" class="btn btn-light" role="button" data-toggle="modal" data-target="#modal_sharing">Share&nbsp;&nbsp;<span class="fa fa-share-alt share-results"/></a>
             </div>
             <div class="functional-icons mr-0 ">
                 <a href="#" class="btn btn-red text-left text-decoration-none float-right" role="button">Help&nbsp;&nbsp;<span class="fas fa-info-circle fa-lg"></span></a>
@@ -63,7 +63,7 @@
 						<!--<div class="red-status float-right ml-2">
 							<span class="far fa-check-circle {% if hit.occurrences > 0 %}ok{% elif hit.revisionState == "published" %}pending{% else %}notok{% endif %}"></span>
 						</div>-->
-                        <div class="red-status float-right ml-2">
+                        <div class="icon red-status float-right ml-2">
 							<span class="{% if hit.occurrences > 0 %}ok{% elif hit.revisionState == "published" %}pending{% else %}notok{% endif %}"></span>
 						</div>
                         
@@ -173,17 +173,19 @@
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail lemma-id-btn "><i class="fas fa-plus-circle"></i>Lemma ID</button>
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-class-btn"><span class="fas fa-plus-circle"></span>Word Class</button>
                 
-                <div class="dropdown">
-                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail" id="languages" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-plus-circle"></span>Translation Languages</button>
-                    <div class="dropdown-menu" aria-labelledby="languages">
-                        <button class="dropdown-item translation-languages-btn-de" type="button">German</button>
-                        <button class="dropdown-item translation-languages-btn-en" type="button">English</button>
-                        <button class="dropdown-item translation-languages-btn-fr" type="button">French</button>
-                      </div>
-                </div>
+                <!-- start LANGUAGE buttons -->
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail languages-btn"><i class="fas fa-plus-circle">
+                </i>Translation Languages</button>                 
+				
+                <div class="indented-buttons indented-buttons-lang hide">
+                     <button class="btn btn-block btn-secondary text-left translation-languages-btn-de" type="button">German</button>
+                    <button class="btn btn-block btn-secondary text-left translation-languages-btn-en" type="button">English</button>
+                    <button class="btn btn-block btn-secondary text-left translation-languages-btn-fr" type="button">French</button>
+				</div>
+                
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestation-time-btn "><i class="fas fa-plus-circle"></i>Attestation time</button>
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail bibliografical-btn "><i class="fas fa-plus-circle"></i>Bibliographical references </button>                
-                <br>	                
+                	                
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail combination-search-btn"><span class="fas fa-plus-circle"></span>Combination Search</button>
 
                 <button type="button" class="btn btn-block btn-light text-left text-decoration-none show-detail combination-search-btn"><span class="fas fa-search-plus"></span>Combination Search</button>
