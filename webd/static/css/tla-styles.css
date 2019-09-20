@@ -360,6 +360,10 @@ ul.annotation-block li.translations {
 
 /*.word-class {float: left;}*/
 
+.sentence-id-button { /* BUG: ragt in nächste Zeile */
+	/*float: right;*/
+	}
+
 .word-class-type {
     font-style: italic;
     font-weight: 100;
