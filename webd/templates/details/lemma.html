@@ -25,14 +25,9 @@
 	<!-- Suchergebnis -->		
 		<div class="col-md-8 result">				 
 			<h2 class="bbaw-libertine">
-				<mark>
-				{% for word in lemma.words %}
-					{{ word.transcription }}
-				{% endfor %}
-				</mark>
+				<mark>Lemma ID {{lemma.id}} ({% for word in lemma.words %}{{word.transcription}}{% endfor %})</mark>
 				<span class="Z3988" title="{{coins}}"></span>
 			</h2> 
-			<p class="lemma-id">(Lemma ID {{lemma.id}})</p>
 		</div>
 		<div class="col-md-4 align-right align-baseline">
             <div class="functional-icons ml-3 float-left">
@@ -112,7 +107,7 @@
 				<strong>Bibliography</strong>
 				<br>
 				{% for bib in bibl %}
-					<button type="button" class="btn btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-right"></span>{{ bib }}</button>
+					<span class="fas fa-arrow-circle-right"></span>{{bib}} &emsp;
 				{% endfor %}
 				<hr>
 			<div>
@@ -122,11 +117,17 @@
 				<strong>External Identifiers</strong>
 				<br>
 				{% for provider, identifiers in lemma.externalReferences.items %}
-					<button type="button" class="btn btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-right"></span>{{provider}} 
-						{% for identifier in identifiers %}
-							<em>{{identifier}}</em>
-						{% endfor %}
-					</button>
+					{% for identifier in identifiers %}
+						{% if identifier|slice:"0:4" == 'http' %} <!-- ## zu? simpler Test -->
+						<a href="{{identifier}}" target="_blank">
+							<button type="button" class="btn btn-red text-left text-decoration-none">
+								<span class="fas fa-arrow-circle-right"></span>{{provider}}&nbsp;<em>{{identifier}}</em>
+							</button>
+						</a>
+						{% else %}
+							<span class="fas fa-arrow-circle-right"></span>{{provider}}&nbsp;<em>{{identifier}}</em> &emsp;
+						{% endif %}
+					{% endfor %}
 				{% endfor %}
 			</div>
 
