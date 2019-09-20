@@ -9,7 +9,6 @@ from glom import glom, Coalesce, flatten
 
 import store
 
-
 def tag_transcription(string):
     return re.sub(
         r'\$([^$]*)\$',

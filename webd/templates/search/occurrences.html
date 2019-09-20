@@ -22,7 +22,7 @@
 	</div><!-- /.row -->
 	
 	<!-- Suchergebnis + sortieren-->	
-	<div class="row search-entries">
+	<div class="row search-entries detail">
 		<div class="col-sm-8 result">
 			<h2 class="bbaw-libertine"><mark>Occurences lemma ID {{params.lemma}} ({{params.transcription}})</mark></h2> <!--## transcription wird nicht mitgeliefert -->
 		</div>
@@ -53,16 +53,6 @@
         <div class="container-annotation-switch hide">
             <div class="container-annotation mt-2 mb-2">
                 {% for token in hit.sentence.tokens %}
-						    <!-- verfügbar in token aktuell, Beispiel
-							'id': 'IBUBd7OVlOhfKUiumxJHEQfNPHc', 
-							'type': 'word', 
-							'label': 'jn', 
-							'lemma': '26660', 
-							'flexcode': '3', 
-							'glossing':	'unverändert zu BWL', 
-							'glyphs': 'M17-N35', 
-							'translations': {'de': ['seitens (jmds.)']
-							####KEIN highlight verfügbar, vgl. unten -->
                 <ul class="annotation-block {%if token.highlight%}highlight-{{token.highlight}}{%endif%}">
                     <li class="word-id hide">  <!-- ### add class ### -->
 					    {% if token.id %}
@@ -71,7 +61,7 @@
                             &nbsp;
                         {% endif %}
 					</li>
-                    <li class="hieroglyph" onclick="window.open('/view/lemma/{{token.lemma}}','_blank')">
+                    <li class="hieroglyph" {% if token.type == 'word' %}onclick="window.open('/view/lemma/{{token.lemma}}','_blank')"{% endif %}>
                         <canvas class="res occ-tok-glyphs" style="font-size: 20px; vertical-align: -5px;"  title="{{token.glyphs}}">
                         {% if token.glyphs %}
                             {{token.glyphs}}
@@ -80,14 +70,14 @@
                         {% endif %}
                        </canvas>
 					</li>
-                    <li class="transcription" onclick="window.open('/view/lemma/{{token.lemma}}','_blank')">
+                    <li class="transcription" {% if token.type == 'word' %}onclick="window.open('/view/lemma/{{token.lemma}}','_blank')"{% endif %}>
 					    {% if token.label %}
                            {{token.label}}
                         {% else %}
                             &nbsp;
                         {% endif %}
 					</li>
-                    <li class="lemma-id hide" onclick="window.open('/view/lemma/{{token.lemma}}','_blank')">
+                    <li class="lemma-id hide" {% if token.type == 'word' %}onclick="window.open('/view/lemma/{{token.lemma}}','_blank')"{% endif %}>
 					    {% if token.lemma %}
                            {{token.lemma}}
 						{% else %}
@@ -150,8 +140,8 @@
                     <!-- Lemma -->
                     <h3 class="word bbaw-libertine">
                         {% for token in hit.sentence.tokens %}
-                        <a href="/view/lemma/{{token.lemma}}">
-                            <span id="{{token.id}}" class="occ-tok {%if token.highlight%}highlight-{{token.highlight}}{%endif%} bbaw-libertine">
+                        <a{% if token.type == 'word' %} href="/view/lemma/{{token.lemma}}" target="_blank"{% endif %}>
+                            <span id="{{token.id}}" class="occ-tok {%if token.highlight%}highlight-{{token.highlight}}{%endif%} bbaw-libertine" {% if token.type == 'word' %}onclick="window.open('/view/lemma/{{token.lemma}}','_blank')"{% endif %}>
                                     {% if token.label %}
                                         {{token.label}}
                                     {% endif %}
@@ -164,9 +154,11 @@
                         {%for token in hit.sentence.tokens%}
                         <span class="glyphbox">
                             {%if token.glyphs%}
-                            <canvas class="res occ-tok-glyphs {%if token.highlight%}highlight-{{token.highlight}}{%endif%}" title="{{token.glyphs}}">
-                                {{token.glyphs}}
-                            </canvas>
+                             <a{% if token.type == 'word' %} href="/view/lemma/{{token.lemma}}" target="_blank"{% endif %}>
+								<canvas class="res occ-tok-glyphs {%if token.highlight%}highlight-{{token.highlight}}{%endif%}" title="{{token.glyphs}}">
+									{{token.glyphs}}
+								</canvas>
+							</a>
                             {%endif%}
                         </span>
                         {%endfor%}
