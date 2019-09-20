@@ -227,25 +227,7 @@ function init() {
             $('.indented-buttons-lang').slideToggle('slow');
         });
     
-	// Copy-Text-Button
-    
-   // muss noch geschrieben werden
-   
-
 	
-    // .copy-to-clipboard-btn
-
-/* braucht input oder textarea-element
-$('.copy-to-clipboard-btn').click(function(e) {
-			e.preventDefault();
-  var copyText = document.getElementById('citation-text');
-  alert(copyText);
-  copyText.focus();
-  copyText.select();
-  copyText.setSelectionRange(0, 99999);
-  document.execCommand('copy');
-  alert("Copied to clipboard" + copyText);
-        });*/
 		
 		    
 	// Headroom 
@@ -268,30 +250,21 @@ $('.copy-to-clipboard-btn').click(function(e) {
 		}());
 		
 		
-	// scrolltop
+	// change button-icons
 	
-		$(document).ready(function(){
-			$('.show-more').on('click', function(){
-				let button = $(this);
-				// change icons for show-detail-buttons
-				$("[aria-expanded^=true]").each(function() {
-					$(this)
-						.find("[data-fa-i2svg]")
-						.removeClass("fa-minus-circle")
-						.addClass("fa-plus-circle");
-				});
-				$('html,body').animate({scrollTop: $(this).offset().top}, 800);
-				if (button.is("[aria-expanded^=false]")) {
-					$(this)
-						.find('[data-fa-i2svg]')
-						.removeClass('fa-plus-circle')
-						.addClass('fa-minus-circle');
-					$("#submit-search-form").attr(
-						"form",
-						$(this).attr("form")
-					);
-				}
-			}); 
+    $(document).ready(function() {			
+        $('.show-detail').click(function() {
+    
+        $("i", this).toggleClass("fas fa-plus-circle fas fa-minus-circle");
+            });
+        
+			/*$('.show-detail, .show-more').click('click',function () {
+				$(this)
+				.find('[fas fa-plus-circle]')
+				.toggleClass('fas fa-plus-circle')
+				.toggleClass('fas fa-minus-circle');		
+			});	*/	
+			
 		}); 
 	
 }

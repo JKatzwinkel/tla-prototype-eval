@@ -26,7 +26,7 @@ a, p, h1, h2, h3, ul, li {
 	margin-bottom: 0.2rem;
 	}
 
-.condenesed {font-familiy:"Roboto Condensed"}
+.condenesed {font-familiy:"Roboto Condensed";}
 
 a {color:red;}	
 a:hover {
@@ -503,14 +503,19 @@ ul.annotation-block li.translations {
 	margin-right: 0.5rem;
 	vertical-align: -.1em;
 	}
+
 .id {
-	font-weight: bold;
+	font-weight: 600;
 	padding: 1rem;
 	background-color: #CCC;
-	color: white;}
-/*.details-content  .btn-block+.btn-block {
-    margin-top: 0!important;
-}	*/
+	color: white;
+    display: inline-block;
+}
+.id h4 span {
+    font-family: "BBAWLibertine"!important;
+    font-weight: 200;
+}
+
 
 /* Show/Hide */
 

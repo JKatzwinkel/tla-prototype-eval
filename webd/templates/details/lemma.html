@@ -23,11 +23,12 @@
   
 	<div class="row search-entries detail">
 	<!-- Suchergebnis -->		
-		<div class="col-md-8 result">				 
-			<h2 class="bbaw-libertine">
-				<mark>Lemma ID {{lemma.id}} ({% for word in lemma.words %}{{word.transcription}}{% endfor %})</mark>
+		<div class="col-md-8 result">	
+            <p>Lemma-ID</p>
+			<h4 class="id">
+				{{lemma.id}} ({% for word in lemma.words %}{{word.transcription}}{% endfor %})
 				<span class="Z3988" title="{{coins}}"></span>
-			</h2> 
+			</h4> 
 		</div>
 		<div class="col-md-4 align-right align-baseline">
             <div class="functional-icons ml-3 float-left">
