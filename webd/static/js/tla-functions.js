@@ -123,6 +123,7 @@ function init() {
 		 if ($('.translation-de').is(':visible') && !e.target == '.translation-de') {
                 $('.translation-de').slideUp('ease-out');                
             }
+            
         });
 
         $('.translation-languages-btn-de').click(function (e) {
@@ -145,6 +146,7 @@ function init() {
             $('.translation-en').slideToggle('slow');
             $('.translation-de').slideUp('ease-out');
             $('.translation-fr').slideUp('ease-out');
+            
         });	
     
     // .translation-languages FR
