@@ -18,6 +18,25 @@ function copyStringToClipboard (str) {
        document.body.removeChild(el);
     }
 	
+// Sidebar
+    $('html').not('#sidebar').click(function (e) {
+		        console.log($(e.target).parent());
+		 if ($('#sidebar').is(':visible') && !e.target == '#sidebar') {
+                $('#sidebar').toggle('slide', 
+                    {direction: 'right'}, 
+                    500);
+            }
+        });
+
+        $('.sandwich').click(function (e) {
+			e.preventDefault();
+            $('#sidebar').toggle('fast');
+        });
+		$('.close-sidebar').click(function (e) {
+			e.preventDefault();
+            $('#sidebar').toggle('fast');
+        });
+
 function init() {	
 // Show/Hide - Buttons
 		// .hieroglyph
