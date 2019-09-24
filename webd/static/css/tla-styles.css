@@ -3,7 +3,23 @@
  */
 
 
-.container {max-width: 85%!important;}
+.container {max-width: 90%!important;}
+
+@media only screen and (max-width: 992px) {
+   .container {max-width: 98% !important;} 
+
+
+    .functional-icon-set {
+
+        position: absolute;
+        right: 20px;
+        top: 110px;
+        width: 150px;
+
+    }
+
+}
+
 
 
 /* Typography */
@@ -18,9 +34,9 @@
 		font-weight: 900;
 }*/
 
-.fas, .far {margin-right: .5rem;}
+.fa, .fas, .far {margin-right: .5rem;}
 
-a, p, h1, h2, h3, ul, li {
+body, a, p, h1, h2, h3, ul, li {
 	font-family: "roboto", arial, sans-serif;
 	font-weight: 400;
 	margin-bottom: 0.2rem;
@@ -351,7 +367,7 @@ ul.annotation-block li.translations {
 }
 
 .translations {
-    font-weight: 600;    
+    font-weight: 500;    
 }
 
 .translation .result-list-bibliography {
@@ -385,19 +401,37 @@ ul.annotation-block li.translations {
 /* OffCanvas Sidebar */
 
 #sidebar {
-  position: absolute;
-  width: 220px;
-  background-color: white;
+  position: fixed;
+  width: 300px;
+  background-color: lightgrey;
   padding: 0;
-  z-index: 20;
-  display: none!important; }
+  z-index: 1100;
+  height: 100%;
+  right: 0;
+    top: 0;
+  padding: 89px 15px 0;
+  display: none; }
 
-  @media only screen and (max-width: 760px) {
+  @media only screen and (max-width: 540px) {
     #sidebar {
       width: 98%; } 
     }
 
 
+/* Sidebar 
+#sidebar { 
+  opacity: .98;
+  display: none;
+  z-index: 1100;
+  right: 0;
+  background-color: lightgrey;
+  position: fixed;
+  width: 300px;
+  height: 100%;
+  top: 0;
+  padding: 89px 15px 0;
+
+}
 	
 /* Content - Detailseite */
 

@@ -1,6 +1,28 @@
 $(window).on('pageshow', init);
 
 
+// Sidebar 
+ /*   $('html').not('#sidebar').click(function (e) {
+		        //console.log($(e.target).parent());
+		 if ($('#sidebar').is(':visible') && !e.target == '#sidebar') {
+                $('#sidebar').toggle('slide', 
+                    {direction: 'right'}, 
+                    500);
+            }
+        });
+
+    $('.sandwich').click(function (e) {
+			e.preventDefault();
+            $('#sidebar').toggle('fast');
+        });
+    $('.close-sidebar').click(function (e) {
+			e.preventDefault();
+            $('#sidebar').toggle('fast');
+        });
+*/
+
+
+
 function copyStringToClipboard (str) {
        // Create new element
        var el = document.createElement('textarea');
@@ -18,27 +40,24 @@ function copyStringToClipboard (str) {
        document.body.removeChild(el);
     }
 	
-// Sidebar
-    $('html').not('#sidebar').click(function (e) {
-		        console.log($(e.target).parent());
-		 if ($('#sidebar').is(':visible') && !e.target == '#sidebar') {
-                $('#sidebar').toggle('slide', 
-                    {direction: 'right'}, 
-                    500);
-            }
-        });
 
-        $('.sandwich').click(function (e) {
-			e.preventDefault();
-            $('#sidebar').toggle('fast');
-        });
-		$('.close-sidebar').click(function (e) {
-			e.preventDefault();
-            $('#sidebar').toggle('fast');
-        });
 
 function init() {	
 // Show/Hide - Buttons
+    
+    // .sidebar
+		$('html').not('#sidebar').click(function (e) {
+		        //console.log($(e.target).parent());
+		 if ($('#sidebar').is(':visible') && !e.target == '#sidebar') {
+                $('#sidebar').slideUp('ease-out');
+            }
+        });
+        $('.sidebar-btn, .close-sidebar').click(function (e) {
+			e.preventDefault();
+            $('#sidebar').slideToggle('slow');
+        });	
+    
+    
 		// .hieroglyph
 		$('html').not('.hieroglyph').click(function (e) {
 		        //console.log($(e.target).parent());
@@ -276,13 +295,7 @@ function init() {
     
         $("i", this).toggleClass("fas fa-plus-circle fas fa-minus-circle");
             });
-        
-			/*$('.show-detail, .show-more').click('click',function () {
-				$(this)
-				.find('[fas fa-plus-circle]')
-				.toggleClass('fas fa-plus-circle')
-				.toggleClass('fas fa-minus-circle');		
-			});	*/	
+        	
 			
 		}); 
 	

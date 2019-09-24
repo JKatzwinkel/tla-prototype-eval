@@ -23,32 +23,44 @@
 	
 	<!-- Suchergebnis + sortieren-->	
 	<div class="row search-entries">
-		<div class="col-sm-8 result">
+		<div class="col-sm-12 col-lg-8 result">
             <p>Search results for:</p> 
-            <h2 class="word bbaw-libertine mt-1"><mark>{{params.transcription}}</mark></h2>
+            <h2 class="word bbaw-libertine mt-1 mt-3"><mark>{{params.transcription}}</mark></h2>
 		</div>
-		<div class="col-md-4 align-right align-baseline">
-            <div class="functional-icons ml-1 float-left">
+		<div class="col-md-4 align-right align-baseline functional-icon-set">
+            
+            <div class="functional-icons float-right sidebar-btn d-lg-none">
+                <a href="#" class="btn btn-light" >Show options&nbsp;&nbsp;<span class="fa fa-eye"/></a>               
+            </div>
+            
+            <div class="functional-icons float-right">
               <a href="#" class="btn btn-light" role="button" data-toggle="modal" data-target="#modal_sharing">Share&nbsp;&nbsp;<span class="fa fa-share-alt share-results"/></a>
             </div>
-            <div class="functional-icons mr-0 ">
-                <a href="#" class="btn btn-red text-left text-decoration-none float-right" role="button">Help&nbsp;&nbsp;<span class="fas fa-info-circle fa-lg"></span></a>
-            </div>
-		</div>		
+                       
+            <div class="functional-icons float-right">
+              <a href="#" class="btn btn-light">Help&nbsp;&nbsp;<span class="fas fa-info-circle share-results"/></a>
+            </div>           
+            
+		</div>	
+        
+        
     </div><!-- /.row -->
 	
 	<!-- Trefferanzahl-->
 	<div class="row searchresult">		
-			<div class="col-8 pt-3">
+			<div class="col-sm-12 col-lg-8 pt-3">
                 <p class="result-entries">Results: <b>{{start}} - {{end}}</b> of <b>{{hitcount}}</b> Dictionary Entries 
                     <!--<a href="#" class="btn btn-light solo-icon float-right mr-1" role="button" data-toggle="modal" data-target="#modal_sharing"><span class="fa fa-share-alt share-results"/></a>-->
-                </p>                
+                </p>  
+                
+                
+                
 			</div>
 	</div><!-- /.row -->  
 	  	
 	<!-- Trefferliste -->
 	<div class="row result-list">	
-		<div class="col-8 ">
+		<div class="col-sm-12 col-lg-8">
 		<!-- Treffer -->
             {% for indent, pred, hit in hits %}        
 			<div class="result-list-item indent-{{indent}} {% if hit.revisionState != 'published' %}notok{% endif %}">
@@ -155,8 +167,8 @@
             
         </div> <!-- .col-8 -->    
        	
-		<!-- Sidebar -->
-		<div class="col-sm-4">
+<!-- Sidebar large-->
+		<div class="col-lg-4 d-none d-lg-block">
             <div class="sticky-top">
 				<div class="input-group mb-3">
 					<div class="input-group-append">
@@ -195,6 +207,58 @@
             </div>
 		</div>
 	</div> <!-- /.row -->	  
+    
+    
+    <!-- Sidebar small-->
+    
+    <div id="sidebar" class="d-lg-none">
+        <div class="sidebar-wrapper">                        
+            <div class="close-sidebar">
+                <a href="#"><button type="button" class="btn btn-block btn-red text-left text-decoration-none show-detail"><span class="fas fa-times"></span>hide options</button>
+                </a>
+            </div>
+            
+            <div class="input-group mt-2 mb-3">
+					<div class="input-group-append">
+						<label class="input-group-text" for="inputGroupSelect02">Order by</label>
+					</div>
+					<select class="custom-select" id="inputGroupSelect02">
+						<option value="0" selected>alphabetical</option>
+						<option value="1">attestation time, start</option>
+						<option value="2">attestation time, middle</option>
+						<option value="3">attestation time, end</option>
+					</select>			  
+				</div>
+			
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail hieroglyph-btn "><i class="fas fa-minus-circle"></i>Hieroglyphs</button>
+            
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail lemma-id-btn "><i class="fas fa-plus-circle"></i>Lemma ID</button>
+            
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-class-btn"><span class="fas fa-plus-circle"></span>Word Class</button>
+                
+                <!-- start LANGUAGE buttons -->
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail languages-btn"><i class="fas fa-plus-circle">
+                </i>Translation Languages</button>                 
+				
+                <div class="indented-buttons indented-buttons-lang hide">
+                     <button class="btn btn-block btn-secondary text-left translation-languages-btn-de" type="button">German</button>
+                    <button class="btn btn-block btn-secondary text-left translation-languages-btn-en" type="button">English</button>
+                    <button class="btn btn-block btn-secondary text-left translation-languages-btn-fr" type="button">French</button>
+				</div>
+                
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestation-time-btn "><i class="fas fa-plus-circle"></i>Attestation time</button>
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail bibliografical-btn "><i class="fas fa-plus-circle"></i>Bibliographical references </button>                
+                	                
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail combination-search-btn"><span class="fas fa-plus-circle"></span>Combination Search</button>
+
+                <button type="button" class="btn btn-block btn-light text-left text-decoration-none show-detail combination-search-btn"><span class="fas fa-search-plus"></span>Combination Search</button>
+                
+                <a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none mt-2"><span class="fas fa-arrow-circle-left"></span>Modify Search</button></a>
+            
+            
+        </div>
+    </div>
+    
     
      <!-- Modal for Sharing-->
     <div class="modal fade" id="modal_sharing" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
