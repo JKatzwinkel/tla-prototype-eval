@@ -298,6 +298,14 @@ function init() {
         	
 			
 		}); 
+    
+    // scrolltop
+	
+		$(document).ready(function(){
+			$('.show-more').on('click', function(){
+				$('html,body').animate({scrollTop: $(this).offset().top}, 800);
+			}); 
+		}); 
 	
 }
 

@@ -5,22 +5,6 @@
 
 .container {max-width: 90%!important;}
 
-@media only screen and (max-width: 992px) {
-   .container {max-width: 98% !important;} 
-
-
-    .functional-icon-set {
-
-        position: absolute;
-        right: 20px;
-        top: 110px;
-        width: 150px;
-
-    }
-
-}
-
-
 
 /* Typography */
 
@@ -418,21 +402,11 @@ ul.annotation-block li.translations {
     }
 
 
-/* Sidebar 
-#sidebar { 
-  opacity: .98;
-  display: none;
-  z-index: 1100;
-  right: 0;
-  background-color: lightgrey;
-  position: fixed;
-  width: 300px;
-  height: 100%;
-  top: 0;
-  padding: 89px 15px 0;
+/* Footer */ 
 
-}
-	
+footer.bg-light{background-color: #e0e6ed!important;}
+
+
 /* Content - Detailseite */
 
 .show-info-button span.fas{
@@ -705,3 +679,21 @@ span.multiselect-native-select select {
 .composes:before {content: "Part of";}
 .contains:before {content: "Part";}
 .partOf:before {content: "Part of";}
+
+
+/* -- Media Queries --*/
+@media only screen and (max-width: 992px) {
+   
+    .container {max-width: 98% !important;} 
+   
+    .functional-icon-set {
+        position: absolute;
+        right: 20px;
+        top: 110px;
+        width: 150px;
+    }
+    
+    .footer-logo {margin-top: 2rem; text-align: center;}
+    footer .contact {text-align: right;}
+
+}
