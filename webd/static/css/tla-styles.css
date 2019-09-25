@@ -673,8 +673,8 @@ span.multiselect-native-select select {
 .rootOf:before {content: "Root of";}
 .predecessor:before {content: "Pred.";}
 .successor:before {content: "Succ.";}     
-.referencing:before {content: "Now";}
-.referencedBy:before {content: "Prev.";}
+.referencing:before {content: "Prev.";}
+.referencedBy:before {content: "Now";}
 .composedOf:before {content: "Part";}
 .composes:before {content: "Part of";}
 .contains:before {content: "Sub.";}

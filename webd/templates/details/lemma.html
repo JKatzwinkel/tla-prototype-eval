@@ -163,7 +163,7 @@
 				<p class="relations"><strong>Lemma Relations</strong></p><!-- ## Werden schon alle Relationen mitgeliefert? -->
 				{% if lemma.relations %} <!--# Abfrage, ob überhaupt welche enthalten sind, stimmt nicht -->
 					{% for where, hits in lemma.relations.items %}
-					<p><strong>{{where}}</strong></p>
+					<p><strong>{{where|niceRelationName}}</strong></p>
 						{% for hit in hits %}
 						<div class="result-list"> <!-- ##identisch mit der in dict.html => ausgliedern? -->						
 							<div class="result-list-item indent-1 {% if hit.revisionState == 'published-obsolete' %}notok{% endif %}"> <!-- indent functioniert nicht -->
@@ -424,7 +424,7 @@
             </button>
           </div>
           <div class="modal-body">            
-              <a href="#" class="btn btn-block btn-info" role="button"><span class="far fa-envelope"></span>E-Mail</a> 
+              <a href="urlencode('')" class="btn btn-block btn-info" role="button"><span class="far fa-envelope"></span>E-Mail</a> 
               <a href="#" class="btn btn-block btn-info" role="button"><span class="fab fa-twitter"></span>Twitter</a> 
               <a href="#" class="btn btn-block btn-info" role="button"><span class="fab fa-facebook"></span>Facebook</a> 
           </div>
