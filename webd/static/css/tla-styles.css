@@ -703,5 +703,5 @@ span.multiselect-native-select select {
 .referencedBy:before {content: "Prev.";}
 .composedOf:before {content: "Part";}
 .composes:before {content: "Part of";}
-.contains:before {content: "Part";}
-.partOf:before {content: "Part of";}
+.contains:before {content: "Sub.";}
+.partOf:before {content: "Super.";}

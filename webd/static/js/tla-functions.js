@@ -22,7 +22,6 @@ $(window).on('pageshow', init);
 */
 
 
-
 function copyStringToClipboard (str) {
        // Create new element
        var el = document.createElement('textarea');

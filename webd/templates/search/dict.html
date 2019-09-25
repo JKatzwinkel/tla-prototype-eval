@@ -63,7 +63,7 @@
 		<div class="col-sm-12 col-lg-8">
 		<!-- Treffer -->
             {% for indent, pred, hit in hits %}        
-			<div class="result-list-item indent-{{indent}} {% if hit.revisionState != 'published' %}notok{% endif %}">
+			<div class="result-list-item indent-{{indent}} {% if hit.revisionState == 'published-obsolete' %}notok{% endif %}">
 				<!-- indent in views.py  --><!--{%if pred%}{{pred}}{%endif%}-->
                 
                 {% if pred %}
@@ -77,7 +77,8 @@
 							<span class="far fa-check-circle {% if hit.occurrences > 0 %}ok{% elif hit.revisionState == "published" %}pending{% else %}notok{% endif %}"></span>
 						</div>-->
                         <div class="icon red-status float-right ml-2">
-							<span class="{% if hit.occurrences > 0 %}ok{% elif hit.revisionState == "published" %}pending{% else %}notok{% endif %}"></span>
+							<span class="{% if hit.revisionState == 'published' %}ok{% elif hit.revisionState == 'published-awaiting-review' %}pending{% elif hit.revisionState == 'published-obsolete' %}notok{% endif %}"/>
+							<!--<span class="{% if hit.occurrences > 0 %}ok{% elif hit.revisionState == "published" %}pending{% else %}notok{% endif %}"></span>-->
 						</div>
                         
 						{% if hit.occurrences > 0 %}

@@ -2,7 +2,7 @@
 {% load static %}
 {% load js %}
 
-{% block title %}TLA lemma ID {{lemma.id}} ({% for word in lemma.words %}{{word.transcription}}{% endfor %}){% endblock %}
+{% block title %}TLA lemma ID {{lemma.id}} ( {% for word in lemma.words %}{{word.transcription}} {% endfor %}){% endblock %}
 
 {% block content %}
 <!-- Page Content -->
@@ -25,7 +25,7 @@
 	<!-- Suchergebnis -->		
 		<div class="col-md-8 result">	
             <p>Lemma-ID</p>
-			<h4 class="id mt-1">{{lemma.id}} ({% for word in lemma.words %}{{word.transcription}}{% endfor %})
+			<h4 class="id mt-1">{{lemma.id}} ( {% for word in lemma.words %}{{word.transcription}} {% endfor %})
                     <span class="Z3988" title="{{coins}}"></span></h4>
 				
 			 
@@ -63,9 +63,9 @@
 				<hr>
 				<p><strong>Persistent Identifiers</strong>
 				<br><strong>Persistent lemma ID:</strong> {{lemma.id}} 
-                </p>
                 <button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{{lemma.id}}')"><span class="fas fa-clipboard"></span>Copy ID</button>
 				<br><strong>Persistent URL:</strong> {{tlaBaseURL}}/view/lemma/{{lemma.id}} <button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('TLA lemma ID {{lemma.id}} ({% for word in lemma.words %}{{word.transcription}}{% endfor %}), &lt;{{tlaBaseURL}}/view/lemma/{{lemma.id}}&gt;, in: {{tlaTitle}} &lt;{{tlaBaseURL}}&gt;, Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, ed. by {{tlaEditor}} (accessed: {{dateToday}})');"><span class="fas fa-clipboard"></span>Copy citation</button>
+                </p>
 			</div>
 			<div class="grammar">
 				<hr>
@@ -94,7 +94,7 @@
 			<!-- Beleglage -->  
 			<div>
 				<hr>
-				<p><strong>Attestation</strong>&nbsp;<span class="solo-icon red-status"><span class="far fa-check-circle {% if occurrences.corpus > 0 %}ok{% elif lemma.revisionState == "published" %}pending{% else %}notok{% endif %}"/></span>
+				<p><strong>Attestation</strong>
 				<br><strong>Occurences:</strong>&nbsp;
 				{% for where, count in occurrences.items %}
                 </p>
@@ -122,10 +122,8 @@
 			<!-- Verweise -->
 			</div>
 				<p><strong>External Identifiers</strong></p>
-				<br>
-                
-                <!-- BITTE KEIN INLINE-JS ! Wenn das hier funktioniert, bitte in tla-functions.js auslagern !-->
-                
+              
+                <!-- BITTE KEIN INLINE-JS ! Wenn das hier funktioniert, bitte in tla-functions.js auslagern !-->              
 				{% for provider, identifiers in lemma.externalReferences.items %}
 					{% for identifier in identifiers %}
 						{% if identifier|slice:"0:4" == 'http' %} <!-- ## zu? simpler Test -->
@@ -168,7 +166,7 @@
 					<p><strong>{{where}}</strong></p>
 						{% for hit in hits %}
 						<div class="result-list"> <!-- ##identisch mit der in dict.html => ausgliedern? -->						
-							<div class="result-list-item indent-1 {% if hit.revisionState != 'published' %}notok{% endif %}"> <!-- indent functioniert nicht -->
+							<div class="result-list-item indent-1 {% if hit.revisionState == 'published-obsolete' %}notok{% endif %}"> <!-- indent functioniert nicht -->
 								
 								<div class="lemma-rel {{where}}"></div> <!-- lemma-beziehung -->
 								
@@ -176,7 +174,7 @@
 									<!-- Redaktionsstatus & Anzahl Occurences-->
 									<div class="pt-1">
 										<div class="red-status float-right ml-2">
-											<span class="far fa-check-circle {% if hit.occurrences > 0 %}ok{% elif hit.revisionState == "published" %}pending{% else %}notok{% endif %}"></span>
+											<span class="{% if lemma.revisionState == 'published' %}ok{% elif lemma.revisionState == 'published-awaiting-review' %}pending{% elif lemma.revisionState == 'published-obsolete' %}notok{% endif %}"/>
 										</div>
 										{% if hit.occurrences > 0 %}
 										   <div class="number_occurences float-right">
@@ -308,7 +306,7 @@
 				<p><strong>TLA Editor:&nbsp;<a href="#">{{ lemma.edited.name }}</a></strong>			
 				    <br><strong>Last Revision:</strong> {{ lemma.edited.date }}
 				    <br><strong>Protocoll:</strong> {{ lemma.xxx }} <!--## Wert noch nicht mitgeliefert -->
-				    <br><strong>Review State:</strong> {{ lemma.revisionState }}
+				    <br><strong>Review State:</strong> <span class="solo-icon red-status"><span class="fa-check-circle {% if lemma.revisionState == 'published' %}ok{% elif lemma.revisionState == 'published-awaiting-review' %}pending{% elif lemma.revisionState == 'published-obsolete' %}notok{% endif %}"/></span> ({{ lemma.revisionState }})
                  </p>
 				</div>
 			</div>  
@@ -318,12 +316,12 @@
 		<div class="bg-light citation mt-5 mb-4">         
 			<p class="h6"><strong>Please cite as:</strong></p>
 				<!-- Version, Issue, Release-Date, heutiges Datum noch per globaler Variable holen -->
-			<blockquote>TLA lemma ID {{lemma.id}} ({% for word in lemma.words %}{{word.transcription}}{% endfor %}), &lt;{{tlaBaseURL}}/view/lemma/{{lemma.id}}&gt;, 
+			<blockquote>TLA lemma ID {{lemma.id}} ( {% for word in lemma.words %}{{word.transcription}} {% endfor %}), &lt;{{tlaBaseURL}}/view/lemma/{{lemma.id}}&gt;, 
 				in: <i>{{tlaTitle}}</i> &lt;{{tlaBaseURL}}&gt;, 
 				Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, 
 				ed. by {{tlaEditor}} 
 				(accessed: {{dateToday}})</blockquote>
-			<button type="button" class="btn btn-secondary btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('TLA lemma ID {{lemma.id}} ({% for word in lemma.words %}{{word.transcription}}{% endfor %}), &lt;{{tlaBaseURL}}/view/lemma/{{lemma.id}}&gt;, in: {{tlaTitle}} &lt;{{tlaBaseURL}}&gt;, Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, ed. by {{tlaEditor}} (accessed: {{dateToday}})');"><span class="fas fa-clipboard"></span>Copy citation</button>
+			<button type="button" class="btn btn-secondary btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('TLA lemma ID {{lemma.id}} ( {% for word in lemma.words %}{{word.transcription}} {% endfor %}), &lt;{{tlaBaseURL}}/view/lemma/{{lemma.id}}&gt;, in: {{tlaTitle}} &lt;{{tlaBaseURL}}&gt;, Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, ed. by {{tlaEditor}} (accessed: {{dateToday}})');"><span class="fas fa-clipboard"></span>Copy citation</button>
 		</div>  
             
 	
