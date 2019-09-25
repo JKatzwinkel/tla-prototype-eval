@@ -207,7 +207,7 @@ a.navbar-brand {
 .red-status span.pending:before { 
     font-family: "Font Awesome 5 Free"!important;
     font-weight: 900;
-    content: "\f058";
+    content: "\f059";
     color: orange!important;
     }
 .red-status span.notok:before {
