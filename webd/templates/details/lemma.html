@@ -24,11 +24,8 @@
 	<div class="row search-entries detail">
 	<!-- Suchergebnis -->		
 		<div class="col-md-8 result">	
-            <p>Lemma-ID</p>
-			<h4 class="id mt-1">{{lemma.id}} ( {% for word in lemma.words %}{{word.transcription}} {% endfor %})
-                    <span class="Z3988" title="{{coins}}"></span></h4>
-				
-			 
+			<h4 class="id mt-1">Lemma-ID {{lemma.id}} ( {% for word in lemma.words %}{{word.transcription}} {% endfor %})<span class="Z3988" title="{{coins}}"></span></h4>
+			<span class="solo-icon red-status float-right"><span class="fa-check-circle {% if lemma.revisionState == 'published' %}ok{% elif lemma.revisionState == 'published-awaiting-review' %}pending{% elif lemma.revisionState == 'published-obsolete' %}notok{% endif %}"/></span>
 		</div>
 		<div class="col-md-4 align-right align-baseline">
             <div class="functional-icons ml-3 float-left">
@@ -308,7 +305,7 @@
 				<p><strong>TLA Editor:&nbsp;<a href="#">{{ lemma.edited.name }}</a></strong>			
 				    <br><strong>Last Revision:</strong> {{ lemma.edited.date }}
 				    <br><strong>Protocoll:</strong> {{ lemma.xxx }} <!--## Wert noch nicht mitgeliefert -->
-				    <br><strong>Review State:</strong> <span class="solo-icon red-status"><span class="fa-check-circle {% if lemma.revisionState == 'published' %}ok{% elif lemma.revisionState == 'published-awaiting-review' %}pending{% elif lemma.revisionState == 'published-obsolete' %}notok{% endif %}"/></span> ({{ lemma.revisionState }})
+				    <br><strong>Review State:</strong> {{ lemma.revisionState }}
                  </p>
 				</div>
 			</div>  
