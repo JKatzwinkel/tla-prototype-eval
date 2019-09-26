@@ -189,6 +189,7 @@
 										</h2>
 										<!-- Hieroglyph -->
 											<span class="hieroglyph">
+												#hiero# <!-- ##Variable noch nicht verfügbar -->
 												{% for word in hit.words %}
 													{% if word.glyphs %}
 														<span class="glyphbox">
@@ -222,30 +223,33 @@
 										<!-- Translation DE -->
 										<span class="translations translation-de">
 											<span class="font-italic hide">[{{hit.type}}]</span>
+											#transl.de# <!-- ##Variable noch nicht verfügbar -->
 											{%for translation in hit.translations.de%}
 											<span class="translation">{{translation}}</span>
 											{%endfor%}
 										</span>
 										<!-- Translation EN -->
 										<span class="translations translation-en hide">
+											#transl.en# <!-- ##Variable noch nicht verfügbar -->
 											<span class="font-italic hide">[{{hit.type}}]</span>
 											{%for translation in hit.translations.en%}
-											<span>{{translation}}</span>
+											<span class="translation">{{translation}}</span>
 											{%endfor%}					
 										</span>
 										<!-- Translation FR -->
 										<span class="translations translation-fr hide">
-											<span class="font-italic hide">[{{hit.type}}]</span>
+											#transl.fr# <!-- ##Variable noch nicht verfügbar -->
+											<span class="font-italic hide">[{{hit.type}}]</span> 
 											{%for translation in hit.translations.fr%}
-											<span>{{translation}}</span>
+											<span class="translation">{{translation}}</span>
 											{%endfor%}					
 										</span>
 							   
 										<!-- Attestation time -->
-										<span class="result-list-attestation-time hide">(##att.time##{{hit.xxx}})</span> <!-- ##Variable noch nicht verfügbar -->
+										<span class="result-list-attestation-time hide">(#att.time#{{hit.xxx}})</span> <!-- ##Variable noch nicht verfügbar -->
 										
 										<!-- Bibliography -->
-										<span class="result-list-bibliography hide">({{hit.bibliography}})</span>
+										<span class="result-list-bibliography hide">(#bibl#{{hit.bibliography}})</span> <!-- ##Variable noch nicht verfügbar -->
 									</div>
 								</div> 
 							<hr>
