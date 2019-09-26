@@ -124,7 +124,7 @@
 				<p><strong>External references</strong></p>             
 				{% for provider, references in lemma.externalReferences.items %}
 					{% for reference in references %}
-						{% if reference|isURL %} <!-- ## zu? simpler Test -->
+						{% if reference|isURL %}
 						<a href="{{reference}}" target="_blank">
 							<button type="button" class="btn btn-red text-left text-decoration-none">
 								<span class="fas fa-arrow-circle-right"></span>{{provider}}&nbsp;<em>{{reference}}</em>
@@ -422,7 +422,7 @@
             </button>
           </div>
           <div class="modal-body">            
-              <a href="urlencode('')" class="btn btn-block btn-info" role="button"><span class="far fa-envelope"></span>E-Mail</a> 
+              <a href="mailto:?subject=TLA,%20Lemma%20{{lemma.id}}&amp;body=TLA lemma ID {{lemma.id}} ( {% for word in lemma.words %}{{word.transcription}} {% endfor %}), &lt;{{tlaBaseURL}}/view/lemma/{{lemma.id}}&gt;, in: {{tlaTitle}} &lt;{{tlaBaseURL}}&gt;, Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, ed. by {{tlaEditor}} (accessed: {{dateToday}})" class="btn btn-block btn-info" role="button"><span class="far fa-envelope"></span>E-Mail</a> 
               <a href="#" class="btn btn-block btn-info" role="button"><span class="fab fa-twitter"></span>Twitter</a> 
               <a href="#" class="btn btn-block btn-info" role="button"><span class="fab fa-facebook"></span>Facebook</a> 
           </div>

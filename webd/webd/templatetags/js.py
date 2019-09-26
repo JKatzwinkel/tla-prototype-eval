@@ -1,5 +1,6 @@
 from django.utils.safestring import mark_safe
 from django.template import Library
+#from django.utils.http import urlencode
 
 import json
 
@@ -52,4 +53,9 @@ def linkFromExternalReference(ref, where):
     if ref[0:4] != 'http': # falls nun keine URL, dann '' zurückgeben
         ref = ''
     return ref   
-    
+# obsolete
+
+@register.filter(is_safe=True)
+def encodeEMail(text): 
+    #text = urlencode(text) 
+    return text
