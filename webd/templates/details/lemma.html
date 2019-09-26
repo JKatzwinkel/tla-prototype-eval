@@ -121,19 +121,17 @@
 			
 			<!-- Verweise -->
 			</div>
-				<p><strong>External Identifiers</strong></p>
-              
-                <!-- BITTE KEIN INLINE-JS ! Wenn das hier funktioniert, bitte in tla-functions.js auslagern !-->              
-				{% for provider, identifiers in lemma.externalReferences.items %}
-					{% for identifier in identifiers %}
-						{% if identifier|slice:"0:4" == 'http' %} <!-- ## zu? simpler Test -->
-						<a href="{{identifier}}" target="_blank">
+				<p><strong>External references</strong></p>             
+				{% for provider, references in lemma.externalReferences.items %}
+					{% for reference in references %}
+						{% if reference|isURL %} <!-- ## zu? simpler Test -->
+						<a href="{{reference}}" target="_blank">
 							<button type="button" class="btn btn-red text-left text-decoration-none">
-								<span class="fas fa-arrow-circle-right"></span>{{provider}}&nbsp;<em>{{identifier}}</em>
+								<span class="fas fa-arrow-circle-right"></span>{{provider}}&nbsp;<em>{{reference}}</em>
 							</button>
 						</a>
 						{% else %}
-							<span class="fas fa-arrow-circle-right"></span>{{provider}}&nbsp;<em>{{identifier}}</em> &emsp;
+							<span class="fas fa-arrow-circle-right"></span>{{provider}}&nbsp;<em>{{reference}}</em> &emsp;
 						{% endif %}
 					{% endfor %}
 				{% endfor %}
