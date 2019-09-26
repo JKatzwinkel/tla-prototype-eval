@@ -18,6 +18,8 @@ def niceRelationName(name):
         name = 'Root of'
     elif name == 'predecessor':
         name = 'Predecessors'
+    elif name == 'successor':
+        name = 'Successors'
     elif name == 'referencing':
         name = 'Substitutes for following obsolete lemmata'        
     elif name == 'referencedBy':
