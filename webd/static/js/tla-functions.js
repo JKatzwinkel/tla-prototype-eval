@@ -166,8 +166,8 @@ function init() {
         $('.translation-languages-btn-de').click(function (e) {
 			e.preventDefault();
             $('.translation-de').slideToggle('slow');
-            $('.translation-en').slideUp('ease-out');
-            $('.translation-fr').slideUp('ease-out');
+            /*$('.translation-en').slideUp('ease-out');
+            $('.translation-fr').slideUp('ease-out');*/
         });	
     
     // .translation-languages EN
@@ -181,8 +181,8 @@ function init() {
         $('.translation-languages-btn-en').click(function (e) {
 			e.preventDefault();
             $('.translation-en').slideToggle('slow');
-            $('.translation-de').slideUp('ease-out');
-            $('.translation-fr').slideUp('ease-out');
+            /*$('.translation-de').slideUp('ease-out');
+            $('.translation-fr').slideUp('ease-out');*/
             
         });	
     
@@ -197,8 +197,8 @@ function init() {
         $('.translation-languages-btn-fr').click(function (e) {
 			e.preventDefault();
             $('.translation-fr').slideToggle('slow');
-            $('.translation-en').slideUp('ease-out');
-            $('.translation-de').slideUp('ease-out');
+            /*$('.translation-en').slideUp('ease-out');
+            $('.translation-de').slideUp('ease-out');*/
         });	 
     
     
