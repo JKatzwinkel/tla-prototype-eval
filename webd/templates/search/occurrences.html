@@ -27,6 +27,22 @@
             <p>Occurences lemma ID</p>
 			<h2 class="bbaw-libertine mt-1"><mark>{{params.lemma}} ({{params.transcription}})</mark></h2> <!--## transcription wird nicht mitgeliefert -->
 		</div>
+        <div class="col-md-4 align-right align-baseline functional-icon-set">
+            
+            <div class="functional-icons float-right sidebar-btn d-lg-none">
+                <a href="#" class="btn btn-light" >Show options&nbsp;&nbsp;<span class="fa fa-eye"/></a>               
+            </div>
+            
+            <div class="functional-icons float-right">
+              <a href="#" class="btn btn-light" role="button" data-toggle="modal" data-target="#modal_sharing">Share&nbsp;&nbsp;<span class="fa fa-share-alt share-results"/></a>
+            </div>
+                       
+            <div class="functional-icons float-right">
+              <a href="#" class="btn btn-light">Help&nbsp;&nbsp;<span class="fas fa-info-circle share-results"/></a>
+            </div>           
+            
+		</div>
+        <!--
 		<div class="col-md-4 align-right align-baseline">
             <div class="functional-icons ml-3 float-left">
               <a href="#" class="btn btn-light solo-icon" role="button" data-toggle="modal" data-target="#modal_sharing"><span class="fa fa-share-alt share-results"/></a>
@@ -34,7 +50,7 @@
             <div class="functional-icons mr-0 ">
                 <a href="#" class="btn btn-red text-left text-decoration-none float-right" role="button">Help&nbsp;&nbsp;<span class="fas fa-info-circle fa-lg"></span></a>
             </div>
-		</div>		
+		</div> -->		
     </div><!-- /.row -->
 	
 	<!-- Trefferanzahl-->
@@ -46,7 +62,7 @@
 	  	
 	<!-- Trefferliste -->
 	<div class="row occ-list">	
-		<div class="col-sm-8">
+		<div class="col-sm-12 col-lg-8">
 		<!-- Treffer -->
             
         {% for hit in hits %}
@@ -213,8 +229,8 @@
 		</div> <!-- .col-sm-8 -->
 	
 	
-		<!-- Sidebar -->
-		<div class="col-sm-4">
+		<!-- Sidebar large -->
+		<div class="col-lg-4 d-none d-lg-block">
 			<div class="sticky-top">
 				<div class="input-group mb-3">
 					<div class="input-group-append">
@@ -258,7 +274,59 @@
 		</div>
 	</div> <!-- /.row -->
     
+    <!-- Sidebar small-->
     
+    <div id="sidebar" class="d-lg-none">
+        <div class="sidebar-wrapper">                        
+            <div class="close-sidebar">
+                <a href="#"><button type="button" class="btn btn-block btn-red text-left text-decoration-none show-detail"><span class="fas fa-times"></span>hide options</button>
+                </a>
+            </div>
+            
+            <div class="input-group mt-2 mb-3">
+					<div class="input-group-append">
+						<label class="input-group-text" for="inputGroupSelect02">Order by</label>
+					</div>
+					<select class="custom-select" id="inputGroupSelect02">
+						<option value="1">attestation time, start</option>
+						<option value="2" selected>attestation time, middle</option>
+						<option value="3">attestation time, end</option>
+					</select>			  
+				</div>
+
+				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail hieroglyph-btn "><i class="fas fa-minus-circle"></i>Hieroglyphs</button>
+                
+                <!-- start LANGUAGE buttons -->
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail languages-btn">Translation Languages</button>                 
+				
+                <div class="indented-buttons indented-buttons-lang hide">
+                     <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn-de" type="button"><i class="fas fa-minus-circle"></i>German</button>
+                    <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn-en" type="button"><i class="fas fa-plus-circle"></i>English</button>
+                    <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn-fr" type="button"><i class="fas fa-plus-circle"></i>French</button>
+				</div>
+                
+                <!-- start ANNOTATION buttons -->
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail anno-block-btn"><i class="fas fa-plus-circle">
+                </i>Switch Annotation/Block-View</button>
+                <div class="indented-buttons indented-buttons-annotation hide">
+                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail lemma-id-btn "><i class="fas fa-plus-circle"></i>Lemma ID</button>
+                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-id-btn "><i class="fas fa-plus-circle"></i>Word ID</button><!--new-->
+                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail part-of-speech-btn"><i class="fas fa-plus-circle"></i>Part of Speech</button>
+                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail glossing-btn"><i class="fas fa-plus-circle"></i>Glossing</button>
+				    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestation-time-btn"><i class="fas fa-plus-circle"></i>Attestation time</button>
+				</div>	
+				<br>
+				
+				<a href="javascript:history.back()"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Back to lemma</button></a>
+				<!-- anstelle des historyBack sollte u.U. der Search-String verwendet werden -->
+				
+				<a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Modify Search</button></a>
+			
+                
+            
+            
+        </div>
+    </div>
     
     <!-- Modal for Sharing-->
     <div class="modal fade" id="modal_sharing" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

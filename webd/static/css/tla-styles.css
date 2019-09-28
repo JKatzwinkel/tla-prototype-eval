@@ -91,6 +91,7 @@ a.navbar-brand {
 .search-entries {
 	padding: 10px;
 	border-bottom: 2px solid #EEE;
+    margin-top: -1rem;
 	}
 	
 .search-entries .result h2 mark{
@@ -506,8 +507,7 @@ footer.bg-light{background-color: #e0e6ed!important;}
     background-color: red;
 }
 
-.solo-icon {padding: .2em .2em .2em .6em;
-            }
+
 
 .svg-inline--fa{
 	margin-right: 0.5rem;
@@ -684,16 +684,29 @@ span.multiselect-native-select select {
 
 
 
+
+
 /* -- Media Queries --*/
 @media only screen and (max-width: 992px) {
    
     .container {max-width: 98% !important;} 
    
+    #button-bar-small {
+        
+        display: block!important;
+        margin: -45px 0 1rem 0;
+        top:0;
+        height:4rem;
+        background-color: white;
+        border-bottom: 3px solid #DDD;
+    }
+    .functional-icons {
+        position: relative;
+    }
+    .share-button {float: right!important;}
+
     .functional-icon-set {
-        position: absolute;
-        right: 20px;
-        top: 110px;
-        width: 150px;
+       padding-top: .75rem; 
     }
     
     .footer-logo {margin-top: 2rem; text-align: center;}
