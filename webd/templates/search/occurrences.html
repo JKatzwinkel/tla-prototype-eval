@@ -20,37 +20,49 @@
 			</nav>
 		</div>
 	</div><!-- /.row -->
-	
-	<!-- Suchergebnis + sortieren-->	
-	<div class="row search-entries detail">
-		<div class="col-sm-8 result">
-            <p>Occurences lemma ID</p>
-			<h2 class="bbaw-libertine mt-1"><mark>{{params.lemma}} ({{params.transcription}})</mark></h2> <!--## transcription wird nicht mitgeliefert -->
-		</div>
-        <div class="col-md-4 align-right align-baseline functional-icon-set">
+    
+    <div id="button-bar-small" class="sticky-top d-lg-none">
+        <div class="functional-icon-set">
             
-            <div class="functional-icons float-right sidebar-btn d-lg-none">
-                <a href="#" class="btn btn-light" >Show options&nbsp;&nbsp;<span class="fa fa-eye"/></a>               
+            <a href="/search"><button type="button" class="btn btn-red text-left text-decoration-none float-left"><i class="fa fa-search"></i><span class="d-none d-lg-block">Modify Search</span></button></a>
+            
+            <a href="javascript:history.back()"><button type="button" class="btn btn-red text-left text-decoration-none "><i class="fas fa-arrow-circle-left"></i><span class="d-none d-lg-block">Back to Lemma</span></button></a>   
+            
+            
+            <div class="functional-icons float-right solo-icon sidebar-btn">
+                <a href="#" class="btn btn-light" ><i class="fa fa-eye"></i></a>               
             </div>
             
-            <div class="functional-icons float-right">
-              <a href="#" class="btn btn-light" role="button" data-toggle="modal" data-target="#modal_sharing">Share&nbsp;&nbsp;<span class="fa fa-share-alt share-results"/></a>
+
+            <div class="functional-icons float-right solo-icon">
+                <a href="#" class="btn btn-red text-left text-decoration-none " role="button"><i class="fas fa-info-circle fa-lg"></i></a>
             </div>
-                       
-            <div class="functional-icons float-right">
-              <a href="#" class="btn btn-light">Help&nbsp;&nbsp;<span class="fas fa-info-circle share-results"/></a>
+            
+              <div class="functional-icons ml-3 float-right share-button solo-icon">
+              <a href="#" class="btn btn-light" role="button" data-toggle="modal" data-target="#modal_sharing"><i class="fa fa-share-alt share-results"></i></a>           
             </div>           
             
 		</div>
-        <!--
-		<div class="col-md-4 align-right align-baseline">
-            <div class="functional-icons ml-3 float-left">
-              <a href="#" class="btn btn-light solo-icon" role="button" data-toggle="modal" data-target="#modal_sharing"><span class="fa fa-share-alt share-results"/></a>
+    </div><!-- /#button-bar-small-->
+    
+	
+	<!-- Suchergebnis + sortieren-->	
+	<div class="row search-entries detail">
+		<div class="col-sm-12 col-lg-8 result">
+            <p>Occurences lemma ID</p>
+			<h2 class="bbaw-libertine mt-3"><mark>{{params.lemma}} ({{params.transcription}})</mark></h2> <!--## transcription wird nicht mitgeliefert -->
+		</div>
+        
+        <div class="col-md-4 align-right align-baseline d-none d-lg-block">
+            <div class="functional-icons ml-3 ">
+              <a href="#" class="btn btn-light solo-icon" role="button" data-toggle="modal" data-target="#modal_sharing">Share&nbsp;&nbsp;<i class="fa fa-share-alt share-results"></i></a>              
             </div>
+                       
             <div class="functional-icons mr-0 ">
-                <a href="#" class="btn btn-red text-left text-decoration-none float-right" role="button">Help&nbsp;&nbsp;<span class="fas fa-info-circle fa-lg"></span></a>
+                <a href="#" class="btn btn-red text-left text-decoration-none solo-icon" role="button">Help&nbsp;&nbsp;<i class="fas fa-info-circle fa-lg"></i></a>
             </div>
-		</div> -->		
+		</div>	
+           	
     </div><!-- /.row -->
 	
 	<!-- Trefferanzahl-->
@@ -320,7 +332,7 @@
 				<a href="javascript:history.back()"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Back to lemma</button></a>
 				<!-- anstelle des historyBack sollte u.U. der Search-String verwendet werden -->
 				
-				<a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Modify Search</button></a>
+				<a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fa fa-search"></span>Modify Search</button></a>
 			
                 
             

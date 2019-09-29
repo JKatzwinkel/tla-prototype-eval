@@ -24,19 +24,20 @@
     <div id="button-bar-small" class="sticky-top d-lg-none">
         <div class="functional-icon-set">
             
-            <div class="functional-icons float-right sidebar-btn ">
-                <a href="#" class="btn btn-light" ><span class="fa fa-eye"/></a>               
+            <a href="/search"><button type="button" class="btn btn-red text-left text-decoration-none float-left"><i class="fa fa-search"></i><span class="d-none d-lg-block">Modify Search</span></button></a>
+            
+            <div class="functional-icons float-right solo-icon sidebar-btn">
+                <a href="#" class="btn btn-light" ><i class="fa fa-eye"></i></a>               
             </div>
             
-            <div class="functional-icons ml-3 float-left share-button">
-              <a href="#" class="btn btn-light solo-icon" role="button" data-toggle="modal" data-target="#modal_sharing"><span class="fa fa-share-alt share-results"/></a>
-              
+
+            <div class="functional-icons float-right solo-icon">
+                <a href="#" class="btn btn-red text-left text-decoration-none " role="button"><i class="fas fa-info-circle fa-lg"></i></a>
             </div>
-            <div class="functional-icons mr-0 ">
-                <a href="#" class="btn btn-red text-left text-decoration-none float-right" role="button"><span class="fas fa-info-circle fa-lg"></span></a>
-            </div> 
             
-            <a href="/search"><button type="button" class="btn btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Modify Search</button></a>
+              <div class="functional-icons ml-3 float-right share-button solo-icon">
+              <a href="#" class="btn btn-light" role="button" data-toggle="modal" data-target="#modal_sharing"><i class="fa fa-share-alt share-results"></i></a>           
+            </div>           
             
 		</div>
     </div><!-- /#button-bar-small-->
@@ -45,7 +46,7 @@
 	<div class="row search-entries">
 		<div class="col-sm-12 col-lg-8 result">
             <p>Search results for:</p> 
-            <h2 class="word bbaw-libertine mt-1 mt-3"><mark>{{params.transcription}}</mark></h2>
+            <h2 class="word bbaw-libertine mt-3"><mark>{{params.transcription}}</mark></h2>
             
             
 		</div>

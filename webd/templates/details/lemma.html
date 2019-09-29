@@ -20,29 +20,63 @@
 			</nav>
 		</div>
 	</div><!-- /.row -->
+    
+    <div id="button-bar-small" class="sticky-top d-lg-none">
+        <div class="functional-icon-set">
+            
+            <a href="/search"><button type="button" class="btn btn-red text-left text-decoration-none float-left"><i class="fa fa-search"></i><span class="d-none d-lg-block">Modify Search</span></button></a>
+            
+            <a href="javascript:history.back()"><button type="button" class="btn btn-red text-left text-decoration-none "><i class="fas fa-arrow-circle-left"></i><span class="d-none d-lg-block">Result List</span></button></a>    
+            
+            
+            <div class="functional-icons float-right solo-icon sidebar-btn">
+                <a href="#" class="btn btn-light" ><i class="fa fa-eye"></i></a>               
+            </div>
+            
+
+            <div class="functional-icons float-right solo-icon">
+                <a href="#" class="btn btn-red text-left text-decoration-none " role="button"><i class="fas fa-info-circle fa-lg"></i></a>
+            </div>
+            
+            <div class="functional-icons float-right solo-icon">
+                <a href="#" class="btn btn-light" role="button" data-toggle="modal" data-target="#modal_comments"><i class="far fa-comment"></i></a>
+            </div>
+            
+              <div class="functional-icons float-right share-button solo-icon">
+              <a href="#" class="btn btn-light" role="button" data-toggle="modal" data-target="#modal_sharing"><i class="fa fa-share-alt share-results"></i></a>           
+            </div>           
+            
+		</div>
+    </div><!-- /#button-bar-small-->
   
 	<div class="row search-entries detail">
 	<!-- Suchergebnis -->		
-		<div class="col-md-8 result">	
+		<div class="col-sm-12 col-lg-8 result">	
 			<h4 class="id mt-1">Lemma-ID {{lemma.id}} ( {% for word in lemma.words %}{{word.transcription}} {% endfor %})<span class="Z3988" title="{{coins}}"></span></h4>
-			<span class="solo-icon red-status float-right"><span class="fa-check-circle {% if lemma.revisionState == 'published' %}ok{% elif lemma.revisionState == 'published-awaiting-review' %}pending{% elif lemma.revisionState == 'published-obsolete' %}notok{% endif %}"/></span>
+			<span class="solo-icon red-status float-right"><span class="fa-check-circle {% if lemma.revisionState == 'published' %}ok{% elif lemma.revisionState == 'published-awaiting-review' %}pending{% elif lemma.revisionState == 'published-obsolete' %}notok{% endif %}"></span></span>
 		</div>
-		<div class="col-md-4 align-right align-baseline">
-            <div class="functional-icons ml-3 float-left">
-              <a href="#" class="btn btn-light solo-icon" role="button" data-toggle="modal" data-target="#modal_sharing"><span class="fa fa-share-alt share-results"/></a>
-              <a href="#" class="btn btn-light solo-icon" role="button" data-toggle="modal" data-target="#modal_comments"><span class="far fa-comment"/></a>
+        
+        <div class="col-md-4 align-right align-baseline d-none d-lg-block">
+            <div class="functional-icons ml-3 ">
+              <a href="#" class="btn btn-light solo-icon" role="button" data-toggle="modal" data-target="#modal_sharing">Share&nbsp;&nbsp;<i class="fa fa-share-alt share-results"></i></a>              
             </div>
+            
+            <div class="functional-icons ml-3 ">
+            <a href="#" class="btn btn-light solo-icon" role="button" data-toggle="modal" data-target="#modal_comments">Comment&nbsp;&nbsp;<i class="far fa-comment"></i></a>
+            </div>
+            
             <div class="functional-icons mr-0 ">
-                <a href="#" class="btn btn-red text-left text-decoration-none float-right" role="button">Help&nbsp;&nbsp;<span class="fas fa-info-circle fa-lg"></span></a>
+                <a href="#" class="btn btn-red text-left text-decoration-none solo-icon" role="button">Help&nbsp;&nbsp;<i class="fas fa-info-circle fa-lg"></i></a>
             </div>
-		</div>		
+		</div>
+
 	</div>
 	<!-- /.row -->
   
   	
 	<!-- Content Details -->
 	<div class="row details-content">	
-		<div class="col-sm-8">
+		<div class="col-sm-12 col-lg-8">
 			<div class="lemma pt-3">
 				<p><strong>Hieroglyphic spellings:</strong>
 				{% for word in lemma.words %}
@@ -94,12 +128,14 @@
 				<p><strong>Attestation</strong>
 				<br><strong>Occurences:</strong>&nbsp;
 				{% for where, count in occurrences.items %}
-                </p>
+                
 				<a href="/search/occurrences?lemma={{lemma.id}}">
 					<button type="button" class="btn btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-right"></span>{{where}}: {{count}}</button>
 				</a>
 				{% endfor %}
-				<br>
+                </p>
+				
+                
                 <p><strong>Time:</strong>&nbsp;<a href="#">{{ lemma.xxx }}</a></p> <!--## Werte noch nicht mitgeliefert -->
 			</div> 
 			
@@ -323,34 +359,13 @@
 			<button type="button" class="btn btn-secondary btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('TLA lemma ID {{lemma.id}} ( {% for word in lemma.words %}{{word.transcription}} {% endfor %}), &lt;{{tlaBaseURL}}/view/lemma/{{lemma.id}}&gt;, in: {{tlaTitle}} &lt;{{tlaBaseURL}}&gt;, Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, ed. by {{tlaEditor}} (accessed: {{dateToday}})');"><span class="fas fa-clipboard"></span>Copy citation</button>
 		</div>  
             
-	
             
-		</div> <!-- close content col-sm-8 -->	
+		</div> <!-- close content col-sm-12 -->	
 
-		<!-- Sidebar -->
-		<div class="col-sm-4">
+		<!-- Sidebar large -->
+		<div class="col-lg-4 d-none d-lg-block">
             <div class="sticky-top">
-				<!-- Lemma ID feld -->
-				<!--<h6 class="id mt-2">Lemma ID {{lemma.id}}</h6> 
-				<button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{{lemma.id}}')"><span class="fa fa-clipboard"></span>Copy ID</button>-->
-				
-				<!-- Verweise -->
-				<!-- ## in Hauptfeld verschieben, dann rechte Kolumne immer nur mit Buttons/Navi -->
-				<!--<p class="h6 pt-4 pb-1 pl-3">Bibliography</p>
-				{% for bib in bibl %}
-					<button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-right"></span>{{ bib }}</button>
-				{% endfor %}
-				<hr>
-				<p class="h6 pt-1 pb-1 pl-3">External Identifiers</p>
-				{% for provider, identifiers in lemma.externalReferences.items %}
-					<button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-right"></span>{{provider}} 
-						{% for identifier in identifiers %}
-							<em>{{identifier}}</em>
-						{% endfor %}
-					</button>
-				{% endfor %}-->
-				
-				<!-- Buttons -->
+                <!-- Buttons -->
 				<br>
 				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail hieroglyph-btn "><i class="fas fa-minus-circle"></i>Hieroglyphs</button>
 				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail lemma-id-btn "><i class="fas fa-plus-circle"></i>Lemma ID</button>
@@ -368,14 +383,45 @@
 				<!-- Navigation -->
 				<br>
 				<button type="button" class="btn btn-block btn-light text-left text-decoration-none"><span class="fas fa-search-plus"></span>Select for Combination Search</button>
-				<a href="javascript:history.back()"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Back to search results</button></a>
+				<button type="button" class="btn btn-block btn-red text-left text-decoration-none"><a href="javascript:history.back()"><i class="fas fa-arrow-circle-left"></i>Back to search results</a></button>
 				<!-- anstelle des historyBack sollte u.U. der Search-String verwendet werden -->
-				<a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Modify Search</button></a>
+				<button type="button" class="btn btn-block btn-red text-left text-decoration-none"><a href="/search"><i class="fa fa-search"></i>Modify Search</a></button>
             </div>    
 		</div>		
 	</div> <!-- /.row -->
 	
-			
+	<!-- Sidebar small-->
+    
+    <div id="sidebar" class="d-lg-none">
+        <div class="sidebar-wrapper">                        
+            <div class="close-sidebar">
+                <a href="#"><button type="button" class="btn btn-block btn-red text-left text-decoration-none show-detail"><span class="fas fa-times"></span>hide options</button>
+                </a>
+            </div>
+            
+            <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail hieroglyph-btn "><i class="fas fa-minus-circle"></i>Hieroglyphs</button>
+				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail lemma-id-btn "><i class="fas fa-plus-circle"></i>Lemma ID</button>
+				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-class-btn"><i class="fas fa-plus-circle"></i>Word Class</button>
+				<!-- start LANGUAGE buttons -->
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail languages-btn">Translation Languages</button>                 
+                <div class="indented-buttons indented-buttons-lang hide">
+                    <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn-de" type="button"><i class="fas fa-minus-circle"></i>German</button>
+                    <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn-en" type="button"><i class="fas fa-plus-circle"></i>English</button>
+                    <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn-fr" type="button"><i class="fas fa-plus-circle"></i>French</button>
+				</div>
+				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestation-time-btn "><i class="fas fa-plus-circle"></i>Attestation time</button>
+				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail bibliografical-btn "><i class="fas fa-plus-circle"></i>Bibliographical references </button>  
+				
+				<!-- Navigation -->
+				<br>
+				<button type="button" class="btn btn-block btn-light text-left text-decoration-none"><span class="fas fa-search-plus"></span>Select for Combination Search</button>
+				<a href="javascript:history.back()"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Back to search results</button></a>
+				<!-- anstelle des historyBack sollte u.U. der Search-String verwendet werden -->
+				<a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Modify Search</button></a>             
+            
+            
+        </div>
+    </div>		
     
     <!-- Modal for Comments-->
     <div class="modal fade" id="modal_comments" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

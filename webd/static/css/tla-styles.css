@@ -585,6 +585,11 @@ footer.bg-light{background-color: #e0e6ed!important;}
     background-color: #ccc;
 
 }
+
+.solo-icon {margin-left: 1em;}
+.solo-icon i {margin-right: 0!important;}
+
+
 /* multiselect */
 
 span.multiselect-native-select {
@@ -707,6 +712,12 @@ span.multiselect-native-select select {
 
     .functional-icon-set {
        padding-top: .75rem; 
+    }
+    .functional-icon-set i{
+       font-size: 1.25rem; 
+    }
+    
+    .functional-icons .fa-info-circle {font-size: 1.5rem; 
     }
     
     .footer-logo {margin-top: 2rem; text-align: center;}
