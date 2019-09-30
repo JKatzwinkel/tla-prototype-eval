@@ -712,6 +712,7 @@ span.multiselect-native-select select {
 
     .functional-icon-set {
        padding-top: .75rem; 
+        z-index: 1200;
     }
     .functional-icon-set i{
        font-size: 1.25rem; 

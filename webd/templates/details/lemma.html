@@ -24,9 +24,9 @@
     <div id="button-bar-small" class="sticky-top d-lg-none">
         <div class="functional-icon-set">
             
-            <a href="/search"><button type="button" class="btn btn-red text-left text-decoration-none float-left"><i class="fa fa-search"></i><span class="d-none d-lg-block">Modify Search</span></button></a>
+            <a href="/search"><button type="button" class="btn btn-red text-left text-decoration-none float-left solo-icon"><i class="fa fa-search"></i><span class="d-none d-lg-block">Modify Search</span></button></a>
             
-            <a href="javascript:history.back()"><button type="button" class="btn btn-red text-left text-decoration-none "><i class="fas fa-arrow-circle-left"></i><span class="d-none d-lg-block">Result List</span></button></a>    
+            <a href="javascript:history.back()"><button type="button" class="btn btn-red text-left text-decoration-none solo-icon"><i class="fas fa-arrow-circle-left"></i><span class="d-none d-lg-block">Result List</span></button></a>    
             
             
             <div class="functional-icons float-right solo-icon sidebar-btn">
@@ -383,9 +383,9 @@
 				<!-- Navigation -->
 				<br>
 				<button type="button" class="btn btn-block btn-light text-left text-decoration-none"><span class="fas fa-search-plus"></span>Select for Combination Search</button>
-				<button type="button" class="btn btn-block btn-red text-left text-decoration-none"><a href="javascript:history.back()"><i class="fas fa-arrow-circle-left"></i>Back to search results</a></button>
+				<a href="javascript:history.back()"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Back to search results</button></a>
 				<!-- anstelle des historyBack sollte u.U. der Search-String verwendet werden -->
-				<button type="button" class="btn btn-block btn-red text-left text-decoration-none"><a href="/search"><i class="fa fa-search"></i>Modify Search</a></button>
+				<a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Modify Search</button></a> 
             </div>    
 		</div>		
 	</div> <!-- /.row -->
@@ -394,8 +394,8 @@
     
     <div id="sidebar" class="d-lg-none">
         <div class="sidebar-wrapper">                        
-            <div class="close-sidebar">
-                <a href="#"><button type="button" class="btn btn-block btn-red text-left text-decoration-none show-detail"><span class="fas fa-times"></span>hide options</button>
+            <div class="close-sidebar mb-2">
+               <a href="#"><button type="button" class="btn btn-block btn-red text-left text-decoration-none show-detail"><span class="fas fa-times"></span>hide options</button>
                 </a>
             </div>
             
@@ -414,8 +414,8 @@
 				
 				<!-- Navigation -->
 				<br>
-				<button type="button" class="btn btn-block btn-light text-left text-decoration-none"><span class="fas fa-search-plus"></span>Select for Combination Search</button>
-				<a href="javascript:history.back()"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Back to search results</button></a>
+				<button type="button" class="btn btn-block btn-light text-left text-decoration-none mb-2"><span class="fas fa-search-plus"></span>Select for Combination Search</button>
+				<a href="javascript:history.back()"><button type="button" class="btn btn-block btn-red text-left text-decoration-none mb-2"><span class="fas fa-arrow-circle-left"></span>Back to search results</button></a>
 				<!-- anstelle des historyBack sollte u.U. der Search-String verwendet werden -->
 				<a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Modify Search</button></a>             
             
