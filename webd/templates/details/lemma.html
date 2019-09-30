@@ -52,7 +52,7 @@
 	<div class="row search-entries detail">
 	<!-- Suchergebnis -->		
 		<div class="col-sm-12 col-lg-8 result">	
-			<h4 class="id mt-1">Lemma-ID {{lemma.id}} ( {% for word in lemma.words %}{{word.transcription}} {% endfor %})<span class="Z3988" title="{{coins}}"></span></h4>
+			<h4 class="id mt-1">Lemma ID {{lemma.id}} ( {% for word in lemma.words %}{{word.transcription}} {% endfor %})<span class="Z3988" title="{{coins}}"></span></h4>
 			<span class="solo-icon red-status float-right"><span class="fa-check-circle {% if lemma.revisionState == 'published' %}ok{% elif lemma.revisionState == 'published-awaiting-review' %}pending{% elif lemma.revisionState == 'published-obsolete' %}notok{% endif %}"></span></span>
 		</div>
         
@@ -112,7 +112,7 @@
 				<hr>				
 				<p><strong>Translation</strong></p>
 				{% for translation in lemma.translations.de %}
-					<p class="h6">(Ger.) {{ translation }}</p>
+					<p class="german">(Ger.) {{ translation }}</p> <!-- ## sollte so aussehen wie die anderen Sprachen -->
 				{% endfor %}
 				{% for translation in lemma.translations.en %}
 					<p class="english">(Engl.) {{ translation }}</p>
@@ -205,7 +205,7 @@
 									<!-- Redaktionsstatus & Anzahl Occurences-->
 									<div class="pt-1">
 										<div class="red-status float-right ml-2">
-											<span class="{% if lemma.revisionState == 'published' %}ok{% elif lemma.revisionState == 'published-awaiting-review' %}pending{% elif lemma.revisionState == 'published-obsolete' %}notok{% endif %}"/>
+											<span class="{% if hit.revisionState == 'published' %}ok{% elif hit.revisionState == 'published-awaiting-review' %}pending{% elif hit.revisionState == 'published-obsolete' %}notok{% endif %}"/>
 										</div>
 										{% if hit.occurrences > 0 %}
 										   <div class="number_occurences float-right">

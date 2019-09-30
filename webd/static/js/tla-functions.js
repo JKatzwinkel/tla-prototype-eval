@@ -142,15 +142,27 @@ function init() {
         });	
 		
   	// .glossing
-		$('html').not('.glossing').click(function (e) {
+		$('html').not('.flexcode').click(function (e) {
 		        //console.log($(e.target).parent());
-		 if ($('.glossing').is(':visible') && !e.target == '.glossing') {
-                $('.glossing').slideUp('ease-out');
+		 if ($('.flexcode').is(':visible') && !e.target == '.flexcode') {
+                $('.flexcode').slideUp('ease-out');
             }
         });
-        $('.glossing-btn').click(function (e) {
+        $('.flexcode-btn').click(function (e) {
 			e.preventDefault();
-            $('.glossing').slideToggle('slow');
+            $('.flexcode').slideToggle('slow');
+        });	
+		
+  	// .glossing
+		$('html').not('.ling-glossing').click(function (e) {
+		        //console.log($(e.target).parent());
+		 if ($('.ling-glossing').is(':visible') && !e.target == '.ling-glossing') {
+                $('.ling-glossing').slideUp('ease-out');
+            }
+        });
+        $('.ling-glossing-btn').click(function (e) {
+			e.preventDefault();
+            $('.ling-glossing').slideToggle('slow');
         });	
 		
    // Translation Languages
