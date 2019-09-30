@@ -49,8 +49,7 @@
 	<!-- Suchergebnis + sortieren-->	
 	<div class="row search-entries detail">
 		<div class="col-sm-12 col-lg-8 result">
-            <p>Occurences lemma ID</p>
-			<h2 class="bbaw-libertine mt-3"><mark>{{params.lemma}} ({{params.transcription}})</mark></h2> <!--## transcription wird nicht mitgeliefert -->
+			<h2 class="bbaw-libertine mt-3"><mark>Occurences lemma ID {{params.lemma}} ({{params.transcription}})</mark></h2> <!--## transcription wird nicht mitgeliefert -->
 		</div>
         
         <div class="col-md-4 align-right align-baseline d-none d-lg-block">
@@ -106,26 +105,31 @@
                             &nbsp;
                         {% endif %}
 					</li>
-                    <li class="lemma-id hide" {% if token.type == 'word' %}onclick="window.open('/view/lemma/{{token.lemma}}','_blank')"{% endif %}>
+                    <!--<li class="lemma-id hide" {% if token.type == 'word' %}onclick="window.open('/view/lemma/{{token.lemma}}','_blank')"{% endif %}>
 					    {% if token.lemma %}
                            {{token.lemma}}
 						{% else %}
-							{% if token.flexcode %}
-								{{token.flexcode}}
-							{% else %}
-								&nbsp;
-							{% endif %}
+                            &nbsp;
                         {% endif %}
-					</li>
-                    <li class="part-of-speech hide"> <!-- ##vorläufig Inhalt von type, letzendlich muss hier POS-Inhalt rein  -->
-					    {% if token.type %}
-                           {{token.type}}
+					</li>-->
+                    <li class="part-of-speech hide"> 
+						##POS##<!-- ##Inhalt aktuell noch nicht in token mitgeliefert  -->
+					    {% if token.xxx %}
+                           {{token.xxx}}
                         {% else %}
                             &nbsp;
                         {% endif %}
 					</li>
-                    <li class="glossing hide condenesed">
-					    {% if token.glossing %}
+                    <li class="ling-glossing hide condensed">
+						##ling.gloss##<!-- ##Inhalt aktuell noch nicht in token mitgeliefert  -->
+					    {% if token.xxx %}
+                           {{token.xxx}}
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+					</li>
+                    <li class="flexcode hide condensed"> <!-- ##Achtung in 'glossing' steht BTS glossing, nicht ling. glossing  -->
+					    {% if token.glossing %} 
                            {{token.glossing}}
                         {% else %}
                             &nbsp;
@@ -140,24 +144,24 @@
                             &nbsp;
                         {% endif %}
 					</li>               
-                    <li class="translations translation-en hide"> <!-- ##Inhalt aktuell noch nicht in token mitgeliefert  -->
+                    <!-- <li class="translations translation-en hide"> <! -- ##Inhalt aktuell noch nicht in token mitgeliefert, gibt es nicht?  -- >
 					    {% if token.translations.en %}
 							{%for translation in token.translations.en %}
 								{{translation}}
 							{%endfor%}
                         {% else %}
-                            &nbsp;
+                            &mdash;
                         {% endif %}
 					</li>               
-                    <li class="translations translation-fr hide"> <!-- ##Inhalt aktuell noch nicht in token mitgeliefert  -->
-					    {% if token.translations.fr %}
+                    <li class="translations translation-fr hide"> <! -- ##Inhalt aktuell noch nicht in token mitgeliefert, gibt es nicht? -- >
+						{% if token.translations.fr %}
 							{%for translation in token.translations.fr %}
 								{{translation}}
 							{%endfor%}
                         {% else %}
-                            &nbsp;
+                            &mdash;
                         {% endif %}
-					</li>               
+					</li>                 -->
                 </ul>
                 {% endfor %}          
                
@@ -197,15 +201,15 @@
             
 				<!-- Translation DE -->
 				{% for translation in hit.sentence.translations.de %}
-					<p class="translations translation-de">{{translation}}</p>
+					<p class="translations translation-de">(Dtsch.) {{translation}}</p>
 				{% endfor %}
-				<!-- Translation EN, werten  -->
-				{% for translation in hit.sentence.translations.de %}
-					<p class="translations translation-en hide">{{translation}}</p>
+				<!-- Translation EN  -->
+				{% for translation in hit.sentence.translations.en %}
+					<p class="translations translation-en hide">(Engl.) {{translation}}</p>
 				{% endfor %}
 				<!-- Translation FR -->
-				{% for translation in hit.sentence.translations.de %}
-					<p class="translations translation-fr hide">{{translation}}</p>
+				{% for translation in hit.sentence.translations.fr %}
+					<p class="translations translation-fr hide">(Fr.) {{translation}}</p>
 				{% endfor %}
 
 				<div class="corpus-paths">
@@ -270,11 +274,12 @@
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail anno-block-btn"><i class="fas fa-plus-circle">
                 </i>Switch Annotation/Block-View</button>
                 <div class="indented-buttons indented-buttons-annotation hide">
-                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail lemma-id-btn "><i class="fas fa-plus-circle"></i>Lemma ID</button>
                     <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-id-btn "><i class="fas fa-plus-circle"></i>Word ID</button><!--new-->
+                    <!--<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail lemma-id-btn "><i class="fas fa-plus-circle"></i>Lemma ID</button>-->
                     <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail part-of-speech-btn"><i class="fas fa-plus-circle"></i>Part of Speech</button>
-                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail glossing-btn"><i class="fas fa-plus-circle"></i>Glossing</button>
-				    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestation-time-btn"><i class="fas fa-plus-circle"></i>Attestation time</button>
+                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail ling-glossing-btn"><i class="fas fa-plus-circle"></i>Linguistic glossing</button>
+                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail flexcode-btn"><i class="fas fa-plus-circle"></i>BTS flexcode</button>
+				    <!--<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestation-time-btn"><i class="fas fa-plus-circle"></i>Attestation time</button>-->
 				</div>	
 				<br>
 				
@@ -321,11 +326,12 @@
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail anno-block-btn"><i class="fas fa-plus-circle">
                 </i>Switch Annotation/Block-View</button>
                 <div class="indented-buttons indented-buttons-annotation hide">
-                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail lemma-id-btn "><i class="fas fa-plus-circle"></i>Lemma ID</button>
                     <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-id-btn "><i class="fas fa-plus-circle"></i>Word ID</button><!--new-->
+                    <!--<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail lemma-id-btn "><i class="fas fa-plus-circle"></i>Lemma ID</button>-->
                     <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail part-of-speech-btn"><i class="fas fa-plus-circle"></i>Part of Speech</button>
-                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail glossing-btn"><i class="fas fa-plus-circle"></i>Glossing</button>
-				    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestation-time-btn"><i class="fas fa-plus-circle"></i>Attestation time</button>
+                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail ling-glossing-btn"><i class="fas fa-plus-circle"></i>Linguistic glossing</button>
+                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail flexcode-btn"><i class="fas fa-plus-circle"></i>BTS flexcode</button>
+				    <!--<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestation-time-btn"><i class="fas fa-plus-circle"></i>Attestation time</button>-->
 				</div>	
 				<br>
 				

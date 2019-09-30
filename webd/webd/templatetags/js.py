@@ -13,17 +13,17 @@ def js(obj):
 @register.filter(is_safe=True)
 def niceRelationName(name):
     if name == 'root':
-        name = 'Roots'
+        name = 'Root'
     elif name == 'rootOf':
         name = 'Root of'
     elif name == 'predecessor':
-        name = 'Predecessors'
+        name = 'Historical predecessors'
     elif name == 'successor':
-        name = 'Successors'
+        name = 'Historical successors'
     elif name == 'referencing':
-        name = 'Substitutes for following obsolete lemmata'        
-    elif name == 'referencedBy':
         name = 'Substituted by'        
+    elif name == 'referencedBy':
+        name = 'Substitutes for following obsolete lemmata'        
     elif name == 'composedOf':
         name = 'Parts'        
     elif name == 'composes':

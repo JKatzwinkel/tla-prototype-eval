@@ -52,7 +52,7 @@
 	<div class="row search-entries detail">
 	<!-- Suchergebnis -->		
 		<div class="col-sm-12 col-lg-8 result">	
-			<h4 class="id mt-1">Lemma-ID {{lemma.id}} ( {% for word in lemma.words %}{{word.transcription}} {% endfor %})<span class="Z3988" title="{{coins}}"></span></h4>
+			<h4 class="id mt-1">Lemma ID {{lemma.id}} ( {% for word in lemma.words %}{{word.transcription}} {% endfor %})<span class="Z3988" title="{{coins}}"></span></h4>
 			<span class="solo-icon red-status float-right"><span class="fa-check-circle {% if lemma.revisionState == 'published' %}ok{% elif lemma.revisionState == 'published-awaiting-review' %}pending{% elif lemma.revisionState == 'published-obsolete' %}notok{% endif %}"></span></span>
 		</div>
         
@@ -112,7 +112,7 @@
 				<hr>				
 				<p><strong>Translation</strong></p>
 				{% for translation in lemma.translations.de %}
-					<p class="h6">(Ger.) {{ translation }}</p>
+					<p class="german">(Ger.) {{ translation }}</p> <!-- ## sollte so aussehen wie die anderen Sprachen -->
 				{% endfor %}
 				{% for translation in lemma.translations.en %}
 					<p class="english">(Engl.) {{ translation }}</p>
@@ -205,7 +205,7 @@
 									<!-- Redaktionsstatus & Anzahl Occurences-->
 									<div class="pt-1">
 										<div class="red-status float-right ml-2">
-											<span class="{% if lemma.revisionState == 'published' %}ok{% elif lemma.revisionState == 'published-awaiting-review' %}pending{% elif lemma.revisionState == 'published-obsolete' %}notok{% endif %}"/>
+											<span class="{% if hit.revisionState == 'published' %}ok{% elif hit.revisionState == 'published-awaiting-review' %}pending{% elif hit.revisionState == 'published-obsolete' %}notok{% endif %}"/>
 										</div>
 										{% if hit.occurrences > 0 %}
 										   <div class="number_occurences float-right">
@@ -467,9 +467,9 @@
             </button>
           </div>
           <div class="modal-body">            
-              <a href="mailto:?subject=TLA,%20Lemma%20{{lemma.id}}&amp;body=TLA lemma ID {{lemma.id}} ( {% for word in lemma.words %}{{word.transcription}} {% endfor %}), &lt;{{tlaBaseURL}}/view/lemma/{{lemma.id}}&gt;, in: {{tlaTitle}} &lt;{{tlaBaseURL}}&gt;, Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, ed. by {{tlaEditor}} (accessed: {{dateToday}})" class="btn btn-block btn-info" role="button"><span class="far fa-envelope"></span>E-Mail</a> 
-              <a href="#" class="btn btn-block btn-info" role="button"><span class="fab fa-twitter"></span>Twitter</a> 
-              <a href="#" class="btn btn-block btn-info" role="button"><span class="fab fa-facebook"></span>Facebook</a> 
+              <a href="mailto:?subject=TLA,%20Lemma%20{{lemma.id}}&amp;body=TLA lemma ID {{lemma.id}} ( {% for word in lemma.words %}{{word.transcription}} {% endfor %}), &lt;{{tlaBaseURL}}/view/lemma/{{lemma.id}}&gt;, in: {{tlaTitle}} &lt;{{tlaBaseURL}}&gt;, Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, ed. by {{tlaEditor}} (accessed: {{dateToday}})" class="btn btn-block btn-info" role="button"><span class="far fa-envelope"></span> E-mail citation</a> 
+              <a href="https://twitter.com/share?url={{tlaBaseURL}}/view/lemma/{{lemma.id}}" title="Twitter" class="btn btn-block btn-info" role="button" target="_blank"><span class="fab fa-twitter"></span> Twitter URL</a>
+              <a href="#" class="btn btn-block btn-info disabled" role="button"><span class="fab fa-facebook"></span> Facebook</a> 
           </div>
         </div>
       </div>

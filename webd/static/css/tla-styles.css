@@ -26,7 +26,7 @@ body, a, p, h1, h2, h3, ul, li {
 	margin-bottom: 0.2rem;
 	}
 
-.condenesed {font-familiy:"Roboto Condensed";}
+.condensed {font-familiy:"Roboto Condensed";}
 
 a {color:red;}	
 a:hover {
@@ -261,7 +261,8 @@ a span.lc:hover {
 .container-annotation .translation-de,
 .container-annotation .translation-en,
 .container-annotation .translation-fr,
-.container-annotation .glossing {
+.container-annotation .glossing,
+.container-annotation .flexcode {
     font-size: 0.8em; 
     }
 
@@ -680,8 +681,8 @@ span.multiselect-native-select select {
 .rootOf:before {content: "Root of";}
 .predecessor:before {content: "Pred.";}
 .successor:before {content: "Succ.";}     
-.referencing:before {content: "Prev.";}
-.referencedBy:before {content: "Now";}
+.referencing:before {content: "Now";}
+.referencedBy:before {content: "Prev.";}
 .composedOf:before {content: "Part";}
 .composes:before {content: "Part of";}
 .contains:before {content: "Sub.";}
