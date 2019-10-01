@@ -72,21 +72,12 @@ def search(index, query, size=100, offset=0):
                 from_=offset
             )
     else:
-        try:
-            res = es.search(
-                index=index,
-                doc_type=index,
-                body=query,
-                size=size,
-                from_=offset
-            )
-        except TypeError:
-            res = es.search(
-                index=index,
-                body=query,
-                size=size,
-                from_=offset
-            )
+        res = es.search(
+            index=index,
+            body=query,
+            size=size,
+            from_=offset
+        )
     return res.get('hits', {})
 
 

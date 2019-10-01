@@ -382,8 +382,13 @@
 				
 				<!-- Navigation -->
 				<br>
+
 				<button type="button" class="btn btn-block btn-light text-left text-decoration-none"><span class="fas fa-search-plus"></span>Select for Combination Search</button>
 				<a href="javascript:history.back()"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Back to search results</button></a>
+
+				<button type="button" class="btn btn-block btn-light text-left text-decoration-none" disabled><span class="fas fa-search-plus"></span>Select for Combination Search</button>
+				<button type="button" class="btn btn-block btn-red text-left text-decoration-none"><a href="javascript:history.back()"><i class="fas fa-arrow-circle-left"></i>Back to search results</a></button>
+
 				<!-- anstelle des historyBack sollte u.U. der Search-String verwendet werden -->
 				<a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Modify Search</button></a> 
             </div>    
@@ -414,8 +419,13 @@
 				
 				<!-- Navigation -->
 				<br>
+
 				<button type="button" class="btn btn-block btn-light text-left text-decoration-none mb-2"><span class="fas fa-search-plus"></span>Select for Combination Search</button>
 				<a href="javascript:history.back()"><button type="button" class="btn btn-block btn-red text-left text-decoration-none mb-2"><span class="fas fa-arrow-circle-left"></span>Back to search results</button></a>
+
+				<button type="button" class="btn btn-block btn-light text-left text-decoration-none disabled"><span class="fas fa-search-plus"></span>Select for Combination Search</button>
+				<a href="javascript:history.back()"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Back to search results</button></a>
+
 				<!-- anstelle des historyBack sollte u.U. der Search-String verwendet werden -->
 				<a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Modify Search</button></a>             
             
@@ -469,7 +479,7 @@
           <div class="modal-body">            
               <a href="mailto:?subject=TLA,%20Lemma%20{{lemma.id}}&amp;body=TLA lemma ID {{lemma.id}} ( {% for word in lemma.words %}{{word.transcription}} {% endfor %}), &lt;{{tlaBaseURL}}/view/lemma/{{lemma.id}}&gt;, in: {{tlaTitle}} &lt;{{tlaBaseURL}}&gt;, Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, ed. by {{tlaEditor}} (accessed: {{dateToday}})" class="btn btn-block btn-info" role="button"><span class="far fa-envelope"></span> E-mail citation</a> 
               <a href="https://twitter.com/share?url={{tlaBaseURL}}/view/lemma/{{lemma.id}}" title="Twitter" class="btn btn-block btn-info" role="button" target="_blank"><span class="fab fa-twitter"></span> Twitter URL</a>
-              <a href="#" class="btn btn-block btn-info disabled" role="button"><span class="fab fa-facebook"></span> Facebook</a> 
+              <a href="http://www.facebook.com/share.php?u={{tlaBaseURL}}/view/lemma/{{lemma.id}}" class="btn btn-block btn-info" role="button" target="_blank"><span class="fab fa-facebook"></span> Facebook</a> 
           </div>
         </div>
       </div>

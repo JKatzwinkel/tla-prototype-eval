@@ -448,6 +448,15 @@ def request_url_without_page(request):
         url = url.replace('page={}'.format(page), '')
     return url
 
+#### Doppelung aus webd/details/views.py unschön
+tlaTitle = "Thesaurus Linguae Aegyptiae"
+tlaVersion = "19"
+tlaIssue = "1"
+tlaReleaseDate = "30.10.2019"
+tlaEditor = "Berlin-Brandenburgische Akademie der Wissenschaften & Sächsische Akademie der Wissenschaften"
+tlaPublisher = "Berlin-Brandenburgische Akademie der Wissenschaften"
+tlaBaseURL = "http://tla.bbaw.de"
+
 
 @require_http_methods(["GET"])
 def search_dict(request):
@@ -474,6 +483,14 @@ def search_dict(request):
             'start': offset + 1,
             'end': min(count, offset + RESULTS_PER_PAGE),
             'pagination': pagination(request, count),
+            'tlaVersion': tlaVersion,
+            'tlaTitle': tlaTitle,
+            'tlaVersion': tlaVersion,
+            'tlaIssue': tlaIssue,
+            'tlaReleaseDate': tlaReleaseDate,
+            'tlaEditor': tlaEditor,
+            'tlaBaseURL': tlaBaseURL,
+            #'dateToday': datetime.now().strftime("%d.%m.%Y"),
         }
     )
 
@@ -504,5 +521,13 @@ def search_text_words(request):
             'end': min(count, offset + RESULTS_PER_PAGE),
             'pagination': pagination(request, count),
             'url': request_url_without_page(request),
+            'tlaVersion': tlaVersion,
+            'tlaTitle': tlaTitle,
+            'tlaVersion': tlaVersion,
+            'tlaIssue': tlaIssue,
+            'tlaReleaseDate': tlaReleaseDate,
+            'tlaEditor': tlaEditor,
+            'tlaBaseURL': tlaBaseURL,
+            #'dateToday': datetime.now().strftime("%d.%m.%Y"),
         }
     )
