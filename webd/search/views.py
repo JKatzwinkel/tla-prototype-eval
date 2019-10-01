@@ -474,6 +474,14 @@ def search_dict(request):
             'start': offset + 1,
             'end': min(count, offset + RESULTS_PER_PAGE),
             'pagination': pagination(request, count),
+            #'tlaVersion': tlaVersion,
+            #'tlaTitle': tlaTitle,
+            #'tlaVersion': tlaVersion,
+            #'tlaIssue': tlaIssue,
+            #'tlaReleaseDate': tlaReleaseDate,
+            #'tlaEditor': tlaEditor,
+            #'tlaBaseURL': tlaBaseURL,
+            #'dateToday': datetime.now().strftime("%d.%m.%Y"),
         }
     )
 
@@ -504,5 +512,13 @@ def search_text_words(request):
             'end': min(count, offset + RESULTS_PER_PAGE),
             'pagination': pagination(request, count),
             'url': request_url_without_page(request),
+            #'tlaVersion': tlaVersion,
+            #'tlaTitle': tlaTitle,
+            #'tlaVersion': tlaVersion,
+            #'tlaIssue': tlaIssue,
+            #'tlaReleaseDate': tlaReleaseDate,
+            #'tlaEditor': tlaEditor,
+            #'tlaBaseURL': tlaBaseURL,
+            #'dateToday': datetime.now().strftime("%d.%m.%Y"),
         }
     )

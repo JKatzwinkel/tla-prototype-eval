@@ -2,7 +2,7 @@
 {% load static %}
 {% load js %}
 
-{% block title %}TLA - Occurences - {{params.transcription}} (Lemma ID {{params.lemma}}){% endblock %}
+{% block title %}TLA - Occurences lemma ID {{params.lemma}} ({{params.transcription}}){% endblock %}
 
 {% block content %}
 <!-- Page Content -->
@@ -49,7 +49,7 @@
 	<!-- Suchergebnis + sortieren-->	
 	<div class="row search-entries detail">
 		<div class="col-sm-12 col-lg-8 result">
-			<h2 class="bbaw-libertine mt-3"><mark>Occurences lemma ID {{params.lemma}} ({{params.transcription}})</mark></h2> <!--## transcription wird nicht mitgeliefert -->
+			<h2 class="bbaw-libertine mt-3"><mark>Occurences lemma ID {{params.lemma}} (##transkr##{{params.transcription}})</mark></h2> <!--## transcription wird nicht mitgeliefert -->
 		</div>
         
         <div class="col-md-4 align-right align-baseline d-none d-lg-block">
@@ -346,7 +346,7 @@
         </div>
     </div>
     
-    <!-- Modal for Sharing-->
+    <!-- Modal for Sharing-- >
     <div class="modal fade" id="modal_sharing" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -364,7 +364,7 @@
           
         </div>
       </div>
-    </div>
+    </div>-->
     
      <!-- Modal for Sharing-->
     <div class="modal fade" id="modal_sharing" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -377,12 +377,11 @@
             </button>
           </div>
           <div class="modal-body">            
-              <a href="#" class="btn btn-block btn-info" role="button"><span class="far fa-envelope"></span>E-Mail</a> 
-              <a href="#" class="btn btn-block btn-info" role="button"><span class="fab fa-twitter"></span>Twitter</a> 
-              <a href="#" class="btn btn-block btn-info" role="button"><span class="fab fa-facebook"></span>Facebook</a> 
-          </div>
-          
-        </div>
+              <a href="mailto:?subject=TLA,%20Occurences%20lemma%20{{lemma.id}}&amp;body=TLA, occurences lemma ID {{lemma.id}} ( {% for word in lemma.words %}{{word.transcription}} {% endfor %}), &lt;{{tlaBaseURL}}/search/occurrences?lemma={{lemma.id}}&gt;, in: {{tlaTitle}} &lt;{{tlaBaseURL}}&gt;, Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, ed. by {{tlaEditor}} (accessed: {{dateToday}})" class="btn btn-block btn-info" role="button"><span class="far fa-envelope"></span> E-mail citation</a> 
+              <a href="https://twitter.com/share?url={{tlaBaseURL}}/search/occurrences?lemma={{lemma.id}}" title="Twitter" class="btn btn-block btn-info" role="button" target="_blank"><span class="fab fa-twitter"></span> Twitter URL</a>
+              <a href="http://www.facebook.com/share.php?u={{tlaBaseURL}}/search/occurrences?lemma={{lemma.id}}" class="btn btn-block btn-info" role="button" target="_blank"><span class="fab fa-facebook"></span> Facebook</a> 
+          </div>        
+		</div>
       </div>
     </div>
     
