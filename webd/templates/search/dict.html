@@ -2,7 +2,7 @@
 {% load static %}
 {% load js %}
 
-{% block title %}TLA - Search Results - {{params.transcription}}{% endblock %}
+{% block title %}TLA - Search results for {{params.transcription}}{% endblock %}
 
 {% block content %}
 <!-- Page Content -->
@@ -15,7 +15,7 @@
 			  <ol class="breadcrumb">
 				<li class="breadcrumb-item"><a href="#">Home</a></li>
 				<li class="breadcrumb-item"><a href="/search">Search</a></li>
-				<li class="breadcrumb-item active" aria-current="page">Search Results</li>
+				<li class="breadcrumb-item active" aria-current="page">Search results</li>
 			  </ol>
 			</nav>
 		</div>
@@ -24,7 +24,7 @@
     <div id="button-bar-small" class="sticky-top d-lg-none">
         <div class="functional-icon-set">
             
-            <a href="/search"><button type="button" class="btn btn-red text-left text-decoration-none float-left"><i class="fa fa-search"></i><span class="d-none d-lg-block">Modify Search</span></button></a>
+            <a href="/search"><button type="button" class="btn btn-red text-left text-decoration-none float-left"><i class="fa fa-search"></i><span class="d-none d-lg-block">Modify search</span></button></a>
             
             <div class="functional-icons float-right solo-icon sidebar-btn">
                 <a href="#" class="btn btn-light" ><i class="fa fa-eye"></i></a>               
@@ -45,16 +45,15 @@
 	<!-- Suchergebnis + sortieren-->	
 	<div class="row search-entries">
 		<div class="col-sm-12 col-lg-8 result">
-            <p>Search results for:</p> 
+            <p>Search results for</p> 
             <h2 class="word bbaw-libertine mt-3"><mark>{{params.transcription}}</mark></h2>
             
             
 		</div>
         
         <div class="col-md-4 align-right align-baseline d-none d-lg-block">
-            <div class="functional-icons ml-3 float-left">
-              <a href="#" class="btn btn-light solo-icon" role="button" data-toggle="modal" data-target="#modal_sharing">Share&nbsp;&nbsp;<i class="fa fa-share-alt share-results"></i></a>
-              
+            <div class="functional-icons ml-3">
+              <a href="#" class="btn btn-light solo-icon" role="button" data-toggle="modal" data-target="#modal_sharing">Share&nbsp;&nbsp;<i class="fa fa-share-alt share-results"></i></a>        
             </div>
             <div class="functional-icons mr-0 ">
                 <a href="#" class="btn btn-red text-left text-decoration-none float-right" role="button">Help&nbsp;&nbsp;<i class="fas fa-info-circle fa-lg"></i></a>
@@ -197,20 +196,20 @@
 						<label class="input-group-text" for="inputGroupSelect02">Order by</label>
 					</div>
 					<select class="custom-select" id="inputGroupSelect02">
-						<option value="0" selected>alphabetical, hierarchical</option>
-						<option value="1" selected>alphabetical, strictly</option>
-						<option value="2">attestation time, start</option>
-						<option value="3">attestation time, middle</option>
-						<option value="4">attestation time, end</option>
+						<option value="1" selected>Alphabetical, hierarchical</option>
+						<option value="2">Alphabetical, strictly</option>
+						<option value="3">Attestation time, start</option>
+						<option value="4">Attestation time, middle</option>
+						<option value="5">Attestation time, end</option>
 					</select>			  
 				</div>
 			
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail hieroglyph-btn "><i class="fas fa-minus-circle"></i>Hieroglyphs</button>
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail lemma-id-btn "><i class="fas fa-plus-circle"></i>Lemma ID</button>
-                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-class-btn"><i class="fas fa-plus-circle"></i>Word Class</button>
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-class-btn"><i class="fas fa-plus-circle"></i>Word class</button>
                 
                 <!-- start LANGUAGE buttons -->
-                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail languages-btn">Translation Languages</button>                 
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail languages-btn">Translation languages</button>                 
 				
                 <div class="indented-buttons indented-buttons-lang hide">
                     <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn-de" type="button"><i class="fas fa-minus-circle"></i>German</button>
@@ -221,11 +220,11 @@
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestation-time-btn "><i class="fas fa-plus-circle"></i>Attestation time</button>
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail bibliografical-btn "><i class="fas fa-plus-circle"></i>Bibliographical references </button>                
                 	                
-                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail combination-search-btn" disabled><i class="fas fa-plus-circle"></i>Combination Search</button>
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail combination-search-btn" disabled><i class="fas fa-plus-circle"></i>Select for combination Search</button>
 
-                <button type="button" class="btn btn-block btn-light text-left text-decoration-none show-detail" disabled><span class="fas fa-search-plus"></span>Combination Search</button>
+                <button type="button" class="btn btn-block btn-light text-left text-decoration-none show-detail mb-2" disabled><span class="fas fa-search-plus"></span>Execute combination search</button>
                 
-                <a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Modify Search</button></a>
+                <a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none mb-2"><span class="fas fa-arrow-circle-left"></span>Modify search</button></a>
             </div>
 		</div>
 	</div> <!-- /.row -->	  
@@ -236,7 +235,7 @@
     <div id="sidebar" class="d-lg-none">
         <div class="sidebar-wrapper">                        
             <div class="close-sidebar">
-                <a href="#"><button type="button" class="btn btn-block btn-red text-left text-decoration-none show-detail"><span class="fas fa-times"></span>hide options</button>
+                <a href="#"><button type="button" class="btn btn-block btn-red text-left text-decoration-none show-detail"><span class="fas fa-times"></span>Hide options</button>
                 </a>
             </div>
             
@@ -245,10 +244,11 @@
 						<label class="input-group-text" for="inputGroupSelect02">Order by</label>
 					</div>
 					<select class="custom-select" id="inputGroupSelect02">
-						<option value="0" selected>alphabetical</option>
-						<option value="1">attestation time, start</option>
-						<option value="2">attestation time, middle</option>
-						<option value="3">attestation time, end</option>
+						<option value="1" selected>Alphabetical, hierarchical</option>
+						<option value="2">Alphabetical, strictly</option>
+						<option value="3">Attestation time, start</option>
+						<option value="4">Attestation time, middle</option>
+						<option value="5">Attestation time, end</option>
 					</select>			  
 				</div>
 			
@@ -256,10 +256,10 @@
             
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail lemma-id-btn "><i class="fas fa-plus-circle"></i>Lemma ID</button>
             
-                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-class-btn"><i class="fas fa-plus-circle"></i>Word Class</button>
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-class-btn"><i class="fas fa-plus-circle"></i>Word class</button>
                 
                 <!-- start LANGUAGE buttons -->
-                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail languages-btn">Translation Languages</button>                 
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail languages-btn">Translation languages</button>                 
 				
                 <div class="indented-buttons indented-buttons-lang hide">
                      <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn-de" type="button"><i class="fas fa-minus-circle"></i>German</button>
@@ -270,11 +270,11 @@
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestation-time-btn "><i class="fas fa-plus-circle"></i>Attestation time</button>
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail bibliografical-btn "><i class="fas fa-plus-circle"></i>Bibliographical references </button>                
                 	                
-                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail combination-search-btn"><i class="fas fa-plus-circle"></i>Combination Search</button>
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail combination-search-btn"><i class="fas fa-plus-circle"></i>Select for combination search</button>
 
-                <button type="button" class="btn btn-block btn-light text-left text-decoration-none show-detail combination-search-btn"><span class="fas fa-search-plus"></span>Combination Search</button>
+                <button type="button" class="btn btn-block btn-light text-left text-decoration-none show-detail combination-search-btn"><span class="fas fa-search-plus"></span>Execute combination search</button>
                 
-                <a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none mt-2"><span class="fas fa-arrow-circle-left"></span>Modify Search</button></a>
+                <a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none mt-2"><span class="fas fa-arrow-circle-left"></span>Modify search</button></a>
             
             
         </div>
