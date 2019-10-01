@@ -215,7 +215,7 @@
 				<div class="corpus-paths">
 					{%for path in hit.text.paths%}
 					<p class="corpus-path">
-					{%for object in path%}
+					    {%for object in path%}
 						<span id="{{hit.text.id}}-{{object.id}}" class="corpus-path-element">
 							<a href="{{object.url}}">
 								{{object.name}}

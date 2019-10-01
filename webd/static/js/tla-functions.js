@@ -141,7 +141,7 @@ function init() {
             $('.part-of-speech').slideToggle('slow');
         });	
 		
-  	// .glossing
+  	// .flexcode (TLA flexcode)
 		$('html').not('.flexcode').click(function (e) {
 		        //console.log($(e.target).parent());
 		 if ($('.flexcode').is(':visible') && !e.target == '.flexcode') {
@@ -153,7 +153,7 @@ function init() {
             $('.flexcode').slideToggle('slow');
         });	
 		
-  	// .glossing
+  	// .ling-glossing
 		$('html').not('.ling-glossing').click(function (e) {
 		        //console.log($(e.target).parent());
 		 if ($('.ling-glossing').is(':visible') && !e.target == '.ling-glossing') {

@@ -261,7 +261,7 @@ a span.lc:hover {
 .container-annotation .translation-de,
 .container-annotation .translation-en,
 .container-annotation .translation-fr,
-.container-annotation .glossing,
+.container-annotation .ling-glossing,
 .container-annotation .flexcode {
     font-size: 0.8em; 
     }
