@@ -24,9 +24,9 @@
     <div id="button-bar-small" class="sticky-top d-lg-none">
         <div class="functional-icon-set">
             
-            <a href="/search"><button type="button" class="btn btn-red text-left text-decoration-none float-left solo-icon"><i class="fa fa-search"></i><span class="d-none d-lg-block">Modify Search</span></button></a>
+            <a href="/search"><button type="button" class="btn btn-red text-left text-decoration-none float-left"><i class="fa fa-search"></i><span class="d-none d-lg-block">Modify Search</span></button></a>
             
-            <a href="javascript:history.back()"><button type="button" class="btn btn-red text-left text-decoration-none solo-icon"><i class="fas fa-arrow-circle-left"></i><span class="d-none d-lg-block">Back to Lemma</span></button></a>   
+            <a href="javascript:history.back()"><button type="button" class="btn btn-red text-left text-decoration-none "><i class="fas fa-arrow-circle-left"></i><span class="d-none d-lg-block">Back to Lemma</span></button></a>   
             
             
             <div class="functional-icons float-right solo-icon sidebar-btn">
@@ -212,38 +212,28 @@
 					<p class="translations translation-fr hide">(Fr.) {{translation}}</p>
 				{% endfor %}
 
-				<div class="corpus-paths">                    
-                    
+				<div class="corpus-paths">
 					{%for path in hit.text.paths%}
-					<div class="corpus-path">
-					   {%for object in path%}
-                        
-                            <span class="corpus-path-text" id="{{hit.text.id}}-{{object.id}}" class="corpus-path-element">
-                                <a href="{{object.url}}">
-                                    {{object.name}}
-                                    <i class="fas fa-arrow-circle-right"></i>
-                                </a>
-                                
-                                {%if not forloop.last%}
-
-                                {%endif%}
-                            </span>
-                         
-                            {%endfor%}
-                        
-                        <!-- expand-button -->
-                           
-                        <!-- end expand-button -->                        
-                        
-                            <a href="/view/occurrence/{{hit.occurrence.id}}">
-                                <span class="lc">
-                                 [{{hit.occurrence.line}}]
-                                </span>
-                            </a>                        
-					
-					<div class="sentence-id-button"><button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{{hit.sentence.id}}')"><span class="far fa-clipboard"></span>Copy sentence ID</button></div>
+					<p class="corpus-path">
+					    {%for object in path%}
+						<span id="{{hit.text.id}}-{{object.id}}" class="corpus-path-element">
+							<a href="{{object.url}}">
+								{{object.name}}
+                                <i class="fas fa-arrow-circle-right"></i>
+							</a>
+							{%if not forloop.last%}
+							
+							{%endif%}
+						</span>
+						{%endfor%}
+						<a href="/view/occurrence/{{hit.occurrence.id}}">
+							<span class="lc">
+							 [{{hit.occurrence.line}}]
+							</span>
+						</a>
+					</p>
+					<p class="sentence-id-button"><button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{{hit.sentence.id}}')"><span class="far fa-clipboard"></span>Copy sentence ID</button></p>
 					{%endfor%}
-                    </div>
 				</div>	
 				
 							
