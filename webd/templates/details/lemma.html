@@ -112,13 +112,13 @@
 				<hr>				
 				<p><strong>Translation</strong></p>
 				{% for translation in lemma.translations.de %}
-					<p class="german">(Ger.) {{ translation }}</p> <!-- ## sollte so aussehen wie die anderen Sprachen -->
+					<p class="german"><span class="lang-icon">DE</span> {{ translation }}</p> <!-- ## sollte so aussehen wie die anderen Sprachen -->
 				{% endfor %}
 				{% for translation in lemma.translations.en %}
-					<p class="english">(Engl.) {{ translation }}</p>
+					<p class="english"><span class="lang-icon">EN</span> {{ translation }}</p>
 				{% endfor %}
 				{% for translation in lemma.translations.fr %}
-					<p class="french">(Fr.) {{ translation }}</p>
+					<p class="french"><span class="lang-icon">FR</span> {{ translation }}</p>
 				{% endfor %}
 			</div>	
 		

@@ -24,9 +24,9 @@
     <div id="button-bar-small" class="sticky-top d-lg-none">
         <div class="functional-icon-set">
             
-            <a href="/search"><button type="button" class="btn btn-red text-left text-decoration-none float-left"><i class="fa fa-search"></i><span class="d-none d-lg-block">Modify Search</span></button></a>
+            <a href="/search"><button type="button" class="btn btn-red text-left text-decoration-none solo-icon float-left"><i class="fa fa-search"></i><span class="d-none d-lg-block">Modify Search</span></button></a>
             
-            <a href="javascript:history.back()"><button type="button" class="btn btn-red text-left text-decoration-none "><i class="fas fa-arrow-circle-left"></i><span class="d-none d-lg-block">Back to Lemma</span></button></a>   
+            <a href="javascript:history.back()"><button type="button" class="btn btn-red text-left text-decoration-none solo-icon"><i class="fas fa-arrow-circle-left"></i><span class="d-none d-lg-block">Back to Lemma</span></button></a>   
             
             
             <div class="functional-icons float-right solo-icon sidebar-btn">
@@ -201,15 +201,15 @@
             
 				<!-- Translation DE -->
 				{% for translation in hit.sentence.translations.de %}
-					<p class="translations translation-de">(Dtsch.) {{translation}}</p>
+					<p class="translations translation-de"><span class="lang-icon">DE</span> {{translation}}</p>
 				{% endfor %}
 				<!-- Translation EN  -->
 				{% for translation in hit.sentence.translations.en %}
-					<p class="translations translation-en hide">(Engl.) {{translation}}</p>
+					<p class="translations translation-en hide"><span class="lang-icon">EN</span> {{translation}}</p>
 				{% endfor %}
 				<!-- Translation FR -->
 				{% for translation in hit.sentence.translations.fr %}
-					<p class="translations translation-fr hide">(Fr.) {{translation}}</p>
+					<p class="translations translation-fr hide"><span class="lang-icon">FR</span> {{translation}}</p>
 				{% endfor %}
 
 				<div class="corpus-paths">
@@ -274,7 +274,7 @@
 				</div>	
 
                 <!-- start LANGUAGE buttons -->
-                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail languages-btn">Translation Languages</button>                 
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail languages-btn mt-2">Translation Languages</button>                 
 				
                 <div class="indented-buttons indented-buttons-lang hide">
                      <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn-de" type="button"><i class="fas fa-minus-circle"></i>German</button>

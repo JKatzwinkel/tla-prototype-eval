@@ -275,8 +275,25 @@ a span.lc:hover {
     font-size: 0.8em; 
     }
 
-.translations {display:block;}
+.translations {display:inline;}
 
+.translation-de {
+    font-weight: 500;    
+}
+.translation-fr, translation-en {
+    font-weight: 300;    
+}
+
+.lang-icon {
+    background-color: #EEE; 
+    color: grey; 
+    font-size: .65em; 
+    padding: .3em; 
+    border-radius: .2em;
+    display: inline;
+    top: -2px;
+    position: relative;
+}
 
 .result-list-item span.glyphbox img{
 }
@@ -363,9 +380,7 @@ ul.annotation-block li.translations {
     font-size: .65em;
 }
 
-.translations {
-    font-weight: 500;    
-}
+
 
 .translation .result-list-bibliography {
     font-weight: 100!important; 
