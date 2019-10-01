@@ -230,6 +230,15 @@ a.share-results:hover {color: red;}
 	background-color: grey;
 	color: white;
 }
+
+.corpus-path span.corpus-path-text {
+	display: none;
+}
+.corpus-path span:first-child {
+	display: block!important;
+    float: left;
+}
+
 .corpus-path-element a {
 	color: grey!important;
 }
