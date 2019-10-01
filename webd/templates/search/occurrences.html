@@ -260,7 +260,19 @@
 				</div>
 
 				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail hieroglyph-btn "><i class="fas fa-minus-circle"></i>Hieroglyphs</button>
-                
+
+                <!-- start ANNOTATION buttons -->
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail anno-block-btn"><i class="fas fa-plus-circle"></i>Switch Annotation/Block-View</button>
+				
+                <div class="indented-buttons indented-buttons-annotation hide">
+                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-id-btn "><i class="fas fa-plus-circle"></i>Word ID</button><!--new-->
+                    <!--<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail lemma-id-btn "><i class="fas fa-plus-circle"></i>Lemma ID</button>-->
+                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail part-of-speech-btn"><i class="fas fa-plus-circle"></i>Part of Speech</button>
+                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail ling-glossing-btn"><i class="fas fa-plus-circle"></i>Linguistic glossing</button>
+                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail flexcode-btn"><i class="fas fa-plus-circle"></i>TLA flexcode</button>
+				    <!--<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestation-time-btn"><i class="fas fa-plus-circle"></i>Attestation time</button>-->
+				</div>	
+
                 <!-- start LANGUAGE buttons -->
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail languages-btn">Translation Languages</button>                 
 				
@@ -270,17 +282,6 @@
                     <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn-fr" type="button"><i class="fas fa-plus-circle"></i>French</button>
 				</div>
                 
-                <!-- start ANNOTATION buttons -->
-                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail anno-block-btn"><i class="fas fa-plus-circle">
-                </i>Switch Annotation/Block-View</button>
-                <div class="indented-buttons indented-buttons-annotation hide">
-                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-id-btn "><i class="fas fa-plus-circle"></i>Word ID</button><!--new-->
-                    <!--<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail lemma-id-btn "><i class="fas fa-plus-circle"></i>Lemma ID</button>-->
-                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail part-of-speech-btn"><i class="fas fa-plus-circle"></i>Part of Speech</button>
-                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail ling-glossing-btn"><i class="fas fa-plus-circle"></i>Linguistic glossing</button>
-                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail flexcode-btn"><i class="fas fa-plus-circle"></i>BTS flexcode</button>
-				    <!--<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestation-time-btn"><i class="fas fa-plus-circle"></i>Attestation time</button>-->
-				</div>	
 				<br>
 				
 				<a href="javascript:history.back()"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Back to lemma</button></a>
@@ -313,15 +314,6 @@
 
 				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail hieroglyph-btn "><i class="fas fa-minus-circle"></i>Hieroglyphs</button>
                 
-                <!-- start LANGUAGE buttons -->
-                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail languages-btn">Translation Languages</button>                 
-				
-                <div class="indented-buttons indented-buttons-lang hide">
-                     <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn-de" type="button"><i class="fas fa-minus-circle"></i>German</button>
-                    <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn-en" type="button"><i class="fas fa-plus-circle"></i>English</button>
-                    <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn-fr" type="button"><i class="fas fa-plus-circle"></i>French</button>
-				</div>
-                
                 <!-- start ANNOTATION buttons -->
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail anno-block-btn"><i class="fas fa-plus-circle">
                 </i>Switch Annotation/Block-View</button>
@@ -330,9 +322,19 @@
                     <!--<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail lemma-id-btn "><i class="fas fa-plus-circle"></i>Lemma ID</button>-->
                     <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail part-of-speech-btn"><i class="fas fa-plus-circle"></i>Part of Speech</button>
                     <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail ling-glossing-btn"><i class="fas fa-plus-circle"></i>Linguistic glossing</button>
-                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail flexcode-btn"><i class="fas fa-plus-circle"></i>BTS flexcode</button>
+                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail flexcode-btn"><i class="fas fa-plus-circle"></i>TLA flexcodes</button>
 				    <!--<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestation-time-btn"><i class="fas fa-plus-circle"></i>Attestation time</button>-->
 				</div>	
+                
+                <!-- start LANGUAGE buttons -->
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail languages-btn">Translation Languages</button>                 
+				
+                <div class="indented-buttons indented-buttons-lang hide">
+                     <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn-de" type="button"><i class="fas fa-minus-circle"></i>German</button>
+                    <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn-en" type="button"><i class="fas fa-plus-circle"></i>English</button>
+                    <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn-fr" type="button"><i class="fas fa-plus-circle"></i>French</button>
+				</div>
+
 				<br>
 				
 				<a href="javascript:history.back()"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Back to lemma</button></a>
@@ -376,10 +378,10 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">            
-              <a href="mailto:?subject=TLA,%20Occurences%20lemma%20{{lemma.id}}&amp;body=TLA, occurences lemma ID {{lemma.id}} ( {% for word in lemma.words %}{{word.transcription}} {% endfor %}), &lt;{{tlaBaseURL}}/search/occurrences?lemma={{lemma.id}}&gt;, in: {{tlaTitle}} &lt;{{tlaBaseURL}}&gt;, Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, ed. by {{tlaEditor}} (accessed: {{dateToday}})" class="btn btn-block btn-info" role="button"><span class="far fa-envelope"></span> E-mail citation</a> 
-              <a href="https://twitter.com/share?url={{tlaBaseURL}}/search/occurrences?lemma={{lemma.id}}" title="Twitter" class="btn btn-block btn-info" role="button" target="_blank"><span class="fab fa-twitter"></span> Twitter URL</a>
-              <a href="http://www.facebook.com/share.php?u={{tlaBaseURL}}/search/occurrences?lemma={{lemma.id}}" class="btn btn-block btn-info" role="button" target="_blank"><span class="fab fa-facebook"></span> Facebook</a> 
+          <div class="modal-body"> 	  
+              <a href="mailto:?subject=TLA,%20Occurences%20lemma%20{{params.lemma}}&amp;body=TLA, occurences lemma ID {{params.lemma}} ( {% for word in lemma.words %}{{word.transcription}} {% endfor %}), &lt;{{tlaBaseURL}}/search/occurrences?lemma={{params.lemma}}&gt;, in: {{tlaTitle}} &lt;{{tlaBaseURL}}&gt;, Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, ed. by {{tlaEditor}} (accessed: {{dateToday}})" class="btn btn-block btn-info" role="button"><span class="far fa-envelope"></span> E-mail citation</a> 
+              <a href="https://twitter.com/share?url={{tlaBaseURL}}/search/occurrences?lemma={{params.lemma}}" title="Twitter" class="btn btn-block btn-info" role="button" target="_blank"><span class="fab fa-twitter"></span> Twitter URL</a>
+              <a href="http://www.facebook.com/share.php?u={{tlaBaseURL}}/search/occurrences?lemma={{params.lemma}}" class="btn btn-block btn-info" role="button" target="_blank"><span class="fab fa-facebook"></span> Facebook</a> 
           </div>        
 		</div>
       </div>
@@ -387,4 +389,3 @@
     
 </div><!-- /.container Content -->
 {% endblock %}
-
