@@ -219,30 +219,22 @@
 							{%if forloop.first%}
 							<!--<a href="{{object.url}}">-->
 								{{object.name}}
-                                <i class="fas fa-arrow-circle-right"></i> <span class="hide-dots">...</span>
+                                <i class="fas fa-arrow-circle-right"></i> 
 							<!--</a>-->
 							{%elif forloop.last %}
 							<!--<a href="{{object.url}}">-->
 								{{object.name}}
                                 <i class="fas fa-arrow-circle-right"></i>
 							<!--</a>-->
-							{%else%}
-							
-                            
-                            <!-- mittlere Fälle -->
-							<!--<a>
-							... 
-							<i class="fas fa-arrow-circle-right"></i>
-							</a>-->
-							
-                            <!--<a href="{{object.url}}">-->
-								<span class="corpus-path-all hide">{{object.name}} <i class="fas fa-arrow-circle-right"></i></span>                               
-                           
-							<!--</a>-->                            
-                            
+							{%elif forloop.revcounter == 3  %}
+								<!-- mittlere Fälle -->
+								<span class="hide-dots"><button class="btn btn-light btn-sm text-left text-decoration-none show-corpus-path">&gt;...&lt;&nbsp;&nbsp;<i class="fas fa-arrow-circle-right"></i></button></span>
+                            {%else%}
+							<!--<a href="{{object.url}}">-->
+								<span class="corpus-path-all hide">{{object.name}} <i class="fas fa-arrow-circle-right"></i></span>                                                         
+							<!--</a>-->                         						
 							{%endif%}
-                            
-                            
+     
 						</div>
 						{%endfor%}
 						<span class="lc">
@@ -250,7 +242,7 @@
 								 [{{hit.occurrence.line}}]
 							<!--</a>-->
 						</span>
-                        <button class="btn btn-light btn-sm text-left text-decoration-none show-corpus-path">show whole corpus path</button>
+                        
 					</div>
 					<p class="sentence-id-button"><button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{{hit.sentence.id}}')"><span class="far fa-clipboard"></span>Copy sentence ID</button></p>
 					{%endfor%}
