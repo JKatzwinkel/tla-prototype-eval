@@ -216,20 +216,34 @@
 					<p class="corpus-path">
 					    {%for object in path%}
 						<span id="{{hit.text.id}}-{{object.id}}" class="corpus-path-element">
-							<a href="{{object.url}}">
+							{%if forloop.first%}
+							<!--<a href="{{object.url}}">-->
 								{{object.name}}
                                 <i class="fas fa-arrow-circle-right"></i>
-							</a>
-							{%if not forloop.last%}
-							
+							<!--</a>-->
+							{%elif forloop.last %}
+							<!--<a href="{{object.url}}">-->
+								{{object.name}}
+                                <i class="fas fa-arrow-circle-right"></i>
+							<!--</a>-->
+							{%else%}
+							<!-- mittlere Fälle -->
+							<!--<a>
+							... 
+							<i class="fas fa-arrow-circle-right"></i>
+							</a>-->
+							<!--<a href="{{object.url}}">-->
+								{{object.name}}
+                                <i class="fas fa-arrow-circle-right"></i>
+							<!--</a>-->
 							{%endif%}
 						</span>
 						{%endfor%}
-						<a href="/view/occurrence/{{hit.occurrence.id}}">
-							<span class="lc">
-							 [{{hit.occurrence.line}}]
-							</span>
-						</a>
+						<span class="lc">
+							<!--<a href="#">-->
+								 [{{hit.occurrence.line}}]
+							<!--</a>-->
+						</span>
 					</p>
 					<p class="sentence-id-button"><button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{{hit.sentence.id}}')"><span class="far fa-clipboard"></span>Copy sentence ID</button></p>
 					{%endfor%}

@@ -29,9 +29,9 @@ def fixForRES(mdc):
 def niceTransliteration(transl):
     if transl:
         transl = transl.replace('≡', '=')
+        transl = transl.replace(',', '.')
         transl = transl.replace('.du', ':DU')
         transl = transl.replace('.pl', ':PL')
-        transl = transl.replace(',', '.')
     return transl
 
 @register.filter(is_safe=True)
