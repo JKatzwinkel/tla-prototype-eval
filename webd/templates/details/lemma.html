@@ -15,7 +15,7 @@
 			  <ol class="breadcrumb">
 				<li class="breadcrumb-item"><a href="#">Home</a></li>
 				<li class="breadcrumb-item"><a href="/search">Search</a></li>
-				<li class="breadcrumb-item active" aria-current="page">Details: Dictionary Entry</li>
+				<li class="breadcrumb-item active" aria-current="page">Dictionary entry</li>
 			  </ol>
 			</nav>
 		</div>
@@ -23,16 +23,14 @@
     
     <div id="button-bar-small" class="sticky-top d-lg-none">
         <div class="functional-icon-set">
+		
+            <a href="javascript:history.back()"><button type="button" class="btn btn-red text-left text-decoration-none solo-icon"><i class="fas fa-arrow-circle-left"></i><span class="d-none d-lg-block">Back to search results</span></button></a>  
             
-            <a href="/search"><button type="button" class="btn btn-red text-left text-decoration-none float-left solo-icon"><i class="fa fa-search"></i><span class="d-none d-lg-block">Modify Search</span></button></a>
-            
-            <a href="javascript:history.back()"><button type="button" class="btn btn-red text-left text-decoration-none solo-icon"><i class="fas fa-arrow-circle-left"></i><span class="d-none d-lg-block">Result List</span></button></a>    
-            
+            <a href="/search"><button type="button" class="btn btn-red text-left text-decoration-none float-left solo-icon"><i class="fa fa-search"></i><span class="d-none d-lg-block">Modify search</span></button></a>
             
             <div class="functional-icons float-right solo-icon sidebar-btn">
                 <a href="#" class="btn btn-light" ><i class="fa fa-eye"></i></a>               
             </div>
-            
 
             <div class="functional-icons float-right solo-icon">
                 <a href="#" class="btn btn-red text-left text-decoration-none " role="button"><i class="fas fa-info-circle fa-lg"></i></a>
@@ -89,6 +87,7 @@
 					{% endif %}
 				{% endfor %}</p>
 			</div>
+			
 			<!-- persistente URL / ID -->
 			<div>
 				<hr>
@@ -98,21 +97,25 @@
 				<br><strong>Persistent URL:</strong> {{tlaBaseURL}}/view/lemma/{{lemma.id}} <button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('TLA lemma ID {{lemma.id}} ({% for word in lemma.words %}{{word.transcription}}{% endfor %}), &lt;{{tlaBaseURL}}/view/lemma/{{lemma.id}}&gt;, in: {{tlaTitle}} &lt;{{tlaBaseURL}}&gt;, Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, ed. by {{tlaEditor}} (accessed: {{dateToday}})');"><span class="fas fa-clipboard"></span>Copy citation</button>
                 </p>
 			</div>
+			
+			<!-- POS -->
 			<div class="grammar">
 				<hr>
 				<p><strong>Part of Speech:</strong>&nbsp;
 				<span>
-					{{lemma.type}}
+					{{lemma.type|nicePOS}}
 					{% if lemma.subtype %}
-						({{ lemma.subtype }})
+						({{ lemma.subtype|niceSubPOS }})
 					{% endif %}
 				</span></p>
 			</div>
+			
+			<!-- translations -->
 			<div class="translation">
 				<hr>				
 				<p><strong>Translation</strong></p>
 				{% for translation in lemma.translations.de %}
-					<p class="german"><span class="lang-icon">DE</span> {{ translation }}</p> <!-- ## sollte so aussehen wie die anderen Sprachen -->
+					<p class="german"><span class="lang-icon">DE</span> {{ translation }}</p>
 				{% endfor %}
 				{% for translation in lemma.translations.en %}
 					<p class="english"><span class="lang-icon">EN</span> {{ translation }}</p>
@@ -134,9 +137,8 @@
 				</a>
 				{% endfor %}
                 </p>
-				
                 
-                <p><strong>Time:</strong>&nbsp;<a href="#">{{ lemma.xxx }}</a></p> <!--## Werte noch nicht mitgeliefert -->
+                <p><strong>Time:</strong> ##attestation time##{{ lemma.xxx }}</p> <!--## Werte noch nicht mitgeliefert -->
 			</div> 
 			
 			<!-- Bibliographie -->
@@ -183,11 +185,31 @@
 			<div>
 				<hr>
 				<p><strong>Annotations</strong>
-				<br><strong>Language:</strong> {{ lemma.xxx }}  <!--## Wert noch nicht mitgeliefert -->
-				<br><strong>Script:</strong> {{ lemma.xxx }}  <!--## Wert noch nicht mitgeliefert -->
+				<br><strong>Language:</strong> ##language##{{ lemma.xxx }}  <!--## Wert noch nicht mitgeliefert -->
+				<br><strong>Script:</strong> ##script##{{ lemma.xxx }}  <!--## Wert noch nicht mitgeliefert -->
                 </p>
 			</div>
+		</div>  <!-- close content col-sm-12 -->	
+
+
+		<!-- Sidebar large -->
+		<div class="col-lg-4 d-none d-lg-block">
+            <div class="sticky-top">	
+				<!-- Navigation -->
+				<br>
+
+				<button type="button" class="btn btn-block btn-light text-left text-decoration-none mb-2" disabled><span class="fas fa-search-plus"></span>Select for combination search</button>
+				<a href="javascript:history.back()"><button type="button" class="btn btn-block btn-red text-left text-decoration-none mb-2"><i class="fas fa-arrow-circle-left"></i>Back to search results</button></a>
+
+				<!-- anstelle des historyBack sollte u.U. der Search-String verwendet werden -->
+				<a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Modify search</button></a> 
+            </div>    
+		</div>		
+
+	</div>	 <!-- close row details-content-->	
 															 
+	<div class="row details-content">	
+		<div class="col-sm-12 col-lg-8">
 			<!-- Lemma Relations -->
 			<div class="relations">
 				<hr>
@@ -291,73 +313,29 @@
 						{% endfor %}
 					{% endfor %}
 				{% endif %}
-							
-				<!-- alte Auflistung -->			
-				<!--<p>			
-				{% if lemma.relations.root %}
-					<br>Root:
-					{% for root in lemma.relations.root %}
-						<span>
-							<a href="/view/lemma/{{root.id}}" title="{{root.id}} (Root)" class="bbaw-libertine">
-								{{root.name}}
-							</a>
-						</span>
-					{% endfor %}
-				{% endif %}
-				{% if lemma.relations.partOf %}
-					<br>Superordinate Items:
-					{% for item in lemma.relations.partOf %}
-						<span>{{item}}
-							<a href="/view/lemma/{{item.id}}" title="{{item.id}} (Superordinate)" class="bbaw-libertine">
-								{{item.name}}
-							</a>
-						</span>
-					{% endfor %}
-				{% endif %}
-				{% if lemma.relations.contains %}
-					<br>Subordinate Items:
-					{% for item in lemma.relations.contains %}
-						<span>{{item}}
-							<a href="/view/lemma/{{item.id}}" title="{{item.id}} (Subordinate)" class="bbaw-libertine">
-								{{item.name}}
-							</a>
-						</span>
-					{% endfor %}
-				{% endif %}
-				{% if lemma.relations.successor %}
-					<br>Historical Successor:
-					{% for item in lemma.relations.successor %}
-						<span>{{item}}
-							<a href="/view/lemma/{{item.id}}" title="{{item.id}} (Successor)" class="bbaw-libertine">
-								{{item.name}}
-							</a>
-						</span>
-					{% endfor %}
-				{% endif %}
-				</p>-->
 				
 				<div class="editor">
 				<hr>	
-				<p><strong>TLA Editor:&nbsp;<a href="#">{{ lemma.edited.name }}</a></strong>			
+				<p><strong>TLA Editor:</strong> {{ lemma.edited.name }}		
 				    <br><strong>Last Revision:</strong> {{ lemma.edited.date }}
-				    <br><strong>Protocoll:</strong> {{ lemma.xxx }} <!--## Wert noch nicht mitgeliefert -->
-				    <br><strong>Review State:</strong> {{ lemma.revisionState }}
+				    <br><strong>Protocoll:</strong> ##protocoll##{{ lemma.xxx }} <!--## Wert noch nicht mitgeliefert -->
+				    <br><strong>Review State:</strong> {{ lemma.revisionState|niceReviewState }}
                  </p>
 				</div>
 			</div>  
             
             	
-		<!-- Zitationsfeld -->        
-		<div class="bg-light citation mt-5 mb-4">         
-			<p class="h6"><strong>Please cite as:</strong></p>
-				<!-- Version, Issue, Release-Date, heutiges Datum noch per globaler Variable holen -->
-			<blockquote>TLA lemma ID {{lemma.id}} ( {% for word in lemma.words %}{{word.transcription}} {% endfor %}), &lt;{{tlaBaseURL}}/view/lemma/{{lemma.id}}&gt;, 
-				in: <i>{{tlaTitle}}</i> &lt;{{tlaBaseURL}}&gt;, 
-				Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, 
-				ed. by {{tlaEditor}} 
-				(accessed: {{dateToday}})</blockquote>
-			<button type="button" class="btn btn-secondary btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('TLA lemma ID {{lemma.id}} ( {% for word in lemma.words %}{{word.transcription}} {% endfor %}), &lt;{{tlaBaseURL}}/view/lemma/{{lemma.id}}&gt;, in: {{tlaTitle}} &lt;{{tlaBaseURL}}&gt;, Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, ed. by {{tlaEditor}} (accessed: {{dateToday}})');"><span class="fas fa-clipboard"></span>Copy citation</button>
-		</div>  
+			<!-- Zitationsfeld -->        
+			<div class="bg-light citation mt-5 mb-4">         
+				<p class="h6"><strong>Please cite as:</strong></p>
+					<!-- Version, Issue, Release-Date, heutiges Datum noch per globaler Variable holen -->
+				<blockquote>TLA lemma ID {{lemma.id}} ( {% for word in lemma.words %}{{word.transcription}} {% endfor %}), &lt;{{tlaBaseURL}}/view/lemma/{{lemma.id}}&gt;, 
+					in: <i>{{tlaTitle}}</i> &lt;{{tlaBaseURL}}&gt;, 
+					Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, 
+					ed. by {{tlaEditor}} 
+					(accessed: {{dateToday}})</blockquote>
+				<button type="button" class="btn btn-secondary btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('TLA lemma ID {{lemma.id}} ( {% for word in lemma.words %}{{word.transcription}} {% endfor %}), &lt;{{tlaBaseURL}}/view/lemma/{{lemma.id}}&gt;, in: {{tlaTitle}} &lt;{{tlaBaseURL}}&gt;, Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, ed. by {{tlaEditor}} (accessed: {{dateToday}})');"><span class="fas fa-clipboard"></span>Copy citation</button>
+			</div>  
             
             
 		</div> <!-- close content col-sm-12 -->	
@@ -382,9 +360,11 @@
 				
 				<!-- Navigation -->
 				<br>
+				<button type="button" class="btn btn-block btn-light text-left text-decoration-none mb-2" disabled><span class="fas fa-search-plus"></span>Select for combination search</button>
+				<a href="javascript:history.back()"><button type="button" class="btn btn-block btn-red text-left text-decoration-none mb-2"><i class="fas fa-arrow-circle-left"></i>Back to search results</button></a>
 
-				<button type="button" class="btn btn-block btn-light text-left text-decoration-none"><span class="fas fa-search-plus"></span>Select for Combination Search</button>
-				<a href="javascript:history.back()"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Back to search results</button></a>
+				<! -- anstelle des historyBack sollte u.U. der Search-String verwendet werden -- >
+				<a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Modify search</button></a> -->
 
             </div>    
 		</div>		
@@ -415,14 +395,11 @@
 				<!-- Navigation -->
 				<br>
 
-				<button type="button" class="btn btn-block btn-light text-left text-decoration-none mb-2"><span class="fas fa-search-plus"></span>Select for Combination Search</button>
+				<button type="button" class="btn btn-block btn-light text-left text-decoration-none mb-2 disabled"><span class="fas fa-search-plus"></span>Select for Combination Search</button>
 				<a href="javascript:history.back()"><button type="button" class="btn btn-block btn-red text-left text-decoration-none mb-2"><span class="fas fa-arrow-circle-left"></span>Back to search results</button></a>
 
-				<button type="button" class="btn btn-block btn-light text-left text-decoration-none disabled"><span class="fas fa-search-plus"></span>Select for Combination Search</button>
-				<a href="javascript:history.back()"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Back to search results</button></a>
-
 				<!-- anstelle des historyBack sollte u.U. der Search-String verwendet werden -->
-				<a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Modify Search</button></a>             
+				<a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Modify search</button></a>             
             
             
         </div>

@@ -15,7 +15,7 @@
 			  <ol class="breadcrumb">
 				<li class="breadcrumb-item"><a href="#">Home</a></li>
 				<li class="breadcrumb-item"><a href="/search">Search</a></li>
-				<li class="breadcrumb-item active" aria-current="page">Search Results</li>
+				<li class="breadcrumb-item active" aria-current="page">Occurences</li>
 			  </ol>
 			</nav>
 		</div>
@@ -24,11 +24,10 @@
     <div id="button-bar-small" class="sticky-top d-lg-none">
         <div class="functional-icon-set">
             
-            <a href="/search"><button type="button" class="btn btn-red text-left text-decoration-none solo-icon float-left"><i class="fa fa-search"></i><span class="d-none d-lg-block">Modify Search</span></button></a>
+            <a href="javascript:history.back()"><button type="button" class="btn btn-red text-left text-decoration-none solo-icon"><i class="fas fa-arrow-circle-left"></i><span class="d-none d-lg-block">Back to lemma</span></button></a>   
             
-            <a href="javascript:history.back()"><button type="button" class="btn btn-red text-left text-decoration-none solo-icon"><i class="fas fa-arrow-circle-left"></i><span class="d-none d-lg-block">Back to Lemma</span></button></a>   
-            
-            
+            <a href="/search"><button type="button" class="btn btn-red text-left text-decoration-none solo-icon float-left"><i class="fa fa-search"></i><span class="d-none d-lg-block">Modify search</span></button></a>
+                        
             <div class="functional-icons float-right solo-icon sidebar-btn">
                 <a href="#" class="btn btn-light" ><i class="fa fa-eye"></i></a>               
             </div>
@@ -92,7 +91,7 @@
                     <li class="hieroglyph" {% if token.type == 'word' %}onclick="window.open('/view/lemma/{{token.lemma}}','_blank')"{% endif %}>
                         <canvas class="res occ-tok-glyphs" style="font-size: 20px; vertical-align: -5px;"  title="{{token.glyphs}}">
                         {% if token.glyphs %}
-                            {{token.glyphs}}
+                            {{token.glyphs|fixForRES}}
                         {% else %}
                             empty
                         {% endif %}
@@ -100,7 +99,7 @@
 					</li>
                     <li class="transcription" {% if token.type == 'word' %}onclick="window.open('/view/lemma/{{token.lemma}}','_blank')"{% endif %}>
 					    {% if token.label %}
-                           {{token.label}}
+                           {{token.label|niceTransliteration}}
                         {% else %}
                             &nbsp;
                         {% endif %}
@@ -115,7 +114,7 @@
                     <li class="part-of-speech hide"> 
 						##POS##<!-- ##Inhalt aktuell noch nicht in token mitgeliefert  -->
 					    {% if token.xxx %}
-                           {{token.xxx}}
+                           {{token.xxx|nicePOS}} ({{token.xxx|niceSubPOS}})
                         {% else %}
                             &nbsp;
                         {% endif %}
@@ -176,7 +175,7 @@
                         <a{% if token.type == 'word' %} href="/view/lemma/{{token.lemma}}" target="_blank"{% endif %}>
                             <span id="{{token.id}}" class="occ-tok {%if token.highlight%}highlight-{{token.highlight}}{%endif%} bbaw-libertine" {% if token.type == 'word' %}onclick="window.open('/view/lemma/{{token.lemma}}','_blank')"{% endif %}>
                                     {% if token.label %}
-                                        {{token.label}}
+                                        {{token.label|niceTransliteration}}
                                     {% endif %}
                             </span>
                         </a>
@@ -189,7 +188,7 @@
                             {%if token.glyphs%}
                              <a{% if token.type == 'word' %} href="/view/lemma/{{token.lemma}}" target="_blank"{% endif %}>
 								<canvas class="res occ-tok-glyphs {%if token.highlight%}highlight-{{token.highlight}}{%endif%}" title="{{token.glyphs}}">
-									{{token.glyphs}}
+									{{token.glyphs|fixForRES}}
 								</canvas>
 							</a>
                             {%endif%}
@@ -217,20 +216,34 @@
 					<p class="corpus-path">
 					    {%for object in path%}
 						<span id="{{hit.text.id}}-{{object.id}}" class="corpus-path-element">
-							<a href="{{object.url}}">
+							{%if forloop.first%}
+							<!--<a href="{{object.url}}">-->
 								{{object.name}}
                                 <i class="fas fa-arrow-circle-right"></i>
-							</a>
-							{%if not forloop.last%}
-							
+							<!--</a>-->
+							{%elif forloop.last %}
+							<!--<a href="{{object.url}}">-->
+								{{object.name}}
+                                <i class="fas fa-arrow-circle-right"></i>
+							<!--</a>-->
+							{%else%}
+							<!-- mittlere Fälle -->
+							<!--<a>
+							... 
+							<i class="fas fa-arrow-circle-right"></i>
+							</a>-->
+							<!--<a href="{{object.url}}">-->
+								{{object.name}}
+                                <i class="fas fa-arrow-circle-right"></i>
+							<!--</a>-->
 							{%endif%}
 						</span>
 						{%endfor%}
-						<a href="/view/occurrence/{{hit.occurrence.id}}">
-							<span class="lc">
-							 [{{hit.occurrence.line}}]
-							</span>
-						</a>
+						<span class="lc">
+							<!--<a href="#">-->
+								 [{{hit.occurrence.line}}]
+							<!--</a>-->
+						</span>
 					</p>
 					<p class="sentence-id-button"><button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{{hit.sentence.id}}')"><span class="far fa-clipboard"></span>Copy sentence ID</button></p>
 					{%endfor%}
@@ -253,16 +266,16 @@
 						<label class="input-group-text" for="inputGroupSelect02">Order by</label>
 					</div>
 					<select class="custom-select" id="inputGroupSelect02">
-						<option value="1">attestation time, start</option>
-						<option value="2" selected>attestation time, middle</option>
-						<option value="3">attestation time, end</option>
+						<option value="1" selected>Date of text, start of time span</option>
+						<option value="2">Date of text, middle of time span</option>
+						<option value="3">Date of text, end of time span</option>
 					</select>			  
 				</div>
 
 				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail hieroglyph-btn "><i class="fas fa-minus-circle"></i>Hieroglyphs</button>
 
                 <!-- start ANNOTATION buttons -->
-                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail anno-block-btn"><i class="fas fa-plus-circle"></i>Switch Annotation/Block-View</button>
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail anno-block-btn"><i class="fas fa-plus-circle"></i>Switch annotation/block view</button>
 				
                 <div class="indented-buttons indented-buttons-annotation hide">
                     <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-id-btn "><i class="fas fa-plus-circle"></i>Word ID</button><!--new-->
@@ -274,7 +287,7 @@
 				</div>	
 
                 <!-- start LANGUAGE buttons -->
-                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail languages-btn mt-2">Translation Languages</button>                 
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail languages-btn mt-2">Translation languages</button>                 
 				
                 <div class="indented-buttons indented-buttons-lang hide">
                      <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn-de" type="button"><i class="fas fa-minus-circle"></i>German</button>
@@ -287,7 +300,7 @@
 				<a href="javascript:history.back()"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Back to lemma</button></a>
 				<!-- anstelle des historyBack sollte u.U. der Search-String verwendet werden -->
 				
-				<a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Modify Search</button></a>
+				<a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Modify search</button></a>
 			</div>
 		</div>
 	</div> <!-- /.row -->
@@ -297,7 +310,7 @@
     <div id="sidebar" class="d-lg-none">
         <div class="sidebar-wrapper">                        
             <div class="close-sidebar">
-                <a href="#"><button type="button" class="btn btn-block btn-red text-left text-decoration-none show-detail"><span class="fas fa-times"></span>hide options</button>
+                <a href="#"><button type="button" class="btn btn-block btn-red text-left text-decoration-none show-detail"><span class="fas fa-times"></span>Hide options</button>
                 </a>
             </div>
             
@@ -306,17 +319,16 @@
 						<label class="input-group-text" for="inputGroupSelect02">Order by</label>
 					</div>
 					<select class="custom-select" id="inputGroupSelect02">
-						<option value="1">attestation time, start</option>
-						<option value="2" selected>attestation time, middle</option>
-						<option value="3">attestation time, end</option>
+						<option value="1" selected>Date of text, start of time span</option>
+						<option value="2">Date of text, middle of time span</option>
+						<option value="3">Date of text, end of time span</option>
 					</select>			  
 				</div>
 
 				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail hieroglyph-btn "><i class="fas fa-minus-circle"></i>Hieroglyphs</button>
                 
                 <!-- start ANNOTATION buttons -->
-                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail anno-block-btn"><i class="fas fa-plus-circle">
-                </i>Switch Annotation/Block-View</button>
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail anno-block-btn"><i class="fas fa-plus-circle"></i>Switch annotation/block view</button>
                 <div class="indented-buttons indented-buttons-annotation hide">
                     <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-id-btn "><i class="fas fa-plus-circle"></i>Word ID</button><!--new-->
                     <!--<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail lemma-id-btn "><i class="fas fa-plus-circle"></i>Lemma ID</button>-->
@@ -327,7 +339,7 @@
 				</div>	
                 
                 <!-- start LANGUAGE buttons -->
-                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail languages-btn">Translation Languages</button>                 
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail languages-btn">Translation languages</button>                 
 				
                 <div class="indented-buttons indented-buttons-lang hide">
                      <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn-de" type="button"><i class="fas fa-minus-circle"></i>German</button>
@@ -340,7 +352,7 @@
 				<a href="javascript:history.back()"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Back to lemma</button></a>
 				<!-- anstelle des historyBack sollte u.U. der Search-String verwendet werden -->
 				
-				<a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fa fa-search"></span>Modify Search</button></a>
+				<a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fa fa-search"></span>Modify search search</button></a>
 			
                 
             
