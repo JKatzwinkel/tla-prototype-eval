@@ -427,13 +427,13 @@ def hit_tree(hits):
         related_hit_ids = sorted([
             (hid.get('id'), pred)
             for pred in [
-                'rootOf',
+                #'rootOf',
                 #'referencing',
-                'successor',
+                #'successor',
                 'referencedBy',
                 #'composedOf',
                 #'predecessor',
-                'composes',
+                #'composes',
                 'contains'
             ]
             for hid in hit.get('relations', {}).get(pred, [])

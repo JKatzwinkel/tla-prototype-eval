@@ -54,11 +54,6 @@
         
         <div class="col-md-4 align-right align-baseline d-none d-lg-block">
 
-            <div class="functional-icons ml-3 ">
-              <a href="#" class="btn btn-light solo-icon" role="button" data-toggle="modal" data-target="#modal_sharing">Share&nbsp;&nbsp;<i class="fa fa-share-alt share-results"></i></a>              
-            </div>            
-            
-
             <div class="functional-icons ml-3">
               <a href="#" class="btn btn-light solo-icon" role="button" data-toggle="modal" data-target="#modal_sharing">Share&nbsp;&nbsp;<i class="fa fa-share-alt share-results"></i></a>        
             </div>
@@ -148,8 +143,8 @@
 						<!-- Wordclass -->
 						<span class="word-class hide">
 							<strong>
-								<span class="font-italic word-class-type">[{{hit.type}}]</span>
-								{%if hit.subtype%}<span class="word-class-subtype">({{hit.subtype}})</span>{%endif%}
+								<span class="font-italic word-class-type">{{hit.type|nicePOS}}</span>
+								{%if hit.subtype%}<span class="word-class-type">({{hit.subtype|niceSubPOS}})</span>{%endif%}
 							</strong>
 						</span>
 						
