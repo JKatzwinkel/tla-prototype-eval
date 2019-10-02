@@ -309,7 +309,7 @@ function init() {
         	
 			
 		}); 
-    
+     
     // scrolltop
 	
 		$(document).ready(function(){
@@ -317,6 +317,6 @@ function init() {
 				$('html,body').animate({scrollTop: $(this).offset().top}, 800);
 			}); 
 		}); 
-	
+	 
 }
 

@@ -611,7 +611,7 @@ footer.bg-light{background-color: #e0e6ed!important;}
 
 }
 
-.solo-icon {margin-left: 1em;}
+.solo-icon {margin-left: .5em;}
 .solo-icon i {margin-right: 0!important;}
 
 
@@ -751,3 +751,18 @@ span.multiselect-native-select select {
 
 }
 
+.cookie-container {    
+    
+}
+.cookie-wrapper {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1500;   
+    display: block;
+    width: 100%;
+    padding: 1em 2em;
+    background-color: #DDD;
+    
+}
