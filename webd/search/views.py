@@ -122,9 +122,14 @@ def dict_search_query(**params):
             if 'transcription_enc' in params:
                 transcription_enc = params.get('transcription_enc')[0] if type(params.get('transcription_enc')) == list else params.get('transcription_enc')
                 if transcription_enc == 'mdc':
-                    translString = transcription.maketrans("'AaHxXSTDṱ", "ʾꜣꜥḥḫẖšṯḏṱ")
-                    transcription = transcription.translate(translString)
-                    transcription = transcription.replace("'", "i͗") # oder i ohne Punkt?
+                    translString = root.maketrans("'AaHxXSTDV", "ʾꜣꜥḥḫẖšṯḏṱ")
+                    root = root.translate(translString)
+                    root = root.replace("v", "h̭") 
+                    root = root.replace("u", "u̯") 
+                    #Problem, dass i zwei Bedeutungen hat; Darf man dann bei MdC-Kodierung nicht gleichzeitig in hierogl und demot suchen
+                    #root = root.replace("i", "i̯") # Hieroglyphisch/Hieratisch
+                    root = root.replace("i", "ı͗") # Demotisch
+                    root = root.replace("'", "ı͗") # neue Empfehlung wäre i͗
             clauses.append(
                 {
                     "match_phrase_prefix": {
@@ -145,9 +150,14 @@ def dict_search_query(**params):
             if 'root_enc' in params:
                 root_enc = params.get('root_enc')[0] if type(params.get('root_enc')) == list else params.get('root_enc')
                 if root_enc == 'mdc':
-                    translString = root.maketrans("'AaHxXSTDṱ", "ʾꜣꜥḥḫẖšṯḏṱ")
+                    translString = root.maketrans("'AaHxXSTDV", "ʾꜣꜥḥḫẖšṯḏṱ")
                     root = root.translate(translString)
-                    root = root.replace("'", "i͗") # oder i ohne Punkt?
+                    root = root.replace("v", "h̭") 
+                    root = root.replace("u", "u̯") 
+                    #Problem, dass i zwei Bedeutungen hat; Darf man dann bei MdC-Kodierung nicht gleichzeitig in hierogl und demot suchen
+                    #root = root.replace("i", "i̯") # Hieroglyphisch/Hieratisch
+                    root = root.replace("i", "ı͗") # Demotisch
+                    root = root.replace("'", "ı͗") # neue Empfehlung wäre i͗
             clauses.append(
                 {
                     "match_phrase_prefix": {
