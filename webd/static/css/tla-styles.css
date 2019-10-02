@@ -231,17 +231,15 @@ a.share-results:hover {color: red;}
 	color: white;
 }
 
-.corpus-path span.corpus-path-text {
-	display: none;
+.corpus-path-element {
+	display: inline;
 }
-.corpus-path span:first-child {
-	display: block!important;
-    float: left;
-}
+
 
 .corpus-path-element a {
 	color: grey!important;
 }
+
 .corpus-path-element a:hover {
 	color: red!important;
 }

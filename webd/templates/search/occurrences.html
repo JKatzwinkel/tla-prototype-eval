@@ -213,13 +213,13 @@
 
 				<div class="corpus-paths">
 					{%for path in hit.text.paths%}
-					<p class="corpus-path">
+					<div class="corpus-path">
 					    {%for object in path%}
-						<span id="{{hit.text.id}}-{{object.id}}" class="corpus-path-element">
+						<div id="{{hit.text.id}}-{{object.id}}" class="corpus-path-element">
 							{%if forloop.first%}
 							<!--<a href="{{object.url}}">-->
 								{{object.name}}
-                                <i class="fas fa-arrow-circle-right"></i>
+                                <i class="fas fa-arrow-circle-right"></i> <span class="hide-dots">...</span>
 							<!--</a>-->
 							{%elif forloop.last %}
 							<!--<a href="{{object.url}}">-->
@@ -227,24 +227,31 @@
                                 <i class="fas fa-arrow-circle-right"></i>
 							<!--</a>-->
 							{%else%}
-							<!-- mittlere Fälle -->
+							
+                            
+                            <!-- mittlere Fälle -->
 							<!--<a>
 							... 
 							<i class="fas fa-arrow-circle-right"></i>
 							</a>-->
-							<!--<a href="{{object.url}}">-->
-								{{object.name}}
-                                <i class="fas fa-arrow-circle-right"></i>
-							<!--</a>-->
+							
+                            <!--<a href="{{object.url}}">-->
+								<span class="corpus-path-all hide">{{object.name}} <i class="fas fa-arrow-circle-right"></i></span>                               
+                           
+							<!--</a>-->                            
+                            
 							{%endif%}
-						</span>
+                            
+                            
+						</div>
 						{%endfor%}
 						<span class="lc">
 							<!--<a href="#">-->
 								 [{{hit.occurrence.line}}]
 							<!--</a>-->
 						</span>
-					</p>
+                        <button class="btn btn-light btn-sm text-left text-decoration-none show-corpus-path">show whole corpus path</button>
+					</div>
 					<p class="sentence-id-button"><button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{{hit.sentence.id}}')"><span class="far fa-clipboard"></span>Copy sentence ID</button></p>
 					{%endfor%}
 				</div>	

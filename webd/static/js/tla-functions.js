@@ -239,6 +239,18 @@ function init() {
             $('.combination-search').slideToggle('slow');
         });	
     
+     // .corpus-path
+		$('html').not('.corpus-path-all').click(function (e) {
+		        //console.log($(e.target).parent());
+		 if ($('.corpus-path-all').is(':visible') && !e.target == '.corpus-path-all') {
+                $('.corpus-path-all').slideUp('ease-out');
+            }
+        });
+        $('.show-corpus-path').click(function (e) {
+			e.preventDefault();
+            $('.corpus-path-all, .hide-dots').slideToggle('slow');
+        });	
+    
         
     // .anno-block-btn
 		$('html').not('.anno-block-btn').click(function (e) {
@@ -317,6 +329,6 @@ function init() {
 				$('html,body').animate({scrollTop: $(this).offset().top}, 800);
 			}); 
 		}); 
-	 
+
 }
 
