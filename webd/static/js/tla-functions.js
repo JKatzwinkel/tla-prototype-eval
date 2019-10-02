@@ -290,9 +290,8 @@ function init() {
     
 	// Show/Hide Comments
         
-        $('.show-comment-button').click(function()  {    
-             $('.comment-wrapper').toggleClass('hide-comment show-comment'); 
-            $('.comment-wrapper').slideDown('slow');
+            $('.show-comment-button').click(function()  {    
+             $('.comment-wrapper').toggleClass('hide-comment show-comment');             
             $('.show-comment-button').addClass('d-none');            
             $('.hide-comment-button').removeClass('d-none');
             
@@ -300,11 +299,15 @@ function init() {
         
     $('.hide-comment-button').click(function()  {
            $('.comment-wrapper').toggleClass('hide-comment show-comment');            
-            //$('.comment-wrapper').slideUp('slow');
             $('.hide-comment-button').addClass('d-none');
             $('.show-comment-button').removeClass('d-none');
             });
         
+    // Cookie Alert ausblenden
+    $('.cookie-ok').click(function()  {
+           $('.cookie-container').addClass('d-none');
+            
+            });
 		
 		    
 	// Headroom 

@@ -143,26 +143,26 @@
 	<footer class="py-5 bg-light">
 	<div class="container">
 		<div class="row">
-		<div class="col-sm-7 col-lg-4">
-			 <address>
-			<strong>Thesaurus Linguae Aegyptiae</strong>
-			<br>Strukturen und Transformationen des Wortschatzes der aegyptischen Sprache
-			<br><br><a href="#">http://aaew.bbaw.de</a>
-			</address>		 
-		</div>
-		
-		<div class="col-sm-4 col-lg-2 contact">
-			<a href="#">Contact</a> 
-			<br><a href="#">Legal Notice</a> 
-			<br><a href="#">Privacy statement</a>	
-		</div>
-            
-		<div class="footer-logo col-sm-6 col-lg-3">			
-			<a href="http://www.saw-leipzig.de/de"><img src="{% static "img/logo_saw.png" %}"></a>
-		</div>
-		<div class="footer-logo col-sm-6 col-lg-3">
-			<a href="http://www.bbaw.de"><img src="{% static "img/logo_bbaw.png" %}"></a>			
-		</div>
+            <div class="col-sm-7 col-lg-4">
+                 <address>
+                <strong>Thesaurus Linguae Aegyptiae</strong>
+                <br>Strukturen und Transformationen des Wortschatzes der aegyptischen Sprache
+                <br><br><a href="#">http://aaew.bbaw.de</a>
+                </address>		 
+            </div>
+
+            <div class="col-sm-4 col-lg-2 contact">
+                <a href="#">Contact</a> 
+                <br><a href="#">Legal Notice</a> 
+                <br><a href="#">Privacy statement</a>	
+            </div>
+
+            <div class="footer-logo col-sm-6 col-lg-3">			
+                <a href="http://www.saw-leipzig.de/de"><img src="{% static "img/logo_saw.png" %}"></a>
+            </div>
+            <div class="footer-logo col-sm-6 col-lg-3">
+                <a href="http://www.bbaw.de"><img src="{% static "img/logo_bbaw.png" %}"></a>	
+            </div>
 		</div>
 	</div>
 		<!-- /.container -->
@@ -170,24 +170,36 @@
 	{% endblock %}
         
         
-    <!-- Cookie-Alert 
-    <div class="container-container">        
-        <div class="cookie-wrapper px-5 py-3">                
+    <!-- Cookie-Alert -->
+    <div class="cookie-container">        
+        <div class="cookie-wrapper px-5 py-2">                
+            <!-- Content -->
+            <div class="row my-4">
+                <div class="col-sm-8">
+                
+            <p class="">
+                 This site would like to place cookies on your computer. One cookie that is essential for the operation of the site has already been sent; accepting further cookies will improve your experience. Please see our <a href="/cookies">cookie policy</a> for more information.
+            
+            </p> 
+                </div>
 
-            <p class="text-muted credit">
-                 By using our website you are consenting to our use of cookies in accordance with our <a href="/cookies">cookie policy</a>.
-            
-            </p>                    
-            <div class="form-group form-check float-right mr-2">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">I agree</label>
-            </div>
-            
-            <button type="submit" class="btn btn-secondary float-right ">OK</button> 
+                <!-- Buttons -->
+                <div class="col-sm-4">
+                    <button class="btn btn-secondary float-right ml-4">Dismiss</button>
+                    <button class="btn btn-danger float-right ml-4 cookie-ok">OK</button>      
+                    <div class="form-group form-check float-right ml-2 pt-1">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">I agree</label>
+                    </div>
+                
          
+                </div>
+
+            </div> <!-- /.row -->                
+            
                    
         </div>
-    </div> -->   
+    </div>   
         
 	</body>
 

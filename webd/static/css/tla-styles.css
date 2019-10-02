@@ -777,7 +777,8 @@ span.multiselect-native-select select {
 
 .cookie-container {    
     
-}
+    }
+
 .cookie-wrapper {
     position: fixed;
     left: 0;
@@ -788,5 +789,7 @@ span.multiselect-native-select select {
     width: 100%;
     padding: 1em 2em;
     background-color: #DDD;
-    
+    transition: all 500ms ease;
 }
+
+
