@@ -91,7 +91,7 @@
                     <li class="hieroglyph" {% if token.type == 'word' %}onclick="window.open('/view/lemma/{{token.lemma}}','_blank')"{% endif %}>
                         <canvas class="res occ-tok-glyphs" style="font-size: 20px; vertical-align: -5px;"  title="{{token.glyphs}}">
                         {% if token.glyphs %}
-                            {{token.glyphs}}
+                            {{token.glyphs|fixForRES}}
                         {% else %}
                             empty
                         {% endif %}
@@ -99,7 +99,7 @@
 					</li>
                     <li class="transcription" {% if token.type == 'word' %}onclick="window.open('/view/lemma/{{token.lemma}}','_blank')"{% endif %}>
 					    {% if token.label %}
-                           {{token.label}}
+                           {{token.label|niceTransliteration}}
                         {% else %}
                             &nbsp;
                         {% endif %}
@@ -114,7 +114,7 @@
                     <li class="part-of-speech hide"> 
 						##POS##<!-- ##Inhalt aktuell noch nicht in token mitgeliefert  -->
 					    {% if token.xxx %}
-                           {{token.xxx}}
+                           {{token.xxx|nicePOS}} ({{token.xxx|niceSubPOS}})
                         {% else %}
                             &nbsp;
                         {% endif %}
@@ -175,7 +175,7 @@
                         <a{% if token.type == 'word' %} href="/view/lemma/{{token.lemma}}" target="_blank"{% endif %}>
                             <span id="{{token.id}}" class="occ-tok {%if token.highlight%}highlight-{{token.highlight}}{%endif%} bbaw-libertine" {% if token.type == 'word' %}onclick="window.open('/view/lemma/{{token.lemma}}','_blank')"{% endif %}>
                                     {% if token.label %}
-                                        {{token.label}}
+                                        {{token.label|niceTransliteration}}
                                     {% endif %}
                             </span>
                         </a>
@@ -188,7 +188,7 @@
                             {%if token.glyphs%}
                              <a{% if token.type == 'word' %} href="/view/lemma/{{token.lemma}}" target="_blank"{% endif %}>
 								<canvas class="res occ-tok-glyphs {%if token.highlight%}highlight-{{token.highlight}}{%endif%}" title="{{token.glyphs}}">
-									{{token.glyphs}}
+									{{token.glyphs|fixForRES}}
 								</canvas>
 							</a>
                             {%endif%}

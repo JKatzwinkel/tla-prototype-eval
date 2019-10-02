@@ -119,6 +119,12 @@ def dict_search_query(**params):
         transcription = params.get('transcription')[0] if type(
             params.get('transcription')) == list else params.get('transcription')
         if len(transcription.strip()) > 0:
+            if 'transcription_enc' in params:
+                transcription_enc = params.get('transcription_enc')[0] if type(params.get('transcription_enc')) == list else params.get('transcription_enc')
+                if transcription_enc == 'mdc':
+                    translString = transcription.maketrans("'AaHxXSTDṱ", "ʾꜣꜥḥḫẖšṯḏṱ")
+                    transcription = transcription.translate(translString)
+                    transcription = transcription.replace("'", "i͗") # oder i ohne Punkt?
             clauses.append(
                 {
                     "match_phrase_prefix": {
@@ -130,6 +136,36 @@ def dict_search_query(**params):
                 {
                     "term": {
                         "name": transcription,
+                    }
+                }
+            )
+    if 'root' in params:
+        root = params.get('root')[0] if type(params.get('root')) == list else params.get('root')
+        if len(root.strip()) > 0:
+            if 'root_enc' in params:
+                root_enc = params.get('root_enc')[0] if type(params.get('root_enc')) == list else params.get('root_enc')
+                if root_enc == 'mdc':
+                    translString = root.maketrans("'AaHxXSTDṱ", "ʾꜣꜥḥḫẖšṯḏṱ")
+                    root = root.translate(translString)
+                    root = root.replace("'", "i͗") # oder i ohne Punkt?
+            clauses.append(
+                {
+                    "match_phrase_prefix": {
+                        "name": root,
+                    }
+                }
+            )
+            clauses.append(
+                {
+                    "term": {
+                        "name": root,
+                    }
+                }
+            )
+            clauses.append(
+                {
+                    "match": {
+                        "type": "root"
                     }
                 }
             )
@@ -382,13 +418,13 @@ def hit_tree(hits):
             (hid.get('id'), pred)
             for pred in [
                 'rootOf',
-                'referencing',
+                #'referencing',
                 'successor',
                 'referencedBy',
-                'composedOf'
-                'predecessor',
+                #'composedOf',
+                #'predecessor',
                 'composes',
-                'partOf'
+                'contains'
             ]
             for hid in hit.get('relations', {}).get(pred, [])
             if hid.get('id') in structure],
