@@ -458,9 +458,37 @@ footer.bg-light{background-color: #e0e6ed!important;}
 	border-bottom: 2px solid #EEE!important;
 	padding-top: 1rem;	
 	}
+
 .comment.content-field {
 	border-bottom: 0!important;
 	}
+
+.comment-wrapper.hide-comment{
+        max-height: 100px;
+        overflow: hidden;
+        z-index: 0;
+   /* transition: all 500ms ease; */
+    
+}
+
+.comment-wrapper.show-comment {
+        max-height: 100%;
+        display: block;        
+}
+
+.btn-grey {background-color: #CCC;}
+
+.show-comment-button {
+    display: block;    
+    margin-top: -4em;
+    padding-top: 3em;
+    background: url(../img/hg_comment_hide.png) repeat-x;
+    position: relative;
+    height: 80px;
+    vertical-align: bottom;
+    z-index: 50;
+}
+
 .details-content p.relations span{
 	font-style: italic;
 	font-weight: bold;
@@ -695,9 +723,7 @@ span.multiselect-native-select select {
     color: grey;
     }
 .lemma-id {color:red;}
-.copy-to-clipboard-btn {
-	/**/
-}
+
 
 .root:before {content: "Root";}
 .rootOf:before {content: "Root of";}

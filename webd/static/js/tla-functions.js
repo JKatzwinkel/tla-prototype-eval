@@ -288,7 +288,23 @@ function init() {
             $('.indented-buttons-lang').slideToggle('slow');
         });
     
-	
+	// Show/Hide Comments
+        
+        $('.show-comment-button').click(function()  {    
+             $('.comment-wrapper').toggleClass('hide-comment show-comment'); 
+            $('.comment-wrapper').slideDown('slow');
+            $('.show-comment-button').addClass('d-none');            
+            $('.hide-comment-button').removeClass('d-none');
+            
+            });
+        
+    $('.hide-comment-button').click(function()  {
+           $('.comment-wrapper').toggleClass('hide-comment show-comment');            
+            //$('.comment-wrapper').slideUp('slow');
+            $('.hide-comment-button').addClass('d-none');
+            $('.show-comment-button').removeClass('d-none');
+            });
+        
 		
 		    
 	// Headroom 
@@ -317,8 +333,7 @@ function init() {
         $('.show-detail').click(function() {
     
         $("i", this).toggleClass("fas fa-plus-circle fas fa-minus-circle");
-            });
-        	
+            });        	
 			
 		}); 
      
