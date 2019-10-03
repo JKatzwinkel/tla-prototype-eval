@@ -21,6 +21,12 @@ def subdictionaryFromLemmaID(lemmaID):
     return subdict 
     
 @register.filter(is_safe=True)
+def niceLineCount(lcStr):
+    if lcStr:
+        lcStr = lcStr.replace('lc', 'line')
+    return lcStr 
+    
+@register.filter(is_safe=True)
 def fixForRES(mdc):
     if mdc:
         mdc = mdc.replace('[', 'empty[shade]') # temporary workaround
