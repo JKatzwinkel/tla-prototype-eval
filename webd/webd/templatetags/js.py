@@ -23,8 +23,8 @@ def subdictionaryFromLemmaID(lemmaID):
 @register.filter(is_safe=True)
 def fixForRES(mdc):
     if mdc:
-        mdc = mdc.replace('[', '"["')
-        mdc = mdc.replace(']', '"]"')
+        mdc = mdc.replace('[', 'empty[shade]') # temporary workaround
+        #mdc = mdc.replace(']', '"]"') # darf nicht nochmal getauscht werden, sonst zerstört es die Ersetzung von "["
         mdc = mdc.replace('..', 'empty')
         mdc = mdc.replace('.', 'empty[width=0.5,height=0.5]')
         mdc = mdc.replace('//', 'empty[shade]')
