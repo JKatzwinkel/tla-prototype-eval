@@ -273,6 +273,10 @@ a span.lc:hover {
     font-size: 0.8em; 
     }
 
+.ling-glossing {
+    font-variant: small-caps; 
+    }
+	
 .translations {display:inline;}
 
 .translation-de {

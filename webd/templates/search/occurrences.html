@@ -120,9 +120,9 @@
                         {% endif %}
 					</li>
                     <li class="ling-glossing hide condensed">
-						##ling.gloss##<!-- ##Inhalt aktuell noch nicht in token mitgeliefert  -->
-					    {% if token.xxx %}
-                           {{token.xxx}}
+						<!--##ling.gloss##-->
+					    {% if token.flexcode %}
+                           {{token.flexcode|computeLingGlossing}}
                         {% else %}
                             &nbsp;
                         {% endif %}
