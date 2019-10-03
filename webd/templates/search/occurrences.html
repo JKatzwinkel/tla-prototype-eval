@@ -128,8 +128,8 @@
                         {% endif %}
 					</li>
                     <li class="flexcode hide condensed"> <!-- ##Achtung in 'glossing' steht BTS glossing, nicht ling. glossing  -->
-					    {% if token.glossing %} 
-                           {{token.glossing}}
+					    {% if token.flexcode %} 
+                           {{token.flexcode|verbalFlexcode}}
                         {% else %}
                             &nbsp;
                         {% endif %}
