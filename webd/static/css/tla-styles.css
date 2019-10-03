@@ -265,6 +265,16 @@ a span.lc:hover {
 	background-color: lightgrey;
 }
 
+.token-destruction_marker {
+	color: gray!important;
+    font-style: italic;
+}
+
+.token-lc {
+	color: black!important;
+    font-weight: bold;
+}
+
 .container-annotation .translation-de,
 .container-annotation .translation-en,
 .container-annotation .translation-fr,

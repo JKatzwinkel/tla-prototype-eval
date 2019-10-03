@@ -81,7 +81,7 @@
             <div class="container-annotation mt-2 mb-2">
                 {% for token in hit.sentence.tokens %}
                 <ul class="annotation-block {%if token.highlight%}highlight-{{token.highlight}}{%endif%}">
-                    <li class="word-id hide">  <!-- ### add class ### -->
+                    <li class="word-id hide"> 
 					    {% if token.id %}
 						   <button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{{token.id}}')"><span class="fas fa-clipboard"></span>Copy word ID</button>
                         {% else %}
@@ -97,7 +97,7 @@
                         {% endif %}
                        </canvas>
 					</li>
-                    <li class="transcription" {% if token.type == 'word' %}onclick="window.open('/view/lemma/{{token.lemma}}','_blank')"{% endif %}>
+                    <li class="transcription {%if token.type == 'destruction_marker'%}token-destruction_marker{%endif%} {%if token.type == 'lc'%}token-lc{%endif%}" {% if token.type == 'word' %}onclick="window.open('/view/lemma/{{token.lemma}}','_blank')"{% endif %}>
 					    {% if token.label %}
                            {{token.label|niceTransliteration}}
                         {% else %}
@@ -169,33 +169,34 @@
 			
             <div class="container-annotation-switch">
                 
-                    <!-- Lemma -->
-                    <h3 class="word bbaw-libertine">
-                        {% for token in hit.sentence.tokens %}
-                        <a{% if token.type == 'word' %} href="/view/lemma/{{token.lemma}}" target="_blank"{% endif %}>
-                            <span id="{{token.id}}" class="occ-tok {%if token.highlight%}highlight-{{token.highlight}}{%endif%} bbaw-libertine" {% if token.type == 'word' %}onclick="window.open('/view/lemma/{{token.lemma}}','_blank')"{% endif %}>
-                                    {% if token.label %}
-                                        {{token.label|niceTransliteration}}
-                                    {% endif %}
-                            </span>
-                        </a>
-                        {% endfor %}
-                    </h3>
-
+                    <!-- Hieroglyphs -->
                     <div class="hieroglyph mb-1">
                         {%for token in hit.sentence.tokens%}
                         <span class="glyphbox">
                             {%if token.glyphs%}
-                             <a{% if token.type == 'word' %} href="/view/lemma/{{token.lemma}}" target="_blank"{% endif %}>
+								{% if token.type == 'word' %}<a href="/view/lemma/{{token.lemma}}" target="_blank">{% endif %}
 								<canvas class="res occ-tok-glyphs {%if token.highlight%}highlight-{{token.highlight}}{%endif%}" title="{{token.glyphs}}">
 									{{token.glyphs|fixForRES}}
 								</canvas>
-							</a>
+								{% if token.type == 'word' %}</a>{% endif %}
                             {%endif%}
                         </span>
                         {%endfor%}
                     </div>
                 
+                    <!-- Transliteration -->
+                    <h3 class="word bbaw-libertine">
+                        {% for token in hit.sentence.tokens %}
+							{% if token.type == 'word' %}<a href="/view/lemma/{{token.lemma}}" target="_blank">{% endif %}
+                            <span id="{{token.id}}" class="occ-tok {%if token.highlight%}highlight-{{token.highlight}}{%endif%} {%if token.type == 'destruction_marker'%}token-destruction_marker{%endif%} {%if token.type == 'lc'%}token-lc{%endif%} bbaw-libertine" {% if token.type == 'word' %}onclick="window.open('/view/lemma/{{token.lemma}}','_blank')"{% endif %}>
+                                    {% if token.label %}
+                                        {{token.label|niceTransliteration}}
+                                    {% endif %}
+                            </span>
+							{% if token.type == 'word' %}</a>{% endif %}
+                        {% endfor %}
+                    </h3>
+
             </div> <!-- container-switch close -->
             
 				<!-- Translation DE -->
