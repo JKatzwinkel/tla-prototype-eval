@@ -122,14 +122,14 @@ def dict_search_query(**params):
             if 'transcription_enc' in params:
                 transcription_enc = params.get('transcription_enc')[0] if type(params.get('transcription_enc')) == list else params.get('transcription_enc')
                 if transcription_enc == 'mdc':
-                    translString = root.maketrans("'AaHxXSTDV", "ʾꜣꜥḥḫẖšṯḏṱ")
-                    root = root.translate(translString)
-                    root = root.replace("v", "h̭") 
-                    root = root.replace("u", "u̯") 
+                    translString = transcription.maketrans("'AaHxXSTDV", "ʾꜣꜥḥḫẖšṯḏṱ")
+                    transcription = transcription.translate(translString)
+                    transcription = transcription.replace("v", "h̭") 
+                    transcription = transcription.replace("u", "u̯") 
                     #Problem, dass i zwei Bedeutungen hat; Darf man dann bei MdC-Kodierung nicht gleichzeitig in hierogl und demot suchen
-                    #root = root.replace("i", "i̯") # Hieroglyphisch/Hieratisch
-                    root = root.replace("i", "ı͗") # Demotisch
-                    root = root.replace("'", "ı͗") # neue Empfehlung wäre i͗
+                    #transcription = transcription.replace("i", "i̯") # Hieroglyphisch/Hieratisch
+                    transcription = transcription.replace("i", "ı͗") # Demotisch
+                    transcription = transcription.replace("'", "ı͗") # neue Empfehlung wäre i͗
             clauses.append(
                 {
                     "match_phrase_prefix": {
