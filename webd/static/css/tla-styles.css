@@ -730,12 +730,11 @@ span.multiselect-native-select select {
 .predecessor:before {content: "Pred.";}
 .successor:before {content: "Succ.";}     
 .referencing:before {content: "Now";}
-.referencedBy:before {content: "Prev.";}
-.composedOf:before {content: "Part";}
-.composes:before {content: "Part of";}
-.contains:before {content: "Sub.";}
-.partOf:before {content: "Super.";}
-
+.referencedBy:before {content: "Prev.";}   /* Previously */
+.composedOf:before {content: "Part";} 
+.composes:before {content: "Part of";}   /* Achtung: Label 'Part of' nicht verwechseln mit Var. partOf */
+.contains:before {content: "Sub.";}     /* Subordinates */
+.partOf:before {content: "Super.";}  /* Superordinates */
 
 
 

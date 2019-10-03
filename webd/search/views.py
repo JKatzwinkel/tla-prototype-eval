@@ -433,7 +433,7 @@ def hit_tree(hits):
                 'referencedBy',
                 #'composedOf',
                 #'predecessor',
-                #'composes',
+                'composes',
                 'contains'
             ]
             for hid in hit.get('relations', {}).get(pred, [])

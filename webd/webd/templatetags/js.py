@@ -12,6 +12,15 @@ def js(obj):
     return mark_safe(json.dumps(obj))
     
 @register.filter(is_safe=True)
+def subdictionaryFromLemmaID(lemmaID):
+    subdict = '(error)'
+    if lemmaID[0] == 'd':
+        subdict = "Demotic"
+    elif lemmaID[0] >= '1' and lemmaID[0] <= '9':
+        subdict = "Hieroglyphic/Hieratic"
+    return subdict 
+    
+@register.filter(is_safe=True)
 def fixForRES(mdc):
     if mdc:
         mdc = mdc.replace('[', '"["')
