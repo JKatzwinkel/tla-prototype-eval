@@ -102,12 +102,8 @@
                 <div class="result-bg" id="{{hit.id}}" onclick="window.open('/view/lemma/{{hit.id}}','_self')">
 					<!-- Redaktionsstatus & Anzahl Occurences-->
 					<div class="pt-1">
-						<!--<div class="red-status float-right ml-2">
-							<span class="far fa-check-circle {% if hit.occurrences > 0 %}ok{% elif hit.revisionState == "published" %}pending{% else %}notok{% endif %}"></span>
-						</div>-->
                         <div class="icon red-status float-right ml-2">
 							<span class="{% if hit.revisionState == 'published' %}ok{% elif hit.revisionState == 'published-awaiting-review' %}pending{% elif hit.revisionState == 'published-obsolete' %}notok{% endif %}"/>
-							<!--<span class="{% if hit.occurrences > 0 %}ok{% elif hit.revisionState == "published" %}pending{% else %}notok{% endif %}"></span>-->
 						</div>
                         
 						{% if hit.occurrences > 0 %}
@@ -301,9 +297,9 @@
             </button>
           </div>
           <div class="modal-body">            
-              <a href="mailto:?subject=TLA,%20Occurences%20lemma%20{{params.lemma}}&amp;body=TLA, occurences lemma ID {{params.lemma}} ( {% for word in lemma.words %}{{word.transcription}} {% endfor %}), &lt;{{tlaBaseURL}}/search/occurrences?lemma={{params.lemma}}&gt;, in: {{tlaTitle}} &lt;{{tlaBaseURL}}&gt;, Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, ed. by {{tlaEditor}} (accessed: {{dateToday}})" class="btn btn-block btn-info" role="button"><span class="far fa-envelope"></span> E-mail citation</a> 
-              <a href="https://twitter.com/share?url={{tlaBaseURL}}/search/occurrences?lemma={{params.lemma}}" title="Twitter" class="btn btn-block btn-info" role="button" target="_blank"><span class="fab fa-twitter"></span> Twitter URL</a>
-              <a href="http://www.facebook.com/share.php?u={{tlaBaseURL}}/search/occurrences?lemma={{params.lemma}}" class="btn btn-block btn-info" role="button" target="_blank"><span class="fab fa-facebook"></span> Facebook</a> 
+              <a href="mailto:?subject=TLA,%20Search%20results&amp;body=TLA, Search results &lt;{{tlaBaseURL}}/search/dict?{%for param in params.lists%}{%for val in param.1%}{{param.0}}={{val}}{%if not forloop.last%}%26{%endif%}{%endfor%}{% if not forloop.last%}%26{%endif%}{%endfor%}&gt;, in: {{tlaTitle}} &lt;{{tlaBaseURL}}&gt;, Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, ed. by {{tlaEditor}}(accessed: {{dateToday}})" class="btn btn-block btn-info" role="button"><span class="far fa-envelope"></span> E-mail citation</a> 
+              <a href="https://twitter.com/share?url={{tlaBaseURL}}/search/dict?{%for param in params.lists%}{%for val in param.1%}{{param.0}}={{val}}{%if not forloop.last%}%26{%endif%}{%endfor%}{% if not forloop.last%}%26{%endif%}{%endfor%}" title="Twitter" class="btn btn-block btn-info" role="button" target="_blank"><span class="fab fa-twitter"></span> Twitter URL</a>
+              <a href="http://www.facebook.com/share.php?u={{tlaBaseURL}}/dict/occurrences?{%for param in params.lists%}{%for val in param.1%}{{param.0}}={{val}}{%if not forloop.last%}%26{%endif%}{%endfor%}{% if not forloop.last%}%26{%endif%}{%endfor%}" class="btn btn-block btn-info" role="button" target="_blank"><span class="fab fa-facebook"></span> Facebook</a> 
           </div>        
         </div>
       </div>
