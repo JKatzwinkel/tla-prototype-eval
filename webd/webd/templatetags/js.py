@@ -72,7 +72,26 @@ def niceRelationName(name):
     elif name == 'partOf':
         name = 'Superordinates'      
     return name
-    
+        
+@register.filter(is_safe=True)
+def niceQueryData(name):
+    dict = {
+        'script': 'Sub-dictionary',
+        'hieroglyphic': 'Hieroglyphic/Hieratic',
+        'demotic': 'Demotic',
+        'coptic': 'Coptic',
+        'transcription': 'Transliteration',
+        'transcription_enc': 'Encoding',
+        'unicode': 'Unicode',
+        'manuel_de_codage': 'Manuel de Codage',
+        'wc_type': 'Part of Speech' 
+        }
+    newName = dict.get(name)
+    if newName:
+        return newName
+    else:
+        return name
+        
 @register.filter(is_safe=True)
 def niceReviewState(name):
     dict = {

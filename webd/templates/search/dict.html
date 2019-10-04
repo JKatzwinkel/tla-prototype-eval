@@ -49,9 +49,9 @@
             <h2 class="id mt-1">Search results</h2> 
             <p class="ml-3">Query: 
             {%for param in params.lists%} 
-				{{param.0}} = 
+				{{param.0|niceQueryData}} = 
 				{%for val in param.1%} 
-					"<span class="bbaw-libertine">{{val}}</span>"{% if not forloop.last%} /{%endif%} 
+					"<span class="bbaw-libertine">{{val|niceQueryData}}</span>"{% if not forloop.last%} /{%endif%} 
 				{%endfor%}
 				{% if not forloop.last%}; {%endif%}
 			{%endfor%}

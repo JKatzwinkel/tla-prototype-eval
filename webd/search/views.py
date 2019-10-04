@@ -121,7 +121,7 @@ def dict_search_query(**params):
         if len(transcription.strip()) > 0:
             if 'transcription_enc' in params:
                 transcription_enc = params.get('transcription_enc')[0] if type(params.get('transcription_enc')) == list else params.get('transcription_enc')
-                if transcription_enc == 'mdc':
+                if transcription_enc == 'manuel_de_codage':
                     translString = transcription.maketrans("'AaHxXSTDV", "ʾꜣꜥḥḫẖšṯḏṱ")
                     transcription = transcription.translate(translString)
                     transcription = transcription.replace("v", "h̭") 
@@ -149,7 +149,7 @@ def dict_search_query(**params):
         if len(root.strip()) > 0:
             if 'root_enc' in params:
                 root_enc = params.get('root_enc')[0] if type(params.get('root_enc')) == list else params.get('root_enc')
-                if root_enc == 'mdc':
+                if root_enc == 'manuel_de_codage':
                     translString = root.maketrans("'AaHxXSTDV", "ʾꜣꜥḥḫẖšṯḏṱ")
                     root = root.translate(translString)
                     root = root.replace("v", "h̭") 
@@ -180,13 +180,13 @@ def dict_search_query(**params):
                 }
             )
     if 'script' in params:
-        if ('h' in params.get('script')) ^ ('d' in params.get('script')):
+        if ('hieroglyphic' in params.get('script')) ^ ('demotic' in params.get('script')):
             query = {
                 "prefix": {
                     "id": "d"
                 }
             }
-            query['predicate'] = 'must' if 'd' in params.get('script') else 'must_not'
+            query['predicate'] = 'must' if 'demotic' in params.get('script') else 'must_not'
             clauses.append(query)
     if 'translation' in params:
         clauses.append(
