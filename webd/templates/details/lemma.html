@@ -50,7 +50,8 @@
 	<div class="row search-entries detail">
 	<!-- Suchergebnis -->		
 		<div class="col-sm-12 col-lg-8 result">	
-			<h4 class="id mt-1">Lemma ID {{lemma.id}} ({%for word in lemma.words%}{{word.transcription}}{% if not forloop.last%} {%endif%}{%endfor%})<span class="Z3988" title="{{coins}}"></span></h4>
+            <p>Dictionary entry</p> 
+			<h2 class="id mt-1">Lemma ID {{lemma.id}} (<span class="bbaw-libertine">{%for word in lemma.words%}{{word.transcription}}{% if not forloop.last%} {%endif%}{%endfor%}</span>)<span class="Z3988" title="{{coins}}"></span></h2>
 			<span class="solo-icon red-status float-right"><span class="fa-check-circle {% if lemma.revisionState == 'published' %}ok{% elif lemma.revisionState == 'published-awaiting-review' %}pending{% elif lemma.revisionState == 'published-obsolete' %}notok{% endif %}"></span></span>
 		</div>
         

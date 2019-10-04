@@ -46,10 +46,16 @@
 	<!-- Suchergebnis + sortieren-->	
 	<div class="row search-entries">
 		<div class="col-sm-12 col-lg-8 result">
-            <p>Search results for</p> 
-            <h2 class="word bbaw-libertine mt-3"><mark>{{params.transcription}}</mark></h2>
-            
-            
+            <h2 class="id mt-1">Search results</h2> 
+            <p class="ml-3">Query: 
+            {%for param in params.lists%} 
+				{{param.0}} = 
+				{%for val in param.1%} 
+					"<span class="bbaw-libertine">{{val}}</span>"{% if not forloop.last%} /{%endif%} 
+				{%endfor%}
+				{% if not forloop.last%}; {%endif%}
+			{%endfor%}
+            </p>
 		</div>
         
         <div class="col-md-4 align-right align-baseline d-none d-lg-block">
