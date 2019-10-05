@@ -36,6 +36,8 @@ $(window).on('pageshow', function(){
     var key = wordClassTypesField.val();
     if (key in wordClasses && wordClasses[key] != null) {
       wordClassSubtypesField.empty();
+	  $('#word_class_subtypes').append(
+      '<option value="(any)">(any)</option>');
       wordClasses[key].forEach((subtype, index) => {
         $('#word_class_subtypes').append(
         '<option value="'+subtype+'">'+subtype+'</option>');
@@ -171,17 +173,18 @@ $(window).on('pageshow', function(){
 				  
 				  <!-- Word class -->			  
 				  <div class="form-group row">
-					<label for="inputWordClass" class="col-sm-12 col-lg-3 col-xl-2 col-form-label">Word class</label>
+					<label for="inputWordClass" class="col-sm-12 col-lg-3 col-xl-2 col-form-label">Part of Speech</label>
 					<div class="col-sm-12 col-lg-9 col-xl-10">
-						<select class="form-control" id="word_class_types" name="wc_type">
+						<select class="form-control" id="word_class_types" name="pos_type">
 							<option value="(any)">(any)</option>
 							{% for type, subtypes in word_classes.items%}
 							  <option value="{{type}}">{{type}}</option>
 							{%endfor%}
 						</select>					  
 					</div>
+					<label for="inputWordClass" class="col-sm-12 col-lg-3 col-xl-2 col-form-label">Sub-category</label>
 					<div class="col-sm-12 col-lg-9 col-xl-10">
-						<select class="form-control" id="word_class_subtypes" name="wc_subtype">
+						<select class="form-control" id="word_class_subtypes" name="pos_subtype">
 						</select>					  
 					</div>
 				  </div>

@@ -84,8 +84,8 @@ def niceQueryData(name):
         'transcription_enc': 'Encoding',
         'unicode': 'Unicode',
         'manuel_de_codage': 'Manuel de Codage',
-        'wc_type': 'Part of Speech', 
-        'wc_subtype': 'POS subtype' 
+        'pos_type': 'Part of Speech', 
+        'pos_subtype': 'POS subtype' 
         }
     newName = dict.get(name)
     if newName:

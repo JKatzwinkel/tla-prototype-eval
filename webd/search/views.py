@@ -175,7 +175,7 @@ def dict_search_query(**params):
             clauses.append(
                 {
                     "match": {
-                        "type": "root"
+                        "type": "root",
                     }
                 }
             )
@@ -198,6 +198,38 @@ def dict_search_query(**params):
                 }
                 for lang in params.get('lang', ['de'])
             ]
+        )
+    if 'pos_type' in params:
+        pos_type = params.get('pos_type')[0]
+        clauses.append(
+            {
+                "match_phrase_prefix": {
+                    "type": pos_type,
+                }
+            }
+        )
+        clauses.append(
+            {
+                "term": {
+                    "type": pos_type,
+                }
+            }
+        )
+    if 'pos_subtype' in params:
+        pos_subtype = params.get('pos_subtype')[0]
+        clauses.append(
+            {
+                "match_phrase_prefix": {
+                    "subtype": pos_subtype,
+                }
+            }
+        )
+        clauses.append(
+            {
+                "term": {
+                    "subtype": pos_subtype,
+                }
+            }
         )
     q = build_query(*clauses)
     print(q)
