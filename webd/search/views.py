@@ -150,8 +150,10 @@ def dict_search_query(**params):
             if 'root_enc' in params:
                 root_enc = params.get('root_enc')[0] if type(params.get('root_enc')) == list else params.get('root_enc')
                 if root_enc == 'manuel_de_codage':
+                    #nicht zusammengesetzte Unicode-Zeichen
                     translString = root.maketrans("'AaHxXSTDV", "ʾꜣꜥḥḫẖšṯḏṱ")
                     root = root.translate(translString)
+                    #zusammengesetzte Unicode-Zeichen
                     root = root.replace("v", "h̭") 
                     root = root.replace("u", "u̯") 
                     #Problem, dass i zwei Bedeutungen hat; Darf man dann bei MdC-Kodierung nicht gleichzeitig in hierogl und demot suchen
@@ -161,7 +163,7 @@ def dict_search_query(**params):
             clauses.append(
                 {
                     "regexp": {
-                        "name": TLAWildcardToRegEx(root),
+                        "name": TLAWildcardToRegEx(root), ## Problem: zusammengesetzte Unicode-Zeichen werden in "[  ]" nicht wie ein Zeichen benahdelt; H̱nm wird nicht erkannt (weil zusammengesetzt?) 
                     }
                 }
             )
@@ -542,14 +544,23 @@ tlaEditor = "Berlin-Brandenburgische Akademie der Wissenschaften & Sächsische A
 tlaPublisher = "Berlin-Brandenburgische Akademie der Wissenschaften"
 tlaBaseURL = "http://tla.bbaw.de"
 
-def sortTranslit(sortString):
+def sortTranslitStr(sortString):
+    # zusammengesetzte Großbuchstaben in Kleinbuchstaben verwandeln
+    sortString = sortString.replace('H̱', 'ẖ') 
+    sortString = sortString.replace('H̭͗', 'h̭') 
+    # Groß- in Kleinbuchstaben verwandeln
     sortString = sortString.lower()
-    translString = sortString.maketrans(".ꜣʾjïyꜥwbpfmnrhḥḫẖzsšqkgtṯṱdḏ-", "ABCDFHJKLMNOPQRSTUVWXYZabcdefg")
+    # Transliterationsalphabet in Pseudoalphabet verwandeln, nur unzusammengesetzte
+    translString = sortString.maketrans(".ꜣʾjïyꜥwbpfmnrhḥḫẖzsšqkgtṯṱdḏ-", "ABCDFHIJLMNOPQRSTUWXYZabcdefgh")
     sortString = sortString.translate(translString) 
+    # restliche, zusammengesetzte Kleinbuchstaben in Pseudoalphabet verwandeln
     sortString = sortString.replace('ı͗', 'E') 
     sortString = sortString.replace('i̯', 'G') 
-    sortString = sortString.replace('u̯', 'I')
-    ### Problem §§§[i̯j] gibt §§[i̯j] zurück?!
+    sortString = sortString.replace('u̯', 'K')
+    sortString = sortString.replace('h̭', 'V')
+    # entspricht Sortierfolge 
+    # .ꜣʾjı͗ïi̯yꜥwu̯bpfmnrhḥḫẖh̭zsšqkgtṯṱdḏ-
+    # ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefgh
     return sortString
 
 @require_http_methods(["GET"])
@@ -566,7 +577,7 @@ def search_dict(request):
     count = hits.get('total')
     hits = store.hits_contents(hits)
     hits = hit_tree(hits)
-    hits = sorted(hits, key=lambda items: sortTranslit(items[2]['name']))
+    hits = sorted(hits, key=lambda items: sortTranslitStr(items[2]['name']))
     return render(
         request,
         'search/dict.html',
