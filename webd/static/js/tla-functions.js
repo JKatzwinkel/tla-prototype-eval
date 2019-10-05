@@ -39,10 +39,48 @@ function copyStringToClipboard (str) {
        document.body.removeChild(el);
     }
 	
+function getCookie(Bezeichner) {
+  var Wert = "";
+  if (document.cookie) {
+    var Wertstart = document.cookie.indexOf("=") + 1;
+    var Wertende = document.cookie.indexOf(";");
+    if (Wertende == -1) {
+      Wertende = document.cookie.length;
+	}
+	if (document.cookie.substring(0, Wertstart-1) == Bezeichner) {
+		Wert = document.cookie.substring(Wertstart, Wertende);
+	}
+  }
+  return Wert;
+}
 
+function setCookie(Bezeichner, Wert, Verfall) {
+  var jetzt = new Date();
+  var Auszeit = new Date(jetzt.getTime() + Verfall);
+  document.cookie = Bezeichner + "=" + Wert + ";expires=" + Auszeit.toGMTString() + ";path=/;";
+}
 
 function init() {	
-// Show/Hide - Buttons
+
+    // Cookie Alert ausblenden
+
+	  var cookieAcceptanceState = getCookie("CookiePolicy");
+	  if (cookieAcceptanceState == "accepted") {
+		  $('.cookie-container').addClass('d-none');
+		  var ausgabe = document.getElementById('info');
+		  ausgabe.innerHTML = '(Cookie '+cookieAcceptanceState+')';
+	  }
+	
+    $('.cookie-ok').click(function()  {
+           $('.cookie-container').addClass('d-none');
+            setCookie("CookiePolicy", "accepted", 1000 * 60 * 60 * 24 * 365);
+            });
+		
+    $('.cookie-dismissed').click(function()  {
+           $('.cookie-container').addClass('d-none');
+            });
+			
+	// Show/Hide - Buttons
     
     // .sidebar
 		$('html').not('#sidebar').click(function (e) {
@@ -303,12 +341,6 @@ function init() {
             $('.show-comment-button').removeClass('d-none');
             });
         
-    // Cookie Alert ausblenden
-    $('.cookie-ok').click(function()  {
-           $('.cookie-container').addClass('d-none');
-            
-            });
-		
 		    
 	// Headroom 
 	    $(function() {
