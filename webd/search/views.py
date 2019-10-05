@@ -116,9 +116,9 @@ def dict_search_query(**params):
     q = {"query": {"bool": {"must": [], "must_not": [], "should": []}}}
     clauses = []
     if 'transcription' in params:
-        transcription = params.get('transcription')[0] if type(
-            params.get('transcription')) == list else params.get('transcription')
-        if len(transcription.strip()) > 0:
+        transcription = params.get('transcription')[0] if type(params.get('transcription')) == list else params.get('transcription')
+        transcription = transcription.strip()
+        if len(transcription) > 0:
             if 'transcription_enc' in params:
                 transcription_enc = params.get('transcription_enc')[0] if type(params.get('transcription_enc')) == list else params.get('transcription_enc')
                 if transcription_enc == 'manuel_de_codage':
@@ -139,7 +139,8 @@ def dict_search_query(**params):
             )
     if 'root' in params:
         root = params.get('root')[0] if type(params.get('root')) == list else params.get('root')
-        if len(root.strip()) > 0:
+        root = root.strip()
+        if len(root) > 0:
             if 'root_enc' in params:
                 root_enc = params.get('root_enc')[0] if type(params.get('root_enc')) == list else params.get('root_enc')
                 if root_enc == 'manuel_de_codage':
@@ -175,19 +176,22 @@ def dict_search_query(**params):
             query['predicate'] = 'must' if 'demotic' in params.get('script') else 'must_not'
             clauses.append(query)
     if 'translation' in params:
-        clauses.append(
-            [
-                {
-                    "match_phrase_prefix": {
-                        "translations.{}".format(lang): params.get('translation')[0],
+        transl = params.get('translation')[0]
+        transl = transl.strip()
+        if transl != '':
+            clauses.append(
+                [
+                    {
+                        "match_phrase_prefix": {
+                            "translations.{}".format(lang): transl,
+                        }
                     }
-                }
-                for lang in params.get('lang', ['de'])
-            ]
-        )
+                    for lang in params.get('lang', ['de'])
+                ]
+            )
     if 'pos_type' in params:
         pos_type = params.get('pos_type')[0]
-        if pos_type != '(any)':
+        if pos_type != '' and pos_type != '(any)':
             clauses.append(
                 {
                     "term": {
@@ -197,7 +201,7 @@ def dict_search_query(**params):
             )
     if 'pos_subtype' in params:
         pos_subtype = params.get('pos_subtype')[0]
-        if pos_subtype != '(any)':
+        if pos_subtype != '' and pos_subtype != '(any)':
             clauses.append(
                 {
                     "term": {
@@ -207,13 +211,26 @@ def dict_search_query(**params):
             )
     if 'bibliography' in params:
         bib = params.get('bibliography')[0]
-        clauses.append(
-            {
-                "match_phrase_prefix": {
-                    "passport.bibliography.bibliographical_text_field": bib,
+        bib = bib.strip()
+        if bib != '':
+            clauses.append(
+                {
+                    "match_phrase_prefix": {
+                        "passport.bibliography.bibliographical_text_field": bib,
+                    }
                 }
-            }
-        )
+            )
+    if 'lemma_id' in params:
+        lemma_id = params.get('lemma_id')[0]
+        lemma_id = lemma_id.strip()
+        if lemma_id != '':
+            clauses.append(
+                {
+                    "term": {
+                        "id": lemma_id,
+                    }
+                }
+            )
     q = build_query(*clauses)
     print(q)
     return q

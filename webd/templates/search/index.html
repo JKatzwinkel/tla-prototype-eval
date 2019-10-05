@@ -157,23 +157,9 @@ $(window).on('pageshow', function(){
 						<small class="form-text text-muted pl-2 pt-1">You may encode a Regular Expression.</small>
 					</div>
 				  </div>
-
-             
-              <!-- Translation -->			  
-				  <div class="form-group row bg-grey">
-					<label for="Translation" class="col-sm-12 col-lg-3 col-xl-2 col-form-label">Translation</label>
-					<div class="col-sm-12 col-lg-9 col-xl-10">
-                        <input type="text" class="form-control mb-3 mdb-select colorful-select dropdown-primary md-form" id="dict-search-translation" name="translation" multiple searchable="Search here..">
-                        <select class="form-control" id="dict-search-translation" name="lang"> 						
-						    <option value="de">German</option>						
-						    <option value="en">English</option>						
-						    <option value="fr">French</option>    
-						</select>           
-					</div>
-				  </div>
 				  
 				  <!-- Word class -->			  
-				  <div class="form-group row">
+				  <div class="form-group row bg-grey">
 					<label for="inputWordClass" class="col-sm-12 col-lg-3 col-xl-2 col-form-label">Part of Speech</label>
 					<div class="col-sm-12 col-lg-9 col-xl-10">
 						<select class="form-control" id="word_class_types" name="pos_type">
@@ -187,14 +173,6 @@ $(window).on('pageshow', function(){
 					<div class="col-sm-12 col-lg-9 col-xl-10">
 						<select class="form-control" id="word_class_subtypes" name="pos_subtype">
 						</select>					  
-					</div>
-				  </div>
-				  
-				  <!-- Bibliography -->			  
-				  <div class="form-group row bg-grey">
-					<label for="Translation" class="col-sm-12 col-lg-3 col-xl-2 col-form-label">Bibliography</label>
-					<div class="col-sm-12 col-lg-9 col-xl-10">
-					  <input class="form-control" type="text" placeholder="" name="bibliography">
 					</div>
 				  </div>
 				  
@@ -216,18 +194,49 @@ $(window).on('pageshow', function(){
 						<small class="form-text text-muted pl-2 pt-1">You may encode a Regular Expression.</small>
 					</div>
 				  </div>
-				  
-				  <!-- Annotaion -->			  
+             
+              <!-- Translation -->			  
 				  <div class="form-group row bg-grey">
+					<label for="Translation" class="col-sm-12 col-lg-3 col-xl-2 col-form-label">Translation</label>
+					<div class="col-sm-12 col-lg-9 col-xl-10">
+                        <input type="text" class="form-control mb-3 mdb-select colorful-select dropdown-primary md-form" id="dict-search-translation" name="translation" multiple searchable="Search here..">
+                        <select class="form-control" id="dict-search-translation" name="lang"> 						
+						    <option value="de">German</option>						
+						    <option value="en">English</option>						
+						    <option value="fr">French</option>    
+						</select>           
+					</div>
+				  </div>
+
+				  
+				  <!-- Bibliography -->			  
+				  <div class="form-group row">
+					<label for="Translation" class="col-sm-12 col-lg-3 col-xl-2 col-form-label">Bibliography</label>
+					<div class="col-sm-12 col-lg-9 col-xl-10">
+					  <input class="form-control" type="text" placeholder="" name="bibliography">
+					</div>
+				  </div>
+
+
+				  <!-- Lemma ID -->			  
+				  <div class="form-group row bg-grey">
+					<label for="Lemma-ID" class="col-sm-12 col-lg-3 col-xl-2 col-form-label">Lemma ID</label>
+					<div class="col-sm-12 col-lg-9 col-xl-10">
+					  <input class="form-control" type="text" placeholder="" name="lemma_id">
+					</div>
+				  </div>
+				  
+				  <!-- Annotaion			  
+				  <div class="form-group row">
 					<label for="Word-Class" class="col-sm-12 col-lg-3 col-xl-2 col-form-label">Annotation type</label>
 					<div class="col-sm-12 col-lg-9 col-xl-10">
-						<select class="form-control" disabled>
+						<select class="form-control">
 						  <option></option>
 						  <option>Annotation 1</option>
 						  <option>Annotation 2</option>
 						</select>					  
 					</div>					
-				  </div>
+				  </div> -->
 				
 				</form>			  
 			</div>
