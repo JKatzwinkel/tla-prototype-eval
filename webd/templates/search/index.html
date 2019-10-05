@@ -174,7 +174,7 @@ $(window).on('pageshow', function(){
 					<label for="inputWordClass" class="col-sm-12 col-lg-3 col-xl-2 col-form-label">Word class</label>
 					<div class="col-sm-12 col-lg-9 col-xl-10">
 						<select class="form-control" id="word_class_types" name="wc_type">
-							<option value="">(any)</option>
+							<option value="(any)">(any)</option>
 							{% for type, subtypes in word_classes.items%}
 							  <option value="{{type}}">{{type}}</option>
 							{%endfor%}

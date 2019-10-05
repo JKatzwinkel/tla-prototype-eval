@@ -47,11 +47,11 @@
 	<div class="row search-entries">
 		<div class="col-sm-12 col-lg-8 result">
             <h2 class="id mt-1">Search results</h2> 
-            <p class="ml-3">Query: 
+            <p class="ml-3"><b>Query</b>: 
             {%for param in params.lists%} 
 				{{param.0|niceQueryData}} = 
 				{%for val in param.1%} 
-					"<span class="bbaw-libertine">{{val|niceQueryData}}</span>"{% if not forloop.last%} /{%endif%} 
+					"<span class="bbaw-libertine">{{val|niceQueryData|nicePOS|niceSubPOS}}</span>"{% if not forloop.last%} / {%endif%} 
 				{%endfor%}
 				{% if not forloop.last%}; {%endif%}
 			{%endfor%}
@@ -291,7 +291,7 @@
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Share these Results</h5>
+            <h5 class="modal-title" id="exampleModalLongTitle">Share these results</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>

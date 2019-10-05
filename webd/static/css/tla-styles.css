@@ -68,6 +68,11 @@ a.navbar-brand {
 	background-color: red;
 	}
 	
+.navbar h1 {
+	font-size: 1.5rem;
+	color: rgba(0, 0, 0, 0.5);
+}
+	
 .breadcrumb {
     background-color: #FFF;
 	padding: 1rem 0rem;
