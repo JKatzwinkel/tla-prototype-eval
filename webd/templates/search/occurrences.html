@@ -67,7 +67,7 @@
 	<!-- Trefferanzahl-->
 	<div class="row searchresult">		
 			<div class="col-sm-12 pt-3">
-			<p class="result-entries">Results: <b>{{start}} - {{end}}</b> of <b>{{hitcount}}</b> occurences in texts</p>
+			<p class="result-entries">Results: {%if hitcount > 0%}<b>{{start}} - {{end}}</b> of <b>{{hitcount}}</b> occurences in texts{%else%}<b>none</b>{%endif%}</p>
 			</div>
 	</div><!-- /.row -->  
 	  	

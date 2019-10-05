@@ -109,7 +109,13 @@ def build_query(*clauses, fields=None):
             )
     return query
 
-
+def TLAWildcardToRegEx(expr):
+    if expr:
+        expr = expr.replace('.', '\.')
+        expr = expr.replace('-', '\-')
+        expr = expr.replace('§', '.')
+    return expr
+    
 def dict_search_query(**params):
     """ generate elasticsearch query object with parameters as would be expected to come from
     the `dict-search` form in the `search/index.html` template. """
@@ -133,7 +139,7 @@ def dict_search_query(**params):
             clauses.append(
                 {
                     "regexp": {
-                        "name": transcription,
+                        "name": TLAWildcardToRegEx(transcription),
                     }
                 }
             )
@@ -155,7 +161,7 @@ def dict_search_query(**params):
             clauses.append(
                 {
                     "regexp": {
-                        "name": root,
+                        "name": TLAWildcardToRegEx(root),
                     }
                 }
             )

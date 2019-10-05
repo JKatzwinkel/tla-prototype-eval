@@ -77,7 +77,7 @@
 	<div class="row details-content">	
 		<div class="col-sm-12 col-lg-8">
 			<div class="lemma pt-3">
-				<p><strong>Hieroglyphic spellings:</strong>
+				<p><strong>Hieroglyphic spelling(s):</strong>
 				{% for word in lemma.words %}
 					{% if word.glyphs %}
 					<span class="glyphbox">
@@ -139,10 +139,13 @@
 				<p><strong>Attestation</strong>
 				<br><strong>Occurences:</strong>&nbsp;
 				{% for where, count in occurrences.items %}
-                
-				<a href="/search/occurrences?lemma={{lemma.id}}">
-					<button type="button" class="btn btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-right"></span>{{where}}: {{count}}</button>
-				</a>
+					{%if count > 0%}
+						<a href="/search/occurrences?lemma={{lemma.id}}">
+							<button type="button" class="btn btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-right"></span>{{where|niceCorpus}}: {{count}} instances</button>
+						</a>
+					{%else%}
+							<span class="fas fa-arrow-circle-right"></span>{{where|niceCorpus}}: No instances
+					{%endif%}
 				{% endfor %}
                 </p>
                 

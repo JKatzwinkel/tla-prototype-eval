@@ -27,6 +27,12 @@ def niceLineCount(lcStr):
     return lcStr 
     
 @register.filter(is_safe=True)
+def niceCorpus(corpus):
+    if corpus:
+        corpus = corpus.replace('corpus', 'Digital BTS corpus')
+    return corpus 
+    
+@register.filter(is_safe=True)
 def fixForRES(mdc):
     if mdc:
         mdc = mdc.replace('[', 'empty[shade]') # temporary workaround
@@ -48,7 +54,7 @@ def niceTransliteration(transl):
         transl = transl.replace('.du', ':DU')
         transl = transl.replace('.pl', ':PL')
     return transl
-
+    
 @register.filter(is_safe=True)
 def niceRelationName(name):
     if name == 'root':
