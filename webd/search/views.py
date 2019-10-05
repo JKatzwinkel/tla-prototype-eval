@@ -542,6 +542,15 @@ tlaEditor = "Berlin-Brandenburgische Akademie der Wissenschaften & Sächsische A
 tlaPublisher = "Berlin-Brandenburgische Akademie der Wissenschaften"
 tlaBaseURL = "http://tla.bbaw.de"
 
+def sortTranslit(sortString):
+    sortString = sortString.lower()
+    translString = sortString.maketrans(".ꜣʾjïyꜥwbpfmnrhḥḫẖzsšqkgtṯṱdḏ-", "ABCDFHJKLMNOPQRSTUVWXYZabcdefg")
+    sortString = sortString.translate(translString) 
+    sortString = sortString.replace('ı͗', 'E') 
+    sortString = sortString.replace('i̯', 'G') 
+    sortString = sortString.replace('u̯', 'I')
+    ### Problem §§§[i̯j] gibt §§[i̯j] zurück?!
+    return sortString
 
 @require_http_methods(["GET"])
 def search_dict(request):
@@ -557,6 +566,7 @@ def search_dict(request):
     count = hits.get('total')
     hits = store.hits_contents(hits)
     hits = hit_tree(hits)
+    hits = sorted(hits, key=lambda items: sortTranslit(items[2]['name']))
     return render(
         request,
         'search/dict.html',
