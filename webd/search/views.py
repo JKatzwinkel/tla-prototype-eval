@@ -132,14 +132,7 @@ def dict_search_query(**params):
                     transcription = transcription.replace("'", "ı͗") # neue Empfehlung wäre i͗
             clauses.append(
                 {
-                    "match_phrase_prefix": {
-                        "name": transcription,
-                    }
-                }
-            )
-            clauses.append(
-                {
-                    "term": {
+                    "regexp": {
                         "name": transcription,
                     }
                 }
@@ -160,7 +153,7 @@ def dict_search_query(**params):
                     root = root.replace("'", "ı͗") # neue Empfehlung wäre i͗
             clauses.append(
                 {
-                    "match_phrase_prefix": {
+                    "regexp": {
                         "name": root,
                     }
                 }
@@ -168,13 +161,6 @@ def dict_search_query(**params):
             clauses.append(
                 {
                     "term": {
-                        "name": root,
-                    }
-                }
-            )
-            clauses.append(
-                {
-                    "match": {
                         "type": "root",
                     }
                 }
@@ -192,8 +178,8 @@ def dict_search_query(**params):
         clauses.append(
             [
                 {
-                    "match": {
-                        "translations.{}".format(lang): params.get('translation')[0]
+                    "match_phrase_prefix": {
+                        "translations.{}".format(lang): params.get('translation')[0],
                     }
                 }
                 for lang in params.get('lang', ['de'])
@@ -201,33 +187,30 @@ def dict_search_query(**params):
         )
     if 'pos_type' in params:
         pos_type = params.get('pos_type')[0]
-        clauses.append(
-            {
-                "match_phrase_prefix": {
-                    "type": pos_type,
+        if pos_type != '(any)':
+            clauses.append(
+                {
+                    "term": {
+                        "type": pos_type,
+                    }
                 }
-            }
-        )
-        clauses.append(
-            {
-                "term": {
-                    "type": pos_type,
-                }
-            }
-        )
+            )
     if 'pos_subtype' in params:
         pos_subtype = params.get('pos_subtype')[0]
+        if pos_subtype != '(any)':
+            clauses.append(
+                {
+                    "term": {
+                        "subtype": pos_subtype,
+                    }
+                }
+            )
+    if 'bibliography' in params:
+        bib = params.get('bibliography')[0]
         clauses.append(
             {
                 "match_phrase_prefix": {
-                    "subtype": pos_subtype,
-                }
-            }
-        )
-        clauses.append(
-            {
-                "term": {
-                    "subtype": pos_subtype,
+                    "passport.bibliography.bibliographical_text_field": bib,
                 }
             }
         )
