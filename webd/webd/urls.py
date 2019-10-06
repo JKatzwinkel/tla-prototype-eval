@@ -24,5 +24,6 @@ urlpatterns = [
         path('es/<str:index>/search/<str:query>', views.es_search),
         re_path(r'^$', search),
         path('search/', include('search.urls')),
-        path('view/', include('detail.urls')),
+        #path('view/', include('detail.urls')),
+        path('', include('detail.urls')),
 ]

@@ -82,7 +82,7 @@
 					{% if word.glyphs %}
 					<span class="glyphbox">
 						<canvas class="res" title="{{word.glyphs}}">
-							{{word.glyphs}}
+							{{word.glyphs|fixForRES}}
 						</canvas>
 					</span>
 					{% endif %}
@@ -95,7 +95,7 @@
 				<p><strong>Persistent Identifiers</strong>
 				<br><strong>Persistent lemma ID:</strong> {{lemma.id}} 
                 <button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{{lemma.id}}')"><span class="fas fa-clipboard"></span>Copy ID</button>
-				<br><strong>Persistent URL:</strong> {{tlaBaseURL}}/view/lemma/{{lemma.id}} <button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('TLA lemma ID {{lemma.id}} ({%for word in lemma.words%}{{word.transcription}}{% if not forloop.last%} {%endif%}{%endfor%}), &lt;{{tlaBaseURL}}/view/lemma/{{lemma.id}}&gt;, in: {{tlaTitle}} &lt;{{tlaBaseURL}}&gt;, Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, ed. by {{tlaEditor}} (accessed: {{dateToday}})');"><span class="fas fa-clipboard"></span>Copy citation</button>
+				<br><strong>Persistent URL:</strong> {{tlaBaseURL}}/lemma/{{lemma.id}} <button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('TLA lemma ID {{lemma.id}} ({%for word in lemma.words%}{{word.transcription}}{% if not forloop.last%} {%endif%}{%endfor%}), &lt;{{tlaBaseURL}}/lemma/{{lemma.id}}&gt;, in: {{tlaTitle}} &lt;{{tlaBaseURL}}&gt;, Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, ed. by {{tlaEditor}} (accessed: {{dateToday}})');"><span class="fas fa-clipboard"></span>Copy citation</button>
                 </p>
 			</div>
 
@@ -233,7 +233,7 @@
 								
 								<div class="lemma-rel {{where}}"></div> <!-- lemma-beziehung -->
 								
-								<div class="result-bg" id="{{hit.id}}" onclick="window.open('/view/lemma/{{hit.id}}','_self')">
+								<div class="result-bg" id="{{hit.id}}" onclick="window.open('/lemma/{{hit.id}}','_self')">
 									<!-- Redaktionsstatus & Anzahl Occurences-->
 									<div class="pt-1">
 										<div class="red-status float-right ml-2">
@@ -346,12 +346,12 @@
 			<div class="bg-light citation mt-5 mb-4">         
 				<p class="h6"><strong>Please cite as:</strong></p>
 					<!-- Version, Issue, Release-Date, heutiges Datum noch per globaler Variable holen -->
-				<blockquote>TLA lemma ID {{lemma.id}} ({%for word in lemma.words%}{{word.transcription}}{% if not forloop.last%} {%endif%}{%endfor%}), &lt;{{tlaBaseURL}}/view/lemma/{{lemma.id}}&gt;, 
+				<blockquote>TLA lemma ID {{lemma.id}} ({%for word in lemma.words%}{{word.transcription}}{% if not forloop.last%} {%endif%}{%endfor%}), &lt;{{tlaBaseURL}}/lemma/{{lemma.id}}&gt;, 
 					in: <i>{{tlaTitle}}</i> &lt;{{tlaBaseURL}}&gt;, 
 					Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, 
 					ed. by {{tlaEditor}} 
 					(accessed: {{dateToday}})</blockquote>
-				<button type="button" class="btn btn-secondary btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('TLA lemma ID {{lemma.id}} ({%for word in lemma.words%}{{word.transcription}}{% if not forloop.last%} {%endif%}{%endfor%}), &lt;{{tlaBaseURL}}/view/lemma/{{lemma.id}}&gt;, in: {{tlaTitle}} &lt;{{tlaBaseURL}}&gt;, Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, ed. by {{tlaEditor}} (accessed: {{dateToday}})');"><span class="fas fa-clipboard"></span>Copy citation</button>
+				<button type="button" class="btn btn-secondary btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('TLA lemma ID {{lemma.id}} ({%for word in lemma.words%}{{word.transcription}}{% if not forloop.last%} {%endif%}{%endfor%}), &lt;{{tlaBaseURL}}/lemma/{{lemma.id}}&gt;, in: {{tlaTitle}} &lt;{{tlaBaseURL}}&gt;, Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, ed. by {{tlaEditor}} (accessed: {{dateToday}})');"><span class="fas fa-clipboard"></span>Copy citation</button>
 			</div>  
             
             
@@ -465,9 +465,9 @@
             </button>
           </div>
           <div class="modal-body">            
-              <a href="mailto:?subject=TLA,%20Lemma%20{{lemma.id}}&amp;body=TLA lemma ID {{lemma.id}} ({%for word in lemma.words%}{{word.transcription}}{% if not forloop.last%} {%endif%}{%endfor%}), &lt;{{tlaBaseURL}}/view/lemma/{{lemma.id}}&gt;, in: {{tlaTitle}} &lt;{{tlaBaseURL}}&gt;, Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, ed. by {{tlaEditor}} (accessed: {{dateToday}})" class="btn btn-block btn-info" role="button"><span class="far fa-envelope"></span> E-mail citation</a> 
-              <a href="https://twitter.com/share?url={{tlaBaseURL}}/view/lemma/{{lemma.id}}" title="Twitter" class="btn btn-block btn-info" role="button" target="_blank"><span class="fab fa-twitter"></span> Twitter URL</a>
-              <a href="http://www.facebook.com/share.php?u={{tlaBaseURL}}/view/lemma/{{lemma.id}}" class="btn btn-block btn-info" role="button" target="_blank"><span class="fab fa-facebook"></span> Facebook</a> 
+              <a href="mailto:?subject=TLA,%20Lemma%20{{lemma.id}}&amp;body=TLA lemma ID {{lemma.id}} ({%for word in lemma.words%}{{word.transcription}}{% if not forloop.last%} {%endif%}{%endfor%}), &lt;{{tlaBaseURL}}/lemma/{{lemma.id}}&gt;, in: {{tlaTitle}} &lt;{{tlaBaseURL}}&gt;, Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, ed. by {{tlaEditor}} (accessed: {{dateToday}})" class="btn btn-block btn-info" role="button"><span class="far fa-envelope"></span> E-mail citation</a> 
+              <a href="https://twitter.com/share?url={{tlaBaseURL}}/lemma/{{lemma.id}}" title="Twitter" class="btn btn-block btn-info" role="button" target="_blank"><span class="fab fa-twitter"></span> Twitter URL</a>
+              <a href="http://www.facebook.com/share.php?u={{tlaBaseURL}}/lemma/{{lemma.id}}" class="btn btn-block btn-info" role="button" target="_blank"><span class="fab fa-facebook"></span> Facebook</a> 
           </div>
         </div>
       </div>

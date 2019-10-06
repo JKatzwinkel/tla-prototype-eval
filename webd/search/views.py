@@ -419,7 +419,8 @@ def populate_textword_occurrences(hits, **params):
             print('text id', text['id'])
             for path in text.get('paths', []):
                 for node in path:
-                    node["url"] = "/view/{}/{}".format(
+                    #node["url"] = "/view/{}/{}".format(
+                    node["url"] = "/{}/{}".format(
                         {
                             "BTSTCObject": "object",
                             "BTSText": "text",
