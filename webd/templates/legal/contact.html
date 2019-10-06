@@ -1,0 +1,110 @@
+{% extends "../base.html" %}
+{% load static %}
+{% load js %}
+
+{% block title %}TLA Contact{%endblock%}
+
+{% block content %}
+<!-- Page Content -->
+<div class="container content my-4">
+
+	<div class="row">
+		<!-- Breadcrumbs -->
+		<div class="col-12">
+			<nav aria-label="breadcrumb">
+			  <ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="#">Home</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Contact</li>
+			  </ol>
+			</nav>
+		</div>
+	</div><!-- /.row -->
+  
+	<div class="row search-entries detail">
+	<!-- Suchergebnis -->		
+		<div class="col-sm-12 col-lg-8 result">	
+			<h2 class="id mt-1">Contact<span class="Z3988" title="{{coins}}"></span></h2>
+		</div>
+        
+        <!--<div class="col-md-4 align-right align-baseline d-none d-lg-block">
+            <div class="functional-icons ml-3 ">
+              <a href="#" class="btn btn-light solo-icon" role="button" data-toggle="modal" data-target="#modal_sharing">Share&nbsp;&nbsp;<i class="fa fa-share-alt share-results"></i></a>              
+            </div>
+            
+            <div class="functional-icons ml-3 ">
+            <a href="#" class="btn btn-light solo-icon" role="button" data-toggle="modal" data-target="#modal_comments">Comment&nbsp;&nbsp;<i class="far fa-comment"></i></a>
+            </div>
+		</div>-->
+	</div>
+	<!-- /.row -->
+  
+  	
+	<!-- Content -->
+	<div class="row search my-4">
+		<div class="col-sm-12">
+			<h2>Bootstrap verwenden!</h2>
+			<p>hier finden sich die meisten Formatierungsmöglichkeiten, die Bootstrap für Textinhalte anbietet: <a href="http://holdirbootstrap.de/css/">http://holdirbootstrap.de/css</a> 
+			
+			<h5>Zwischenüberschrift</h5>
+			<p>	Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?</p>
+			<br>
+			
+			<h5>Text mit Bild</h5>
+			<figure class="figure img-fluid single-article-image">
+			  <img src="https://placehold.it/400x300&amp;text=Bild 400 x 300 px" alt="article image">
+			  <figcaption class="figure-caption">Bildunterschrift / &copy; 2019</figcaption>
+			</figure>
+			
+			<p>	Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure? Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?</p>
+			
+			
+			<br>
+			
+			<h5>Liste</h5>
+			<ul>
+				<li>Listenpunkt 1</li>
+				<li>Listenpunkt 2</li>
+				<li><strong>Listenpunkt 3:</strong> To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? </li>
+				<li>Listenpunkt 4</li>
+				<li>Listenpunkt 5</li>
+			</ul>
+			<br>
+			<h5>Tabelle</h5>
+			<table class="table table-striped">
+			  <thead>
+				<tr>
+				  <th>#</th>
+				  <th>Vorname</th>
+				  <th>Nachname</th>
+				  <th>Benutzername</th>
+				</tr>
+			  </thead>
+			  <tbody>
+				<tr>
+				  <th scope="row">1</th>
+				  <td>Mark</td>
+				  <td>Otto</td>
+				  <td>@mdo</td>
+				</tr>
+				<tr>
+				  <th scope="row">2</th>
+				  <td>Jacob</td>
+				  <td>Thornton</td>
+				  <td>@fat</td>
+				</tr>
+				<tr>
+				  <th scope="row">3</th>
+				  <td>Larry</td>
+				  <td>the Bird</td>
+				  <td>@twitter</td>
+				</tr>
+			  </tbody>
+			</table>
+		</div>
+	
+	
+	
+     
+	</div> <!-- /.row -->	  
+</div><!-- /.container Content -->  	
+{% endblock %}

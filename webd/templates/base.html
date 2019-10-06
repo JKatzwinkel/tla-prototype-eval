@@ -53,7 +53,7 @@
 	<!-- Navigation -->
 	<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
 		<div class="container">
-		<a class="navbar-brand" href="#">TLA</a><h1>Thesaurus Linguae Aegyptiae</h1>
+		<a class="navbar-brand" href="/">TLA</a><h1>Thesaurus Linguae Aegyptiae</h1>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -65,23 +65,23 @@
 		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">TLA</a>
 			<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-				<a class="dropdown-item" href="#">Introduction</a>
-				<a class="dropdown-item" href="#">Project</a>
-				<a class="dropdown-item" href="#">Collaboration</a>
-				<a class="dropdown-item" href="#">Licence</a>
+				<a class="dropdown-item" href="/info/introduction">Introduction</a>
+				<a class="dropdown-item" href="/info/project">Project</a>
+				<a class="dropdown-item" href="/info/collaboration">Collaboration</a>
+				<a class="dropdown-item" href="/info/licence">Licence</a>
 			</div>
 			</li>	
 		<li class="nav-item">
-					<a class="nav-link" href="#">Dictionary</a>
+					<a class="nav-link" href="/info/dictionary">Dictionary</a>
 				</li>
 		<li class="nav-item">
-				<a class="nav-link" href="#">Text Corpus</a>
+				<a class="nav-link" href="/info/text-corpus">Text Corpus</a>
+				</li>
+		<li class="nav-item" >
+				<a class="nav-link" href="/info/extras">Extras</a>
 				</li>
 		<li class="nav-item">
-				<a class="nav-link" href="#">Extras</a>
-				</li>
-		<li class="nav-item">
-				<a class="nav-link" href="#">Help</a>
+				<a class="nav-link" href="/help">Help</a>
 				</li>
 			</ul>
 		</div>
@@ -152,16 +152,16 @@
             </div>
 
             <div class="col-sm-4 col-lg-2 contact">
-                <a href="/contact">Contact</a> 
-                <br><a href="/legal-notice">Legal notice</a> 
-                <br><a href="/privacy-policy">Privacy policy</a> <span id="info">(Cookie not yet accepted)</span>	
+                <a href="/contact" target="_blank">Contact</a> 
+                <br><a href="/imprint" target="_blank">Imprint</a> 
+                <br><a href="/privacy-policy" target="_blank">Privacy policy</a> <span id="info">(Cookie not yet accepted)</span>	
             </div>
 
             <div class="footer-logo col-sm-6 col-lg-3">			
-                <a href="http://www.saw-leipzig.de/de"><img src="{% static "img/logo_saw.png" %}"></a>
+                <a href="http://www.saw-leipzig.de/de" target="_blank"><img src="{% static "img/logo_saw.png" %}"></a>
             </div>
             <div class="footer-logo col-sm-6 col-lg-3">
-                <a href="http://www.bbaw.de"><img src="{% static "img/logo_bbaw.png" %}"></a>	
+                <a href="http://www.bbaw.de" target="_blank"><img src="{% static "img/logo_bbaw.png" %}"></a>	
             </div>
 		</div>
 	</div>
