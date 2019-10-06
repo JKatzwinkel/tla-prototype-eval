@@ -248,7 +248,6 @@
 									
 									<!-- erste Zeile -->
 									<div> 
-										<a href="/view/lemma/{{hit.id}}" title="{%if pred%}{{pred}}{%endif%}"> <!-- lemma-beziehung -->
 										<h2 class="word bbaw-libertine">
 											{{hit.name}}
 										</h2>
@@ -268,10 +267,9 @@
 											</span>
 
 										<!-- Lemma ID -->
-										<span class="result-list-lemma-id">
+										<span class="lemma-id">
 											&nbsp; (ID {{hit.id}})
 										</span>
-										</a>
 									</div>
 									
 									 <!-- zweite Zeile -->
@@ -287,31 +285,43 @@
 										<!-- Translations -->
 										<!-- Translation DE -->
 										<span class="translations translation-de">
-											<span class="font-italic hide">[{{hit.type}}]</span><div class="lang-icon">DE</div>##translDE##
-											{%for translation in hit.translations.de%}
-											{{translation}}
-											{%endfor%}
+											<span class="lang-icon">DE</span>
+											{%if hit.translations.de%}
+												{%for translation in hit.translations.de%}
+													{{translation}}
+												{%endfor%}
+											{%else%}
+												&mdash;
+											{%endif%}
 										</span>
 										<!-- Translation EN -->
 										<span class="translations translation-en">
-											<span class="font-italic hide">[{{hit.type}}]</span><div class="lang-icon">EN</div>##translEN##
-											{%for translation in hit.translations.en%}
-											{{translation}}
-											{%endfor%}					
+											<span class="lang-icon">EN</span>
+											{%if hit.translations.en%}
+												{%for translation in hit.translations.en%}
+													{{translation}}
+												{%endfor%}
+											{%else%}
+												&mdash;
+											{%endif%}
 										</span>
 										<!-- Translation FR -->
 										<span class="translations translation-fr">
-											<span class="font-italic hide">[{{hit.type}}]</span><span class="lang-icon">FR</span>##translFR##
-											{%for translation in hit.translations.fr%}
-											{{translation}}
-											{%endfor%}					
+											<span class="lang-icon">FR</span>
+											{%if hit.translations.fr%}
+												{%for translation in hit.translations.fr%}
+													{{translation}}
+												{%endfor%}					
+											{%else%}
+												&mdash;
+											{%endif%}
 										</span>	
 							   
 										<!-- Attestation time -->
-										<span class="result-list-attestation-time">(#att.time#{{hit.xxx}})</span> <!-- ##Variable noch nicht verfügbar -->
+										<span class="attestation-time">(#att.time#{{hit.xxx}})</span> <!-- ##Variable noch nicht verfügbar -->
 										
 										<!-- Bibliography -->
-										<span class="result-list-bibliography">(#bibl#{{hit.bibliography}})</span> <!-- ##Variable noch nicht verfügbar -->
+										<span class="bibliography-list">(#bibl#{{hit.bibliography}})</span> <!-- ##Variable noch nicht verfügbar -->
 									</div>
 								</div> 
 							<hr>
@@ -363,7 +373,7 @@
                     <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-fr-btn" type="button"><i class="fas"></i>French</button>
 				</div>
 				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestation-time-btn "><i class="fas"></i>Attestation time</button>
-				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail bibliography-btn "><i class="fas"></i>Bibliographical references </button>  
+				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail bibliography-list-btn "><i class="fas"></i>Bibliographical references </button>  
 				
 				<!-- Navigation 
 				<br>
@@ -396,7 +406,7 @@
                     <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-fr-btn" type="button"><i class="fas"></i>French</button>
 				</div>
 				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestation-time-btn "><i class="fas"></i>Attestation time</button>
-				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail bibliography-btn "><i class="fas"></i>Bibliographical references </button>  
+				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail bibliography-list-btn "><i class="fas"></i>Bibliographical references </button>  
 				
 				<!-- Navigation -->
 				<br>

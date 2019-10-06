@@ -128,22 +128,22 @@ a.navbar-brand {
 .result-list-item h2:hover .svg-inline--fa{
     color: white;
 	}
-.result-list-item a.result-list-bibliography{
+.result-list-item a.bibliography-list{
 	padding: 3px 1px 3px 10px;
     margin-left: -9px;
 	}
 	
-.result-list-item a.result-list-bibliography:hover{
+.result-list-item a.bibliography-list:hover{
     color: white;
 	background-color: red;
 	cursor: pointer;
 	}		
-.result-list-item a.result-list-bibliography .svg-inline--fa{
+.result-list-item a.bibliography-list .svg-inline--fa{
     margin-left: 0.5rem;
     color: grey;
 	vertical-align: -.1em;
 	}	
-.result-list-item a.result-list-bibliography:hover .svg-inline--fa{
+.result-list-item a.bibliography-list:hover .svg-inline--fa{
 	color: white;
 	}
 	
@@ -285,7 +285,8 @@ a span.lc:hover {
 .translation-de {
     font-weight: 500;    
 }
-.translation-fr, translation-en {
+.translation-fr, 
+.translation-en {
     font-weight: 300;    
 }
 
@@ -390,7 +391,7 @@ ul.annotation-block li.translations {
     }
 
 
-.translation .result-list-bibliography {
+.translation .bibliography-list {
     font-weight: 100!important; 
 }
 
@@ -732,8 +733,6 @@ span.multiselect-native-select select {
     font-size: .9em;
     color: grey;
     }
-.lemma-id {color:red;}
-
 
 .root:before {content: "Root";}
 .rootOf:before {content: "Root of";}
@@ -782,6 +781,10 @@ span.multiselect-native-select select {
     .footer-logo {margin-top: 2rem; text-align: center;}
     footer .contact {text-align: right;}
 
+	/* jede zeile in Suchergebnis einzeln */
+	.result-list-item-element {
+		display: block;
+	}
 }
 
 .cookie-container {    

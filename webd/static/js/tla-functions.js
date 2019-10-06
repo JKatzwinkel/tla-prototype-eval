@@ -119,92 +119,13 @@ function init() {
             $('.hieroglyph').slideToggle('slow');
         });	
 		
-	// .result-list-lemma-id
+	// .lemma-id
 		if (getCookie("LemmaIDVisible") == "true") {
 			$('i', '.lemma-id-btn').addClass("fa-plus-circle")
-			$('.result-list-lemma-id').show();
-			}
-		else {
-			$('i', '.lemma-id-btn').addClass("fa-minus-circle")
-			$('.result-list-lemma-id').hide();
-			}
-
-		$('html').not('.result-list-lemma-id').click(function (e) {
-		 if ($('.result-list-lemma-id').is(':visible') && !e.target == '.result-list-lemma-id') {
-                $('.result-list-lemma-id').slideUp('ease-out');
-            }
-        });
-        $('.lemma-id-btn').click(function (e) {
-			e.preventDefault();
-			if (getCookie("CookiePolicy") == "accepted") {
-				if ($('.result-list-lemma-id').is(':visible')) {
-					setCookie("LemmaIDVisible", "false");
-				} else {
-					setCookie("LemmaIDVisible", "true");
-				}
-			}
-            $('.result-list-lemma-id').slideToggle('slow');
-        });	
-
-	// .result-list-bibliography
-		if (getCookie("BibliographyVisible") == "true") {
-			$('i', '.bibliography-btn').addClass("fa-plus-circle")
-			$('.result-list-bibliography').show();
-			}
-		else {
-			$('i', '.bibliography-btn').addClass("fa-minus-circle")
-			$('.result-list-bibliography').hide();
-			}
-
-		$('html').not('.result-list-bibliography').click(function (e) {
-		 if ($('.result-list-bibliography').is(':visible') && !e.target == '.result-list-bibliography') {
-                $('.result-list-bibliography').slideUp('ease-out');
-            }
-        });
-        $('.bibliography-btn').click(function (e) {
-			e.preventDefault();
-			if (getCookie("CookiePolicy") == "accepted") {
-				if ($('.result-list-bibliography').is(':visible')) {
-					setCookie("BibliographyVisible", "false");
-				} else {
-					setCookie("BibliographyVisible", "true");
-				}
-			}
-            $('.result-list-bibliography').slideToggle('slow');
-        });	
-
-	// .result-list-attestation-time
-		if (getCookie("AttestationTimeVisible") == "true") {
-			$('i', '.attestation-time-btn').addClass("fa-plus-circle")
-			$('.result-list-attestation-time').show();
-			}
-		else {
-			$('i', '.attestation-time-btn').addClass("fa-minus-circle")
-			$('.result-list-attestation-time').hide();
-			}
-
-		$('html').not('.result-list-attestation-time').click(function (e) {
-		 if ($('.result-list-attestation-time').is(':visible') && !e.target == '.result-list-attestation-time') {
-                $('.result-list-attestation-time').slideUp('ease-out');
-            }
-        });
-        $('.attestation-time-btn').click(function (e) {
-			e.preventDefault();
-			if (getCookie("CookiePolicy") == "accepted") {
-				if ($('.result-list-attestation-time').is(':visible')) {
-					setCookie("AttestationTimeVisible", "false");
-				} else {
-					setCookie("AttestationTimeVisible", "true");
-				}
-			}
-            $('.result-list-attestation-time').slideToggle('slow');
-        });	
-		
-	// .lemma-id
-	/*	if (getCookie("LemmaIDVisible") == "true") {
 			$('.lemma-id').show();
 			}
 		else {
+			$('i', '.lemma-id-btn').addClass("fa-minus-circle")
 			$('.lemma-id').hide();
 			}
 
@@ -223,7 +144,61 @@ function init() {
 				}
 			}
             $('.lemma-id').slideToggle('slow');
-        });	*/
+        });	
+
+	// .bibliography-list
+		if (getCookie("BibliographyVisible") == "true") {
+			$('i', '.bibliography-list-btn').addClass("fa-plus-circle")
+			$('.bibliography-list').show();
+			}
+		else {
+			$('i', '.bibliography-list-btn').addClass("fa-minus-circle")
+			$('.bibliography-list').hide();
+			}
+
+		$('html').not('.bibliography-list').click(function (e) {
+		 if ($('.bibliography-list').is(':visible') && !e.target == '.bibliography-list') {
+                $('.bibliography-list').slideUp('ease-out');
+            }
+        });
+        $('.bibliography-list-btn').click(function (e) {
+			e.preventDefault();
+			if (getCookie("CookiePolicy") == "accepted") {
+				if ($('.bibliography-list').is(':visible')) {
+					setCookie("BibliographyVisible", "false");
+				} else {
+					setCookie("BibliographyVisible", "true");
+				}
+			}
+            $('.bibliography-list').slideToggle('slow');
+        });	
+
+	// .attestation-time
+		if (getCookie("AttestationTimeVisible") == "true") {
+			$('i', '.attestation-time-btn').addClass("fa-plus-circle")
+			$('.attestation-time').show();
+			}
+		else {
+			$('i', '.attestation-time-btn').addClass("fa-minus-circle")
+			$('.attestation-time').hide();
+			}
+
+		$('html').not('.attestation-time').click(function (e) {
+		 if ($('.attestation-time').is(':visible') && !e.target == '.attestation-time') {
+                $('.attestation-time').slideUp('ease-out');
+            }
+        });
+        $('.attestation-time-btn').click(function (e) {
+			e.preventDefault();
+			if (getCookie("CookiePolicy") == "accepted") {
+				if ($('.attestation-time').is(':visible')) {
+					setCookie("AttestationTimeVisible", "false");
+				} else {
+					setCookie("AttestationTimeVisible", "true");
+				}
+			}
+            $('.attestation-time').slideToggle('slow');
+        });	
 
  	// .word-id
 		if (getCookie("WordIDVisible") == "true") {
@@ -277,33 +252,6 @@ function init() {
 				}
 			}
             $('.word-class').slideToggle('slow');
-        });	
-		
- 	// .part-of-speech
-		if (getCookie("POSVisible") == "true") {
-			$('i', '.part-of-speech-btn').addClass("fa-plus-circle")
-			$('.part-of-speech').show();
-			}
-		else {
-			$('i', '.part-of-speech-btn').addClass("fa-minus-circle")
-			$('.part-of-speech').hide();
-			}
-
-		$('html').not('.part-of-speech').click(function (e) {
-		 if ($('.part-of-speech').is(':visible') && !e.target == '.part-of-speech') {
-                $('.part-of-speech').slideUp('ease-out');
-            }
-        });
-        $('.part-of-speech-btn').click(function (e) {
-			e.preventDefault();
-			if (getCookie("CookiePolicy") == "accepted") {
-				if ($('.part-of-speech').is(':visible')) {
-					setCookie("POSVisible", "false");
-				} else {
-					setCookie("POSVisible", "true");
-				}
-			}
-            $('.part-of-speech').slideToggle('slow');
         });	
 		
   	// .flexcode (TLA flexcode)

@@ -102,7 +102,7 @@
 						</div>
                         
 						{% if hit.occurrences > 0 %}
-						   <div class="number_occurences float-right">
+						    <div class="number_occurences float-right">
 								<p>Occ.:&nbsp;{{hit.occurrences}}</p>
 							</div>
 						{% endif %} 
@@ -110,35 +110,33 @@
 					
 					<!-- erste Zeile -->
 					<div> 
-						<a href="/view/lemma/{{hit.id}}" title="{%if pred%}{{pred}}{%endif%}"> <!-- lemma-beziehung -->
-						<h2 class="word bbaw-libertine">
+						<h2 class="result-list-item-element word bbaw-libertine">
 							{{hit.name}}
 						</h2>
 						<!-- Hieroglyph -->
-							<span class="hieroglyph">
-								{% for word in hit.words %}
-									{% if word.glyphs %}
-										<span class="glyphbox">
-											<!-- TODO font-size: 20px; vertical-align: -5px; in css verschieben -->
-											<canvas class="res" style="font-size: 20px; vertical-align: -5px;" title="{{word.glyphs}}">
-												{{word.glyphs}}
-											</canvas>
-										</span>
-									{% endif %}
-								{% endfor %}
-							</span>
+						<span class="result-list-item-element hieroglyph">
+							{% for word in hit.words %}
+								{% if word.glyphs %}
+									<span class="glyphbox">
+										<!-- TODO font-size: 20px; vertical-align: -5px; in css verschieben -->
+										<canvas class="res" style="font-size: 20px; vertical-align: -5px;" title="{{word.glyphs}}">
+											{{word.glyphs}}
+										</canvas>
+									</span>
+								{% endif %}
+							{% endfor %}
+						</span>
 
 						<!-- Lemma ID -->
-						<span class="result-list-lemma-id">
-							&nbsp; (ID {{hit.id}})
+						<span class="result-list-item-element lemma-id">
+							(ID {{hit.id}})
 						</span>
-						</a>
 					</div>
 					
 					 <!-- zweite Zeile -->
 					<div>
 						<!-- Wordclass -->
-						<span class="word-class">
+						<span class="result-list-item-element word-class">
 							<strong>
 								<span class="font-italic word-class-type">{{hit.type|nicePOS}}
 								{%if hit.subtype%}({{hit.subtype|niceSubPOS}}){%endif%}</span>
@@ -147,40 +145,52 @@
 						
 						<!-- Translations -->
 						<!-- Translation DE -->
-						<span class="translations translation-de">
-							<span class="font-italic hide">[{{hit.type}}]</span><div class="lang-icon">DE</div>
-							{%for translation in hit.translations.de%}
-							{{translation}}
-							{%endfor%}
+						<span class="result-list-item-element translations translation-de">
+							<span class="lang-icon">DE</span>
+							{%if hit.translations.de%}
+								{%for translation in hit.translations.de%}
+									{{translation}}
+								{%endfor%}
+							{%else%}
+								&mdash;
+							{%endif%}
 						</span>
 						<!-- Translation EN -->
-						<span class="translations translation-en">
-							<span class="font-italic hide">[{{hit.type}}]</span><div class="lang-icon">EN</div>
-							{%for translation in hit.translations.en%}
-							{{translation}}
-							{%endfor%}					
+						<span class="result-list-item-element translations translation-en">
+							<span class="lang-icon">EN</span>
+							{%if hit.translations.en%}
+								{%for translation in hit.translations.en%}
+									{{translation}}
+								{%endfor%}
+							{%else%}
+								&mdash;
+							{%endif%}
 						</span>
 						<!-- Translation FR -->
-						<span class="translations translation-fr">
-							<span class="font-italic hide">[{{hit.type}}]</span><span class="lang-icon">FR</span>
-							{%for translation in hit.translations.fr%}
-							{{translation}}
-							{%endfor%}					
+						<span class="result-list-item-element translations translation-fr">
+							<span class="lang-icon">FR</span>
+							{%if hit.translations.fr%}
+								{%for translation in hit.translations.fr%}
+									{{translation}}
+								{%endfor%}					
+							{%else%}
+								&mdash;
+							{%endif%}
 						</span>
 			   
 						<!-- Attestation time -->
-						<span class="result-list-attestation-time">(##att.time##{{hit.xxx}})</span> <!-- ##Variable noch nicht verfügbar -->
+						<span class="result-list-item-element attestation-time">(##att.time##{{hit.xxx}})</span> <!-- ##Variable noch nicht verfügbar -->
 						
 						<!-- Bibliography -->
-						<span class="result-list-bibliography">({{hit.bibliography}})</span>
+						<span class="result-list-item-element bibliography-list">({{hit.bibliography}})</span>
 					</div>
 				</div> <!-- /. result-bg --> 
 			
 				<!-- combination-search -->
-				<div class="combination-search ml-4 my-1 hide">
+				<!--<div class="result-list-item-element combination-search ml-4 my-1 hide">
 					<input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
 					  <label class="form-check-label" for="inlineCheckbox2">Select for Combination Search</label>
-				</div>
+				</div>-->
 				<hr>
             </div> <!-- /. result-list-item -->
 			
@@ -214,7 +224,7 @@
                     <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-fr-btn" type="button"><i class="fas"></i>French</button>
 				</div>
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestation-time-btn "><i class="fas"></i>Attestation time</button>
-                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail bibliography-btn "><i class="fas"></i>Bibliographical references </button>                
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail bibliography-list-btn "><i class="fas"></i>Bibliographical references </button>                
                 	                
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail combination-search-btn" disabled><i class="fas"></i>Select for combination Search</button>
 
@@ -259,7 +269,7 @@
                     <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-fr-btn" type="button"><i class="fas"></i>French</button>
 				</div>
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestation-time-btn "><i class="fas"></i>Attestation time</button>
-                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail bibliography-btn "><i class="fas"></i>Bibliographical references </button>                
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail bibliography-list-btn "><i class="fas"></i>Bibliographical references </button>                
                 	                
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail combination-search-btn"><i class="fas"></i>Select for combination search</button>
 

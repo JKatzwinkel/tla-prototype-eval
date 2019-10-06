@@ -200,19 +200,33 @@
 
             </div> <!-- container-switch close -->
             
+			<div class="translations">
 				<!-- Translation DE -->
-				{% for translation in hit.sentence.translations.de %}
-					<p class="translations translation-de"><span class="lang-icon">DE</span> {{translation}}</p>
-				{% endfor %}
-				<!-- Translation EN  -->
-				{% for translation in hit.sentence.translations.en %}
-					<p class="translations translation-en"><span class="lang-icon">EN</span> {{translation}}</p>
-				{% endfor %}
+				{% if hit.sentence.translations.de %}
+					{% for translation in hit.sentence.translations.de %}
+						<p class="translation-de"><span class="lang-icon">DE</span> {{translation}}</p>
+					{% endfor %}
+				{% else %}
+						<p class="translation-de"><span class="lang-icon">DE</span> &mdash;</p>
+				{% endif %}
+				<!-- Translation EN  -->				
+				{% if hit.sentence.translations.en %}
+					{% for translation in hit.sentence.translations.en %}
+						<p class="translation-en"><span class="lang-icon">EN</span> {{translation}}</p>
+					{% endfor %}
+				{% else %}
+						<p class="translation-en"><span class="lang-icon">EN</span> &mdash;</p>
+				{% endif %}
 				<!-- Translation FR -->
-				{% for translation in hit.sentence.translations.fr %}
-					<p class="translations translation-fr"><span class="lang-icon">FR</span> {{translation}}</p>
-				{% endfor %}
-
+				{% if hit.sentence.translations.fr %}
+					{% for translation in hit.sentence.translations.fr %}
+						<p class="translation-fr"><span class="lang-icon">FR</span> {{translation}}</p>
+					{% endfor %}
+				{% else %}
+						<p class="translation-fr"><span class="lang-icon">FR</span> &mdash;</p>
+				{% endif %}
+			</div>
+			
 				<div class="corpus-paths">
 					{%for path in hit.text.paths%}
 					<div class="corpus-path">
@@ -279,12 +293,10 @@
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail anno-block-btn"><i class="fas"></i>Switch annotation/block view</button>
 				
                 <div class="indented-buttons indented-buttons-annotation hide">
-                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-id-btn "><i class="fas"></i>Word ID</button><!--new-->
-                    <!--<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail lemma-id-btn "><i class="fas"></i>Lemma ID</button>-->
+                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-id-btn "><i class="fas"></i>Word ID</button>
                     <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-class-btn"><i class="fas"></i>Word class</button>
                     <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail ling-glossing-btn"><i class="fas"></i>Linguistic glossing</button>
                     <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail flexcode-btn"><i class="fas"></i>TLA flexcode</button>
-				    <!--<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestation-time-btn"><i class="fas"></i>Attestation time</button>-->
 				</div>	
 
                 <!-- start LANGUAGE buttons -->
@@ -331,12 +343,10 @@
                 <!-- start ANNOTATION buttons -->
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail anno-block-btn"><i class="fas"></i>Switch annotation/block view</button>
                 <div class="indented-buttons indented-buttons-annotation hide">
-                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-id-btn "><i class="fas"></i>Word ID</button><!--new-->
-                    <!--<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail lemma-id-btn "><i class="fas"></i>Lemma ID</button>-->
+                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-id-btn "><i class="fas"></i>Word ID</button>
                     <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-class-btn"><i class="fas"></i>Word class</button>
                     <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail ling-glossing-btn"><i class="fas"></i>Linguistic glossing</button>
                     <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail flexcode-btn"><i class="fas"></i>TLA flexcodes</button>
-				    <!--<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestation-time-btn"><i class="fas"></i>Attestation time</button>-->
 				</div>	
                 
                 <!-- start LANGUAGE buttons -->
@@ -360,26 +370,6 @@
             
         </div>
     </div>
-    
-    <!-- Modal for Sharing-- >
-    <div class="modal fade" id="modal_sharing" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Share this article</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">            
-              <a href="#" class="btn btn-block btn-info" role="button"><span class="far fa-envelope"></span>E-Mail</a> 
-              <a href="#" class="btn btn-block btn-info" role="button"><span class="fab fa-twitter"></span>Twitter</a> 
-              <a href="#" class="btn btn-block btn-info" role="button"><span class="fab fa-facebook"></span>Facebook</a> 
-          </div>
-          
-        </div>
-      </div>
-    </div>-->
     
      <!-- Modal for Sharing-->
     <div class="modal fade" id="modal_sharing" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
