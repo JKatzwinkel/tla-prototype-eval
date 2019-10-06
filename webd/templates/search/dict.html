@@ -129,7 +129,7 @@
 							</span>
 
 						<!-- Lemma ID -->
-						<span class="result-list-lemma-id hide">
+						<span class="result-list-lemma-id">
 							&nbsp; (ID {{hit.id}})
 						</span>
 						</a>
@@ -138,10 +138,10 @@
 					 <!-- zweite Zeile -->
 					<div>
 						<!-- Wordclass -->
-						<span class="word-class hide">
+						<span class="word-class">
 							<strong>
-								<span class="font-italic word-class-type">{{hit.type|nicePOS}}</span>
-								{%if hit.subtype%}<span class="word-class-type">({{hit.subtype|niceSubPOS}})</span>{%endif%}
+								<span class="font-italic word-class-type">{{hit.type|nicePOS}}
+								{%if hit.subtype%}({{hit.subtype|niceSubPOS}}){%endif%}</span>
 							</strong>
 						</span>
 						
@@ -154,14 +154,14 @@
 							{%endfor%}
 						</span>
 						<!-- Translation EN -->
-						<span class="translations translation-en hide">
+						<span class="translations translation-en">
 							<span class="font-italic hide">[{{hit.type}}]</span><div class="lang-icon">EN</div>
 							{%for translation in hit.translations.en%}
 							{{translation}}
 							{%endfor%}					
 						</span>
 						<!-- Translation FR -->
-						<span class="translations translation-fr hide">
+						<span class="translations translation-fr">
 							<span class="font-italic hide">[{{hit.type}}]</span><span class="lang-icon">FR</span>
 							{%for translation in hit.translations.fr%}
 							{{translation}}
@@ -169,10 +169,10 @@
 						</span>
 			   
 						<!-- Attestation time -->
-						<span class="result-list-attestation-time hide">(##att.time##{{hit.xxx}})</span> <!-- ##Variable noch nicht verfügbar -->
+						<span class="result-list-attestation-time">(##att.time##{{hit.xxx}})</span> <!-- ##Variable noch nicht verfügbar -->
 						
 						<!-- Bibliography -->
-						<span class="result-list-bibliography hide">({{hit.bibliography}})</span>
+						<span class="result-list-bibliography">({{hit.bibliography}})</span>
 					</div>
 				</div> <!-- /. result-bg --> 
 			
@@ -206,16 +206,13 @@
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail hieroglyph-btn "><i class="fas fa-minus-circle"></i>Hieroglyphs</button>
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail lemma-id-btn "><i class="fas fa-plus-circle"></i>Lemma ID</button>
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-class-btn"><i class="fas fa-plus-circle"></i>Word class</button>
-                
                 <!-- start LANGUAGE buttons -->
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail languages-btn">Translation languages</button>                 
-				
                 <div class="indented-buttons indented-buttons-lang hide">
                     <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn-de" type="button"><i class="fas fa-minus-circle"></i>German</button>
                     <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn-en" type="button"><i class="fas fa-plus-circle"></i>English</button>
                     <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn-fr" type="button"><i class="fas fa-plus-circle"></i>French</button>
 				</div>
-                
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestation-time-btn "><i class="fas fa-plus-circle"></i>Attestation time</button>
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail bibliografical-btn "><i class="fas fa-plus-circle"></i>Bibliographical references </button>                
                 	                
@@ -252,20 +249,15 @@
 				</div>
 			
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail hieroglyph-btn "><i class="fas fa-minus-circle"></i>Hieroglyphs</button>
-            
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail lemma-id-btn "><i class="fas fa-plus-circle"></i>Lemma ID</button>
-            
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-class-btn"><i class="fas fa-plus-circle"></i>Word class</button>
-                
                 <!-- start LANGUAGE buttons -->
-                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail languages-btn">Translation languages</button>                 
-				
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail languages-btn">Translation languages</button>               
                 <div class="indented-buttons indented-buttons-lang hide">
                      <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn-de" type="button"><i class="fas fa-minus-circle"></i>German</button>
                     <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn-en" type="button"><i class="fas fa-plus-circle"></i>English</button>
                     <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn-fr" type="button"><i class="fas fa-plus-circle"></i>French</button>
 				</div>
-                
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestation-time-btn "><i class="fas fa-plus-circle"></i>Attestation time</button>
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail bibliografical-btn "><i class="fas fa-plus-circle"></i>Bibliographical references </button>                
                 	                

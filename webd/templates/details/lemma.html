@@ -109,7 +109,7 @@
 			<!-- POS -->
 			<div class="grammar">
 				<hr>
-				<p><strong>Part of Speech:</strong>&nbsp;
+				<p><strong>Word class:</strong>&nbsp;
 				<span>
 					{{lemma.type|nicePOS}}
 					{% if lemma.subtype %}
@@ -268,7 +268,7 @@
 											</span>
 
 										<!-- Lemma ID -->
-										<span class="result-list-lemma-id hide">
+										<span class="result-list-lemma-id">
 											&nbsp; (ID {{hit.id}})
 										</span>
 										</a>
@@ -277,44 +277,41 @@
 									 <!-- zweite Zeile -->
 									 <div>
 										<!-- Wordclass -->
-										<span class="word-class hide">
+										<span class="word-class">
 											<strong>
-												<span class="font-italic word-class-type">[{{hit.type}}]</span>
-												{%if hit.subtype%}<span class="word-class-subtype">({{hit.subtype}})</span>{%endif%}
+												<span class="font-italic word-class-type">{{hit.type|nicePOS}}
+												##subtype##{%if hit.subtype%}({{hit.subtype|niceSubPOS}}){%endif%}</span>
 											</strong>
 										</span>
 										
 										<!-- Translations -->
 										<!-- Translation DE -->
 										<span class="translations translation-de">
-											<span class="font-italic hide">[{{hit.type}}]</span>
-											#transl.de# <!-- ##Variable noch nicht verfügbar -->
+											<span class="font-italic hide">[{{hit.type}}]</span><div class="lang-icon">DE</div>##translDE##
 											{%for translation in hit.translations.de%}
-											<span class="translation">{{translation}}</span>
+											{{translation}}
 											{%endfor%}
 										</span>
 										<!-- Translation EN -->
-										<span class="translations translation-en hide">
-											#transl.en# <!-- ##Variable noch nicht verfügbar -->
-											<span class="font-italic hide">[{{hit.type}}]</span>
+										<span class="translations translation-en">
+											<span class="font-italic hide">[{{hit.type}}]</span><div class="lang-icon">EN</div>##translEN##
 											{%for translation in hit.translations.en%}
-											<span class="translation">{{translation}}</span>
+											{{translation}}
 											{%endfor%}					
 										</span>
 										<!-- Translation FR -->
-										<span class="translations translation-fr hide">
-											#transl.fr# <!-- ##Variable noch nicht verfügbar -->
-											<span class="font-italic hide">[{{hit.type}}]</span> 
+										<span class="translations translation-fr">
+											<span class="font-italic hide">[{{hit.type}}]</span><span class="lang-icon">FR</span>##translFR##
 											{%for translation in hit.translations.fr%}
-											<span class="translation">{{translation}}</span>
+											{{translation}}
 											{%endfor%}					
-										</span>
+										</span>	
 							   
 										<!-- Attestation time -->
-										<span class="result-list-attestation-time hide">(#att.time#{{hit.xxx}})</span> <!-- ##Variable noch nicht verfügbar -->
+										<span class="result-list-attestation-time">(#att.time#{{hit.xxx}})</span> <!-- ##Variable noch nicht verfügbar -->
 										
 										<!-- Bibliography -->
-										<span class="result-list-bibliography hide">(#bibl#{{hit.bibliography}})</span> <!-- ##Variable noch nicht verfügbar -->
+										<span class="result-list-bibliography">(#bibl#{{hit.bibliography}})</span> <!-- ##Variable noch nicht verfügbar -->
 									</div>
 								</div> 
 							<hr>

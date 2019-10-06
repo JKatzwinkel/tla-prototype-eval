@@ -279,18 +279,6 @@ a span.lc:hover {
 	color: black!important;
     font-weight: bold;
 }
-
-.container-annotation .translation-de,
-.container-annotation .translation-en,
-.container-annotation .translation-fr,
-.container-annotation .ling-glossing,
-.container-annotation .flexcode {
-    font-size: 0.8em; 
-    }
-
-.ling-glossing {
-    font-variant: small-caps; 
-    }
 	
 .translations {display:inline;}
 
@@ -329,6 +317,24 @@ a span.lc:hover {
     flex-flow: row wrap;    
     }
 
+.container-annotation .translation-de,
+.container-annotation .translation-en,
+.container-annotation .translation-fr,
+.container-annotation .ling-glossing,
+.container-annotation .flexcode,
+.container-annotation .word-class {
+    font-size: 0.8em; 
+    }
+
+.container-annotation .word-id  {
+    color: grey; 
+    font-size: .60em;
+}
+
+.container-annotation .ling-glossing {
+    font-variant: small-caps; 
+    }
+	
 ul.annotation-block  {   
     padding: 0;
     text-align: center;
@@ -371,15 +377,6 @@ ul.annotation-block li.translations {
     color: red;
 }
 
-.annotation-block .word-class  {
-    font-style: italic;    
-}
-
-.annotation-block .grammar, .part-of-speech  {
-    color: grey; 
-    font-size: .85em;
-}
-
 .languages-btn {margin-bottom: .5em;}
 
 .indented-buttons {margin: .5em 0;}
@@ -391,12 +388,6 @@ ul.annotation-block li.translations {
     background-color: #777;
     border-color: #777;
     }
-
-.word-id  {
-    color: grey; 
-    font-size: .65em;
-}
-
 
 
 .translation .result-list-bibliography {
