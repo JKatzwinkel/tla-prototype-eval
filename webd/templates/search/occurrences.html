@@ -78,7 +78,7 @@
             
         {% for hit in hits %}
         <div class="occ-list-item pt-1 pb-1" id="{{hit.occurence.id}}">
-        <div class="container-annotation-switch-anno hide">
+        <div class="container-annotation-switch-anno">
             <div class="container-annotation mt-2 mb-2">
                 {% for token in hit.sentence.tokens %}
                 <ul class="annotation-block {%if token.highlight%}highlight-{{token.highlight}}{%endif%}">
@@ -150,7 +150,7 @@
 								{{translation}}
 							{%endfor%}
                         {% else %}
-                            &mdash;
+                            &nbsp;
                         {% endif %}
 					</li>               
                     <li class="translations translation-fr"> <! -- ##Inhalt aktuell noch nicht in token mitgeliefert, gibt es nicht? -- >
@@ -159,7 +159,7 @@
 								{{translation}}
 							{%endfor%}
                         {% else %}
-                            &mdash;
+                            &nbsp;
                         {% endif %}
 					</li>                 -->
                 </ul>
@@ -273,27 +273,27 @@
 					</select>			  
 				</div>
 
-				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail hieroglyph-btn "><i class="fas fa-minus-circle"></i>Hieroglyphs</button>
+				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail hieroglyph-btn "><i class="fas"></i>Hieroglyphs</button>
 
                 <!-- start ANNOTATION buttons -->
-                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail anno-block-btn"><i class="fas fa-plus-circle"></i>Switch annotation/block view</button>
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail anno-block-btn"><i class="fas"></i>Switch annotation/block view</button>
 				
                 <div class="indented-buttons indented-buttons-annotation hide">
-                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-id-btn "><i class="fas fa-plus-circle"></i>Word ID</button><!--new-->
-                    <!--<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail lemma-id-btn "><i class="fas fa-plus-circle"></i>Lemma ID</button>-->
-                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-class-btn"><i class="fas fa-plus-circle"></i>Word class</button>
-                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail ling-glossing-btn"><i class="fas fa-plus-circle"></i>Linguistic glossing</button>
-                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail flexcode-btn"><i class="fas fa-plus-circle"></i>TLA flexcode</button>
-				    <!--<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestation-time-btn"><i class="fas fa-plus-circle"></i>Attestation time</button>-->
+                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-id-btn "><i class="fas"></i>Word ID</button><!--new-->
+                    <!--<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail lemma-id-btn "><i class="fas"></i>Lemma ID</button>-->
+                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-class-btn"><i class="fas"></i>Word class</button>
+                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail ling-glossing-btn"><i class="fas"></i>Linguistic glossing</button>
+                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail flexcode-btn"><i class="fas"></i>TLA flexcode</button>
+				    <!--<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestation-time-btn"><i class="fas"></i>Attestation time</button>-->
 				</div>	
 
                 <!-- start LANGUAGE buttons -->
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail languages-btn mt-2">Translation languages</button>                 
 				
                 <div class="indented-buttons indented-buttons-lang hide">
-                     <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn-de" type="button"><i class="fas fa-minus-circle"></i>German</button>
-                    <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn-en" type="button"><i class="fas fa-plus-circle"></i>English</button>
-                    <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn-fr" type="button"><i class="fas fa-plus-circle"></i>French</button>
+                     <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-de-btn" type="button"><i class="fas"></i>German</button>
+                    <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-en-btn" type="button"><i class="fas"></i>English</button>
+                    <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-fr-btn" type="button"><i class="fas"></i>French</button>
 				</div>
                 
 				<br>
@@ -326,26 +326,26 @@
 					</select>			  
 				</div>
 
-				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail hieroglyph-btn "><i class="fas fa-minus-circle"></i>Hieroglyphs</button>
+				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail hieroglyph-btn "><i class="fas"></i>Hieroglyphs</button>
                 
                 <!-- start ANNOTATION buttons -->
-                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail anno-block-btn"><i class="fas fa-plus-circle"></i>Switch annotation/block view</button>
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail anno-block-btn"><i class="fas"></i>Switch annotation/block view</button>
                 <div class="indented-buttons indented-buttons-annotation hide">
-                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-id-btn "><i class="fas fa-plus-circle"></i>Word ID</button><!--new-->
-                    <!--<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail lemma-id-btn "><i class="fas fa-plus-circle"></i>Lemma ID</button>-->
-                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-class-btn"><i class="fas fa-plus-circle"></i>Word class</button>
-                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail ling-glossing-btn"><i class="fas fa-plus-circle"></i>Linguistic glossing</button>
-                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail flexcode-btn"><i class="fas fa-plus-circle"></i>TLA flexcodes</button>
-				    <!--<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestation-time-btn"><i class="fas fa-plus-circle"></i>Attestation time</button>-->
+                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-id-btn "><i class="fas"></i>Word ID</button><!--new-->
+                    <!--<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail lemma-id-btn "><i class="fas"></i>Lemma ID</button>-->
+                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-class-btn"><i class="fas"></i>Word class</button>
+                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail ling-glossing-btn"><i class="fas"></i>Linguistic glossing</button>
+                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail flexcode-btn"><i class="fas"></i>TLA flexcodes</button>
+				    <!--<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestation-time-btn"><i class="fas"></i>Attestation time</button>-->
 				</div>	
                 
                 <!-- start LANGUAGE buttons -->
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail languages-btn">Translation languages</button>                 
 				
                 <div class="indented-buttons indented-buttons-lang hide">
-                     <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn-de" type="button"><i class="fas fa-minus-circle"></i>German</button>
-                    <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn-en" type="button"><i class="fas fa-plus-circle"></i>English</button>
-                    <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn-fr" type="button"><i class="fas fa-plus-circle"></i>French</button>
+                     <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-de-btn" type="button"><i class="fas"></i>German</button>
+                    <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-en-btn" type="button"><i class="fas"></i>English</button>
+                    <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-fr-btn" type="button"><i class="fas"></i>French</button>
 				</div>
 
 				<br>

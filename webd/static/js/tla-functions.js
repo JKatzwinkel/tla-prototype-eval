@@ -60,7 +60,7 @@ function setCookie(Bezeichner, Wert) {
 
 function init() {	
 
-    // Cookie Alert ausblenden
+    // Cookie Acceptance Banner ausblenden
 
 	  var cookieAcceptanceState = getCookie("CookiePolicy");
 	  if (cookieAcceptanceState == "accepted") {
@@ -94,9 +94,11 @@ function init() {
     
 		// .hieroglyph
 		if (getCookie("HieroglyphsVisible") == "false") {
+			$('i', '.hieroglyph-btn').addClass("fa-minus-circle")
 			$('.hieroglyph').hide();
 			}
 		else {
+			$('i', '.hieroglyph-btn').addClass("fa-plus-circle")
 			$('.hieroglyph').show();
 			}
 			
@@ -119,9 +121,11 @@ function init() {
 		
 	// .result-list-lemma-id
 		if (getCookie("LemmaIDVisible") == "true") {
+			$('i', '.lemma-id-btn').addClass("fa-plus-circle")
 			$('.result-list-lemma-id').show();
 			}
 		else {
+			$('i', '.lemma-id-btn').addClass("fa-minus-circle")
 			$('.result-list-lemma-id').hide();
 			}
 
@@ -144,9 +148,11 @@ function init() {
 
 	// .result-list-bibliography
 		if (getCookie("BibliographyVisible") == "true") {
+			$('i', '.bibliography-btn').addClass("fa-plus-circle")
 			$('.result-list-bibliography').show();
 			}
 		else {
+			$('i', '.bibliography-btn').addClass("fa-minus-circle")
 			$('.result-list-bibliography').hide();
 			}
 
@@ -155,7 +161,7 @@ function init() {
                 $('.result-list-bibliography').slideUp('ease-out');
             }
         });
-        $('.bibliografical-btn').click(function (e) {
+        $('.bibliography-btn').click(function (e) {
 			e.preventDefault();
 			if (getCookie("CookiePolicy") == "accepted") {
 				if ($('.result-list-bibliography').is(':visible')) {
@@ -169,9 +175,11 @@ function init() {
 
 	// .result-list-attestation-time
 		if (getCookie("AttestationTimeVisible") == "true") {
+			$('i', '.attestation-time-btn').addClass("fa-plus-circle")
 			$('.result-list-attestation-time').show();
 			}
 		else {
+			$('i', '.attestation-time-btn').addClass("fa-minus-circle")
 			$('.result-list-attestation-time').hide();
 			}
 
@@ -219,9 +227,11 @@ function init() {
 
  	// .word-id
 		if (getCookie("WordIDVisible") == "true") {
+			$('i', '.word-id-btn').addClass("fa-plus-circle")
 			$('.word-id').show();
 			}
 		else {
+			$('i', '.word-id-btn').addClass("fa-minus-circle")
 			$('.word-id').hide();
 			}
 
@@ -244,9 +254,11 @@ function init() {
 
 	// .word-class
 		if (getCookie("WordClassVisible") == "true") {
+			$('i', '.word-class-btn').addClass("fa-plus-circle")
 			$('.word-class').show();
 			}
 		else {
+			$('i', '.word-class-btn').addClass("fa-minus-circle")
 			$('.word-class').hide();
 		}
 
@@ -269,9 +281,11 @@ function init() {
 		
  	// .part-of-speech
 		if (getCookie("POSVisible") == "true") {
+			$('i', '.part-of-speech-btn').addClass("fa-plus-circle")
 			$('.part-of-speech').show();
 			}
 		else {
+			$('i', '.part-of-speech-btn').addClass("fa-minus-circle")
 			$('.part-of-speech').hide();
 			}
 
@@ -294,9 +308,11 @@ function init() {
 		
   	// .flexcode (TLA flexcode)
 		if (getCookie("TLAFlexcodeVisible") == "true") {
+			$('i', '.flexcode-btn').addClass("fa-plus-circle")
 			$('.flexcode').show();
 			}
 		else {
+			$('i', '.flexcode-btn').addClass("fa-minus-circle")
 			$('.flexcode').hide();
 			}
 
@@ -319,9 +335,11 @@ function init() {
 		
   	// .ling-glossing
 		if (getCookie("LingGlossingVisible") == "true") {
+			$('i', '.ling-glossing-btn').addClass("fa-plus-circle")
 			$('.ling-glossing').show();
 			}
 		else {
+			$('i', '.ling-glossing-btn').addClass("fa-minus-circle")
 			$('.ling-glossing').hide();
 			}
 
@@ -343,11 +361,40 @@ function init() {
         });	
 		
    // Translation Languages
+   
+    // Indented Language-Buttons
+		if (getCookie("LanguagesButtonsVisible") == "true") {
+			$('.indented-buttons-lang').show();
+			}
+		else {
+			$('.indented-buttons-lang').hide();
+			}
+
+        $('html').not('.languages-btn').click(function (e) {
+		 if ($('.indented-buttons-lang').is(':visible') && !e.target == '.indented-buttons-lang') {
+                $('.indented-buttons-lang').slideUp('ease-out');
+            }
+        });
+        $('.languages-btn').click(function (e) {
+			e.preventDefault();
+			if (getCookie("CookiePolicy") == "accepted") {
+				if ($('.indented-buttons-lang').is(':visible')) {
+					setCookie("LanguagesButtonsVisible", "false");
+				} else {
+					setCookie("LanguagesButtonsVisible", "true");
+				}
+			}
+            $('.indented-buttons-lang').slideToggle('slow');
+        });
+		
+		
 	// .translation-languages DE
 		if (getCookie("TranslationDEVisible") == "false") {
+			$('i', '.translation-de-btn').addClass("fa-minus-circle")
 			$('.translation-de').hide();
 			}
 		else {
+			$('i', '.translation-de-btn').addClass("fa-plus-circle")
 			$('.translation-de').show();
 			}
 
@@ -356,7 +403,7 @@ function init() {
                 $('.translation-de').slideUp('ease-out');                
             }
         });
-        $('.translation-languages-btn-de').click(function (e) {
+        $('.translation-de-btn').click(function (e) {
 			e.preventDefault();
 			if (getCookie("CookiePolicy") == "accepted") {
 				if ($('.translation-de').is(':visible')) {
@@ -372,9 +419,11 @@ function init() {
     
     // .translation-languages EN
 		if (getCookie("TranslationENVisible") == "true") {
+			$('i', '.translation-en-btn').addClass("fa-plus-circle")
 			$('.translation-en').show();
 			}
 		else {
+			$('i', '.translation-en-btn').addClass("fa-minus-circle")
 			$('.translation-en').hide();
 			}
 
@@ -384,7 +433,7 @@ function init() {
             }
         });
 
-        $('.translation-languages-btn-en').click(function (e) {
+        $('.translation-en-btn').click(function (e) {
 			e.preventDefault();
 			if (getCookie("CookiePolicy") == "accepted") {
 				if ($('.translation-en').is(':visible')) {
@@ -401,9 +450,11 @@ function init() {
     
     // .translation-languages FR
 		if (getCookie("TranslationFRVisible") == "true") {
+			$('i', '.translation-fr-btn').addClass("fa-plus-circle")
 			$('.translation-fr').show();
 			}
 		else {
+			$('i', '.translation-fr-btn').addClass("fa-minus-circle")
 			$('.translation-fr').hide();
 			}
 
@@ -413,7 +464,7 @@ function init() {
             }
         });
 
-        $('.translation-languages-btn-fr').click(function (e) {
+        $('.translation-fr-btn').click(function (e) {
 			e.preventDefault();
 			if (getCookie("CookiePolicy") == "accepted") {
 				if ($('.translation-fr').is(':visible')) {
@@ -453,18 +504,19 @@ function init() {
         
     // .anno-block-btn
 		if (getCookie("AnnotationBlockVisible") == "true") {
+			$('i', '.anno-block-btn').addClass("fa-plus-circle")
 			$('.container-annotation-switch-anno').show();
 			$('.container-annotation-switch-lines').hide();
 			$('.indented-buttons-annotation').show();
 			}
 		else {
+			$('i', '.anno-block-btn').addClass("fa-minus-circle")
 			$('.container-annotation-switch-anno').hide();
 			$('.container-annotation-switch-lines').show();
 			$('.indented-buttons-annotation').hide();
 			}
 
 		$('html').not('.anno-block-btn').click(function (e) {
-		        //console.log($(e.target).parent());
 		 if ($('.container-annotation-switch-anno').is(':visible') && !e.target == '.container-annotation-switch-anno') {
                 $('.container-annotation-switch-anno').slideUp('ease-out');
             }
@@ -497,17 +549,6 @@ function init() {
             $('.indented-buttons-annotation').slideToggle('slow');
         });*/
     
-    // Indented Language-Buttons
-        $('html').not('.languages-btn').click(function (e) {
-		        //console.log($(e.target).parent());
-		 if ($('.indented-buttons-lang').is(':visible') && !e.target == '.indented-buttons-lang') {
-                $('.indented-buttons-lang').slideUp('ease-out');
-            }
-        });
-        $('.languages-btn').click(function (e) {
-			e.preventDefault();
-            $('.indented-buttons-lang').slideToggle('slow');
-        });
     
 	// Show/Hide Comments
         
