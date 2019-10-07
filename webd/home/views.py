@@ -52,6 +52,13 @@ def homepage(request):
         request,
         'home/homepage.html',
         {
+            'tlaVersion': tlaVersion,
+            'tlaTitle': tlaTitle,
+            'tlaVersion': tlaVersion,
+            'tlaIssue': tlaIssue,
+            'tlaReleaseDate': tlaReleaseDate,
+            'tlaEditor': tlaEditor,
+            'tlaBaseURL': tlaBaseURL,
         }
     )
     
