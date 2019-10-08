@@ -73,7 +73,7 @@ tlaTitle = "Thesaurus Linguae Aegyptiae"
 tlaVersion = "19"
 tlaIssue = "1"
 tlaReleaseDate = "30.10.2019"
-tlaEditor = "Berlin-Brandenburgische Akademie der Wissenschaften & Sächsische Akademie der Wissenschaften"
+tlaEditor = "Berlin-Brandenburgische Akademie der Wissenschaften & Sächsische Akademie der Wissenschaften zu Leipzig"
 tlaPublisher = "Berlin-Brandenburgische Akademie der Wissenschaften"
 tlaBaseURL = "http://tla.bbaw.de"
 

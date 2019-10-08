@@ -18,64 +18,62 @@ from detail import views as detail_views
 RESULTS_PER_PAGE = 24
 
 WORD_CLASSES = {
-    "substantive": [
-        "substantive_masc",
-        "substantive_fem"],
-    "particle": [
-        "particle_enclitic",
-        "particle_nonenclitic"],
-    "root": [
-        "substantive_fem"],
-    "pronoun": [
-        "personal_pronoun",
-        "demonstrative_pronoun",
-        "interrogative_pronoun",
-        "relative_pronoun"],
-    "numeral": [
-        "cardinal",
-        "ordinal"],
-    "adverb": [
-        "prepositional_adverb"],
-    "preposition": None,
     "adjective": [
         "nisbe_adjective_preposition",
         "nisbe_adjective_substantive"],
-    "epitheton_title": [
-        "epith_king",
-        "epith_god",
-        "title"],
+    "adverb": [
+        "prepositional_adverb"],
     "entity_name": [
-        "place_name",
-        "org_name",
-        "person_name",
+        "artifact_name",
         "animal_name",
         "gods_name",
-        "artifact_name",
-        "kings_name"],
-    "undefined": [
-        "gods_name",
-        "substantive_masc"],
+        "kings_name",
+        "org_name",
+        "person_name",
+        "place_name"],
+    "interjection": None,
+    "substantive": [
+        "substantive_masc",
+        "substantive_fem"],
+    "numeral": [
+        "cardinal",
+        "ordinal"],
+    "particle": [
+        "particle_enclitic",
+        "particle_nonenclitic"],
+    "preposition": None,
+    "pronoun": [
+        "demonstrative_pronoun",
+        "interrogative_pronoun",
+        "personal_pronoun",
+        "relative_pronoun"],
+    "root": None,
+    "epitheton_title": [
+        "title",
+        "epith_god",
+        "epith_king"],
     "verb": [
-        "verb_caus_3-inf",
-        "verb_5-inf",
+        "verb_2-lit",
         "verb_3-lit",
-        "verb_3-inf",
-        "verb_6-lit",
-        "verb_caus_3-gem",
-        "verb_5-lit",
-        "verb_2-gem",
-        "verb_caus_4-lit",
-        "verb_caus_2-gem",
         "verb_4-lit",
-        "verb_caus_5-lit",
-        "verb_caus_3-lit",
+        "verb_5-lit",
+        "verb_6-lit",
+        "verb_2-gem",
         "verb_3-gem",
-        "verb_caus_2-lit",
-        "verb_irr",
+        "verb_3-inf",
         "verb_4-inf",
+        "verb_5-inf",
+        "verb_caus_2-lit",
+        "verb_caus_3-lit",
+        "verb_caus_4-lit",
+        "verb_caus_5-lit",
+        "verb_caus_2-gem",
+        "verb_caus_3-gem",
+        "verb_caus_3-inf",
         "verb_caus_4-inf",
-        "verb_2-lit"],
-    "interjection": None}
+        "verb_irr"],
+    "undefined": None,
+    }
 
 
 def build_query(*clauses, fields=None):
@@ -114,6 +112,8 @@ def TLAWildcardToRegEx(expr):
         expr = expr.replace('.', '\.')
         expr = expr.replace('-', '\-')
         expr = expr.replace('§', '.')
+        expr = expr.replace('(', '\(')
+        expr = expr.replace(')', '\)')
     return expr
     
 def dict_search_query(**params):
@@ -139,7 +139,7 @@ def dict_search_query(**params):
             clauses.append(
                 {
                     "regexp": {
-                        "name": TLAWildcardToRegEx(transcription),
+                        "name": TLAWildcardToRegEx(transcription)+"([\.].+)?",
                     }
                 }
             )
@@ -163,7 +163,7 @@ def dict_search_query(**params):
             clauses.append(
                 {
                     "regexp": {
-                        "name": TLAWildcardToRegEx(root), ## Problem: zusammengesetzte Unicode-Zeichen werden in "[  ]" nicht wie ein Zeichen benahdelt; H̱nm wird nicht erkannt (weil zusammengesetzt?) 
+                        "name": TLAWildcardToRegEx(root)+"([\.].+)?", ## Problem: zusammengesetzte Unicode-Zeichen werden in "[  ]" nicht wie ein Zeichen benahdelt; H̱nm wird nicht erkannt (weil zusammengesetzt?) 
                     }
                 }
             )
@@ -541,7 +541,7 @@ tlaTitle = "Thesaurus Linguae Aegyptiae"
 tlaVersion = "19"
 tlaIssue = "1"
 tlaReleaseDate = "30.10.2019"
-tlaEditor = "Berlin-Brandenburgische Akademie der Wissenschaften & Sächsische Akademie der Wissenschaften"
+tlaEditor = "Berlin-Brandenburgische Akademie der Wissenschaften & Sächsische Akademie der Wissenschaften zu Leipzig"
 tlaPublisher = "Berlin-Brandenburgische Akademie der Wissenschaften"
 tlaBaseURL = "http://tla.bbaw.de"
 

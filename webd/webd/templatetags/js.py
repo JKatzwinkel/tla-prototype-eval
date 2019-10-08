@@ -118,7 +118,7 @@ def nicePOS(name):
         "adjective": "adjective",
         "adverb": "adverb",
         "entity_name": "entity name",
-        "epitheton_title": "title / epitheton",
+        "epitheton_title": "title / epithet",
         "interjection": "interjection",
         "numeral": "numeral",
         "particle": "particle",
@@ -126,7 +126,7 @@ def nicePOS(name):
         "pronoun": "pronoun",
         "root": "root",
         "substantive": "noun",
-        "undefined": "(unfedined)",
+        "undefined": "(undefined)",
         "verb": "verb" }
     newName = dict.get(name)
     if newName:

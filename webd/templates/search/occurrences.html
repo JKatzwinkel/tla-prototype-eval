@@ -84,7 +84,7 @@
                 <ul class="annotation-block {%if token.highlight%}highlight-{{token.highlight}}{%endif%}">
                     <li class="word-id"> 
 					    {% if token.id %}
-						   <button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{{token.id}}')"><span class="fas fa-clipboard"></span>Copy word ID</button>
+						   <button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{{token.id}}')"><span class="fas fa-clipboard"></span>Copy token ID</button>
                         {% else %}
                             &nbsp;
                         {% endif %}
@@ -164,12 +164,12 @@
             <div class="container-annotation-switch-lines">
                 
                     <!-- Hieroglyphs -->
-                    <div class="hieroglyph mb-1">
+                    <div class="hieroglyph">
                         {%for token in hit.sentence.tokens%}
                         <span class="glyphbox">
                             {%if token.glyphs%}
 								{% if token.type == 'word' %}<a href="/lemma/{{token.lemma}}" target="_blank">{% endif %}
-								<canvas class="res occ-tok-glyphs {%if token.highlight%}highlight-{{token.highlight}}{%endif%}" title="{{token.glyphs}}">
+								<canvas class="res occ-tok-glyphs mb-2 {%if token.highlight%}highlight-{{token.highlight}}{%endif%}" title="{{token.glyphs}}">
 									{{token.glyphs|fixForRES}}
 								</canvas>
 								{% if token.type == 'word' %}</a>{% endif %}
@@ -179,10 +179,10 @@
                     </div>
                 
                     <!-- Transliteration -->
-                    <h3 class="word bbaw-libertine">
+                    <h3 class="word bbaw-libertine mb-2">
                         {% for token in hit.sentence.tokens %}
 							{% if token.type == 'word' %}<a href="/lemma/{{token.lemma}}" target="_blank">{% endif %}
-                            <span id="{{token.id}}" class="occ-tok {%if token.highlight%}highlight-{{token.highlight}}{%endif%} {%if token.type == 'destruction_marker'%}token-destruction_marker{%endif%} {%if token.type == 'lc'%}token-lc{%endif%} bbaw-libertine" {% if token.type == 'word' %}onclick="window.open('/lemma/{{token.lemma}}','_blank')"{% endif %}>
+                            <span id="{{token.id}}" class="occ-tok {%if token.highlight%}highlight-{{token.highlight}}{%endif%} {%if token.type == 'destruction_marker'%}token-destruction_marker{%endif%} {%if token.type == 'lc'%}token-lc{%endif%} bbaw-libertine">
                                     {% if token.label %}
                                         {{token.label|niceTransliteration}}
                                     {% endif %}
@@ -220,7 +220,7 @@
 				{% endif %}
 			</div>
 			
-				<div class="corpus-paths">
+				<div class="corpus-paths mt-2">
 					{%for path in hit.text.paths%}
 					<div class="corpus-path">
 					    {%for object in path%}
@@ -293,7 +293,7 @@
 				</div>	
 
                 <!-- start LANGUAGE buttons -->
-                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail languages-btn mt-2">Translation languages</button>                 
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail languages-btn mt-2">Sentence translation</button>                 
 				
                 <div class="indented-buttons indented-buttons-lang hide">
                      <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-de-btn" type="button"><i class="fas"></i>German</button>
@@ -343,7 +343,7 @@
 				</div>	
                 
                 <!-- start LANGUAGE buttons -->
-                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail languages-btn">Translation languages</button>                 
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail languages-btn">Sentence translation</button>                 
 				
                 <div class="indented-buttons indented-buttons-lang hide">
                      <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-de-btn" type="button"><i class="fas"></i>German</button>

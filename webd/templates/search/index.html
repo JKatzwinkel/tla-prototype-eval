@@ -26,14 +26,17 @@ $(window).on('pageshow', function(){
     }
     return true;
   });
+  
   // Un-disable form fields when page loads, in case they click back after submission
   $("#dict-search input").attr("disabled", false);
+  
   // inject subtype choices list depending on the type input field value
   var wordClassTypesField = $("#word_class_types");
   var wordClassSubtypesField = $("#word_class_subtypes");
-  wordClassSubtypesField.hide();
+  //wordClassSubtypesField.hide();
   wordClassTypesField.bind('input', function(){//bind is deprecated actually we supposed to use on()
     var key = wordClassTypesField.val();
+
     if (key in wordClasses && wordClasses[key] != null) {
       wordClassSubtypesField.empty();
 	  $('#word_class_subtypes').append(
@@ -42,9 +45,9 @@ $(window).on('pageshow', function(){
         $('#word_class_subtypes').append(
         '<option value="'+subtype+'">'+subtype+'</option>');
       });
-      wordClassSubtypesField.show(150);
+      //wordClassSubtypesField.show(150);
     } else {
-      wordClassSubtypesField.hide(150);
+      //wordClassSubtypesField.hide(150);
 	    wordClassSubtypesField.empty();
         wordClassSubtypesField.val('');
     }
@@ -161,11 +164,11 @@ $(window).on('pageshow', function(){
 				  <!-- Word class -->			  
 				  <div class="form-group row bg-grey">
 					<label for="inputWordClass" class="col-sm-12 col-lg-3 col-xl-2 col-form-label">Part of Speech</label>
-					<div class="col-sm-12 col-lg-9 col-xl-10">
+					<div class="col-sm-12 col-lg-9 col-xl-10 mb-2">
 						<select class="form-control" id="word_class_types" name="pos_type">
 							<option value="(any)">(any)</option>
 							{% for type, subtypes in word_classes.items%}
-							  <option value="{{type}}">{{type}}</option>
+							  <option value="{{type}}">{{type|nicePOS}}</option>
 							{%endfor%}
 						</select>					  
 					</div>
@@ -199,7 +202,7 @@ $(window).on('pageshow', function(){
 				  <div class="form-group row bg-grey">
 					<label for="Translation" class="col-sm-12 col-lg-3 col-xl-2 col-form-label">Translation</label>
 					<div class="col-sm-12 col-lg-9 col-xl-10">
-                        <input type="text" class="form-control mb-3 mdb-select colorful-select dropdown-primary md-form" id="dict-search-translation" name="translation" multiple searchable="Search here..">
+                        <input type="text" class="form-control mb-2 mdb-select colorful-select dropdown-primary md-form" id="dict-search-translation" name="translation" multiple searchable="Search here..">
                         <select class="form-control" id="dict-search-translation" name="lang"> 						
 						    <option value="de">German</option>						
 						    <option value="en">English</option>						
@@ -213,7 +216,7 @@ $(window).on('pageshow', function(){
 				  <div class="form-group row">
 					<label for="Translation" class="col-sm-12 col-lg-3 col-xl-2 col-form-label">Bibliography</label>
 					<div class="col-sm-12 col-lg-9 col-xl-10">
-					  <input class="form-control" type="text" placeholder="" name="bibliography">
+					  <input class="form-control" type="text" placeholder="" id="dict-search-bibliography" name="bibliography">
 					</div>
 				  </div>
 
@@ -222,7 +225,7 @@ $(window).on('pageshow', function(){
 				  <div class="form-group row bg-grey">
 					<label for="Lemma-ID" class="col-sm-12 col-lg-3 col-xl-2 col-form-label">Lemma ID</label>
 					<div class="col-sm-12 col-lg-9 col-xl-10">
-					  <input class="form-control" type="text" placeholder="" name="lemma_id">
+					  <input class="form-control" type="text" placeholder="" id="dict-search-lemma-id" name="lemma_id">
 					</div>
 				  </div>
 				  
@@ -245,7 +248,7 @@ $(window).on('pageshow', function(){
 		  <div class="card">
 			<div class="card-header" id="headingTwo">
 			  <h2 class="mb-0">
-				<button form="text-word-search" class="btn btn-link collapsed show-detail" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+				<button form="text-word-search" class="btn btn-link collapsed show-detail disabled" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
 				 <i class="fas fa-plus-circle"></i>Words in texts
 				</button>
 			  </h2>

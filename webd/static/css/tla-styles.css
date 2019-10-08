@@ -158,7 +158,8 @@ a.navbar-brand {
 	font-size: 1.5em;
 	}
 
-.result-list-item:first-child, .occ-list-item:first-child  {
+.result-list-item:first-child, 
+.occ-list-item:first-child  {
 		border-top: 2px solid #BBB;
 	 }
 
@@ -380,7 +381,10 @@ ul.annotation-block li.translations {
 
 .languages-btn {margin-bottom: .5em;}
 
-.indented-buttons {margin: .5em 0;}
+.indented-buttons {
+	margin: .5em 0;
+	margin-left: 1em;
+	}
 .indented-buttons .btn-secondary {
     background-color: #999;
     border-color: #999;
@@ -443,7 +447,10 @@ ul.annotation-block li.translations {
 
 footer.bg-light{background-color: #e0e6ed!important;}
 
-
+.footer-logo img {
+		height: 90px;
+	}
+	
 /* Content - Detailseite */
 
 .show-info-button span.fas{
@@ -782,7 +789,10 @@ span.multiselect-native-select select {
 		font-size: 1.2rem;
 	}
     
-    .footer-logo {margin-top: 2rem; text-align: center;}
+    .footer-logo {
+		margin-top: 2rem; 
+		text-align: center;
+		}
     footer .contact {text-align: right;}
 
 	/* jede zeile in Suchergebnis einzeln */
