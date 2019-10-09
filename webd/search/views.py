@@ -147,6 +147,13 @@ def dict_search_query(**params):
                     }
                 }
             )
+            query = {
+                "term": {
+                    "type": "root"
+                }
+            }
+            query['predicate'] = 'must_not'
+            clauses.append(query) # Roots von Suchergebnis ausnehmen
     if 'root' in params:
         root = params.get('root')[0] if type(params.get('root')) == list else params.get('root')
         root = root.strip()
@@ -166,20 +173,20 @@ def dict_search_query(**params):
                     root = root.replace("'", "ı͗") # neue Empfehlung wäre i͗
             clauses.append(
                 {
-                    "regexp": {
-                        "name": TLAWildcardToRegEx(root)+"([\.].+)?", ## Problem: zusammengesetzte Unicode-Zeichen werden in "[  ]" nicht wie ein Zeichen benahdelt; H̱nm wird nicht erkannt (weil zusammengesetzt?) 
-                    }
-                }
-            )
-            clauses.append(
-                {
                     "term": {
                         "type": "root",
                     }
                 }
             )
+            clauses.append(
+                {
+                    "regexp": {
+                        "name": TLAWildcardToRegEx(root)+"([\.].+)?", ## Problem: zusammengesetzte Unicode-Zeichen werden in "[  ]" nicht wie ein Zeichen benahdelt; H̱nm wird nicht erkannt (weil zusammengesetzt?) 
+                    }
+                }
+            )
     if 'script' in params:
-        if ('hieroglyphic' in params.get('script')) ^ ('demotic' in params.get('script')):
+        if ('hieroglyphic' in params.get('script')) ^ ('demotic' in params.get('script')): # XOR
             query = {
                 "prefix": {
                     "id": "d"

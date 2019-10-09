@@ -268,7 +268,7 @@ a span.lc:hover {
 	border-radius: 2px;
 }*/
 .occ-list-item .highlight-1 {
-	background-color: lightgrey;
+	background-color: #ffffcc; /* lightgrey; */
 }
 
 .token-destruction_marker {
