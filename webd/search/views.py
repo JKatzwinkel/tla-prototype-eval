@@ -47,7 +47,7 @@ WORD_CLASSES = {
         "interrogative_pronoun",
         "personal_pronoun",
         "relative_pronoun"],
-    "root": None,
+    #"root": None,
     "epitheton_title": [
         "title",
         "epith_god",

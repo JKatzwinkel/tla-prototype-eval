@@ -119,7 +119,7 @@ $(window).on('pageshow', function(){
 		  <div class="card">
 			<div class="card-header" id="headingOne">
 			  <h2 class="mb-0">
-				<button class="btn btn-link show-detail" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" form="dict-search">
+				<button class="btn btn-link show-detail dictionary-search-form-btn" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" form="dict-search">
 				  <i class="fas fa-minus-circle"></i>Dictionary entries
 				</button>
 				
@@ -248,22 +248,31 @@ $(window).on('pageshow', function(){
 		  <div class="card">
 			<div class="card-header" id="headingTwo">
 			  <h2 class="mb-0">
-				<button form="text-word-search" class="btn btn-link collapsed show-detail disabled" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-				 <i class="fas fa-plus-circle"></i>Words in texts
+				<button class="btn btn-link collapsed show-detail text-word-search-form-btn" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" form="text-word-search">
+				   <i class="fas fa-plus-circle"></i>Text database
 				</button>
 			  </h2>
 			</div>
 			<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
 				<form id="text-word-search" name="text-word-search" action="/search/occurrences">
-					{% for field in textwordform %}
+					<!--{% for field in textwordform %}
 					<div class="form-group row bg{% cycle '-grey' '' %}">
 						{{ field }}
 					</div>
-					{% endfor %}
+					{% endfor %}-->
+					
+				 <!-- Sentence ID -->			  
+				  <div class="form-group row bg-grey">
+					<label for="Lemma-ID" class="col-sm-12 col-lg-3 col-xl-2 col-form-label">Sentence ID</label>
+					<div class="col-sm-12 col-lg-9 col-xl-10">
+					  <input class="form-control" type="text" placeholder="" id="dict-search-sentence-id" name="sentence_id">
+					</div>
+				  </div>
 				</form>
 			</div>
 		  </div>
 
+		  <!-- noch nicht implementiert -- >
 		  <div class="card">
 			<div class="card-header" id="headingThree">
 			  <h2 class="mb-0">
@@ -292,6 +301,7 @@ $(window).on('pageshow', function(){
 			   </div>
 			</div>
 		  </div>
+		  <! -- noch nicht implementiert -->
 		  
 		</div>	<!-- .accordion -->	
 		<small id="GlobalSearch" class="form-text text-muted pl-2 pt-1">Enter specific search options and combine search-fields.</small>
@@ -312,11 +322,11 @@ $(window).on('pageshow', function(){
 					
 				</div>		
 			
-				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none">
+				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none" onclick="window.open('/search','_self')">
 					<span class="fas fa-times-circle"></span>Clear all
 				</button>
 				<button id="submit-search-form" type="submit" class="btn btn-block btn-danger text-left text-decoration-none mt-4" form="dict-search" formtarget="_self" formmethod="get" formenctype="application/x-www-form-urlencoded">
-					<span class="fas fa-arrow-circle-right"></span>Search
+					<span class="fas fa-arrow-circle-right"></span>Search in dictionary
 				</button>
 			</div> <!-- .sticky -->
 		</div>

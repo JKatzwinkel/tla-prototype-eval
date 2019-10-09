@@ -77,6 +77,21 @@ function init() {
     $('.cookie-dismissed').click(function()  {
            $('.cookie-container').addClass('d-none');
             });
+
+	// Search-Button
+	
+    $('.dictionary-search-form-btn').click(function()  {
+		  var search_btn = document.getElementById("submit-search-form");
+		  search_btn.innerHTML = '<span class="fas fa-arrow-circle-right"></span>Search in dictionary';
+		  search_btn.setAttribute('form','dict-search')
+		  });	
+
+    $('.text-word-search-form-btn').click(function()  {
+		  var search_btn = document.getElementById("submit-search-form");
+		  search_btn.innerHTML = '<span class="fas fa-arrow-circle-right"></span>Search in texts';
+		  search_btn.setAttribute('form','text-word-search')
+		  });	
+
 			
 	// Show/Hide - Buttons
     
