@@ -251,7 +251,7 @@ def dict_search_query(**params):
                 }
             )
     q = build_query(*clauses)
-    print(q)
+    #print(q)
     return q
 
 
@@ -295,6 +295,18 @@ def textword_search_query(**params):
                         }
                     }
                 )
+    if 'sentence_id' in params:
+        sentence_id = params.get('sentence_id')[0]
+        print(sentence_id)
+        sentence_id = sentence_id.strip()
+        if sentence_id != '':
+            clauses.append(
+                {
+                    "term": {
+                        "id": sentence_id,
+                    }
+                }
+            )
     q = build_query(*clauses)
     print(q)
     return q
@@ -377,6 +389,7 @@ def search_textword_occurrences(offset=1, size=RESULTS_PER_PAGE, **params):
         offset=offset,
         size=size,
     )
+    print(hits)
     return hits
 
 
@@ -618,7 +631,7 @@ def search_text_words(request):
     page = int(params.get('page', 1))
     offset = (page - 1) * RESULTS_PER_PAGE
     #form = TextWordSearchForm(request.GET)
-    print(params)
+    #print(params)
     hits = search_textword_occurrences(
         offset=offset,
         size=RESULTS_PER_PAGE,
