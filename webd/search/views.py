@@ -14,8 +14,8 @@ from .forms import (
 import store
 from detail import views as detail_views
 
-
-RESULTS_PER_PAGE = 24
+# zu Testzwecken erhöht
+RESULTS_PER_PAGE = 100 # 24 
 
 WORD_CLASSES = {
     "adjective": [
@@ -88,8 +88,11 @@ def build_query(*clauses, fields=None):
             "bool": {
                 "must": [],
                 "must_not": [],
-            }
-        }
+            } 
+        }#,
+       #"sort" : [
+       #     {"name" : {"order" : "asc", "mode" : "avg"}}
+       #     ]
     }
     if fields is not None and type(fields) is list:
         query["_source"] = fields
@@ -114,6 +117,7 @@ def TLAWildcardToRegEx(expr):
         expr = expr.replace('§', '.')
         expr = expr.replace('(', '\(')
         expr = expr.replace(')', '\)')
+        expr = expr.lower() # elasticsearch-Suche ist offenbar aktuell case-insensitive, daher muss auch die Suche in lowercase verwandelt werden
     return expr
     
 def dict_search_query(**params):
@@ -469,13 +473,13 @@ def hit_tree(hits):
             (hid.get('id'), pred)
             for pred in [
                 #'rootOf',
-                #'referencing',
+                'referencing',
+                'contains',
                 #'successor',
-                'referencedBy',
+                #'referencedBy',
                 #'composedOf',
                 #'predecessor',
-                'composes',
-                'contains'
+                #'composes',
             ]
             for hid in hit.get('relations', {}).get(pred, [])
             if hid.get('id') in structure],
@@ -484,8 +488,7 @@ def hit_tree(hits):
         for hid, pred in related_hit_ids:
             if hid in structure:
                 _, obj = structure.get(hid)
-                #nest(obj, indent=indent + 1, pred=pred)
-                #nesting deaktiviert
+                nest(obj, indent=indent + 1, pred=pred) #nesting (de)aktiviert             
 
     while len(hits) > 0:
         hit = hits.pop(0)
@@ -578,7 +581,7 @@ def search_dict(request):
     count = hits.get('total')
     hits = store.hits_contents(hits)
     hits = hit_tree(hits)
-    hits = sorted(hits, key=lambda items: sortTranslitStr(items[2]['name']))
+    #hits = sorted(hits, key=lambda items: sortTranslitStr(items[2]['name'])) ## Problem: sortiert nur den Ausschnitt; Sortierung müsste in es einmal? geschehen
     return render(
         request,
         'search/dict.html',
