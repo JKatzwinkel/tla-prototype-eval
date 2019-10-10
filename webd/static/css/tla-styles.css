@@ -83,6 +83,15 @@ a.navbar-brand {
       color: #CCC;	  
 	}
 
+/* Informationsseiten */
+
+.information-page h3, 
+.information-page h4, 
+.information-page h5 {
+	margin-top: 0.8em;
+}	
+
+
 /* Content - Trefferliste */
 
 .container.content {margin-top: 4.5rem!important;}
