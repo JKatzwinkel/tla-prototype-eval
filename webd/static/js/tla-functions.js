@@ -66,7 +66,7 @@ function init() {
 	  if (cookieAcceptanceState == "accepted") {
 		  $('.cookie-container').addClass('d-none');
 		  var ausgabe = document.getElementById('info');
-		  ausgabe.innerHTML = '(Cookie '+cookieAcceptanceState+')';
+		  ausgabe.innerHTML = '(Cookies '+cookieAcceptanceState+')';
 	  }
 	
     $('.cookie-ok').click(function()  {
