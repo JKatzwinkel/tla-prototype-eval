@@ -224,7 +224,7 @@ def verbalFlexcode(flexcode):
         "0": "(unedited)",
         "1": "(?)",
         "2": "(unknown)",
-        "3": "(not specified)",
+        "3": "—",
         "4": "(unclear)",
         "5": "(probematic)",
         "9": "(to be reviewed)",
@@ -9720,6 +9720,150 @@ def stateFromSuffix (flexcode):
     else: state = ':stpr' # stpr 
     return state
     
+def lingGlossFromPOS(pos, sub_pos):
+    dictPOS = {
+        "adjective": "ADJ",
+        "adverb": "ADV",
+        "entity_name": "N",
+        "epitheton_title": "N",
+        "interjection": "INTJ",
+        "numeral": "NUM",
+        "particle": "PTCL",
+        "preposition": "PREP",
+        "pronoun": "PRON",
+        "root": "ROOT",
+        "substantive": "N",
+        "undefined": "(undefined)",
+        "verb": "V",
+        "non valid lemma": "(invalid)"}
+
+    dictSubPOS = {
+        "animal_name": "PROPN",
+        "artifact_name": "PROPN",
+        "cardinal": "NUM.card",
+        "demonstrative_pronoun": "DEM",
+        "epith_god": "DIVN",
+        "epith_king": "ROYLN",
+        "gods_name": "DIVN",
+        "interrogative_pronoun": "Q",
+        "kings_name": "ROYLN",
+        "nisbe_adjective_preposition": "PREP-adjz",
+        "nisbe_adjective_substantive": "N-adjz",
+        "ordinal": "NUM.ord",
+        "org_name": "PROPN",
+        "particle_enclitic": "=PTCL",
+        "particle_nonenclitic": "PTCL",
+        "person_name": "PERSN",
+        "personal_pronoun": "PRO",
+        "place_name": "TOPN",
+        "prepositional_adverb": "PREP\\advz",
+        "relative_pronoun": "REL",
+        "substantive_fem": "N.f",
+        "substantive_masc": "N.m",
+        "title": "TITL",
+        "verb_2-gem": "V",
+        "verb_2-lit": "V",
+        "verb_3-gem": "V",
+        "verb_3-inf": "V",
+        "verb_3-lit": "V",
+        "verb_4-inf": "V",
+        "verb_4-lit": "V",
+        "verb_5-inf": "V",
+        "verb_5-lit": "V",
+        "verb_6-lit": "V",
+        "verb_caus_2-gem": "V",
+        "verb_caus_2-lit": "V",
+        "verb_caus_3-gem": "V",
+        "verb_caus_3-inf": "V",
+        "verb_caus_3-lit": "V",
+        "verb_caus_4-inf": "V",
+        "verb_caus_4-lit": "V",
+        "verb_caus_5-lit": "V",
+        "verb_irr": "V" }
+    
+    if sub_pos != '':
+        lingGloss = dictSubPOS.get(sub_pos)
+        if lingGloss:
+            return lingGloss
+    if pos != '':
+        lingGloss = dictPOS.get(pos)
+        if lingGloss != '':
+            return lingGloss
+        
+    return ''
+    
+def defaultFlexFromPOS(pos, sub_pos):
+    dictPOS = {
+        "adjective": "ADJ:m.sg",
+        "adverb": "ADV",
+        "entity_name": "N",
+        "epitheton_title": "N",
+        "interjection": "INTJ",
+        "numeral": "NUM",
+        "particle": "PTCL",
+        "preposition": "PREP",
+        "pronoun": "PRON",
+        "root": "ROOT",
+        "substantive": "N.m:sg",
+        "undefined": "(undefined)",
+        "verb": "V",
+        "non valid lemma": "(invalid)"}
+
+    dictSubPOS = {
+        "animal_name": "PROPN",
+        "artifact_name": "PROPN",
+        "cardinal": "NUM.card",
+        "demonstrative_pronoun": "DEM",
+        "epith_god": "DIVN",
+        "epith_king": "ROYLN",
+        "gods_name": "DIVN",
+        "interrogative_pronoun": "Q",
+        "kings_name": "ROYLN",
+        "nisbe_adjective_preposition": "PREP-adjz:m.sg",
+        "nisbe_adjective_substantive": "N-adjz:m.sg",
+        "ordinal": "NUM.ord:m.sg",
+        "org_name": "PROPN",
+        "particle_enclitic": "=PTCL",
+        "particle_nonenclitic": "PTCL",
+        "person_name": "PERSN",
+        "personal_pronoun": "PRO",
+        "place_name": "TOPN",
+        "prepositional_adverb": "PREP\\advz",
+        "relative_pronoun": "REL:m.sg",
+        "substantive_fem": "N.f:sg",
+        "substantive_masc": "N.m:sg",
+        "title": "TITL",
+        "verb_2-gem": "V",
+        "verb_2-lit": "V",
+        "verb_3-gem": "V",
+        "verb_3-inf": "V",
+        "verb_3-lit": "V",
+        "verb_4-inf": "V",
+        "verb_4-lit": "V",
+        "verb_5-inf": "V",
+        "verb_5-lit": "V",
+        "verb_6-lit": "V",
+        "verb_caus_2-gem": "V",
+        "verb_caus_2-lit": "V",
+        "verb_caus_3-gem": "V",
+        "verb_caus_3-inf": "V",
+        "verb_caus_3-lit": "V",
+        "verb_caus_4-inf": "V",
+        "verb_caus_4-lit": "V",
+        "verb_caus_5-lit": "V",
+        "verb_irr": "V" }
+    
+    if sub_pos != '':
+        lingGloss = dictSubPOS.get(sub_pos)
+        if lingGloss:
+            return lingGloss
+    if pos != '':
+        lingGloss = dictPOS.get(pos)
+        if lingGloss:
+            return lingGloss
+    
+    return ''
+    
 def stemType (sub_pos):
     if     sub_pos == 'verb_3-inf' \
         or sub_pos == 'verb_irr' \
@@ -9757,19 +9901,37 @@ def computeLingGlossing(flexcode):
         flexcode = int(flexcode)
     except ValueError:
         if logFile: logFile.write('\n'+pos+'\t'+str(sub_pos)+'\t'+str(flexcode)+'\tError: Invalid flexcode [no number]: '+flexcode)
-        return '(invalid)'
+        return '(invalid code)'
+    
+    if flexcode >= 0:
+        algSign = 1
+    else:
+        algSign = 0
+        flexcode = abs(flexcode) 
         
     flex = flexcode % 100000 #Negationsstelle x00000 abschneiden
-    
-    # Status-Codes
-    if flex == 0: glossing = '(unedited)'
-    elif flex == 1: glossing = '(?)'
-    elif flex == 2: glossing = '(unknown)'
-    elif flex == 3: glossing = '(not specified)'
-    elif flex == 4: glossing = '(unclear)'
-    elif flex == 5: glossing = '(problematic)'
-    elif flex == 9: glossing = '(to be reviewed)'
         
+    # Status-Codes
+    if (flexcode >= 0) and (flexcode <= 9): 
+        glossing = lingGlossFromPOS(pos, sub_pos)
+        #if flexcode == 0: glossing += '(flex: unedited)'
+        #elif flexcode == 1: glossing += '(flex: ?)'
+        #elif flexcode == 2: glossing += '(flex: ?)'
+        #elif flexcode == 3: glossing += '(flex: not specified)'
+        #elif flexcode == 4: glossing += '(flex: unclear)'
+        #elif flexcode == 5: glossing += '(flex: problematic)'
+        #elif flexcode == 9: glossing += '(flex: to be reviewed)'
+        if flexcode == 3:
+            glossing = defaultFlexFromPOS(pos, sub_pos)
+        if glossing == '': 
+            if flexcode == 0: glossing = '(unedited)'
+            elif flexcode == 1: glossing = '(?)'
+            elif flexcode == 2: glossing = '(?)'
+            elif flexcode == 3: glossing = '—'
+            elif flexcode == 4: glossing = '(unclear)'
+            elif flexcode == 5: glossing = '(problematic)'
+            elif flexcode == 9: glossing = '(to be reviewed)'            
+            
     # Suffixkonjugation
     elif ((flex // 10000) == 1) or (((flex // 1000) >= 82) and ((flex // 1000) <= 87)):
         glossing = 'V\\tam'
@@ -10271,17 +10433,22 @@ def computeLingGlossing(flexcode):
 
     # Adjektive
     elif (flex // 1000) == 71:
-        glossing = 'A'
+        glossing = 'ADJ'
+        if sub_pos == "nisbe_adjective_preposition":
+            glossing = "PREP-adjz"
+        elif sub_pos == "nisbe_adjective_substantive":
+            glossing = "N-adjz"
         flex = flex % 1000 # auf 3 Stellen beschneiden, Adj-Info weg     
                 
         #Status
-        stateFlex = flex // 10 # erste Ziffer isolieren
-        flex = flex % 10 # letzte Ziffer isolieren 
+        stateFlex = flex // 100 # erste Ziffer isolieren
         
         form = ''
         state = ''
         if stateFlex == 0: 
             state = '' # sta oder unbekannt 
+            flex = flex // 10 # erste beiden Ziffern isolieren ; ACHTUNG: Schenkels Neuerungen noch nicht berücksichtgt
+            
             if flex == 0: 
                 if logFile: logFile.write('\n'+pos+'\t'+str(sub_pos)+'\t'+str(flexcode)+'\tWarning: Underspecified adjective flexcode (number/gender; pattern 71000): '+str(flexcode))
             elif flex == 1: form = ':m.sg' # 
@@ -10309,13 +10476,15 @@ def computeLingGlossing(flexcode):
                 if logFile: logFile.write('\n'+pos+'\t'+str(sub_pos)+'\t'+str(flexcode)+'\tError: Invalid adjective flexcode (pronoun; pattern 711[15-24]): '+str(flexcode))
         elif stateFlex == 2: 
             state = ':stpr' # stpr redundant
-            if flex == 0: form = ':m.sg' # sic, verwirrend, dass bei 0 beginnend
-            elif flex == 1: form = ':f.sg' # 
-            elif flex == 2: form = ':m.pl' # 
-            elif flex == 3: form = ':f.pl' # 
-            elif flex == 4: form = ':m.du' # 
-            elif flex == 5: form = ':f.du' # 
-            elif flex == 6: # 71260, "adj. in SK m. Präfix nꜣ (Einerstelle Suffixpr.) / Spätzeit [nꜣ:nfr=f]
+            flex = flex // 10 # erste beiden Ziffern isolieren ; ACHTUNG: Schenkels Neuerungen noch nicht berücksichtgt
+
+            if flex == 20: form = ':m.sg' # sic, verwirrend, dass bei 0 beginnend
+            elif flex == 21: form = ':f.sg' # 
+            elif flex == 22: form = ':m.pl' # 
+            elif flex == 23: form = ':f.pl' # 
+            elif flex == 24: form = ':m.du' # 
+            elif flex == 25: form = ':f.du' # 
+            elif flex == 26: # 71260, "adj. in SK m. Präfix nꜣ (Einerstelle Suffixpr.) / Spätzeit [nꜣ:nfr=f]
                 glossing = 'vblz-ADJ'
             else: 
                 if logFile: logFile.write('\n'+pos+'\t'+str(sub_pos)+'\t'+str(flexcode)+'\tError: Invalid adjective flexcode (number/gender; pattern 712[0-6]x): '+str(flexcode))
@@ -10624,7 +10793,10 @@ def computeLingGlossing(flexcode):
             if logFile: logFile.write('\n'+pos+'\t'+str(sub_pos)+'\t'+str(flexcode)+'\tError: Invalid POS<>flexcode combination: '+pos+'('+str(sub_pos)+')<>'+glossing)
     
     else:
-        glossing = '(unresolved)'
+        #unresolved
+        glossing = lingGlossFromPOS(pos, sub_pos)
+        if glossing == '': 
+            glossing = '(unresolved)'
         if logFile: logFile.write('\n'+pos+'\t'+str(sub_pos)+'\t'+str(flexcode)+'\tError: Unhandled flex code: '+str(flexcode))
 
     return glossing
