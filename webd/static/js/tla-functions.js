@@ -280,31 +280,31 @@ function init() {
             $('.word-class').slideToggle('slow');
         });	
 		
-  	// .flexcode (TLA flexcode)
+  	// .bts-glossing
 		if (getCookie("TLAFlexcodeVisible") == "true") {
-			$('i', '.flexcode-btn').addClass("fa-plus-circle")
-			$('.flexcode').show();
+			$('i', '.bts-glossing-btn').addClass("fa-plus-circle")
+			$('.bts-glossing').show();
 			}
 		else {
-			$('i', '.flexcode-btn').addClass("fa-minus-circle")
-			$('.flexcode').hide();
+			$('i', '.bts-glossing-btn').addClass("fa-minus-circle")
+			$('.bts-glossing').hide();
 			}
 
-		$('html').not('.flexcode').click(function (e) {
-		 if ($('.flexcode').is(':visible') && !e.target == '.flexcode') {
-                $('.flexcode').slideUp('ease-out');
+		$('html').not('.bts-glossing').click(function (e) {
+		 if ($('.bts-glossing').is(':visible') && !e.target == '.bts-glossing') {
+                $('.bts-glossing').slideUp('ease-out');
             }
         });
-        $('.flexcode-btn').click(function (e) {
+        $('.bts-glossing-btn').click(function (e) {
 			e.preventDefault();
 			if (getCookie("CookiePolicy") == "accepted") {
-				if ($('.flexcode').is(':visible')) {
+				if ($('.bts-glossing').is(':visible')) {
 					setCookie("TLAFlexcodeVisible", "false");
 				} else {
 					setCookie("TLAFlexcodeVisible", "true");
 				}
 			}
-            $('.flexcode').slideToggle('slow');
+            $('.bts-glossing').slideToggle('slow');
         });	
 		
   	// .ling-glossing
@@ -332,6 +332,34 @@ function init() {
 				}
 			}
             $('.ling-glossing').slideToggle('slow');
+        });	
+		
+		
+  	// .token-translation
+		if (getCookie("TokenTranslationVisible") == "true") {
+			$('i', '.token-translation-btn').addClass("fa-plus-circle")
+			$('.token-translation').show();
+			}
+		else {
+			$('i', '.token-translation-btn').addClass("fa-minus-circle")
+			$('.token-translation').hide();
+			}
+
+		$('html').not('.token-translation').click(function (e) {
+		 if ($('.token-translation').is(':visible') && !e.target == '.token-translation') {
+                $('.token-translation').slideUp('ease-out');
+            }
+        });
+        $('.token-translation-btn').click(function (e) {
+			e.preventDefault();
+			if (getCookie("CookiePolicy") == "accepted") {
+				if ($('.token-translation').is(':visible')) {
+					setCookie("TokenTranslationVisible", "false");
+				} else {
+					setCookie("TokenTranslationVisible", "true");
+				}
+			}
+            $('.token-translation').slideToggle('slow');
         });	
 		
    // Translation Languages

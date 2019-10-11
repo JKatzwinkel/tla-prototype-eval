@@ -128,7 +128,7 @@
                             &nbsp;
                         {% endif %}
 					</li>
-                    <li class="translations translation-de">
+                    <li class="token-translation condensed">
 					    {% if token.translations.de %}
  							{%for translation in token.translations.de %}
 								{{translation}}
@@ -137,24 +137,6 @@
                             &nbsp;
                         {% endif %}
 					</li>               
-                    <!-- <li class="translations translation-en"> <! -- ##Inhalt aktuell noch nicht in token mitgeliefert, gibt es nicht?  -- >
-					    {% if token.translations.en %}
-							{%for translation in token.translations.en %}
-								{{translation}}
-							{%endfor%}
-                        {% else %}
-                            &nbsp;
-                        {% endif %}
-					</li>               
-                    <li class="translations translation-fr"> <! -- ##Inhalt aktuell noch nicht in token mitgeliefert, gibt es nicht? -- >
-						{% if token.translations.fr %}
-							{%for translation in token.translations.fr %}
-								{{translation}}
-							{%endfor%}
-                        {% else %}
-                            &nbsp;
-                        {% endif %}
-					</li>                 -->
                 </ul>
                 {% endfor %}          
                
@@ -289,7 +271,8 @@
                     <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-id-btn "><i class="fas"></i>Word ID</button>
                     <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-class-btn"><i class="fas"></i>Word class</button>
                     <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail ling-glossing-btn"><i class="fas"></i>Linguistic glossing</button>
-                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail flexcode-btn"><i class="fas"></i>TLA flexcode</button>
+                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail bts-glossing-btn"><i class="fas"></i>TLA flexcode</button>
+                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail token-translation-btn"><i class="fas"></i>Token translation</button>
 				</div>	
 
                 <!-- start LANGUAGE buttons -->
@@ -339,7 +322,8 @@
                     <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-id-btn "><i class="fas"></i>Word ID</button>
                     <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-class-btn"><i class="fas"></i>Word class</button>
                     <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail ling-glossing-btn"><i class="fas"></i>Linguistic glossing</button>
-                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail flexcode-btn"><i class="fas"></i>TLA flexcodes</button>
+                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail bts-glossing-btn"><i class="fas"></i>TLA flexcodes</button>
+                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail token-translation-btn"><i class="fas"></i>Token translation</button>
 				</div>	
                 
                 <!-- start LANGUAGE buttons -->
