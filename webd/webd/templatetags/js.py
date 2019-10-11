@@ -9855,7 +9855,108 @@ def verbalFlexcode(flexcode):
     if verbal:
         return verbal
     else:
-        return "(mistake: "+flexcode+")"       
+        return "(mistake: "+flexcode+")" 
+
+def lingGlossFromLemmaID(lemmaID):
+    dict = {
+        "10030": "-1sg",
+        "10050": "-3sg.m",
+        "10060": "-3sg.m",
+        "10070": "-1pl",
+        "10090": "-3sg.f",
+        "10100": "-3pl",
+        "10110": "-2sg.m",
+        "10120": "-2sg.f",
+        "10130": "-2pl",
+        "27490": "1pl",
+        "27940": "1sg",
+        "42370": "-3pl",
+        "44000": "=1sg",
+        "80016": "=1pl",
+        "90020": "3sg.m",
+        "90080": "3.sg.f",
+        "90120": "2sg.m",
+        "90160": "2sg.f",
+        "127770": "=3.sg.f",
+        "129490": "=3sg.m",
+        "130830": "3sg.m",
+        "136190": "=3pl",
+        "147350": "=3sg.c",
+        "163890": "=2sg.m",
+        "170100": "-3sg.c",
+        "172370": "-2pl",
+        "174900": "=2sg.m",
+        "175050": "2sg.m",
+        "175640": "=2sg.f",
+        "175650": "=2pl",
+        "400960": "=3pl",
+        "600625": "2sg.m",
+        "600627": "3sg.m",
+        "600628": "3.sg.f",
+        "851173": "-3.sg.f",
+        "851177": "=2du",
+        "851182": "=2sg.m2sg.f",
+        "851183": "=2sg.c",
+        "851184": "=3sg.c",
+        "851185": "=3sg.c",
+        "851187": "=2pl",
+        "851193": "2sg.m",
+        "851195": "3sg.m",
+        "851199": "3pl",
+        "851200": "1sg",
+        "851201": "2sg.m",
+        "851203": "3sg.m",
+        "851204": "3.sg.f",
+        "851205": "3.sg.f",
+        "851206": "3sg.c",
+        "851209": "3pl",
+        "851657": "-3pl",
+        "851878": "3sg.m",
+        "851879": "3.sg.f",
+        "851880": "2sg.m",
+        "851881": "2sg.f",
+        "853880": "=3.sg.f",
+        "859326": "3.sg.f",
+        "859327": "=3.sg.f",
+        "d1172": "-3pl",
+        "d1173": "=1sg",
+        "d1925": "ART.poss:m.sg",
+        "d2193": "-3sg.m",
+        "d2866": "-1pl",
+        "d300": "-1sg",
+        "d3021": "ART.poss:pl",
+        "d4934": "-3sg.f",
+        "d4936": "=3sg.c",
+        "d5105": "-3pl",
+        "d5701": "=3pl",
+        "d5705": "3pl",
+        "d5706": "=3pl",
+        "d582": "1pl.poss",
+        "d590": "1sg",
+        "d6496": "-2sg.m",
+        "d6972": "-2sg.f",
+        "d7044": "ART.poss:f.sg",
+        "d7316": "-2pl",
+        "d7332": "=2pl",
+        "d7333": "2pl",
+        "dm156": "-3sg.m",
+        "dm2089": "ART.poss:m.sg",
+        "dm2393": "-3pl",
+        "dm2475": "=1sg",
+        "dm2685": "2sg.f",
+        "dm2804": "-2sg.m",
+        "dm3593": "m.sg:poss-",
+        "dm382": "-3sg.f",
+        "dm3873": "1sg.poss",
+        "dm3986": "f.sg:poss-" }
+    if lemmaID != '':
+        lingGloss = dict.get(lemmaID)
+    
+    if lingGloss:
+        return lingGloss
+    else:
+        return ''        
+
 
 def stateFromSuffix (flexcode):
     stateFlex = flexcode % 10 # letzte Ziffer isolieren
@@ -10033,13 +10134,18 @@ def stemType (sub_pos):
     return ''
     
 @register.filter(is_safe=True)
-def computeLingGlossing(flexcode):
+def computeLingGlossing(flexcode, lemmaID):
     logFile = None # kein Error Log ausgeben
     pos ='' # im mockup noch nicht verfügbar
     sub_pos ='' # im mockup noch nicht verfügbar
     
+    # ling. Glossierung aus LemmaID (Pronomina, u.a)
+    glossing = lingGlossFromLemmaID(lemmaID)
+    if glossing != '':
+        return glossing
+    
+    # ling. Glossierung aus flexcode
     glossing = ''
-
     try:
         flexcode = int(flexcode)
     except ValueError:

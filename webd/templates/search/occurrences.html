@@ -116,7 +116,7 @@
                     <li class="ling-glossing condensed">
 						<!--##ling.gloss##-->
 					    {% if token.flexcode %}
-                           {{token.flexcode|computeLingGlossing}}
+                           {{token.flexcode|computeLingGlossing:token.lemma}}
                         {% else %}
                             &nbsp;
                         {% endif %}
