@@ -332,7 +332,7 @@ a span.lc:hover {
 .container-annotation .translation-en,
 .container-annotation .translation-fr,
 .container-annotation .ling-glossing,
-.container-annotation .flexcode,
+.container-annotation .bts-glossing,
 .container-annotation .word-class {
     font-size: 0.8em; 
     }
@@ -342,7 +342,7 @@ a span.lc:hover {
     font-size: .60em;
 }
 
-.container-annotation .ling-glossing {
+.ling-glossing {
     font-variant: small-caps; 
     }
 	
@@ -652,16 +652,15 @@ footer.bg-light{background-color: #e0e6ed!important;}
 .content .dropdown {
     margin: .5rem 0;
 }
-.dropdown-menu {
+/*.dropdown-menu {
     width: 100%;
-}
+}*/
 .dropdown-menu {
     background-clip: unset;
 }
 .dropdown-item:hover {
     text-decoration: none;
     background-color: #ccc;
-
 }
 
 .solo-icon {margin-left: .5em;}

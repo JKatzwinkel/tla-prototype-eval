@@ -92,7 +92,18 @@ function init() {
 		  search_btn.setAttribute('form','text-word-search')
 		  });	
 
-			
+	// Abbreviation help links
+	
+	$('.ling-glossing').click(function(e) {
+			e.preventDefault();
+			window.open('/help/ling-glossings','_blank');
+		  });	
+
+	$('.bts-glossing').click(function(e) {
+			e.preventDefault();
+			window.open('/help/bts-glossings','_blank');
+		  });	
+		  
 	// Show/Hide - Buttons
     
 		// .sidebar

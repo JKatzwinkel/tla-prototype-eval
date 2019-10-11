@@ -54,4 +54,23 @@ def help(request):
         {
         }
     )
- 
+
+@require_http_methods(["GET"])
+def BTSglossings(request):
+    params = request.GET.copy()
+    return render(
+        request,
+        'help/bts-glossings.html',
+        {
+        }
+    )
+@require_http_methods(["GET"])
+def lingGlossings(request):
+    params = request.GET.copy()
+    return render(
+        request,
+        'help/ling-glossings.html',
+        {
+        }
+    )
+  
