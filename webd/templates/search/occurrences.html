@@ -158,8 +158,19 @@
                             {%endif%}
                         </span>
                         {%endfor%}
+						<br>(Unicode:)
+						<!-- Unicode Hieroglyphs, Test -->
+                        {%for token in hit.sentence.tokens%}
+                        <span class="unicode-hieroglyphs">
+                            {%if token.glyphs%}
+								<!--{% if token.type == 'word' %}<a href="/lemma/{{token.lemma}}" target="_blank">{% endif %}-->
+									{{token.glyphs|MdC_Unicode_noControlChars}}
+								<!--{% if token.type == 'word' %}</a>{% endif %}-->
+                            {%endif%}
+                        </span>
+                        {%endfor%} 
                     </div>
-                
+ 
                     <!-- Transliteration -->
                     <h3 class="word bbaw-libertine mb-2">
                         {% for token in hit.sentence.tokens %}

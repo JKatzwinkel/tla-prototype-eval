@@ -12,6 +12,10 @@
 		font-family: BBAWLibertine;
 		src: url(../font/BBAWLibertine_ah.ttf);
 }
+@font-face {
+		font-family: EgyptianHiero;
+		src: url(../font/EgyptianHiero3.03.woff);
+}
 /*
 @font-face {
 		font-family: "Font Awesome 5 Free";
@@ -278,6 +282,12 @@ a span.lc:hover {
 }*/
 .occ-list-item .highlight-1 {
 	background-color: #ffffcc; /* lightgrey; */
+}
+
+.unicode-hieroglyphs {
+	font-family: "EgyptianHiero";
+	font-size: 2em;
+	color: black;
 }
 
 .token-destruction_marker {
