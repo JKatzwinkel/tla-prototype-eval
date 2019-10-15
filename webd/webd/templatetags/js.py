@@ -10333,7 +10333,7 @@ def lingGlossFromLemmaID(lemmaID):
     if lingGloss:
         return lingGloss
     else:
-        return ''        
+        return ''
 
 
 def stateFromSuffix (flexcode):

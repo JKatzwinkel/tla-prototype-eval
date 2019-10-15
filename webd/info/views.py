@@ -44,6 +44,13 @@ def coins_openurl_kev(doc):
     coins_kev = urlencode(ctx_rft)
     return coins_kev
 
+tlaTitle = "Thesaurus Linguae Aegyptiae"
+tlaVersion = "19"
+tlaIssue = "1"
+tlaReleaseDate = "30.10.2019"
+tlaEditor = "Berlin-Brandenburgische Akademie der Wissenschaften & Sächsische Akademie der Wissenschaften zu Leipzig"
+tlaPublisher = "Berlin-Brandenburgische Akademie der Wissenschaften"
+tlaBaseURL = "http://tla.bbaw.de"
 
 @require_http_methods(["GET"])
 def introduction(request):
@@ -80,8 +87,15 @@ def licence(request):
     params = request.GET.copy()
     return render(
         request,
-        'info/licence.html',
+        'info/license.html',
         {
+            'tlaVersion': tlaVersion,
+            'tlaTitle': tlaTitle,
+            'tlaVersion': tlaVersion,
+            'tlaIssue': tlaIssue,
+            'tlaReleaseDate': tlaReleaseDate,
+            'tlaEditor': tlaEditor,
+            'tlaBaseURL': tlaBaseURL
         }
     )
     
