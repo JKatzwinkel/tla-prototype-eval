@@ -32,10 +32,10 @@ body, a, p, h1, h2, h3, ul, li {
 
 .condensed {font-familiy:"Roboto Condensed";}
 
-a {color:red;}	
+a {color:#B0152D;}	
 a:hover {
 	text-decoration: none;
-	color:red;	
+	color:#B0152D;	
 	}
 	
 hr {
@@ -62,14 +62,14 @@ box-shadow: 0px 0px 19px 5px rgba(0,0,0,0.17);
 	}
 .navbar-light a {font-weight: bold;}
 .navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover {
-    color: red;
+    color: #C60C30;
 }
 a.navbar-brand {
 	font-weight: bold;
 	font-size: 1.5rem;
 	color: white!important;
 	padding: 10px;
-	background-color: red;
+	background-color: #C60C30;
 	}
 	
 .navbar h1 {
@@ -148,7 +148,7 @@ a.navbar-brand {
 	
 .result-list-item a.bibliography-list:hover{
     color: white;
-	background-color: red;
+	background-color: #B0152D;
 	cursor: pointer;
 	}		
 .result-list-item a.bibliography-list .svg-inline--fa{
@@ -192,7 +192,7 @@ a.navbar-brand {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1a000000', endColorstr='#00000000',GradientType=1 ); /* IE6-9 */
 	}
 .result-list-item h2{	
-	color: red;
+	color: #B0152D;
 	font-size: 1.4em;
 	}
 .result-list .indent-1{
@@ -239,10 +239,10 @@ a.navbar-brand {
 
 
 a.share-results {color: grey!important;}
-a.share-results:hover {color: red;}
+a.share-results:hover {color: #B0152D;}
 
 .result-list-item .occ-tok.highlight-1 {
-	background-color: red;
+	background-color: #C60C30;
 	color: white;
 }
 .result-list-item .occ-tok.highlight-2 {
@@ -260,7 +260,7 @@ a.share-results:hover {color: red;}
 }
 
 .corpus-path-element a:hover {
-	color: red!important;
+	color: #B0152D!important;
 }
 
 a span.lc {
@@ -268,16 +268,16 @@ a span.lc {
     color: grey!important;
 }
 a span.lc:hover {
-	color: red!important;
+	color: #B0152D!important;
 }
 .result-list-item img.occ-tok-glyphs.highlight-1,
 .result-list-item canvas.res.occ-tok-glyphs.highlight-1 {
-	border: 1px solid red;
+	border: 1px solid #B0152D;
 	border-radius: 2px;
 }
 /*.occ-list-item img.occ-tok-glyphs.highlight-1,
 .occ-list-item canvas.res.occ-tok-glyphs.highlight-1 {
-	border: 1px solid red;
+	border: 1px solid #B0152D;
 	border-radius: 2px;
 }*/
 .occ-list-item .highlight-1 {
@@ -325,7 +325,7 @@ a span.lc:hover {
 .result-list-item span.glyphbox img{
 }
 .result-list-item span.glyphbox img:hover {
-	border-bottom: 1px solid red;
+	border-bottom: 1px solid #B0152D;
 }
 
 .result-list hr {margin:0!important;}
@@ -371,7 +371,7 @@ ul.annotation-block:hover {
 }
 .annotation-block.active:hover {
     opacity: 1;
-    background-color: red;
+    background-color: #C60C30;
 }
 .annotation-block.active li{
     color: white!important;
@@ -394,7 +394,7 @@ ul.annotation-block li.translations {
 .annotation-block .transcription {
     font-family: "BBAWLibertine", serif;
     font-size: 1.2em;
-    color: red;
+    color: #B0152D;
 }
 
 .languages-btn {margin-bottom: .5em;}
@@ -559,7 +559,7 @@ footer.bg-light{background-color: #e0e6ed!important;}
 .card-header h2 .btn-link {
     font-weight: 400;
 	font-size: 1.2rem;
-    color: red;    
+    color: #C60C30;    
 }
 .card-header h2 .btn-link:hover {
     text-decoration: none;   
@@ -586,12 +586,12 @@ footer.bg-light{background-color: #e0e6ed!important;}
 	border: 0;
 	}
 .btn-red {
-	color: red;
+	color: #C60C30;
 	background-color: white;
 	}
 .btn-red:hover {
     color: white;
-    background-color: red;
+    background-color: #C60C30;
 }
 
 
