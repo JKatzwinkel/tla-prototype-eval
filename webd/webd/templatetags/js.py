@@ -11223,6 +11223,8 @@ def computeLingGlossing(flexcode, lemmaID):
 #### Kilani Unicode Hieroglyphs Mockup
 # First Function - replaces sign codes, keeps control characters
 
+# First Function - replaces sign codes, keeps control characters
+
 @register.filter(is_safe=True)
 def MdC_Unicode_withLatinControlChars(wordToParse):
 
@@ -11278,6 +11280,22 @@ def MdC_Unicode_noControlChars_WithBreakLigChar(wordToParse):
 
     return wordParsed
 
+# Fourth Function - analyses the word according to all the three previous functions, and output the result as an array
+
+def MdC_Unicode_combined(wordToParse):
+
+    parsed_1 = MdC_Unicode_keepControlChars(wordToParse)
+
+    parsed_2 = MdC_Unicode_noControlChars(wordToParse)
+
+    parsed_3 = MdC_Unicode_noControlChars_WithBreakLigChar(wordToParse)
+
+    parsedArray = []
+    parsedArray.append(parsed_1)
+    parsedArray.append(parsed_2)
+    parsedArray.append(parsed_3)
+
+    return parsedArray
 
 
 
@@ -11291,41 +11309,41 @@ def MdC_Unicode_noControlChars_WithBreakLigChar(wordToParse):
 def replaceGardiner (signs):
 
     for i in range (0, len(signs)):
-        if signs[i] == 'Z16h':
+        if signs[i] == 'Z16H':
             signs[i] = '𓐌'
-        elif signs[i] == 'Z16g':
+        elif signs[i] == 'Z16G':
             signs[i] = '𓐋'
-        elif signs[i] == 'Z16f':
+        elif signs[i] == 'Z16F':
             signs[i] = '𓐊'
-        elif signs[i] == 'Z16e':
+        elif signs[i] == 'Z16E':
             signs[i] = '𓐉'
-        elif signs[i] == 'Z16d':
+        elif signs[i] == 'Z16D':
             signs[i] = '𓐈'
-        elif signs[i] == 'Z16c':
+        elif signs[i] == 'Z16C':
             signs[i] = '𓐇'
-        elif signs[i] == 'Z16b':
+        elif signs[i] == 'Z16B':
             signs[i] = '𓐆'
-        elif signs[i] == 'Z16a':
+        elif signs[i] == 'Z16A':
             signs[i] = '𓐅'
         elif signs[i] == 'Z16':
             signs[i] = '𓐄'
-        elif signs[i] == 'Z15i':
+        elif signs[i] == 'Z15I':
             signs[i] = '𓐃'
-        elif signs[i] == 'Z15h':
+        elif signs[i] == 'Z15H':
             signs[i] = '𓐂'
-        elif signs[i] == 'Z15g':
+        elif signs[i] == 'Z15G':
             signs[i] = '𓐁'
-        elif signs[i] == 'Z15f':
+        elif signs[i] == 'Z15F':
             signs[i] = '𓐀'
-        elif signs[i] == 'Z15e':
+        elif signs[i] == 'Z15E':
             signs[i] = '𓏿'
-        elif signs[i] == 'Z15d':
+        elif signs[i] == 'Z15D':
             signs[i] = '𓏾'
-        elif signs[i] == 'Z15c':
+        elif signs[i] == 'Z15C':
             signs[i] = '𓏽'
-        elif signs[i] == 'Z15b':
+        elif signs[i] == 'Z15B':
             signs[i] = '𓏼'
-        elif signs[i] == 'Z15a':
+        elif signs[i] == 'Z15A':
             signs[i] = '𓏻'
         elif signs[i] == 'Z15':
             signs[i] = '𓏺'
@@ -11351,23 +11369,23 @@ def replaceGardiner (signs):
             signs[i] = '𓏰'
         elif signs[i] == 'Z5':
             signs[i] = '𓏯'
-        elif signs[i] == 'Z4a':
+        elif signs[i] == 'Z4A':
             signs[i] = '𓏮'
         elif signs[i] == 'Z4':
             signs[i] = '𓏭'
-        elif signs[i] == 'Z3b':
+        elif signs[i] == 'Z3B':
             signs[i] = '𓏬'
         elif signs[i] == 'Z3A':
             signs[i] = '𓏫'
         elif signs[i] == 'Z3':
             signs[i] = '𓏪'
-        elif signs[i] == 'Z2d':
+        elif signs[i] == 'Z2D':
             signs[i] = '𓏩'
-        elif signs[i] == 'Z2c':
+        elif signs[i] == 'Z2C':
             signs[i] = '𓏨'
-        elif signs[i] == 'Z2b':
+        elif signs[i] == 'Z2B':
             signs[i] = '𓏧'
-        elif signs[i] == 'Z2a':
+        elif signs[i] == 'Z2A':
             signs[i] = '𓏦'
         elif signs[i] == 'Z2':
             signs[i] = '𓏥'
@@ -11387,25 +11405,25 @@ def replaceGardiner (signs):
             signs[i] = '𓏞'
         elif signs[i] == 'Y2':
             signs[i] = '𓏝'
-        elif signs[i] == 'Y1a':
+        elif signs[i] == 'Y1A':
             signs[i] = '𓏜'
         elif signs[i] == 'Y1':
             signs[i] = '𓏛'
-        elif signs[i] == 'X8a':
+        elif signs[i] == 'X8A':
             signs[i] = '𓏚'
         elif signs[i] == 'X8':
             signs[i] = '𓏙'
         elif signs[i] == 'X7':
             signs[i] = '𓏘'
-        elif signs[i] == 'X6a':
+        elif signs[i] == 'X6A':
             signs[i] = '𓏗'
         elif signs[i] == 'X6':
             signs[i] = '𓏖'
         elif signs[i] == 'X5':
             signs[i] = '𓏕'
-        elif signs[i] == 'X4b':
+        elif signs[i] == 'X4B':
             signs[i] = '𓏔'
-        elif signs[i] == 'X4a':
+        elif signs[i] == 'X4A':
             signs[i] = '𓏓'
         elif signs[i] == 'X4':
             signs[i] = '𓏒'
@@ -11417,7 +11435,7 @@ def replaceGardiner (signs):
             signs[i] = '𓏏'
         elif signs[i] == 'W25':
             signs[i] = '𓏎'
-        elif signs[i] == 'W24a':
+        elif signs[i] == 'W24A':
             signs[i] = '𓏍'
         elif signs[i] == 'W24':
             signs[i] = '𓏌'
@@ -11431,11 +11449,11 @@ def replaceGardiner (signs):
             signs[i] = '𓏈'
         elif signs[i] == 'W19':
             signs[i] = '𓏇'
-        elif signs[i] == 'W18a':
+        elif signs[i] == 'W18A':
             signs[i] = '𓏆'
         elif signs[i] == 'W18':
             signs[i] = '𓏅'
-        elif signs[i] == 'W17a':
+        elif signs[i] == 'W17A':
             signs[i] = '𓏄'
         elif signs[i] == 'W17':
             signs[i] = '𓏃'
@@ -11443,7 +11461,7 @@ def replaceGardiner (signs):
             signs[i] = '𓏂'
         elif signs[i] == 'W15':
             signs[i] = '𓏁'
-        elif signs[i] == 'W14a':
+        elif signs[i] == 'W14A':
             signs[i] = '𓏀'
         elif signs[i] == 'W14':
             signs[i] = '𓎿'
@@ -11453,11 +11471,11 @@ def replaceGardiner (signs):
             signs[i] = '𓎽'
         elif signs[i] == 'W11':
             signs[i] = '𓎼'
-        elif signs[i] == 'W10a':
+        elif signs[i] == 'W10A':
             signs[i] = '𓎻'
         elif signs[i] == 'W10':
             signs[i] = '𓎺'
-        elif signs[i] == 'W9a':
+        elif signs[i] == 'W9A':
             signs[i] = '𓎹'
         elif signs[i] == 'W9':
             signs[i] = '𓎸'
@@ -11471,7 +11489,7 @@ def replaceGardiner (signs):
             signs[i] = '𓎴'
         elif signs[i] == 'W4':
             signs[i] = '𓎳'
-        elif signs[i] == 'W3a':
+        elif signs[i] == 'W3A':
             signs[i] = '𓎲'
         elif signs[i] == 'W3':
             signs[i] = '𓎱'
@@ -11479,7 +11497,7 @@ def replaceGardiner (signs):
             signs[i] = '𓎰'
         elif signs[i] == 'W1':
             signs[i] = '𓎯'
-        elif signs[i] == 'V40a':
+        elif signs[i] == 'V40A':
             signs[i] = '𓎮'
         elif signs[i] == 'V40':
             signs[i] = '𓎭'
@@ -11487,7 +11505,7 @@ def replaceGardiner (signs):
             signs[i] = '𓎬'
         elif signs[i] == 'V38':
             signs[i] = '𓎫'
-        elif signs[i] == 'V37a':
+        elif signs[i] == 'V37A':
             signs[i] = '𓎪'
         elif signs[i] == 'V37':
             signs[i] = '𓎩'
@@ -11497,25 +11515,25 @@ def replaceGardiner (signs):
             signs[i] = '𓎧'
         elif signs[i] == 'V34':
             signs[i] = '𓎦'
-        elif signs[i] == 'V33a':
+        elif signs[i] == 'V33A':
             signs[i] = '𓎥'
         elif signs[i] == 'V33':
             signs[i] = '𓎤'
         elif signs[i] == 'V32':
             signs[i] = '𓎣'
-        elif signs[i] == 'V31a':
+        elif signs[i] == 'V31A':
             signs[i] = '𓎢'
         elif signs[i] == 'V31':
             signs[i] = '𓎡'
-        elif signs[i] == 'V30a':
+        elif signs[i] == 'V30A':
             signs[i] = '𓎠'
         elif signs[i] == 'V30':
             signs[i] = '𓎟'
-        elif signs[i] == 'V29a':
+        elif signs[i] == 'V29A':
             signs[i] = '𓎞'
         elif signs[i] == 'V29':
             signs[i] = '𓎝'
-        elif signs[i] == 'V28a':
+        elif signs[i] == 'V28A':
             signs[i] = '𓎜'
         elif signs[i] == 'V28':
             signs[i] = '𓎛'
@@ -11527,7 +11545,7 @@ def replaceGardiner (signs):
             signs[i] = '𓎘'
         elif signs[i] == 'V24':
             signs[i] = '𓎗'
-        elif signs[i] == 'V23a':
+        elif signs[i] == 'V23A':
             signs[i] = '𓎖'
         elif signs[i] == 'V23':
             signs[i] = '𓎕'
@@ -11535,29 +11553,29 @@ def replaceGardiner (signs):
             signs[i] = '𓎔'
         elif signs[i] == 'V21':
             signs[i] = '𓎓'
-        elif signs[i] == 'V20l':
+        elif signs[i] == 'V20L':
             signs[i] = '𓎒'
-        elif signs[i] == 'V20k':
+        elif signs[i] == 'V20K':
             signs[i] = '𓎑'
-        elif signs[i] == 'V20j':
+        elif signs[i] == 'V20J':
             signs[i] = '𓎐'
-        elif signs[i] == 'V20i':
+        elif signs[i] == 'V20I':
             signs[i] = '𓎏'
-        elif signs[i] == 'V20h':
+        elif signs[i] == 'V20H':
             signs[i] = '𓎎'
-        elif signs[i] == 'V20g':
+        elif signs[i] == 'V20G':
             signs[i] = '𓎍'
-        elif signs[i] == 'V20f':
+        elif signs[i] == 'V20F':
             signs[i] = '𓎌'
-        elif signs[i] == 'V20e':
+        elif signs[i] == 'V20E':
             signs[i] = '𓎋'
-        elif signs[i] == 'V20d':
+        elif signs[i] == 'V20D':
             signs[i] = '𓎊'
-        elif signs[i] == 'V20c':
+        elif signs[i] == 'V20C':
             signs[i] = '𓎉'
-        elif signs[i] == 'V20b':
+        elif signs[i] == 'V20B':
             signs[i] = '𓎈'
-        elif signs[i] == 'V20a':
+        elif signs[i] == 'V20A':
             signs[i] = '𓎇'
         elif signs[i] == 'V20':
             signs[i] = '𓎆'
@@ -11575,17 +11593,17 @@ def replaceGardiner (signs):
             signs[i] = '𓎀'
         elif signs[i] == 'V13':
             signs[i] = '𓍿'
-        elif signs[i] == 'V12b':
+        elif signs[i] == 'V12B':
             signs[i] = '𓍾'
-        elif signs[i] == 'V12a':
+        elif signs[i] == 'V12A':
             signs[i] = '𓍽'
         elif signs[i] == 'V12':
             signs[i] = '𓍼'
-        elif signs[i] == 'V11c':
+        elif signs[i] == 'V11C':
             signs[i] = '𓍻'
-        elif signs[i] == 'V11b':
+        elif signs[i] == 'V11B':
             signs[i] = '𓍺'
-        elif signs[i] == 'V11a':
+        elif signs[i] == 'V11A':
             signs[i] = '𓍹'
         elif signs[i] == 'V11':
             signs[i] = '𓍸'
@@ -11595,9 +11613,9 @@ def replaceGardiner (signs):
             signs[i] = '𓍶'
         elif signs[i] == 'V8':
             signs[i] = '𓍵'
-        elif signs[i] == 'V7b':
+        elif signs[i] == 'V7B':
             signs[i] = '𓍴'
-        elif signs[i] == 'V7a':
+        elif signs[i] == 'V7A':
             signs[i] = '𓍳'
         elif signs[i] == 'V7':
             signs[i] = '𓍲'
@@ -11609,27 +11627,27 @@ def replaceGardiner (signs):
             signs[i] = '𓍯'
         elif signs[i] == 'V3':
             signs[i] = '𓍮'
-        elif signs[i] == 'V2a':
+        elif signs[i] == 'V2A':
             signs[i] = '𓍭'
         elif signs[i] == 'V2':
             signs[i] = '𓍬'
-        elif signs[i] == 'V1i':
+        elif signs[i] == 'V1I':
             signs[i] = '𓍫'
-        elif signs[i] == 'V1h':
+        elif signs[i] == 'V1H':
             signs[i] = '𓍪'
-        elif signs[i] == 'V1g':
+        elif signs[i] == 'V1G':
             signs[i] = '𓍩'
-        elif signs[i] == 'V1f':
+        elif signs[i] == 'V1F':
             signs[i] = '𓍨'
-        elif signs[i] == 'V1e':
+        elif signs[i] == 'V1E':
             signs[i] = '𓍧'
-        elif signs[i] == 'V1d':
+        elif signs[i] == 'V1D':
             signs[i] = '𓍦'
-        elif signs[i] == 'V1c':
+        elif signs[i] == 'V1C':
             signs[i] = '𓍥'
-        elif signs[i] == 'V1b':
+        elif signs[i] == 'V1B':
             signs[i] = '𓍤'
-        elif signs[i] == 'V1a':
+        elif signs[i] == 'V1A':
             signs[i] = '𓍣'
         elif signs[i] == 'V1':
             signs[i] = '𓍢'
@@ -11653,7 +11671,7 @@ def replaceGardiner (signs):
             signs[i] = '𓍙'
         elif signs[i] == 'U33':
             signs[i] = '𓍘'
-        elif signs[i] == 'U32a':
+        elif signs[i] == 'U32A':
             signs[i] = '𓍗'
         elif signs[i] == 'U32':
             signs[i] = '𓍖'
@@ -11661,7 +11679,7 @@ def replaceGardiner (signs):
             signs[i] = '𓍕'
         elif signs[i] == 'U30':
             signs[i] = '𓍔'
-        elif signs[i] == 'U29a':
+        elif signs[i] == 'U29A':
             signs[i] = '𓍓'
         elif signs[i] == 'U29':
             signs[i] = '𓍒'
@@ -11675,7 +11693,7 @@ def replaceGardiner (signs):
             signs[i] = '𓍎'
         elif signs[i] == 'U24':
             signs[i] = '𓍍'
-        elif signs[i] == 'U23a':
+        elif signs[i] == 'U23A':
             signs[i] = '𓍌'
         elif signs[i] == 'U23':
             signs[i] = '𓍋'
@@ -11711,9 +11729,9 @@ def replaceGardiner (signs):
             signs[i] = '𓌼'
         elif signs[i] == 'U7':
             signs[i] = '𓌻'
-        elif signs[i] == 'U6b':
+        elif signs[i] == 'U6B':
             signs[i] = '𓌺'
-        elif signs[i] == 'U6a':
+        elif signs[i] == 'U6A':
             signs[i] = '𓌹'
         elif signs[i] == 'U6':
             signs[i] = '𓌸'
@@ -11733,11 +11751,11 @@ def replaceGardiner (signs):
             signs[i] = '𓌱'
         elif signs[i] == 'T34':
             signs[i] = '𓌰'
-        elif signs[i] == 'T33a':
+        elif signs[i] == 'T33A':
             signs[i] = '𓌯'
         elif signs[i] == 'T33':
             signs[i] = '𓌮'
-        elif signs[i] == 'T32a':
+        elif signs[i] == 'T32A':
             signs[i] = '𓌭'
         elif signs[i] == 'T32':
             signs[i] = '𓌬'
@@ -11771,7 +11789,7 @@ def replaceGardiner (signs):
             signs[i] = '𓌞'
         elif signs[i] == 'T17':
             signs[i] = '𓌝'
-        elif signs[i] == 'T16a':
+        elif signs[i] == 'T16A':
             signs[i] = '𓌜'
         elif signs[i] == 'T16':
             signs[i] = '𓌛'
@@ -11783,21 +11801,21 @@ def replaceGardiner (signs):
             signs[i] = '𓌘'
         elif signs[i] == 'T12':
             signs[i] = '𓌗'
-        elif signs[i] == 'T11a':
+        elif signs[i] == 'T11A':
             signs[i] = '𓌖'
         elif signs[i] == 'T11':
             signs[i] = '𓌕'
         elif signs[i] == 'T10':
             signs[i] = '𓌔'
-        elif signs[i] == 'T9a':
+        elif signs[i] == 'T9A':
             signs[i] = '𓌓'
         elif signs[i] == 'T9':
             signs[i] = '𓌒'
-        elif signs[i] == 'T8a':
+        elif signs[i] == 'T8A':
             signs[i] = '𓌑'
         elif signs[i] == 'T8':
             signs[i] = '𓌐'
-        elif signs[i] == 'T7a':
+        elif signs[i] == 'T7A':
             signs[i] = '𓌏'
         elif signs[i] == 'T7':
             signs[i] = '𓌎'
@@ -11807,7 +11825,7 @@ def replaceGardiner (signs):
             signs[i] = '𓌌'
         elif signs[i] == 'T4':
             signs[i] = '𓌋'
-        elif signs[i] == 'T3a':
+        elif signs[i] == 'T3A':
             signs[i] = '𓌊'
         elif signs[i] == 'T3':
             signs[i] = '𓌉'
@@ -11837,7 +11855,7 @@ def replaceGardiner (signs):
             signs[i] = '𓋽'
         elif signs[i] == 'S36':
             signs[i] = '𓋼'
-        elif signs[i] == 'S35a':
+        elif signs[i] == 'S35A':
             signs[i] = '𓋻'
         elif signs[i] == 'S35':
             signs[i] = '𓋺'
@@ -11857,9 +11875,9 @@ def replaceGardiner (signs):
             signs[i] = '𓋳'
         elif signs[i] == 'S27':
             signs[i] = '𓋲'
-        elif signs[i] == 'S26b':
+        elif signs[i] == 'S26B':
             signs[i] = '𓋱'
-        elif signs[i] == 'S26a':
+        elif signs[i] == 'S26A':
             signs[i] = '𓋰'
         elif signs[i] == 'S26':
             signs[i] = '𓋯'
@@ -11879,7 +11897,7 @@ def replaceGardiner (signs):
             signs[i] = '𓋨'
         elif signs[i] == 'S18':
             signs[i] = '𓋧'
-        elif signs[i] == 'S17a':
+        elif signs[i] == 'S17A':
             signs[i] = '𓋦'
         elif signs[i] == 'S17':
             signs[i] = '𓋥'
@@ -11887,9 +11905,9 @@ def replaceGardiner (signs):
             signs[i] = '𓋤'
         elif signs[i] == 'S15':
             signs[i] = '𓋣'
-        elif signs[i] == 'S14b':
+        elif signs[i] == 'S14B':
             signs[i] = '𓋢'
-        elif signs[i] == 'S14a':
+        elif signs[i] == 'S14A':
             signs[i] = '𓋡'
         elif signs[i] == 'S14':
             signs[i] = '𓋠'
@@ -11907,7 +11925,7 @@ def replaceGardiner (signs):
             signs[i] = '𓋚'
         elif signs[i] == 'S7':
             signs[i] = '𓋙'
-        elif signs[i] == 'S6a':
+        elif signs[i] == 'S6A':
             signs[i] = '𓋘'
         elif signs[i] == 'S6':
             signs[i] = '𓋗'
@@ -11917,7 +11935,7 @@ def replaceGardiner (signs):
             signs[i] = '𓋕'
         elif signs[i] == 'S3':
             signs[i] = '𓋔'
-        elif signs[i] == 'S2a':
+        elif signs[i] == 'S2A':
             signs[i] = '𓋓'
         elif signs[i] == 'S2':
             signs[i] = '𓋒'
@@ -11949,7 +11967,7 @@ def replaceGardiner (signs):
             signs[i] = '𓋅'
         elif signs[i] == 'R17':
             signs[i] = '𓋄'
-        elif signs[i] == 'R16a':
+        elif signs[i] == 'R16A':
             signs[i] = '𓋃'
         elif signs[i] == 'R16':
             signs[i] = '𓋂'
@@ -11963,7 +11981,7 @@ def replaceGardiner (signs):
             signs[i] = '𓊾'
         elif signs[i] == 'R11':
             signs[i] = '𓊽'
-        elif signs[i] == 'R10a':
+        elif signs[i] == 'R10A':
             signs[i] = '𓊼'
         elif signs[i] == 'R10':
             signs[i] = '𓊻'
@@ -11979,13 +11997,13 @@ def replaceGardiner (signs):
             signs[i] = '𓊶'
         elif signs[i] == 'R4':
             signs[i] = '𓊵'
-        elif signs[i] == 'R3b':
+        elif signs[i] == 'R3B':
             signs[i] = '𓊴'
-        elif signs[i] == 'R3a':
+        elif signs[i] == 'R3A':
             signs[i] = '𓊳'
         elif signs[i] == 'R3':
             signs[i] = '𓊲'
-        elif signs[i] == 'R2a':
+        elif signs[i] == 'R2A':
             signs[i] = '𓊱'
         elif signs[i] == 'R2':
             signs[i] = '𓊰'
@@ -12021,21 +12039,21 @@ def replaceGardiner (signs):
             signs[i] = '𓊡'
         elif signs[i] == 'P4':
             signs[i] = '𓊠'
-        elif signs[i] == 'P3a':
+        elif signs[i] == 'P3A':
             signs[i] = '𓊟'
         elif signs[i] == 'P3':
             signs[i] = '𓊞'
         elif signs[i] == 'P2':
             signs[i] = '𓊝'
-        elif signs[i] == 'P1a':
+        elif signs[i] == 'P1A':
             signs[i] = '𓊜'
         elif signs[i] == 'P1':
             signs[i] = '𓊛'
         elif signs[i] == 'O51':
             signs[i] = '𓊚'
-        elif signs[i] == 'O5b':
+        elif signs[i] == 'O5B':
             signs[i] = '𓊙'
-        elif signs[i] == 'O5a':
+        elif signs[i] == 'O5A':
             signs[i] = '𓊘'
         elif signs[i] == 'O50':
             signs[i] = '𓊗'
@@ -12065,13 +12083,13 @@ def replaceGardiner (signs):
             signs[i] = '𓊋'
         elif signs[i] == 'O37':
             signs[i] = '𓊊'
-        elif signs[i] == 'O36d':
+        elif signs[i] == 'O36D':
             signs[i] = '𓊉'
-        elif signs[i] == 'O36c':
+        elif signs[i] == 'O36C':
             signs[i] = '𓊈'
-        elif signs[i] == 'O36b':
+        elif signs[i] == 'O36B':
             signs[i] = '𓊇'
-        elif signs[i] == 'O36a':
+        elif signs[i] == 'O36A':
             signs[i] = '𓊆'
         elif signs[i] == 'O36':
             signs[i] = '𓊅'
@@ -12079,7 +12097,7 @@ def replaceGardiner (signs):
             signs[i] = '𓊄'
         elif signs[i] == 'O34':
             signs[i] = '𓊃'
-        elif signs[i] == 'O33a':
+        elif signs[i] == 'O33A':
             signs[i] = '𓊂'
         elif signs[i] == 'O33':
             signs[i] = '𓊁'
@@ -12087,11 +12105,11 @@ def replaceGardiner (signs):
             signs[i] = '𓊀'
         elif signs[i] == 'O31':
             signs[i] = '𓉿'
-        elif signs[i] == 'O3a':
+        elif signs[i] == 'O3A':
             signs[i] = '𓉾'
         elif signs[i] == 'O30':
             signs[i] = '𓉽'
-        elif signs[i] == 'O29a':
+        elif signs[i] == 'O29A':
             signs[i] = '𓉼'
         elif signs[i] == 'O29':
             signs[i] = '𓉻'
@@ -12101,11 +12119,11 @@ def replaceGardiner (signs):
             signs[i] = '𓉹'
         elif signs[i] == 'O26':
             signs[i] = '𓉸'
-        elif signs[i] == 'O25a':
+        elif signs[i] == 'O25A':
             signs[i] = '𓉷'
         elif signs[i] == 'O25':
             signs[i] = '𓉶'
-        elif signs[i] == 'O24a':
+        elif signs[i] == 'O24A':
             signs[i] = '𓉵'
         elif signs[i] == 'O24':
             signs[i] = '𓉴'
@@ -12115,11 +12133,11 @@ def replaceGardiner (signs):
             signs[i] = '𓉲'
         elif signs[i] == 'O21':
             signs[i] = '𓉱'
-        elif signs[i] == 'O2a':
+        elif signs[i] == 'O2A':
             signs[i] = '𓉰'
         elif signs[i] == 'O20':
             signs[i] = '𓉯'
-        elif signs[i] == 'O19a':
+        elif signs[i] == 'O19A':
             signs[i] = '𓉮'
         elif signs[i] == 'O19':
             signs[i] = '𓉭'
@@ -12139,11 +12157,11 @@ def replaceGardiner (signs):
             signs[i] = '𓉦'
         elif signs[i] == 'O11':
             signs[i] = '𓉥'
-        elif signs[i] == 'O10c':
+        elif signs[i] == 'O10C':
             signs[i] = '𓉤'
-        elif signs[i] == 'O10b':
+        elif signs[i] == 'O10B':
             signs[i] = '𓉣'
-        elif signs[i] == 'O10a':
+        elif signs[i] == 'O10A':
             signs[i] = '𓉢'
         elif signs[i] == 'O10':
             signs[i] = '𓉡'
@@ -12153,21 +12171,21 @@ def replaceGardiner (signs):
             signs[i] = '𓉟'
         elif signs[i] == 'O7':
             signs[i] = '𓉞'
-        elif signs[i] == 'O6f':
+        elif signs[i] == 'O6F':
             signs[i] = '𓉝'
-        elif signs[i] == 'O6e':
+        elif signs[i] == 'O6E':
             signs[i] = '𓉜'
-        elif signs[i] == 'O6d':
+        elif signs[i] == 'O6D':
             signs[i] = '𓉛'
-        elif signs[i] == 'O6c':
+        elif signs[i] == 'O6C':
             signs[i] = '𓉚'
-        elif signs[i] == 'O6b':
+        elif signs[i] == 'O6B':
             signs[i] = '𓉙'
-        elif signs[i] == 'O6a':
+        elif signs[i] == 'O6A':
             signs[i] = '𓉘'
         elif signs[i] == 'O6':
             signs[i] = '𓉗'
-        elif signs[i] == 'O5a':
+        elif signs[i] == 'O5A':
             signs[i] = '𓉖'
         elif signs[i] == 'O5':
             signs[i] = '𓉕'
@@ -12177,11 +12195,11 @@ def replaceGardiner (signs):
             signs[i] = '𓉓'
         elif signs[i] == 'O2':
             signs[i] = '𓉒'
-        elif signs[i] == 'O1a':
+        elif signs[i] == 'O1A':
             signs[i] = '𓉑'
         elif signs[i] == 'O1':
             signs[i] = '𓉐'
-        elif signs[i] == 'NU22a':
+        elif signs[i] == 'NU22A':
             signs[i] = '𓉏'
         elif signs[i] == 'NU22':
             signs[i] = '𓉎'
@@ -12191,7 +12209,7 @@ def replaceGardiner (signs):
             signs[i] = '𓉌'
         elif signs[i] == 'NU19':
             signs[i] = '𓉋'
-        elif signs[i] == 'NU18a':
+        elif signs[i] == 'NU18A':
             signs[i] = '𓉊'
         elif signs[i] == 'NU18':
             signs[i] = '𓉉'
@@ -12207,11 +12225,11 @@ def replaceGardiner (signs):
             signs[i] = '𓉄'
         elif signs[i] == 'NU12':
             signs[i] = '𓉃'
-        elif signs[i] == 'NU11a':
+        elif signs[i] == 'NU11A':
             signs[i] = '𓉂'
         elif signs[i] == 'NU11':
             signs[i] = '𓉁'
-        elif signs[i] == 'NU1a':
+        elif signs[i] == 'NU1A':
             signs[i] = '𓉀'
         elif signs[i] == 'NU10':
             signs[i] = '𓈿'
@@ -12239,7 +12257,7 @@ def replaceGardiner (signs):
             signs[i] = '𓈴'
         elif signs[i] == 'NL18':
             signs[i] = '𓈳'
-        elif signs[i] == 'NL17a':
+        elif signs[i] == 'NL17A':
             signs[i] = '𓈲'
         elif signs[i] == 'NL17':
             signs[i] = '𓈱'
@@ -12265,7 +12283,7 @@ def replaceGardiner (signs):
             signs[i] = '𓈧'
         elif signs[i] == 'NL6':
             signs[i] = '𓈦'
-        elif signs[i] == 'NL5a':
+        elif signs[i] == 'NL5A':
             signs[i] = '𓈥'
         elif signs[i] == 'NL5':
             signs[i] = '𓈤'
@@ -12287,21 +12305,21 @@ def replaceGardiner (signs):
             signs[i] = '𓈜'
         elif signs[i] == 'N38':
             signs[i] = '𓈛'
-        elif signs[i] == 'N37a':
+        elif signs[i] == 'N37A':
             signs[i] = '𓈚'
         elif signs[i] == 'N37':
             signs[i] = '𓈙'
         elif signs[i] == 'N36':
             signs[i] = '𓈘'
-        elif signs[i] == 'N35a':
+        elif signs[i] == 'N35A':
             signs[i] = '𓈗'
         elif signs[i] == 'N35':
             signs[i] = '𓈖'
-        elif signs[i] == 'N34a':
+        elif signs[i] == 'N34A':
             signs[i] = '𓈕'
         elif signs[i] == 'N34':
             signs[i] = '𓈔'
-        elif signs[i] == 'N33a':
+        elif signs[i] == 'N33A':
             signs[i] = '𓈓'
         elif signs[i] == 'N33':
             signs[i] = '𓈒'
@@ -12319,7 +12337,7 @@ def replaceGardiner (signs):
             signs[i] = '𓈌'
         elif signs[i] == 'N26':
             signs[i] = '𓈋'
-        elif signs[i] == 'N25a':
+        elif signs[i] == 'N25A':
             signs[i] = '𓈊'
         elif signs[i] == 'N25':
             signs[i] = '𓈉'
@@ -12335,9 +12353,9 @@ def replaceGardiner (signs):
             signs[i] = '𓈄'
         elif signs[i] == 'N19':
             signs[i] = '𓈃'
-        elif signs[i] == 'N18b':
+        elif signs[i] == 'N18B':
             signs[i] = '𓈂'
-        elif signs[i] == 'N18a':
+        elif signs[i] == 'N18A':
             signs[i] = '𓈁'
         elif signs[i] == 'N18':
             signs[i] = '𓈀'
@@ -12383,7 +12401,7 @@ def replaceGardiner (signs):
             signs[i] = '𓇬'
         elif signs[i] == 'M41':
             signs[i] = '𓇫'
-        elif signs[i] == 'M40a':
+        elif signs[i] == 'M40A':
             signs[i] = '𓇪'
         elif signs[i] == 'M40':
             signs[i] = '𓇩'
@@ -12399,15 +12417,15 @@ def replaceGardiner (signs):
             signs[i] = '𓇤'
         elif signs[i] == 'M34':
             signs[i] = '𓇣'
-        elif signs[i] == 'M33b':
+        elif signs[i] == 'M33B':
             signs[i] = '𓇢'
-        elif signs[i] == 'M33a':
+        elif signs[i] == 'M33A':
             signs[i] = '𓇡'
         elif signs[i] == 'M33':
             signs[i] = '𓇠'
         elif signs[i] == 'M32':
             signs[i] = '𓇟'
-        elif signs[i] == 'M31a':
+        elif signs[i] == 'M31A':
             signs[i] = '𓇞'
         elif signs[i] == 'M31':
             signs[i] = '𓇝'
@@ -12415,7 +12433,7 @@ def replaceGardiner (signs):
             signs[i] = '𓇜'
         elif signs[i] == 'M29':
             signs[i] = '𓇛'
-        elif signs[i] == 'M28a':
+        elif signs[i] == 'M28A':
             signs[i] = '𓇚'
         elif signs[i] == 'M28':
             signs[i] = '𓇙'
@@ -12425,13 +12443,13 @@ def replaceGardiner (signs):
             signs[i] = '𓇗'
         elif signs[i] == 'M25':
             signs[i] = '𓇖'
-        elif signs[i] == 'M24a':
+        elif signs[i] == 'M24A':
             signs[i] = '𓇕'
         elif signs[i] == 'M24':
             signs[i] = '𓇔'
         elif signs[i] == 'M23':
             signs[i] = '𓇓'
-        elif signs[i] == 'M22a':
+        elif signs[i] == 'M22A':
             signs[i] = '𓇒'
         elif signs[i] == 'M22':
             signs[i] = '𓇑'
@@ -12443,15 +12461,15 @@ def replaceGardiner (signs):
             signs[i] = '𓇎'
         elif signs[i] == 'M18':
             signs[i] = '𓇍'
-        elif signs[i] == 'M17a':
+        elif signs[i] == 'M17A':
             signs[i] = '𓇌'
         elif signs[i] == 'M17':
             signs[i] = '𓇋'
-        elif signs[i] == 'M16a':
+        elif signs[i] == 'M16A':
             signs[i] = '𓇊'
         elif signs[i] == 'M16':
             signs[i] = '𓇉'
-        elif signs[i] == 'M15a':
+        elif signs[i] == 'M15A':
             signs[i] = '𓇈'
         elif signs[i] == 'M15':
             signs[i] = '𓇇'
@@ -12459,27 +12477,27 @@ def replaceGardiner (signs):
             signs[i] = '𓇆'
         elif signs[i] == 'M13':
             signs[i] = '𓇅'
-        elif signs[i] == 'M12h':
+        elif signs[i] == 'M12H':
             signs[i] = '𓇄'
-        elif signs[i] == 'M12g':
+        elif signs[i] == 'M12G':
             signs[i] = '𓇃'
-        elif signs[i] == 'M12f':
+        elif signs[i] == 'M12F':
             signs[i] = '𓇂'
-        elif signs[i] == 'M12e':
+        elif signs[i] == 'M12E':
             signs[i] = '𓇁'
-        elif signs[i] == 'M12d':
+        elif signs[i] == 'M12D':
             signs[i] = '𓇀'
-        elif signs[i] == 'M12c':
+        elif signs[i] == 'M12C':
             signs[i] = '𓆿'
-        elif signs[i] == 'M12b':
+        elif signs[i] == 'M12B':
             signs[i] = '𓆾'
-        elif signs[i] == 'M12a':
+        elif signs[i] == 'M12A':
             signs[i] = '𓆽'
         elif signs[i] == 'M12':
             signs[i] = '𓆼'
         elif signs[i] == 'M11':
             signs[i] = '𓆻'
-        elif signs[i] == 'M10a':
+        elif signs[i] == 'M10A':
             signs[i] = '𓆺'
         elif signs[i] == 'M10':
             signs[i] = '𓆹'
@@ -12495,15 +12513,15 @@ def replaceGardiner (signs):
             signs[i] = '𓆴'
         elif signs[i] == 'M4':
             signs[i] = '𓆳'
-        elif signs[i] == 'M3a':
+        elif signs[i] == 'M3A':
             signs[i] = '𓆲'
         elif signs[i] == 'M3':
             signs[i] = '𓆱'
         elif signs[i] == 'M2':
             signs[i] = '𓆰'
-        elif signs[i] == 'M1b':
+        elif signs[i] == 'M1B':
             signs[i] = '𓆯'
-        elif signs[i] == 'M1a':
+        elif signs[i] == 'M1A':
             signs[i] = '𓆮'
         elif signs[i] == 'M1':
             signs[i] = '𓆭'
@@ -12511,7 +12529,7 @@ def replaceGardiner (signs):
             signs[i] = '𓆬'
         elif signs[i] == 'L7':
             signs[i] = '𓆫'
-        elif signs[i] == 'L6a':
+        elif signs[i] == 'L6A':
             signs[i] = '𓆪'
         elif signs[i] == 'L6':
             signs[i] = '𓆩'
@@ -12521,7 +12539,7 @@ def replaceGardiner (signs):
             signs[i] = '𓆧'
         elif signs[i] == 'L3':
             signs[i] = '𓆦'
-        elif signs[i] == 'L2a':
+        elif signs[i] == 'L2A':
             signs[i] = '𓆥'
         elif signs[i] == 'L2':
             signs[i] = '𓆤'
@@ -12551,15 +12569,15 @@ def replaceGardiner (signs):
             signs[i] = '𓆘'
         elif signs[i] == 'I12':
             signs[i] = '𓆗'
-        elif signs[i] == 'I11a':
+        elif signs[i] == 'I11A':
             signs[i] = '𓆖'
         elif signs[i] == 'I11':
             signs[i] = '𓆕'
-        elif signs[i] == 'I1a':
+        elif signs[i] == 'I1A':
             signs[i] = '𓆔'
         elif signs[i] == 'I10':
             signs[i] = '𓆓'
-        elif signs[i] == 'I9a':
+        elif signs[i] == 'I9A':
             signs[i] = '𓆒'
         elif signs[i] == 'I9':
             signs[i] = '𓆑'
@@ -12569,7 +12587,7 @@ def replaceGardiner (signs):
             signs[i] = '𓆏'
         elif signs[i] == 'I6':
             signs[i] = '𓆎'
-        elif signs[i] == 'I5a':
+        elif signs[i] == 'I5A':
             signs[i] = '𓆍'
         elif signs[i] == 'I5':
             signs[i] = '𓆌'
@@ -12585,7 +12603,7 @@ def replaceGardiner (signs):
             signs[i] = '𓆇'
         elif signs[i] == 'H7':
             signs[i] = '𓆆'
-        elif signs[i] == 'H6a':
+        elif signs[i] == 'H6A':
             signs[i] = '𓆅'
         elif signs[i] == 'H6':
             signs[i] = '𓆄'
@@ -12617,13 +12635,13 @@ def replaceGardiner (signs):
             signs[i] = '𓅷'
         elif signs[i] == 'G46':
             signs[i] = '𓅶'
-        elif signs[i] == 'G45a':
+        elif signs[i] == 'G45A':
             signs[i] = '𓅵'
         elif signs[i] == 'G45':
             signs[i] = '𓅴'
         elif signs[i] == 'G44':
             signs[i] = '𓅳'
-        elif signs[i] == 'G43a':
+        elif signs[i] == 'G43A':
             signs[i] = '𓅲'
         elif signs[i] == 'G43':
             signs[i] = '𓅱'
@@ -12637,11 +12655,11 @@ def replaceGardiner (signs):
             signs[i] = '𓅭'
         elif signs[i] == 'G38':
             signs[i] = '𓅬'
-        elif signs[i] == 'G37a':
+        elif signs[i] == 'G37A':
             signs[i] = '𓅫'
         elif signs[i] == 'G37':
             signs[i] = '𓅪'
-        elif signs[i] == 'G36a':
+        elif signs[i] == 'G36A':
             signs[i] = '𓅩'
         elif signs[i] == 'G36':
             signs[i] = '𓅨'
@@ -12663,7 +12681,7 @@ def replaceGardiner (signs):
             signs[i] = '𓅠'
         elif signs[i] == 'G27':
             signs[i] = '𓅟'
-        elif signs[i] == 'G26a':
+        elif signs[i] == 'G26A':
             signs[i] = '𓅞'
         elif signs[i] == 'G26':
             signs[i] = '𓅝'
@@ -12677,7 +12695,7 @@ def replaceGardiner (signs):
             signs[i] = '𓅙'
         elif signs[i] == 'G21':
             signs[i] = '𓅘'
-        elif signs[i] == 'G20a':
+        elif signs[i] == 'G20A':
             signs[i] = '𓅗'
         elif signs[i] == 'G20':
             signs[i] = '𓅖'
@@ -12697,7 +12715,7 @@ def replaceGardiner (signs):
             signs[i] = '𓅏'
         elif signs[i] == 'G12':
             signs[i] = '𓅎'
-        elif signs[i] == 'G11a':
+        elif signs[i] == 'G11A':
             signs[i] = '𓅍'
         elif signs[i] == 'G11':
             signs[i] = '𓅌'
@@ -12707,13 +12725,13 @@ def replaceGardiner (signs):
             signs[i] = '𓅊'
         elif signs[i] == 'G8':
             signs[i] = '𓅉'
-        elif signs[i] == 'G7b':
+        elif signs[i] == 'G7B':
             signs[i] = '𓅈'
-        elif signs[i] == 'G7a':
+        elif signs[i] == 'G7A':
             signs[i] = '𓅇'
         elif signs[i] == 'G7':
             signs[i] = '𓅆'
-        elif signs[i] == 'G6a':
+        elif signs[i] == 'G6A':
             signs[i] = '𓅅'
         elif signs[i] == 'G6':
             signs[i] = '𓅄'
@@ -12731,11 +12749,11 @@ def replaceGardiner (signs):
             signs[i] = '𓄾'
         elif signs[i] == 'F52':
             signs[i] = '𓄽'
-        elif signs[i] == 'F51c':
+        elif signs[i] == 'F51C':
             signs[i] = '𓄼'
-        elif signs[i] == 'F51b':
+        elif signs[i] == 'F51B':
             signs[i] = '𓄻'
-        elif signs[i] == 'F51a':
+        elif signs[i] == 'F51A':
             signs[i] = '𓄺'
         elif signs[i] == 'F51':
             signs[i] = '𓄹'
@@ -12745,15 +12763,15 @@ def replaceGardiner (signs):
             signs[i] = '𓄷'
         elif signs[i] == 'F48':
             signs[i] = '𓄶'
-        elif signs[i] == 'F47a':
+        elif signs[i] == 'F47A':
             signs[i] = '𓄵'
         elif signs[i] == 'F47':
             signs[i] = '𓄴'
-        elif signs[i] == 'F46a':
+        elif signs[i] == 'F46A':
             signs[i] = '𓄳'
         elif signs[i] == 'F46':
             signs[i] = '𓄲'
-        elif signs[i] == 'F45a':
+        elif signs[i] == 'F45A':
             signs[i] = '𓄱'
         elif signs[i] == 'F45':
             signs[i] = '𓄰'
@@ -12769,11 +12787,11 @@ def replaceGardiner (signs):
             signs[i] = '𓄫'
         elif signs[i] == 'F39':
             signs[i] = '𓄪'
-        elif signs[i] == 'F38a':
+        elif signs[i] == 'F38A':
             signs[i] = '𓄩'
         elif signs[i] == 'F38':
             signs[i] = '𓄨'
-        elif signs[i] == 'F37a':
+        elif signs[i] == 'F37A':
             signs[i] = '𓄧'
         elif signs[i] == 'F37':
             signs[i] = '𓄦'
@@ -12787,7 +12805,7 @@ def replaceGardiner (signs):
             signs[i] = '𓄢'
         elif signs[i] == 'F32':
             signs[i] = '𓄡'
-        elif signs[i] == 'F31a':
+        elif signs[i] == 'F31A':
             signs[i] = '𓄠'
         elif signs[i] == 'F31':
             signs[i] = '𓄟'
@@ -12809,7 +12827,7 @@ def replaceGardiner (signs):
             signs[i] = '𓄗'
         elif signs[i] == 'F22':
             signs[i] = '𓄖'
-        elif signs[i] == 'F21a':
+        elif signs[i] == 'F21A':
             signs[i] = '𓄕'
         elif signs[i] == 'F21':
             signs[i] = '𓄔'
@@ -12827,7 +12845,7 @@ def replaceGardiner (signs):
             signs[i] = '𓄎'
         elif signs[i] == 'F14':
             signs[i] = '𓄍'
-        elif signs[i] == 'F13a':
+        elif signs[i] == 'F13A':
             signs[i] = '𓄌'
         elif signs[i] == 'F13':
             signs[i] = '𓄋'
@@ -12853,7 +12871,7 @@ def replaceGardiner (signs):
             signs[i] = '𓄁'
         elif signs[i] == 'F2':
             signs[i] = '𓄀'
-        elif signs[i] == 'F1a':
+        elif signs[i] == 'F1A':
             signs[i] = '𓃿'
         elif signs[i] == 'F1':
             signs[i] = '𓃾'
@@ -12863,7 +12881,7 @@ def replaceGardiner (signs):
             signs[i] = '𓃼'
         elif signs[i] == 'E36':
             signs[i] = '𓃻'
-        elif signs[i] == 'E34a':
+        elif signs[i] == 'E34A':
             signs[i] = '𓃺'
         elif signs[i] == 'E34':
             signs[i] = '𓃹'
@@ -12877,7 +12895,7 @@ def replaceGardiner (signs):
             signs[i] = '𓃵'
         elif signs[i] == 'E29':
             signs[i] = '𓃴'
-        elif signs[i] == 'E28a':
+        elif signs[i] == 'E28A':
             signs[i] = '𓃳'
         elif signs[i] == 'E28':
             signs[i] = '𓃲'
@@ -12895,7 +12913,7 @@ def replaceGardiner (signs):
             signs[i] = '𓃬'
         elif signs[i] == 'E21':
             signs[i] = '𓃫'
-        elif signs[i] == 'E2a':
+        elif signs[i] == 'E2A':
             signs[i] = '𓃪'
         elif signs[i] == 'E20':
             signs[i] = '𓃩'
@@ -12903,11 +12921,11 @@ def replaceGardiner (signs):
             signs[i] = '𓃨'
         elif signs[i] == 'E18':
             signs[i] = '𓃧'
-        elif signs[i] == 'E17a':
+        elif signs[i] == 'E17A':
             signs[i] = '𓃦'
         elif signs[i] == 'E17':
             signs[i] = '𓃥'
-        elif signs[i] == 'E16a':
+        elif signs[i] == 'E16A':
             signs[i] = '𓃤'
         elif signs[i] == 'E16':
             signs[i] = '𓃣'
@@ -12923,11 +12941,11 @@ def replaceGardiner (signs):
             signs[i] = '𓃞'
         elif signs[i] == 'E10':
             signs[i] = '𓃝'
-        elif signs[i] == 'E9a':
+        elif signs[i] == 'E9A':
             signs[i] = '𓃜'
         elif signs[i] == 'E9':
             signs[i] = '𓃛'
-        elif signs[i] == 'E8a':
+        elif signs[i] == 'E8A':
             signs[i] = '𓃚'
         elif signs[i] == 'E8':
             signs[i] = '𓃙'
@@ -12945,21 +12963,21 @@ def replaceGardiner (signs):
             signs[i] = '𓃓'
         elif signs[i] == 'E1':
             signs[i] = '𓃒'
-        elif signs[i] == 'D67h':
+        elif signs[i] == 'D67H':
             signs[i] = '𓃑'
-        elif signs[i] == 'D67g':
+        elif signs[i] == 'D67G':
             signs[i] = '𓃐'
-        elif signs[i] == 'D67f':
+        elif signs[i] == 'D67F':
             signs[i] = '𓃏'
-        elif signs[i] == 'D67e':
+        elif signs[i] == 'D67E':
             signs[i] = '𓃎'
-        elif signs[i] == 'D67d':
+        elif signs[i] == 'D67D':
             signs[i] = '𓃍'
-        elif signs[i] == 'D67c':
+        elif signs[i] == 'D67C':
             signs[i] = '𓃌'
-        elif signs[i] == 'D67b':
+        elif signs[i] == 'D67B':
             signs[i] = '𓃋'
-        elif signs[i] == 'D67a':
+        elif signs[i] == 'D67A':
             signs[i] = '𓃊'
         elif signs[i] == 'D67':
             signs[i] = '𓃉'
@@ -12987,47 +13005,47 @@ def replaceGardiner (signs):
             signs[i] = '𓂾'
         elif signs[i] == 'D55':
             signs[i] = '𓂽'
-        elif signs[i] == 'D54a':
+        elif signs[i] == 'D54A':
             signs[i] = '𓂼'
         elif signs[i] == 'D54':
             signs[i] = '𓂻'
         elif signs[i] == 'D53':
             signs[i] = '𓂺'
-        elif signs[i] == 'D52a':
+        elif signs[i] == 'D52A':
             signs[i] = '𓂹'
         elif signs[i] == 'D52':
             signs[i] = '𓂸'
         elif signs[i] == 'D51':
             signs[i] = '𓂷'
-        elif signs[i] == 'D50i':
+        elif signs[i] == 'D50I':
             signs[i] = '𓂶'
-        elif signs[i] == 'D50h':
+        elif signs[i] == 'D50H':
             signs[i] = '𓂵'
-        elif signs[i] == 'D50g':
+        elif signs[i] == 'D50G':
             signs[i] = '𓂴'
-        elif signs[i] == 'D50f':
+        elif signs[i] == 'D50F':
             signs[i] = '𓂳'
-        elif signs[i] == 'D50e':
+        elif signs[i] == 'D50E':
             signs[i] = '𓂲'
-        elif signs[i] == 'D50d':
+        elif signs[i] == 'D50D':
             signs[i] = '𓂱'
-        elif signs[i] == 'D50c':
+        elif signs[i] == 'D50C':
             signs[i] = '𓂰'
-        elif signs[i] == 'D50b':
+        elif signs[i] == 'D50B':
             signs[i] = '𓂯'
-        elif signs[i] == 'D50a':
+        elif signs[i] == 'D50A':
             signs[i] = '𓂮'
         elif signs[i] == 'D50':
             signs[i] = '𓂭'
         elif signs[i] == 'D49':
             signs[i] = '𓂬'
-        elif signs[i] == 'D48a':
+        elif signs[i] == 'D48A':
             signs[i] = '𓂫'
         elif signs[i] == 'D48':
             signs[i] = '𓂪'
         elif signs[i] == 'D47':
             signs[i] = '𓂩'
-        elif signs[i] == 'D46a':
+        elif signs[i] == 'D46A':
             signs[i] = '𓂨'
         elif signs[i] == 'D46':
             signs[i] = '𓂧'
@@ -13053,7 +13071,7 @@ def replaceGardiner (signs):
             signs[i] = '𓂝'
         elif signs[i] == 'D35':
             signs[i] = '𓂜'
-        elif signs[i] == 'D34a':
+        elif signs[i] == 'D34A':
             signs[i] = '𓂛'
         elif signs[i] == 'D34':
             signs[i] = '𓂚'
@@ -13061,7 +13079,7 @@ def replaceGardiner (signs):
             signs[i] = '𓂙'
         elif signs[i] == 'D32':
             signs[i] = '𓂘'
-        elif signs[i] == 'D31a':
+        elif signs[i] == 'D31A':
             signs[i] = '𓂗'
         elif signs[i] == 'D31':
             signs[i] = '𓂖'
@@ -13071,7 +13089,7 @@ def replaceGardiner (signs):
             signs[i] = '𓂔'
         elif signs[i] == 'D28':
             signs[i] = '𓂓'
-        elif signs[i] == 'D27a':
+        elif signs[i] == 'D27A':
             signs[i] = '𓂒'
         elif signs[i] == 'D27':
             signs[i] = '𓂑'
@@ -13111,7 +13129,7 @@ def replaceGardiner (signs):
             signs[i] = '𓂀'
         elif signs[i] == 'D9':
             signs[i] = '𓁿'
-        elif signs[i] == 'D8a':
+        elif signs[i] == 'D8A':
             signs[i] = '𓁾'
         elif signs[i] == 'D8':
             signs[i] = '𓁽'
@@ -13157,7 +13175,7 @@ def replaceGardiner (signs):
             signs[i] = '𓁩'
         elif signs[i] == 'C11':
             signs[i] = '𓁨'
-        elif signs[i] == 'C10a':
+        elif signs[i] == 'C10A':
             signs[i] = '𓁧'
         elif signs[i] == 'C10':
             signs[i] = '𓁦'
@@ -13175,11 +13193,11 @@ def replaceGardiner (signs):
             signs[i] = '𓁠'
         elif signs[i] == 'C3':
             signs[i] = '𓁟'
-        elif signs[i] == 'C2c':
+        elif signs[i] == 'C2C':
             signs[i] = '𓁞'
-        elif signs[i] == 'C2b':
+        elif signs[i] == 'C2B':
             signs[i] = '𓁝'
-        elif signs[i] == 'C2a':
+        elif signs[i] == 'C2A':
             signs[i] = '𓁜'
         elif signs[i] == 'C2':
             signs[i] = '𓁛'
@@ -13193,7 +13211,7 @@ def replaceGardiner (signs):
             signs[i] = '𓁗'
         elif signs[i] == 'B6':
             signs[i] = '𓁖'
-        elif signs[i] == 'B5a':
+        elif signs[i] == 'B5A':
             signs[i] = '𓁕'
         elif signs[i] == 'B5':
             signs[i] = '𓁔'
@@ -13255,9 +13273,9 @@ def replaceGardiner (signs):
             signs[i] = '𓐗'
         elif signs[i] == 'Aa8':
             signs[i] = '𓐖'
-        elif signs[i] == 'Aa7b':
+        elif signs[i] == 'Aa7B':
             signs[i] = '𓐕'
-        elif signs[i] == 'Aa7a':
+        elif signs[i] == 'Aa7A':
             signs[i] = '𓐔'
         elif signs[i] == 'Aa7':
             signs[i] = '𓐓'
@@ -13323,23 +13341,23 @@ def replaceGardiner (signs):
             signs[i] = '𓀸'
         elif signs[i] == 'A46':
             signs[i] = '𓀷'
-        elif signs[i] == 'A45a':
+        elif signs[i] == 'A45A':
             signs[i] = '𓀶'
         elif signs[i] == 'A45':
             signs[i] = '𓀵'
         elif signs[i] == 'A44':
             signs[i] = '𓀴'
-        elif signs[i] == 'A43a':
+        elif signs[i] == 'A43A':
             signs[i] = '𓀳'
         elif signs[i] == 'A43':
             signs[i] = '𓀲'
-        elif signs[i] == 'A42a':
+        elif signs[i] == 'A42A':
             signs[i] = '𓀱'
         elif signs[i] == 'A42':
             signs[i] = '𓀰'
         elif signs[i] == 'A41':
             signs[i] = '𓀯'
-        elif signs[i] == 'A4a':
+        elif signs[i] == 'A4A':
             signs[i] = '𓀮'
         elif signs[i] == 'A40':
             signs[i] = '𓀭'
@@ -13357,7 +13375,7 @@ def replaceGardiner (signs):
             signs[i] = '𓀧'
         elif signs[i] == 'A33':
             signs[i] = '𓀦'
-        elif signs[i] == 'A32a':
+        elif signs[i] == 'A32A':
             signs[i] = '𓀥'
         elif signs[i] == 'A32':
             signs[i] = '𓀤'
@@ -13389,7 +13407,7 @@ def replaceGardiner (signs):
             signs[i] = '𓀗'
         elif signs[i] == 'A18':
             signs[i] = '𓀖'
-        elif signs[i] == 'A17a':
+        elif signs[i] == 'A17A':
             signs[i] = '𓀕'
         elif signs[i] == 'A17':
             signs[i] = '𓀔'
@@ -13397,7 +13415,7 @@ def replaceGardiner (signs):
             signs[i] = '𓀓'
         elif signs[i] == 'A15':
             signs[i] = '𓀒'
-        elif signs[i] == 'A14a':
+        elif signs[i] == 'A14A':
             signs[i] = '𓀑'
         elif signs[i] == 'A14':
             signs[i] = '𓀐'
@@ -13415,13 +13433,13 @@ def replaceGardiner (signs):
             signs[i] = '𓀊'
         elif signs[i] == 'A7':
             signs[i] = '𓀉'
-        elif signs[i] == 'A6b':
+        elif signs[i] == 'A6B':
             signs[i] = '𓀈'
-        elif signs[i] == 'A6a':
+        elif signs[i] == 'A6A':
             signs[i] = '𓀇'
         elif signs[i] == 'A6':
             signs[i] = '𓀆'
-        elif signs[i] == 'A5a':
+        elif signs[i] == 'A5A':
             signs[i] = '𓀅'
         elif signs[i] == 'A5':
             signs[i] = '𓀄'
@@ -13434,15 +13452,15 @@ def replaceGardiner (signs):
         elif signs[i] == 'A1':
             signs[i] = '𓀀'
         elif signs[i] == 'O':
-            signs[i] = '°'
+            signs[i] = '•'
         elif signs[i] == '[':
             signs[i] = '['
         elif signs[i] == ']':
             signs[i] = ']'
         else:
-            if not signs[i] == "-" and not signs[i] == ":" and not signs[i] == "*" and not signs[i] == "(" and not signs[i] == ")":
+            if not signs[i] == "-" and not signs[i] == ":" and not signs[i] == "*" and not signs[i] == "(" and not \
+            signs[i] == ")" and not signs[i] == "&":
                 signs[i] = "§" + signs[i] + "$"
-
 
     
     return signs
