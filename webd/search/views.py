@@ -508,7 +508,7 @@ def hit_tree(hits):
         for hid, pred in related_hit_ids:
             if hid in structure:
                 _, obj = structure.get(hid)
-                nest(obj, indent=indent + 1, pred=pred) #nesting (de)aktiviert             
+                #nest(obj, indent=indent + 1, pred=pred) #nesting (de)aktiviert: funktioniert nur innerhalb des Datenseite, nicht über Gesamtergebnismenge             
 
     while len(hits) > 0:
         hit = hits.pop(0)
