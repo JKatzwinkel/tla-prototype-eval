@@ -82,8 +82,9 @@ $(window).on('pageshow', function(){
   //wordClassSubtypesField.hide();
   wordClassTypesField.bind('input', function(){//bind is deprecated actually we supposed to use on()
     var key = wordClassTypesField.val();
+    var subkey = wordClassSubtypesField.val();
 
-    if (key in wordClasses && wordClasses[key] != null) {
+    if (subkey == null && key in wordClasses && wordClasses[key] != null) {
       wordClassSubtypesField.empty();
 	  $('#word_class_subtypes').append(
       '<option value="(any)">(any)</option>');
