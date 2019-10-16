@@ -65,7 +65,7 @@ function init() {
 	  var cookieAcceptanceState = getCookie("CookiePolicy");
 	  if (cookieAcceptanceState == "accepted") {
 		  $('.cookie-container').addClass('d-none');
-		  var ausgabe = document.getElementById('info');
+		  var ausgabe = document.getElementById('cookie-info');
 		  ausgabe.innerHTML = '(Cookies '+cookieAcceptanceState+')';
 	  }
 	

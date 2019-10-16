@@ -488,6 +488,11 @@ footer.bg-light{background-color: #e0e6ed!important;}
 		height: 90px;
 	}
 	
+#cookie-info {
+	font-size: 0.9em;
+	color: var(--BBAWdarkgray);
+}
+	
 /* Content - Detailseite */
 
 .show-info-button span.fas{
@@ -631,9 +636,10 @@ footer.bg-light{background-color: #e0e6ed!important;}
 	}
 
 .id {
+	font-size: 1.5em;
 	font-weight: 600;
-	padding: 1rem;
-	background-color: #CCC;
+	padding: 0.6rem;
+	background-color: var(--BBAWlightbluegray);
 	color: white;
     display: inline-block;
 }
@@ -698,7 +704,7 @@ footer.bg-light{background-color: #e0e6ed!important;}
 }
 .dropdown-item:hover {
     text-decoration: none;
-    background-color: #ccc;
+    background-color: var(--BBAWlightbluegray);
 }
 
 .solo-icon {margin-left: .5em;}
@@ -833,6 +839,10 @@ span.multiselect-native-select select {
 	
 	.header h1 {
 		font-size: 1.2rem;
+	}
+	
+	#homepage-img {
+		width: 100%;
 	}
     
     .footer-logo {

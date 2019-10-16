@@ -45,14 +45,19 @@
 		
 			<figure class="figure img-fluid single-article-image">
 				<a href="/search" title="Search the TLA">
-				  <img src="/static/img/zettelarchiv_slips.png" alt="slips from the zettelarchiv">
+				  <img id="homepage-img" src="/static/img/zettelarchiv_slips.png" alt="slips from the zettelarchiv">
 				</a>
 				<figcaption class="figure-caption">Slips from the <i>Zettelarchiv</i></figcaption>
 			</figure>
 
+			<div class="mt-2">
+				<a href="/search">
+					<button type="button" class="btn btn-danger text-left text-decoration-none"><span class="fas fa-arrow-circle-right"></span>Search the TLA</button>
+				</a>
+			</div>
 			
 			<!-- Zitationsfeld -->        
-			<div class="bg-light citation mt-2 mb-4">         
+			<div class="bg-light citation mt-4 mb-2">         
 				<p class="h6"><strong>Please cite this website as:</strong></p>
 				<blockquote><i>{{tlaTitle}}</i> &lt;{{tlaBaseURL}}&gt;, 
 					Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, 
