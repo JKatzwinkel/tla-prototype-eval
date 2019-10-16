@@ -104,6 +104,75 @@ function init() {
 			window.open('/help/bts-glossings','_blank');
 		  });	
 		  
+		  
+	// Search form settings		  
+
+	// corpus checkboxes
+		if (getCookie("CorpusHieroglyphic") == "false") {
+			document.getElementById("script-hieroglyphic").checked = false
+			}
+		else {
+			document.getElementById("script-hieroglyphic").checked = true
+			}
+		if (getCookie("CorpusDemotic") == "false") {
+			document.getElementById("script-demotic").checked = false
+			}
+		else {
+			document.getElementById("script-demotic").checked = true
+			}
+
+        $('#script-hieroglyphic').click(function (e) {
+			//e.preventDefault();
+			if (getCookie("CookiePolicy") == "accepted") {
+				setCookie("CorpusHieroglyphic", document.getElementById("script-hieroglyphic").checked);
+			}
+        });	
+        $('#script-demotic').click(function (e) {
+			//e.preventDefault();
+			if (getCookie("CookiePolicy") == "accepted") {
+				setCookie("CorpusDemotic", document.getElementById("script-demotic").checked);
+			}
+        });	
+
+	// encoding radios
+		if (getCookie("TransciptionEncoding") == "unicode") {
+			document.getElementById("transcription_enc_unicode").checked = true
+			document.getElementById("root_enc_unicode").checked = true
+			}
+		else {
+			document.getElementById("transcription_enc_mdc").checked = true
+			document.getElementById("root_enc_mdc").checked = true
+			}
+
+        $('#transcription_enc_unicode').click(function (e) {
+			//e.preventDefault();
+			if (getCookie("CookiePolicy") == "accepted") {
+				setCookie("TransciptionEncoding", "unicode");
+				document.getElementById("root_enc_unicode").checked = true
+			}
+        });	
+        $('#transcription_enc_mdc').click(function (e) {
+			//e.preventDefault();
+			if (getCookie("CookiePolicy") == "accepted") {
+				setCookie("TransciptionEncoding", "manuel_de_codage");
+				document.getElementById("root_enc_mdc").checked = true
+			}
+        });	
+        $('#root_enc_unicode').click(function (e) {
+			//e.preventDefault();
+			if (getCookie("CookiePolicy") == "accepted") {
+				setCookie("TransciptionEncoding", "unicode");
+				document.getElementById("transcription_enc_unicode").checked = true
+			}
+        });	
+        $('#root_enc_mdc').click(function (e) {
+			//e.preventDefault();
+			if (getCookie("CookiePolicy") == "accepted") {
+				setCookie("TransciptionEncoding", "manuel_de_codage");
+				document.getElementById("transcription_enc_mdc").checked = true
+			}
+        });	
+		
 	// Show/Hide - Buttons
     
 		// .sidebar
