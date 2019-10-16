@@ -8,6 +8,52 @@
 
 <script type="text/javascript">
 var wordClasses = {{ word_classes | js }};
+
+var subPOSDict = {
+        "animal_name": "animal",
+        "artifact_name": "artifact",
+        "cardinal": "cardinal",
+        "demonstrative_pronoun": "demonstrative",
+        "epith_god": "divine",
+        "epith_king": "royal",
+        "gods_name": "divine",
+        "interrogative_pronoun": "interrogative",
+        "kings_name": "royal",
+        "nisbe_adjective_preposition": "de-prepositional nisbe",
+        "nisbe_adjective_substantive": "de-nominal nisbe",
+        "ordinal": "ordinal",
+        "org_name": "organization",
+        "particle_enclitic": "enclitic",
+        "particle_nonenclitic": "nonenclitic",
+        "person_name": "personal",
+        "personal_pronoun": "personal",
+        "place_name": "place",
+        "prepositional_adverb": "de-prepositional",
+        "relative_pronoun": "relative",
+        "substantive_fem": "fem.",
+        "substantive_masc": "masc.",
+        "title": "title",
+        "verb_2-gem": "II gem.",
+        "verb_2-lit": "2 lit.",
+        "verb_3-gem": "III gem.",
+        "verb_3-inf": "III inf.",
+        "verb_3-lit": "3 lit.",
+        "verb_4-inf": "IV inf.",
+        "verb_4-lit": "4 lit.",
+        "verb_5-inf": "V inf.",
+        "verb_5-lit": "5 lit.",
+        "verb_6-lit": "6 lit.",
+        "verb_caus_2-gem": "caus. II gem.",
+        "verb_caus_2-lit": "caus. 2 lit.",
+        "verb_caus_3-gem": "caus. III gem.",
+        "verb_caus_3-inf": "caus. III inf.",
+        "verb_caus_3-lit": "caus. 3 lit.",
+        "verb_caus_4-inf": "caus. IV inf.",
+        "verb_caus_4-lit": "caus. 4 lit.",
+        "verb_caus_5-lit": "caus. 5 lit.",
+        "verb_irr": "irregular"
+};
+
 $(window).on('pageshow', function(){
   // prevent submit button from passing empty parameters in GET request
   $("#dict-search").submit(function() {
@@ -43,7 +89,7 @@ $(window).on('pageshow', function(){
       '<option value="(any)">(any)</option>');
       wordClasses[key].forEach((subtype, index) => {
         $('#word_class_subtypes').append(
-        '<option value="'+subtype+'">'+subtype+'</option>');
+        '<option value="'+subtype+'">'+subPOSDict[subtype]+'</option>');
       });
       //wordClassSubtypesField.show(150);
     } else {
@@ -335,5 +381,3 @@ $(window).on('pageshow', function(){
 	</div>  <!-- /.row content-->
 	</div> <!-- /.container Content -->
 	{% endblock %}
-	
-	
