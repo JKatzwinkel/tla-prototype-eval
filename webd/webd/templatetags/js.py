@@ -35,15 +35,23 @@ def niceCorpus(corpus):
 @register.filter(is_safe=True)
 def fixForRES(mdc):
     if mdc:
-        mdc = mdc.replace('[', 'empty[shade]') # temporary workaround
-        #mdc = mdc.replace(']', '"]"') # darf nicht nochmal getauscht werden, sonst zerstört es die Ersetzung von "["
+        mdc = mdc.replace('*', '-') 
+        mdc = mdc.replace(':', '-') 
+        mdc = mdc.replace('&', '-') 
+        mdc = mdc.replace('[?', '[') 
+        mdc = mdc.replace('?]', '"?"-]') 
+        mdc = mdc.replace('[', '"["') 
+        mdc = mdc.replace(']', '"]"') 
         mdc = mdc.replace('..', 'empty')
         mdc = mdc.replace('.', 'empty[width=0.5,height=0.5]')
-        mdc = mdc.replace('//', 'empty[shade]')
-        mdc = mdc.replace('h/', 'empty[t]')
-        mdc = mdc.replace('v/', 'empty[s]')
-        mdc = mdc.replace('/', 'empty[ts]')
+        mdc = mdc.replace('//', 'empty[width=0.5,shade]-"."-"."-empty[width=0.5,shade]') 
+        mdc = mdc.replace('h/', 'empty[width=0.5,shade]')
+        mdc = mdc.replace('v/', 'empty[height=0.5,shade]')
+        #mdc = mdc.replace('/', 'empty[width=0.5,height=0.5,shade]')
+        mdc = mdc.replace('"var"', '"*"') 
+        mdc = mdc.replace('\\', '[mirror]')
         mdc = re.sub(r'([0-9])([A-Z])', lambda m: m.group(0).lower(), mdc.rstrip()) #replace alphanumerical glyph index by lowercase
+        pass
     return mdc 
 
 @register.filter(is_safe=True)
@@ -11436,8 +11444,7 @@ def computeLingGlossing(flexcode, lemmaID):
 def MdC_Unicode_withLatinControlChars(wordToParse):
     if not wordToParse: return ''
 
-    wordToParse = wordToParse.replace("-", "£-£").replace(":", "£:£").replace("*", "£*£").replace("(", "£(£").replace(
-        "£)£", "").replace("£&£", "")
+    wordToParse = wordToParse.replace("-", "£-£").replace(":", "£:£").replace("*", "£*£").replace("(", "£(£").replace(")", "£)£").replace("&", "£&£")
 
     signsToParse = wordToParse.split("£")
 
@@ -11445,6 +11452,7 @@ def MdC_Unicode_withLatinControlChars(wordToParse):
 
     wordParsed = "".join(signsParsed)
 
+    if not wordParsed: return ''
     return wordParsed
 
 #- - - - - - - - - - - -
@@ -11455,8 +11463,7 @@ def MdC_Unicode_withLatinControlChars(wordToParse):
 def MdC_Unicode_noControlChars(wordToParse):
     if not wordToParse: return ''
 
-    wordToParse = wordToParse.replace("-", "£-£").replace(":", "£:£").replace("*", "£*£").replace("(", "£(£").replace(
-        "£)£", "").replace("£&£", "")
+    wordToParse = wordToParse.replace("-", "£-£").replace(":", "£:£").replace("*", "£*£").replace("(", "£(£").replace(")", "£)£").replace("&", "£&£") #.replace('"', "")
 
     signsToParse = wordToParse.split("£")
 
@@ -11464,9 +11471,10 @@ def MdC_Unicode_noControlChars(wordToParse):
 
     wordToParse = "".join(signsParsed)
 
-    wordParsed = wordToParse.replace("-", "").replace(":", "").replace("*", "").replace("(", "").replace(")", "").replace("&", "")
+    wordParsed = wordToParse.replace("-", "").replace(":", "").replace("*", "").replace("(", "").replace(")", "").replace("&", "") #.replace('"', "")
     wordParsed = wordParsed.replace("§", "(").replace("$", ")")
 
+    if not wordParsed: return ''
     return wordParsed
 
 #- - - - - - - - - - - -
@@ -11488,6 +11496,7 @@ def MdC_Unicode_noControlChars_WithBreakLigChar(wordToParse):
     wordParsed = wordToParse.replace("-", u"\u200B").replace(":", "").replace("*", "").replace("(", "").replace(")", "").replace("&", "")
     wordParsed = wordParsed.replace("§", "(").replace("$", ")")
 
+    if not wordParsed: return ''
     return wordParsed
 
 # Fourth Function - analyses the word according to all the three previous functions, and output the result as an array
@@ -12591,8 +12600,13 @@ def replaceGardiner (signs):
         'A2': '𓀁',
         'A1': '𓀀',
         'O': '•',
-        '[': '[//..//]', # temporary workaroung TLA
-        ']': ']' 
+        '//': '//..//',
+        'v/': '//',
+        'h/': '//',
+        '/': '//',
+        '[?': '[',
+        '?]': '?]',
+        '"var"': '*',
         }
             
     for i in range (0, len(signs)):
@@ -12600,8 +12614,7 @@ def replaceGardiner (signs):
         if unicodeSign:
             signs[i] = unicodeSign
         else:
-            if not signs[i] == "-" and not signs[i] == ":" and not signs[i] == "*" and not signs[i] == "(" and not \
-            signs[i] == ")" and not signs[i] == "&":
+            if not signs[i] == "-" and not signs[i] == ":" and not signs[i] == "*" and not signs[i] == "(" and not signs[i] == ")" and not signs[i] == "&":
                 signs[i] = "§" + signs[i] + "$"
     
     return signs

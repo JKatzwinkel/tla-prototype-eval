@@ -21,7 +21,7 @@
 		</div>
 	</div><!-- /.row -->
     
-    <div id="button-bar-small" class="sticky-top d-lg-none">
+    <div id="button-bar-small" class="button-bar sticky-top d-lg-none">
         <div class="functional-icon-set">
             
             <a href="javascript:history.back()"><button type="button" class="btn btn-red text-left text-decoration-none solo-icon"><i class="fas fa-arrow-circle-left"></i><span class="d-none d-lg-block">Back</span></button></a>   
@@ -52,7 +52,7 @@
 			<h2 class="id mt-1">Lemma ID {{params.lemma}} (<span class="bbaw-libertine">##transkr##{{params.transcription}}</span>)</h2> <!--## transcription wird nicht mitgeliefert -->
 		</div>
         
-        <div class="col-md-4 align-right align-baseline d-none d-lg-block">
+        <div class="button-bar col-md-4 align-right align-baseline d-none d-lg-block">
             <div class="functional-icons ml-3 ">
               <a href="#" class="btn btn-light solo-icon" role="button" data-toggle="modal" data-target="#modal_sharing">Share&nbsp;&nbsp;<i class="fa fa-share-alt share-results"></i></a>              
             </div>
@@ -165,7 +165,7 @@
                             {% if token.type == 'word' %}
 								{{token.glyphs|MdC_Unicode_noControlChars}}
                             {%else%}
-								{{token.glyphs}}
+								{% if token.glyphs %}{{token.glyphs}}{%endif%}
                             {%endif%}
                         </span>
                         {%endfor%} 
@@ -282,7 +282,7 @@
 	
 	
 		<!-- Sidebar large -->
-		<div class="col-lg-4 d-none d-lg-block">
+		<div class="sidebar col-lg-4 d-none d-lg-block">
 			<div class="sticky-top">
 				<div class="input-group mb-3">
 					<div class="input-group-append">
@@ -329,7 +329,7 @@
     
     <!-- Sidebar small-->
     
-    <div id="sidebar" class="d-lg-none">
+    <div id="sidebar" class="sidebar d-lg-none">
         <div class="sidebar-wrapper">                        
             <div class="close-sidebar">
                 <a href="#"><button type="button" class="btn btn-block btn-red text-left text-decoration-none show-detail"><span class="fas fa-times"></span>Hide options</button>
