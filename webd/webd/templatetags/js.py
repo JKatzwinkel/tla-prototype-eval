@@ -109,7 +109,7 @@ def niceQueryData(name):
         'unicode': 'Unicode',
         'manuel_de_codage': 'Manuel de Codage',
         'pos_type': 'Part of Speech', 
-        'pos_subtype': 'POS subtype', 
+        'pos_subtype': 'Part of Speech subtype', 
         'lemma_id': 'Lemma ID'
         }
     newName = dict.get(name)

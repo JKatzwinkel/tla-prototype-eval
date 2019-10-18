@@ -442,6 +442,60 @@ function init() {
             $('.token-translation').slideToggle('slow');
         });	
 		
+  	// .text-date
+		if (getCookie("TextDateVisible") == "false") {
+			$('i', '.text-date-btn').addClass("fa-minus-circle")
+			$('.text-date').hide();
+			}
+		else {
+			$('i', '.text-date-btn').addClass("fa-plus-circle")
+			$('.text-date').show();
+			}
+
+		$('html').not('.text-date').click(function (e) {
+		 if ($('.text-date').is(':visible') && !e.target == '.text-date') {
+                $('.text-date').slideUp('ease-out');
+            }
+        });
+        $('.text-date-btn').click(function (e) {
+			e.preventDefault();
+			if (getCookie("CookiePolicy") == "accepted") {
+				if ($('.text-date').is(':visible')) {
+					setCookie("TextDateVisible", "false");
+				} else {
+					setCookie("TextDateVisible", "true");
+				}
+			}
+            $('.text-date').slideToggle('slow');
+        });	
+		
+  	// .text-editor
+		if (getCookie("TextEditorVisible") == "false") {
+			$('i', '.text-editor-btn').addClass("fa-minus-circle")
+			$('.text-editor').hide();
+			}
+		else {
+			$('i', '.text-editor-btn').addClass("fa-plus-circle")
+			$('.text-editor').show();
+			}
+
+		$('html').not('.text-editor').click(function (e) {
+		 if ($('.text-editor').is(':visible') && !e.target == '.text-editor') {
+                $('.text-editor').slideUp('ease-out');
+            }
+        });
+        $('.text-editor-btn').click(function (e) {
+			e.preventDefault();
+			if (getCookie("CookiePolicy") == "accepted") {
+				if ($('.text-editor').is(':visible')) {
+					setCookie("TextEditorVisible", "false");
+				} else {
+					setCookie("TextEditorVisible", "true");
+				}
+			}
+            $('.text-editor').slideToggle('slow');
+        });	
+		
    // Translation Languages
    
     // Indented Language-Buttons

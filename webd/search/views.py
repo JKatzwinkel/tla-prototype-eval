@@ -143,7 +143,7 @@ def dict_search_query(**params):
             clauses.append(
                 {
                     "regexp": {
-                        "name": TLAWildcardToRegEx(transcription)+"([\.].+)?",
+                        "name": TLAWildcardToRegEx(transcription)+".*", # nur nach ".": '+"([\.].+)?",'
                     }
                 }
             )
@@ -451,11 +451,26 @@ def populate_textword_occurrences(hits, **params):
                         }.get(node.get('eclass')),
                         node['id']
                     )
+            try:
+                editor = text['edited']['name']
+            except: 
+                editor = '(not edited)'
+            try:
+                dateEdited = text['edited']['date']
+            except: 
+                dateEdited = '(not edited)'
+            try:
+                date = text['passport']['date'][0]['date'][0]['date'][0]['name']
+            except: 
+                date = '(not edited)'
             occurrences.append(
                 {
                     "occurrence": hit,
                     "sentence": sentence,
                     "text": text,
+                    "editor": editor,
+                    "date": date,
+                    "dateEdited": dateEdited,
                 }
             )
         else:

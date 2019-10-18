@@ -272,10 +272,14 @@
 					{%endfor%}
 				</div>	
 				
+				<div class="text-data mt-2">
+					<p class="text-date"><strong>Date</strong>: {{hit.date}}</p>
+					<p class="text-editor"><strong>Principle editor</strong>: {{hit.editor}} ({{hit.dateEdited}})</p>
+				</div>
 							
 			
          </div> <!--.Treffer -->
-			{% endfor %}
+		{% endfor %}
 
 
 		</div> <!-- .col-sm-8 -->
@@ -307,6 +311,9 @@
                     <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail token-translation-btn"><i class="fas"></i>Token translation</button>
                     <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-id-btn "><i class="fas"></i>Word token ID</button>
 				</div>	
+
+				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail text-date-btn mt-2"><i class="fas"></i>Dating of text</button>
+				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail text-editor-btn"><i class="fas"></i>Text editor</button>
 
                 <!-- start LANGUAGE buttons -- >
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail languages-btn mt-2">Sentence translation</button>                 
@@ -358,6 +365,9 @@
                     <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail token-translation-btn"><i class="fas"></i>Token translation</button>
                     <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-id-btn "><i class="fas"></i>Word token ID</button>
 				</div>	
+
+				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail text-date-btn mt-2"><i class="fas"></i>Dating of text</button>
+				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail text-editor-btn"><i class="fas"></i>Text editor</button>
                 
                 <!-- start LANGUAGE buttons -- >
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail languages-btn">Sentence translation</button>                 
