@@ -7,6 +7,7 @@
 <link rel="stylesheet" type="text/css" href="{% static "css/keyboard.css"%}"/>
 
 <script type="text/javascript">
+
 var wordClasses = {{ word_classes | js }};
 
 var subPOSDict = {
@@ -55,6 +56,42 @@ var subPOSDict = {
 };
 
 $(window).on('pageshow', function(){
+    // If form values are not blank, restore them to the form fields
+    var sessionVal = sessionStorage.getItem('dictSearchTranscription');
+    if (sessionVal !== null) $('#dict-search-transcription').val(sessionVal);
+    sessionVal = sessionStorage.getItem('dictSearchRoot');
+    if (sessionVal !== null) $('#dict-search-root').val(sessionVal);
+    sessionVal = sessionStorage.getItem('dictSearchTranslation');
+    if (sessionVal !== null) $('#dict-search-translation').val(sessionVal);
+    sessionVal = sessionStorage.getItem('dictSearchBibliography');
+    if (sessionVal !== null) $('#dict-search-bibliography').val(sessionVal);
+    sessionVal = sessionStorage.getItem('dictSearchLemmaID');
+    if (sessionVal !== null) $('#dict-search-lemma-id').val(sessionVal);
+    sessionVal = sessionStorage.getItem('dictSearchPOS');
+    if (sessionVal !== null) $('#word_class_types').val(sessionVal);
+	
+	function populateSubPOS() {
+    $('#word_class_subtypes').empty();
+	var key = $("#word_class_types").val();
+    if (key in wordClasses && wordClasses[key] != null) {
+	  $('#word_class_subtypes').append('<option value="(any)">(any)</option>');
+      wordClasses[key].forEach((subtype, index) => {
+        $('#word_class_subtypes').append('<option value="'+subtype+'">'+subPOSDict[subtype]+'</option>');
+      });
+    } else {
+      $('#word_class_subtypes').val('');
+    }
+	}
+	populateSubPOS();
+	
+    sessionVal = sessionStorage.getItem('dictSearchSubPOS');
+    if (sessionVal !== null) $('#word_class_subtypes').val(sessionVal);
+    sessionVal = sessionStorage.getItem('dictSearchTranslationLanguage');
+    if (sessionVal !== null) $('#dict-search-translation-lang').val(sessionVal);
+    sessionVal = sessionStorage.getItem('dictSearchSentenceID');
+    if (sessionVal !== null) $('#dict-search-sentence-id').val(sessionVal);
+
+
   // prevent submit button from passing empty parameters in GET request
   $("#dict-search").submit(function() {
     // disable empty input fields
@@ -70,6 +107,9 @@ $(window).on('pageshow', function(){
     if (!$("#dict-search-translation").val()) {
       $("select[name=lang]").attr("disabled", "disabled");
     }
+    if (!$("#word_class_types").val() || $("#word_class_types").val() == "(any)") {
+      $("select[name=pos_subtype]").attr("disabled", "disabled");
+    }
     return true;
   });
   
@@ -80,29 +120,36 @@ $(window).on('pageshow', function(){
   var wordClassTypesField = $("#word_class_types");
   var wordClassSubtypesField = $("#word_class_subtypes");
   //wordClassSubtypesField.hide();
-  wordClassTypesField.bind('input', function(){//bind is deprecated actually we supposed to use on()
-    var key = wordClassTypesField.val();
-    var subkey = wordClassSubtypesField.val();
-
+  wordClassTypesField.on('input', function(){ 
+	$('#word_class_subtypes').empty();
+    var key = $("#word_class_types").val();
     if (key in wordClasses && wordClasses[key] != null) {
-      wordClassSubtypesField.empty();
-	  $('#word_class_subtypes').append(
-      '<option value="(any)">(any)</option>');
+	  $('#word_class_subtypes').append('<option value="(any)">(any)</option>');
       wordClasses[key].forEach((subtype, index) => {
-        $('#word_class_subtypes').append(
-        '<option value="'+subtype+'">'+subPOSDict[subtype]+'</option>');
+        $('#word_class_subtypes').append('<option value="'+subtype+'">'+subPOSDict[subtype]+'</option>');
       });
-      //wordClassSubtypesField.show(150);
     } else {
-      //wordClassSubtypesField.hide(150);
-	    wordClassSubtypesField.empty();
-        wordClassSubtypesField.val('');
+      $('#word_class_subtypes').val('');
     }
   });
 });
+
+// Storing form data   
+$(window).on('unload', function() {
+    sessionStorage.setItem("dictSearchTranscription", $('#dict-search-transcription').val());
+    sessionStorage.setItem("dictSearchPOS", $('#word_class_types').val());
+    sessionStorage.setItem("dictSearchSubPOS", $('#word_class_subtypes').val());
+    sessionStorage.setItem("dictSearchRoot", $('#dict-search-root').val());
+    sessionStorage.setItem("dictSearchTranslation", $('#dict-search-translation').val());
+    sessionStorage.setItem("dictSearchTranslationLanguage", $('#dict-search-translation-lang').val());
+    sessionStorage.setItem("dictSearchBibliography", $('#dict-search-bibliography').val());
+    sessionStorage.setItem("dictSearchLemmaID", $('#dict-search-lemma-id').val());
+    sessionStorage.setItem("dictSearchSentenceID", $('#dict-search-sentence-id').val());
+});
+
 </script>
 
-<script type="text/javascript">
+<!--<script type="text/javascript">
  
     $(document).ready(function() {
  
@@ -110,7 +157,7 @@ $(window).on('pageshow', function(){
  
     });
  
-</script>
+</script>-->
 
 {% endblock %}
 
@@ -370,7 +417,7 @@ $(window).on('pageshow', function(){
 					
 				</div>		
 			
-				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none" onclick="window.open('/search','_self')">
+				<button id="clear-form-btn" type="button" class="btn btn-block btn-secondary text-left text-decoration-none">
 					<span class="fas fa-times-circle"></span>Clear all
 				</button>
 				<button id="submit-search-form" type="submit" class="btn btn-block btn-danger text-left text-decoration-none mt-4" form="dict-search" formtarget="_self" formmethod="get" formenctype="application/x-www-form-urlencoded">

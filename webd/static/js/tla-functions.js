@@ -1,6 +1,5 @@
 $(window).on('pageshow', init);
 
-
 // Sidebar 
  /*   $('html').not('#sidebar').click(function (e) {
 		        //console.log($(e.target).parent());
@@ -685,6 +684,19 @@ function init() {
             $('.indented-buttons-annotation').slideToggle('slow');
         });*/
     
+	// Clear all Button   
+$('#clear-form-btn').click(function(e) {
+	e.preventDefault();
+    $('#dict-search-transcription').val('');
+    $('#word_class_types').val('(any)');
+    $('#word_class_subtypes').val('');
+    $('#dict-search-root').val('');
+    $('#dict-search-translation').val('');
+    $('#dict-search-translation-lang').val('de');
+    $('#dict-search-bibliography').val('');
+    $('#dict-search-lemma-id').val('');
+    $('#dict-search-sentence-id').val('');
+});
     
 	// Show/Hide Comments
         
