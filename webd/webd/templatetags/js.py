@@ -59,6 +59,7 @@ def niceTransliteration(transl):
     if transl:
         transl = transl.replace('≡', '=')
         transl = transl.replace(',', '.')
+        transl = transl.replace(';', '.')	# BTS Demotic phonetic complement marker
         transl = transl.replace('.du', ':DU')
         transl = transl.replace('.pl', ':PL')
     return transl

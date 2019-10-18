@@ -571,21 +571,42 @@ tlaBaseURL = "http://tla.bbaw.de"
 def sortTranslitStr(sortString):
     # zusammengesetzte Großbuchstaben in Kleinbuchstaben verwandeln
     sortString = sortString.replace('H̱', 'ẖ') 
-    sortString = sortString.replace('H̭͗', 'h̭') 
+    sortString = sortString.replace('I͗', 'ı͗') 
+    sortString = sortString.replace('H̭', 'h̭') # eigentlich redundant
+    sortString = sortString.replace('Č̣', 'č̣') # eigentlich redundant
     # Groß- in Kleinbuchstaben verwandeln
     sortString = sortString.lower()
     # Transliterationsalphabet in Pseudoalphabet verwandeln, nur unzusammengesetzte
-    translString = sortString.maketrans(".ꜣʾjïyꜥwbpfmnrhḥḫẖzsšqkgtṯṱdḏ-", "ABCDFHIJLMNOPQRSTUWXYZabcdefgh")
+    translString = sortString.maketrans("*=.-ʾꜣaijïyꜥewbpfmnrlhḥḫẖzsśšqḳkgtṱṯčdṭḏ", "ABCDFHIJNOPQRTUWXYZabcdeghijklmnopqrstuv")
     sortString = sortString.translate(translString) 
     # restliche, zusammengesetzte Kleinbuchstaben in Pseudoalphabet verwandeln
-    sortString = sortString.replace('ı͗', 'E') 
-    sortString = sortString.replace('i̯', 'G') 
-    sortString = sortString.replace('u̯', 'K')
-    sortString = sortString.replace('h̭', 'V')
+    sortString = sortString.replace('i̯', 'L') 
+    sortString = sortString.replace('ı͗', 'M') # i ohne Punkt + Haken
+    sortString = sortString.replace('i͗', 'M') # normales "i" + Haken
+    sortString = sortString.replace('u̯', 'S')
+    sortString = sortString.replace('h̭', 'f')
+    sortString = sortString.replace('č̣', 'w')
     # entspricht Sortierfolge 
-    # .ꜣʾjı͗ïi̯yꜥwu̯bpfmnrhḥḫẖh̭zsšqkgtṯṱdḏ-
-    # ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefgh
+    # '*' > '=' > '.' > '-' > 'ʾ' > 'ꜣ' > 'a' > 'i' > 'i̯' > 'ı͗' > 'j' > 'ï' > 'y' > 'ꜥ' > 'e' > 'u̯' > 'w' > 'b' > 'p' > 'f' > 'm' > 'n' > 'r' > 'l' > 'h' > 'ḥ' > 'ḫ' > 'h̭' > 'ẖ' > 'z' > 's' > 'ś' > 'š' > 'q' > 'ḳ' > 'k' > 'g' > 't' > 'ṱ' > 'ṯ' > 'č' > 'd' > 'ṭ' > 'ḏ' > 'č̣'
     return sortString
+
+def unicodeSearchStr(unicodeTransliteration):
+    searchStr = unicodeTransliteration
+    # zusammengesetzte Großbuchstaben in Kleinbuchstaben verwandeln
+    searchStr = searchStr.replace('H̱', 'ẖ') 
+    searchStr = searchStr.replace('I͗', 'ı͗') 
+    searchStr = searchStr.replace('H̭', 'h̭') # eigentlich redundant
+    searchStr = searchStr.replace('Č̣', 'č̣') # eigentlich redundant
+    # Groß- in Kleinbuchstaben verwandeln
+    searchStr = searchStr.lower()
+    # zusammengesetzte Kleinbuchstaben in Pseudoalphabet verwandeln
+    searchStr = searchStr.replace('i̯', 'i') 
+    searchStr = searchStr.replace('ı͗', 'I') # i ohne Punkt + Haken
+    searchStr = searchStr.replace('i͗', 'I') # normales "i" + Haken
+    searchStr = searchStr.replace('u̯', 'u')
+    searchStr = searchStr.replace('h̭', 'H')
+    searchStr = searchStr.replace('č̣', 'D') # sollte nicht vorkommen, aber zur Sicherheit
+    return searchStr
 
 @require_http_methods(["GET"])
 def search_dict(request):

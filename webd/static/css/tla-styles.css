@@ -2,8 +2,7 @@
  * TLA - styles
  */
  
- /* BBAW color variables */
-
+ /* BBAW color variables; !variables not supported by legacy IE */
 :root {
 	--BBAWred: #C60C30; 
 	--BBAWdarkred: #B0152D;
@@ -14,11 +13,15 @@
 	--BBAWlightgray: #E0E0E0;
 }
 
-.BBAWred {color:var(--BBAWred);}
+.BBAWred {
+	color:#C60C30; /* BBAW red*/
+	}
 
 /* Container */
 
-.container {max-width: 90%!important;}
+.container {
+	max-width: 90%!important;
+	}
 
 
 /* Typography */
@@ -47,10 +50,10 @@ body, a, p, h1, h2, h3, ul, li {
 
 .condensed {font-familiy:"Roboto Condensed";}
 
-a {color:var(--BBAWred);}	
+a {color:#C60C30; /* BBAW red*/}	
 a:hover {
 	text-decoration: none;
-	color:var(--BBAWred);	
+	color:#C60C30; /* BBAW red*/	
 	}
 	
 hr {
@@ -77,14 +80,14 @@ box-shadow: 0px 0px 19px 5px rgba(0,0,0,0.17);
 	}
 .navbar-light a {font-weight: bold;}
 .navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover {
-    color: var(--BBAWred);
+    color: #C60C30; /* BBAW red*/
 }
 a.navbar-brand {
 	font-weight: bold;
 	font-size: 1.5rem;
 	color: white!important;
 	padding: 10px;
-	background-color: var(--BBAWred);
+	background-color: #C60C30; /* BBAW red*/
 	}
 	
 .navbar h1 {
@@ -184,7 +187,7 @@ a.navbar-brand {
 	
 .result-list-item a.bibliography-list:hover{
     color: white;
-	background-color: var(--BBAWred);
+	background-color: #C60C30; /* BBAW red*/
 	cursor: pointer;
 	}		
 .result-list-item a.bibliography-list .svg-inline--fa{
@@ -228,7 +231,7 @@ a.navbar-brand {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1a000000', endColorstr='#00000000',GradientType=1 ); /* IE6-9 */
 	}
 .result-list-item h2{	
-	color: var(--BBAWred);
+	color: #C60C30; /* BBAW red*/
 	font-size: 1.4em;
 	}
 .result-list .indent-1{
@@ -275,10 +278,10 @@ a.navbar-brand {
 
 
 a.share-results {color: grey!important;}
-a.share-results:hover {color: var(--BBAWred);}
+a.share-results:hover {color: #C60C30; /* BBAW red*/}
 
 .result-list-item .occ-tok.highlight-1 {
-	background-color: var(--BBAWred);
+	background-color: #C60C30; /* BBAW red*/
 	color: white;
 }
 .result-list-item .occ-tok.highlight-2 {
@@ -296,7 +299,7 @@ a.share-results:hover {color: var(--BBAWred);}
 }
 
 .corpus-path-element a:hover {
-	color: var(--BBAWred)!important;
+	color: #C60C30!important; /* BBAW red*/
 }
 
 a span.lc {
@@ -304,16 +307,16 @@ a span.lc {
     color: grey!important;
 }
 a span.lc:hover {
-	color: var(--BBAWred)!important;
+	color: #C60C30!important; /* BBAW red*/
 }
 .result-list-item img.occ-tok-glyphs.highlight-1,
 .result-list-item canvas.res.occ-tok-glyphs.highlight-1 {
-	border: 1px solid var(--BBAWred);
+	border: 1px solid #C60C30; /* BBAW red*/
 	border-radius: 2px;
 }
 /*.occ-list-item img.occ-tok-glyphs.highlight-1,
 .occ-list-item canvas.res.occ-tok-glyphs.highlight-1 {
-	border: 1px solid var(--BBAWred);
+	border: 1px solid #C60C30; /* BBAW red*/
 	border-radius: 2px;
 }*/
 .occ-list-item .highlight-1 {
@@ -323,7 +326,7 @@ a span.lc:hover {
 .unicode-hieroglyphs {
 	font-family: "EgyptianHiero";
 	font-size: 2em;
-	color: var(--BBAWdarkbluegray); 
+	color: #4A5B70; /* BBAW dark bluegray*/ 
 }
 
 .token-destruction_marker {
@@ -335,6 +338,10 @@ a span.lc:hover {
 	color: black!important;
     font-weight: bold;
 }
+.token-para {
+	color: #687A90!important; /* BBAW middle bluegrey */
+}
+.token-para:before {content: "§";}
 	
 .translations {display:inline;}
 
@@ -361,7 +368,7 @@ a span.lc:hover {
 .result-list-item span.glyphbox img{
 }
 .result-list-item span.glyphbox img:hover {
-	border-bottom: 1px solid var(--BBAWred);
+	border-bottom: 1px solid #C60C30; /* BBAW red*/
 }
 
 .result-list hr {margin:0!important;}
@@ -407,7 +414,7 @@ ul.annotation-block:hover {
 }
 .annotation-block.active:hover {
     opacity: 1;
-    background-color: var(--BBAWred);
+    background-color: #C60C30; /* BBAW red*/
 }
 .annotation-block.active li{
     color: white!important;
@@ -430,7 +437,7 @@ ul.annotation-block li.translations {
 .annotation-block .transcription {
     font-family: "BBAWLibertine", serif;
     font-size: 1.2em;
-    color: var(--BBAWred);
+    color: #C60C30; /* BBAW red*/
 }
 
 .languages-btn {margin-bottom: .5em;}
@@ -507,7 +514,7 @@ footer.bg-light{background-color: #e0e6ed!important;}
 	
 #cookie-info {
 	font-size: 0.9em;
-	color: var(--BBAWdarkgray);
+	color: #3E4955; /* BBAW dark gray*/
 }
 	
 /* Content - Detailseite */
@@ -600,13 +607,13 @@ footer.bg-light{background-color: #e0e6ed!important;}
 .card-header h2 .btn-link {
     font-weight: 400;
 	font-size: 1.2rem;
-    color: var(--BBAWred);    
+    color: #C60C30; /* BBAW red*/    
 }
 .card-header h2 .btn-link:hover {
     text-decoration: none;   
 }
 .keyboardInputInitiator {
-  color: var(--BBAWred);
+  color: #C60C30; /* BBAW red*/
 }
 
 /* Forms */
@@ -630,19 +637,19 @@ footer.bg-light{background-color: #e0e6ed!important;}
 	border: 0;
 	}
 .btn-red {
-	color: var(--BBAWred);
+	color: #C60C30; /* BBAW red*/
 	background-color: white;
 	}
 .btn-red:hover {
     color: white;
-    background-color: var(--BBAWred);
+    background-color: #C60C30; /* BBAW red*/
 }
 .btn-danger {
     color: white;
-    background-color: var(--BBAWred);
+    background-color: #C60C30; /* BBAW red*/
 	}
 .btn-danger:hover {
-	color: var(--BBAWred);
+	color: #C60C30; /* BBAW red*/
 	background-color: white;
 }
 
@@ -656,7 +663,7 @@ footer.bg-light{background-color: #e0e6ed!important;}
 	font-size: 1.5em;
 	font-weight: 600;
 	padding: 0.6rem;
-	background-color: var(--BBAWlightbluegray);
+	background-color: #C1C7CD; /* BBAW light bluegray*/
 	color: white;
     display: inline-block;
 }
@@ -721,7 +728,7 @@ footer.bg-light{background-color: #e0e6ed!important;}
 }
 .dropdown-item:hover {
     text-decoration: none;
-    background-color: var(--BBAWlightbluegray);
+    background-color: #C1C7CD; /* BBAW light bluegray*/
 }
 
 .solo-icon {margin-left: .5em;}
@@ -824,7 +831,9 @@ span.multiselect-native-select select {
 
 
 
-/* -- Media Queries --*/
+/**************/
+/* Smartphone */
+/**************/
 @media only screen and (max-width: 992px) {
    
     .container {max-width: 98% !important;} 
@@ -875,15 +884,19 @@ span.multiselect-native-select select {
 }
 
 
+/**************/
+/* Ausdruck   */
+/**************/
 @media print {
 	
+  #cookie-container,
+  #breadcrumb,
+  footer,
+  header,
   .no-print,
-  .cookie-container,
   .button-bar,
   .sidebar,
-  .btn,
-  footer,
-  header {
+  .btn {
     display: none;
   }
 
