@@ -122,7 +122,7 @@ def niceQueryData(name):
 def niceReviewState(name):
     dict = {
         'published': 'reviewed',
-        'plublished-awaiting-review': 'yet to be reviewed',
+        'published-awaiting-review': 'yet to be reviewed',
         'published-obsolete': 'obsolete' }
     newName = dict.get(name)
     if newName:
