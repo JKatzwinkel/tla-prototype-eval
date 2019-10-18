@@ -191,19 +191,19 @@
 				<!-- Translation DE -->
 				{% if hit.sentence.translations.de %}
 					{% for translation in hit.sentence.translations.de %}
-						<p class="translation-any"><span class="lang-icon">DE</span> {{translation}}</p>
+						<p class="translation-any"><span class="lang-icon">DE</span> {{translation|formatInTranslation}}</p>
 					{% endfor %}
 				{% endif %}
 				<!-- Translation EN  -->				
 				{% if hit.sentence.translations.en %}
 					{% for translation in hit.sentence.translations.en %}
-						<p class="translation-any"><span class="lang-icon">EN</span> {{translation}}</p>
+						<p class="translation-any"><span class="lang-icon">EN</span> {{translation|formatInTranslation}}</p>
 					{% endfor %}
 				{% endif %}
 				<!-- Translation FR -->
 				{% if hit.sentence.translations.fr %}
 					{% for translation in hit.sentence.translations.fr %}
-						<p class="translation-any"><span class="lang-icon">FR</span> {{translation}}</p>
+						<p class="translation-any"><span class="lang-icon">FR</span> {{translation|formatInTranslation}}</p>
 					{% endfor %}
 				{% endif %}
 			</div>

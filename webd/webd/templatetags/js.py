@@ -1,6 +1,7 @@
 from django.utils.safestring import mark_safe
 from django.template import Library
 #from django.utils.http import urlencode
+from html import escape
 import re
 
 import json
@@ -32,6 +33,14 @@ def niceCorpus(corpus):
         corpus = corpus.replace('corpus', 'Digital BTS corpus')
     return corpus 
     
+@register.filter(is_safe=True)
+def formatInTranslation(str):
+    if str:
+        str = escape(str)
+        str = re.sub(r'\$(.*?)\$', r'<span class="bbaw-libertine">\1</span>', str.rstrip()) #replace alphanumerical glyph index by lowercase
+        str = mark_safe(str)
+    return str 
+   
 @register.filter(is_safe=True)
 def fixForRES(mdc):
     if mdc:
