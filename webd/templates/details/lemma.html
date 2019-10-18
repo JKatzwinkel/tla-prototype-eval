@@ -78,7 +78,7 @@
 		<div class="col-sm-12 col-lg-8">
 			<div class="lemma pt-3">
 				<p><strong>Hieroglyphic spelling(s):</strong>
-				<br>Graphics: 
+				<!--<br>Graphics: -->
 				{% for word in lemma.words %}
 					{% if word.glyphs %}
 					<span class="glyphbox">
@@ -89,15 +89,15 @@
 					{% endif %}
 				{% endfor %}
 				<button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{%for word in lemma.words%}{{word.glyphs}}{%endfor%}');"><span class="fas fa-clipboard"></span>Copy Manuel de Codage</button>
-				<br>Unicode:
-				<!-- Unicode Hieroglyphs, Test -->
+				<!--<br>Unicode:
+				<! -- Unicode Hieroglyphs, Test -- >
 				{% for word in lemma.words %}
 				<span class="unicode-hieroglyphs">
 					{%if word.glyphs %}
 						{{word.glyphs|MdC_Unicode_noControlChars}}
 					{%endif%}
 				</span>
-				{%endfor%} 
+				{%endfor%} -->
 				<button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{%for word in lemma.words%}{{word.glyphs|MdC_Unicode_noControlChars}}{%endfor%}');"><span class="fas fa-clipboard"></span>Copy Unicode</button>
 				</p>
 			</div>
@@ -105,8 +105,8 @@
 			<!-- persistente URL / ID -->
 			<div>
 				<hr>
-				<p><strong>Persistent Identifiers</strong>
-				<br><strong>Persistent lemma ID:</strong> {{lemma.id}} 
+				<p><!--<strong>Persistent Identifiers</strong>
+				<br>--><strong>Persistent lemma ID:</strong> {{lemma.id}} 
                 <button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{{lemma.id}}')"><span class="fas fa-clipboard"></span>Copy ID</button>
 				<br><strong>Persistent URL:</strong> {{tlaBaseURL}}/lemma/{{lemma.id}} <button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('TLA lemma ID {{lemma.id}} ({%for word in lemma.words%}{{word.transcription}}{% if not forloop.last%} {%endif%}{%endfor%}), &lt;{{tlaBaseURL}}/lemma/{{lemma.id}}&gt;, in: {{tlaTitle}} &lt;{{tlaBaseURL}}&gt;, Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, ed. by {{tlaEditor}} (accessed: {{dateToday}})');"><span class="fas fa-clipboard"></span>Copy citation</button>
                 </p>
