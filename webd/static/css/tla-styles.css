@@ -316,11 +316,11 @@ a span.lc:hover {
 }
 /*.occ-list-item img.occ-tok-glyphs.highlight-1,
 .occ-list-item canvas.res.occ-tok-glyphs.highlight-1 {
-	border: 1px solid #C60C30; /* BBAW red*/
+	border: 1px solid #C60C30; 
 	border-radius: 2px;
 }*/
 .occ-list-item .highlight-1 {
-	background-color: #ffffcc; /* lightgrey; */
+	background-color: #E0E0E0; /* BBAW light gray*/
 }
 
 .unicode-hieroglyphs {

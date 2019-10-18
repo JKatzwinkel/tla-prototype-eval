@@ -622,7 +622,7 @@ def search_dict(request):
     count = hits.get('total')
     hits = store.hits_contents(hits)
     hits = hit_tree(hits)
-    #hits = sorted(hits, key=lambda items: sortTranslitStr(items[2]['name'])) ## Problem: sortiert nur den Ausschnitt; Sortierung müsste in es einmal? geschehen
+    hits = sorted(hits, key=lambda items: sortTranslitStr(items[2]['name'])) ## Problem: sortiert nur den Ausschnitt; Sortierung müsste in es einmal? geschehen
     return render(
         request,
         'search/dict.html',
