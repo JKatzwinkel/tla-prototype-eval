@@ -117,11 +117,14 @@
 						<span class="result-list-item-element hieroglyph">
 							{% for word in hit.words %}
 								{% if word.glyphs %}
-									<span class="glyphbox">
-										<!-- TODO font-size: 20px; vertical-align: -5px; in css verschieben -->
+									<!--<span class="glyphbox">
+										<! -- TODO font-size: 20px; vertical-align: -5px; in css verschieben -- >
 										<canvas class="res" style="font-size: 20px; vertical-align: -5px;" title="{{word.glyphs}}">
 											{{word.glyphs|fixForRES}}
 										</canvas>
+									</span>-->
+									<span class="unicode-hieroglyphs">
+											{{word.glyphs|MdC_Unicode_noControlChars}}
 									</span>
 								{% endif %}
 							{% endfor %}

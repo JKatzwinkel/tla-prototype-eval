@@ -326,7 +326,10 @@ a span.lc:hover {
 .unicode-hieroglyphs {
 	font-family: "EgyptianHiero";
 	font-size: 2em;
-	color: #4A5B70; /* BBAW dark bluegray*/ 
+}
+.result-list-item .unicode-hieroglyphs {
+	font-size: 1.5em;
+	vertical-align: sub;
 }
 
 .token-destruction_marker {

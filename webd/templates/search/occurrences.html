@@ -157,8 +157,10 @@
                             {%endif%}
                         </span>
                         {%endfor%}
-						<br>(Unicode, ##Anzeige nur zu Testzwecken##:)
+						<button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{%for token in hit.sentence.tokens%}{% if token.type == 'word'%}{{token.glyphs}}{%else%}+l{{token.glyphs}}+s{%endif%}{% if not forloop.last%}-{%endif%}{%endfor%}');"><span class="fas fa-clipboard"></span>Copy Manuel de Codage</button>
+						<button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{%for token in hit.sentence.tokens%}{% if token.type == 'word'%}{{token.glyphs|MdC_Unicode_noControlChars}}{%else%}{{token.glyphs}}{%endif%}{%endfor%}');"><span class="fas fa-clipboard"></span>Copy Unicode</button>
 						<!-- Unicode Hieroglyphs, Test -->
+						<br><span style="color:blue">(Unicode, ##Anzeige nur zu Testzwecken##:)
                         {% for token in hit.sentence.tokens %}
                         <span class="unicode-hieroglyphs">
                             {% if token.type == 'word' %}
@@ -168,7 +170,7 @@
                             {%endif%}
                         </span>
                         {%endfor%} 
-						<button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{%for token in hit.sentence.tokens%}{% if token.type == 'word'%}{{token.glyphs|MdC_Unicode_noControlChars}}{%else%}{{token.glyphs}}{%endif%}{%endfor%}');"><span class="fas fa-clipboard"></span>Copy Unicode</button>
+						</span>
                     </div>
  
                     <!-- Transliteration -->
