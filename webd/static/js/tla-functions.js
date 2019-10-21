@@ -1,27 +1,6 @@
 $(window).on('pageshow', init);
 
 
-// Sidebar 
- /*   $('html').not('#sidebar').click(function (e) {
-		        //console.log($(e.target).parent());
-		 if ($('#sidebar').is(':visible') && !e.target == '#sidebar') {
-                $('#sidebar').toggle('slide', 
-                    {direction: 'right'}, 
-                    500);
-            }
-        });
-
-    $('.sandwich').click(function (e) {
-			e.preventDefault();
-            $('#sidebar').toggle('fast');
-        });
-    $('.close-sidebar').click(function (e) {
-			e.preventDefault();
-            $('#sidebar').toggle('fast');
-        });
-*/
-
-
 function copyStringToClipboard (str) {
        // Create new element
        var el = document.createElement('textarea');
@@ -57,16 +36,16 @@ function init() {
         });	
     
     
-		// .hieroglyph
-		$('html').not('.hieroglyph').click(function (e) {
-		        //console.log($(e.target).parent());
+     // .hieroglyph
+		/*$('html').not('.hieroglyph').click(function (e) {		       
 		 if ($('.hieroglyph').is(':visible') && !e.target == '.hieroglyph') {
                 $('.hieroglyph').slideUp('ease-out');
-            }
-        });
-        $('.hieroglyph-btn').click(function (e) {
-			e.preventDefault();
-            $('.hieroglyph').slideToggle('slow');
+            }             
+        });*/
+        $('.hieroglyph-btn').click(function () {			
+            //$('.hieroglyph').slideToggle('slow');
+            $('.hieroglyph').toggleClass('hide show'); 
+            
         });	
 		
 	// .result-list-lemma-id
