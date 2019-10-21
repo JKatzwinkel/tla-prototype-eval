@@ -64,6 +64,7 @@ def BTSglossings(request):
         {
         }
     )
+    
 @require_http_methods(["GET"])
 def lingGlossings(request):
     params = request.GET.copy()
@@ -73,4 +74,45 @@ def lingGlossings(request):
         {
         }
     )
-  
+    
+@require_http_methods(["GET"])
+def helpSearch(request):
+    params = request.GET.copy()
+    return render(
+        request,
+        'help/help-search.html',
+        {
+        }
+    )
+    
+@require_http_methods(["GET"])
+def helpDict(request):
+    params = request.GET.copy()
+    return render(
+        request,
+        'help/help-dict.html',
+        {
+        }
+    )
+    
+@require_http_methods(["GET"])
+def helpLemma(request):
+    params = request.GET.copy()
+    return render(
+        request,
+        'help/help-lemma.html',
+        {
+        }
+    )
+    
+@require_http_methods(["GET"])
+def helpOccurences(request):
+    params = request.GET.copy()
+    return render(
+        request,
+        'help/help-occurences.html',
+        {
+        }
+    )
+    
+    
