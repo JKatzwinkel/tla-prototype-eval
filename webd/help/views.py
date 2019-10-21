@@ -60,7 +60,7 @@ def BTSglossings(request):
     params = request.GET.copy()
     return render(
         request,
-        'help/bts-glossings.html',
+        'help/BTS-glossings.html',
         {
         }
     )
