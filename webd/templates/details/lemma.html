@@ -76,6 +76,7 @@
 	<!-- Content Details -->
 	<div class="row details-content">	
 		<div class="col-sm-12 col-lg-8">
+			{% if lemma.id|subdictionaryFromLemmaID == 'Hieroglyphic/Hieratic' %}
 			<div class="lemma pt-3">
 				<p><strong>Hieroglyphic spelling(s):</strong>
 				<!--<br>Graphics: -->
@@ -105,6 +106,7 @@
 
 				</p>
 			</div>
+			{% endif %}
 			
 			<!-- persistente URL / ID -->
 			<div>
