@@ -8,12 +8,12 @@
 <!-- Page Content -->
 <div class="container content my-4">
 
-	<div class="row">
+	<div id="breadcrumb" class="row">
 		<!-- Breadcrumbs -->
 		<div class="col-12">
 			<nav aria-label="breadcrumb">
 			  <ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="#">Home</a></li>
+				<li class="breadcrumb-item"><a href="/">Home</a></li>
 				<li class="breadcrumb-item"><a href="/search">Search</a></li>
 				<li class="breadcrumb-item active" aria-current="page">Search results</li>
 			  </ol>
@@ -21,7 +21,7 @@
 		</div>
 	</div><!-- /.row -->
 
-    <div id="button-bar-small" class="sticky-top d-lg-none">
+    <div id="button-bar-small" class="button-bar sticky-top d-lg-none">
         <div class="functional-icon-set">
             
             <a href="/search"><button type="button" class="btn btn-red text-left text-decoration-none float-left"><i class="fa fa-search"></i><span class="d-none d-lg-block">Modify search</span></button></a>
@@ -40,26 +40,32 @@
             </div>           
             
 		</div>
-    </div><!-- /#button-bar-small-->
+    </div><!-- button-bar-small-->
     
 	
 	<!-- Suchergebnis + sortieren-->	
 	<div class="row search-entries">
 		<div class="col-sm-12 col-lg-8 result">
-            <p>Search results for</p> 
-            <h2 class="word bbaw-libertine mt-3"><mark>{{params.transcription}}</mark></h2>
-            
-            
+            <h2 class="id mt-1">Search results</h2> 
+            <p class="ml-3"><b>Query</b>: 
+            {%for param in params.lists%} 
+				{{param.0|niceQueryData}} = 
+				{%for val in param.1%} 
+					"<span class="bbaw-libertine">{{val|niceQueryData|nicePOS|niceSubPOS}}</span>"{% if not forloop.last%} / {%endif%} 
+				{%endfor%}
+				{% if not forloop.last%}; {%endif%}
+			{%endfor%}
+            </p>
 		</div>
         
-        <div class="col-md-4 align-right align-baseline d-none d-lg-block">
+        <div class="button-bar col-md-4 align-right align-baseline d-none d-lg-block">
 
             <div class="functional-icons ml-3">
               <a href="#" class="btn btn-light solo-icon" role="button" data-toggle="modal" data-target="#modal_sharing">Share&nbsp;&nbsp;<i class="fa fa-share-alt share-results"></i></a>        
             </div>
 
             <div class="functional-icons mr-0 ">
-                <a href="#" class="btn btn-red text-left text-decoration-none solo-icon" role="button">Help&nbsp;&nbsp;<i class="fas fa-info-circle fa-lg"></i></a>
+                <a class="btn btn-red text-left text-decoration-none solo-icon" role="button" href="/help/dict" target="_blank">Help&nbsp;&nbsp;<i class="fas fa-info-circle fa-lg"></i></a>
             </div>
 		</div>	
 			
@@ -72,12 +78,7 @@
 	<!-- Trefferanzahl-->
 	<div class="row searchresult">		
 			<div class="col-sm-12 col-lg-8 pt-3">
-                <p class="result-entries">Results: <b>{{start}} - {{end}}</b> of <b>{{hitcount}}</b>Dictionary Entries 
-                    <!--<a href="#" class="btn btn-light solo-icon float-right mr-1" role="button" data-toggle="modal" data-target="#modal_sharing"><span class="fa fa-share-alt share-results"/></a>-->
-                </p>  
-                
-                
-                
+                <p class="result-entries">Results: {%if hitcount > 0%}<b>{{start}} - {{end}}</b> of <b>{{hitcount}}</b> dictionary entries{%else%}<b>none</b>{%endif%}</p>     
 			</div>
 	</div><!-- /.row -->  
 	  	
@@ -93,19 +94,15 @@
 					<div class="lemma-rel {{pred}}"></div> <!-- lemma-beziehung -->
 				{% endif %}
                 
-                <div class="result-bg" id="{{hit.id}}" onclick="window.open('/view/lemma/{{hit.id}}','_self')">
+                <div class="result-bg" id="{{hit.id}}" onclick="window.open('/lemma/{{hit.id}}','_self')">
 					<!-- Redaktionsstatus & Anzahl Occurences-->
 					<div class="pt-1">
-						<!--<div class="red-status float-right ml-2">
-							<span class="far fa-check-circle {% if hit.occurrences > 0 %}ok{% elif hit.revisionState == "published" %}pending{% else %}notok{% endif %}"></span>
-						</div>-->
                         <div class="icon red-status float-right ml-2">
 							<span class="{% if hit.revisionState == 'published' %}ok{% elif hit.revisionState == 'published-awaiting-review' %}pending{% elif hit.revisionState == 'published-obsolete' %}notok{% endif %}"/>
-							<!--<span class="{% if hit.occurrences > 0 %}ok{% elif hit.revisionState == "published" %}pending{% else %}notok{% endif %}"></span>-->
 						</div>
                         
 						{% if hit.occurrences > 0 %}
-						   <div class="number_occurences float-right">
+						    <div class="number_occurences float-right">
 								<p>Occ.:&nbsp;{{hit.occurrences}}</p>
 							</div>
 						{% endif %} 
@@ -113,77 +110,90 @@
 					
 					<!-- erste Zeile -->
 					<div> 
-						<a href="/view/lemma/{{hit.id}}" title="{%if pred%}{{pred}}{%endif%}"> <!-- lemma-beziehung -->
-						<h2 class="word bbaw-libertine">
+						<h2 class="result-list-item-element word bbaw-libertine">
 							{{hit.name}}
 						</h2>
 						<!-- Hieroglyph -->
-							<span class="hieroglyph show">
-								{% for word in hit.words %}
-									{% if word.glyphs %}
-										<span class="glyphbox">
-											<!-- TODO font-size: 20px; vertical-align: -5px; in css verschieben -->
-											<canvas class="res" style="font-size: 20px; vertical-align: -5px;" title="{{word.glyphs}}">
-												{{word.glyphs}}
-											</canvas>
-										</span>
-									{% endif %}
-								{% endfor %}
-							</span>
+						<span class="result-list-item-element hieroglyph">
+							{% for word in hit.words %}
+								{% if word.glyphs %}
+									<!--<span class="glyphbox">
+										<! -- TODO font-size: 20px; vertical-align: -5px; in css verschieben -- >
+										<canvas class="res" style="font-size: 20px; vertical-align: -5px;" title="{{word.glyphs}}">
+											{{word.glyphs|fixForRES}}
+										</canvas>
+									</span>-->
+									<span class="unicode-hieroglyphs">
+											{{word.glyphs|MdC_Unicode_noControlChars}}
+									</span>
+								{% endif %}
+							{% endfor %}
+						</span>
 
 						<!-- Lemma ID -->
-						<span class="result-list-lemma-id hide">
-							&nbsp; (ID {{hit.id}})
+						<span class="result-list-item-element lemma-id">
+							(ID {{hit.id}})
 						</span>
-						</a>
 					</div>
 					
 					 <!-- zweite Zeile -->
 					<div>
 						<!-- Wordclass -->
-						<span class="word-class hide">
+						<span class="result-list-item-element word-class">
 							<strong>
-								<span class="font-italic word-class-type">{{hit.type|nicePOS}}</span>
-								{%if hit.subtype%}<span class="word-class-type">({{hit.subtype|niceSubPOS}})</span>{%endif%}
+								<span class="font-italic word-class-type">{{hit.type|nicePOS}}
+								{%if hit.subtype%}({{hit.subtype|niceSubPOS}}){%endif%}</span>
 							</strong>
 						</span>
 						
 						<!-- Translations -->
 						<!-- Translation DE -->
-						<span class="translations translation-de">
-							<span class="font-italic hide">[{{hit.type}}]</span><div class="lang-icon">DE</div>
-							{%for translation in hit.translations.de%}
-							{{translation}}
-							{%endfor%}
+						<span class="result-list-item-element translations translation-de">
+							<span class="lang-icon">DE</span>
+							{%if hit.translations.de%}
+								{%for translation in hit.translations.de%}
+									{{translation}}
+								{%endfor%}
+							{%else%}
+								&mdash;
+							{%endif%}
 						</span>
 						<!-- Translation EN -->
-						<span class="translations translation-en hide">
-							<span class="font-italic hide">[{{hit.type}}]</span><div class="lang-icon">EN</div>
-							{%for translation in hit.translations.en%}
-							{{translation}}
-							{%endfor%}					
+						<span class="result-list-item-element translations translation-en">
+							<span class="lang-icon">EN</span>
+							{%if hit.translations.en%}
+								{%for translation in hit.translations.en%}
+									{{translation}}
+								{%endfor%}
+							{%else%}
+								&mdash;
+							{%endif%}
 						</span>
 						<!-- Translation FR -->
-						<span class="translations translation-fr hide">
-							<span class="font-italic hide">[{{hit.type}}]</span><span class="lang-icon">FR</span>
-							{%for translation in hit.translations.fr%}
-							{{translation}}
-							{%endfor%}					
+						<span class="result-list-item-element translations translation-fr">
+							<span class="lang-icon">FR</span>
+							{%if hit.translations.fr%}
+								{%for translation in hit.translations.fr%}
+									{{translation}}
+								{%endfor%}					
+							{%else%}
+								&mdash;
+							{%endif%}
 						</span>
 			   
 						<!-- Attestation time -->
-						<span class="result-list-attestation-time hide">(##att.time##{{hit.xxx}})</span> <!-- ##Variable noch nicht verfügbar -->
+						<span class="result-list-item-element attestation-time">(##att.time##{{hit.xxx}})</span> <!-- ##Variable noch nicht verfügbar -->
 						
 						<!-- Bibliography -->
-						<span class="result-list-bibliography hide">({{hit.bibliography}})</span>
+						<span class="result-list-item-element bibliography-list">({{hit.bibliography}})</span>
 					</div>
 				</div> <!-- /. result-bg --> 
 			
 				<!-- combination-search -->
-				<div class="combination-search ml-4 my-1 hide">
+				<!--<div class="result-list-item-element combination-search ml-4 my-1 hide">
 					<input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
 					  <label class="form-check-label" for="inlineCheckbox2">Select for Combination Search</label>
-				</div>
+				</div>-->
 				<hr>
             </div> <!-- /. result-list-item -->
 			
@@ -192,40 +202,38 @@
         </div> <!-- .col-8 -->    
        	
 <!-- Sidebar large-->
-		<div class="col-lg-4 d-none d-lg-block">
+		<div class="sidebar col-lg-4 d-none d-lg-block">
             <div class="sticky-top">
 				<div class="input-group mb-3">
 					<div class="input-group-append">
 						<label class="input-group-text" for="inputGroupSelect02">Order by</label>
 					</div>
 					<select class="custom-select" id="inputGroupSelect02">
-						<option value="1" selected>Alphabetical, hierarchical</option>
-						<option value="2">Alphabetical, strictly</option>
-						<option value="3">Attestation time, start</option>
-						<option value="4">Attestation time, middle</option>
-						<option value="5">Attestation time, end</option>
+						<option value="1" selected>Alphabetical</option>
+						<option value="2">Attestation time, start</option>
+						<option value="3">Attestation time, middle</option>
+						<option value="4">Attestation time, end</option>
 					</select>			  
 				</div>
 			
-                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail hieroglyph-btn "><i class="fas fa-minus-circle"></i>Hieroglyphs</button>
-                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail lemma-id-btn "><i class="fas fa-plus-circle"></i>Lemma ID</button>
-                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-class-btn"><i class="fas fa-plus-circle"></i>Word class</button>
-                
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail hieroglyph-btn "><i class="fas"></i>Hieroglyphs</button>
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail lemma-id-btn "><i class="fas"></i>Lemma ID</button>
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-class-btn"><i class="fas"></i>Word class</button>
                 <!-- start LANGUAGE buttons -->
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail languages-btn">Translation languages</button>                 
-				
                 <div class="indented-buttons indented-buttons-lang hide">
-                    <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn-de" type="button"><i class="fas fa-minus-circle"></i>German</button>
-                    <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn-en" type="button"><i class="fas fa-plus-circle"></i>English</button>
-                    <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn-fr" type="button"><i class="fas fa-plus-circle"></i>French</button>
+                    <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-de-btn" type="button"><i class="fas"></i>German</button>
+                    <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-en-btn" type="button"><i class="fas"></i>English</button>
+                    <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-fr-btn" type="button"><i class="fas"></i>French</button>
 				</div>
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestation-time-btn "><i class="fas"></i>Attestation time</button>
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail bibliography-list-btn "><i class="fas"></i>Bibliographical references </button>           
                 
-                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestation-time-btn "><i class="fas fa-plus-circle"></i>Attestation time</button>
-                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail bibliografical-btn "><i class="fas fa-plus-circle"></i>Bibliographical references </button>                
-                	                
-                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail combination-search-btn" disabled><i class="fas fa-plus-circle"></i>Select for combination Search</button>
+                <!--
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail combination-search-btn" disabled><i class="fas"></i>Select for combination Search</button>
 
                 <button type="button" class="btn btn-block btn-light text-left text-decoration-none show-detail mb-2" disabled><span class="fas fa-search-plus"></span>Execute combination search</button>
+				-->
                 
                 <a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none mb-2"><span class="fas fa-arrow-circle-left"></span>Modify search</button></a>
             </div>
@@ -235,7 +243,7 @@
     
     <!-- Sidebar small-->
     
-    <div id="sidebar" class="d-lg-none">
+    <div id="sidebar" class="sidebar d-lg-none">
         <div class="sidebar-wrapper">                        
             <div class="close-sidebar">
                 <a href="#"><button type="button" class="btn btn-block btn-red text-left text-decoration-none show-detail"><span class="fas fa-times"></span>Hide options</button>
@@ -255,27 +263,24 @@
 					</select>			  
 				</div>
 			
-                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail hieroglyph-btn "><i class="fas fa-minus-circle"></i>Hieroglyphs</button>
-            
-                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail lemma-id-btn "><i class="fas fa-plus-circle"></i>Lemma ID</button>
-            
-                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-class-btn"><i class="fas fa-plus-circle"></i>Word class</button>
-                
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail hieroglyph-btn "><i class="fas"></i>Hieroglyphs</button>
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail lemma-id-btn "><i class="fas"></i>Lemma ID</button>
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-class-btn"><i class="fas"></i>Word class</button>
                 <!-- start LANGUAGE buttons -->
-                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail languages-btn">Translation languages</button>                 
-				
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail languages-btn">Translation languages</button>               
                 <div class="indented-buttons indented-buttons-lang hide">
-                     <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn-de" type="button"><i class="fas fa-minus-circle"></i>German</button>
-                    <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn-en" type="button"><i class="fas fa-plus-circle"></i>English</button>
-                    <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-languages-btn-fr" type="button"><i class="fas fa-plus-circle"></i>French</button>
+                     <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-de-btn" type="button"><i class="fas"></i>German</button>
+                    <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-en-btn" type="button"><i class="fas"></i>English</button>
+                    <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-fr-btn" type="button"><i class="fas"></i>French</button>
 				</div>
-                
-                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestation-time-btn "><i class="fas fa-plus-circle"></i>Attestation time</button>
-                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail bibliografical-btn "><i class="fas fa-plus-circle"></i>Bibliographical references </button>                
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestation-time-btn "><i class="fas"></i>Attestation time</button>
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail bibliography-list-btn "><i class="fas"></i>Bibliographical references </button>                
                 	                
-                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail combination-search-btn"><i class="fas fa-plus-circle"></i>Select for combination search</button>
+                <!--
+				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail combination-search-btn"><i class="fas"></i>Select for combination search</button>
 
                 <button type="button" class="btn btn-block btn-light text-left text-decoration-none show-detail combination-search-btn"><span class="fas fa-search-plus"></span>Execute combination search</button>
+				-->
                 
                 <a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none mt-2"><span class="fas fa-arrow-circle-left"></span>Modify search</button></a>
             
@@ -289,15 +294,15 @@
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Share these Results</h5>
+            <h5 class="modal-title" id="exampleModalLongTitle">Share these results</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">            
-              <a href="mailto:?subject=TLA,%20Occurences%20lemma%20{{params.lemma}}&amp;body=TLA, occurences lemma ID {{params.lemma}} ( {% for word in lemma.words %}{{word.transcription}} {% endfor %}), &lt;{{tlaBaseURL}}/search/occurrences?lemma={{params.lemma}}&gt;, in: {{tlaTitle}} &lt;{{tlaBaseURL}}&gt;, Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, ed. by {{tlaEditor}} (accessed: {{dateToday}})" class="btn btn-block btn-info" role="button"><span class="far fa-envelope"></span> E-mail citation</a> 
-              <a href="https://twitter.com/share?url={{tlaBaseURL}}/search/occurrences?lemma={{params.lemma}}" title="Twitter" class="btn btn-block btn-info" role="button" target="_blank"><span class="fab fa-twitter"></span> Twitter URL</a>
-              <a href="http://www.facebook.com/share.php?u={{tlaBaseURL}}/search/occurrences?lemma={{params.lemma}}" class="btn btn-block btn-info" role="button" target="_blank"><span class="fab fa-facebook"></span> Facebook</a> 
+              <a href="mailto:?subject=TLA,%20Search%20results&amp;body=TLA, Search results &lt;{{tlaBaseURL}}/search/dict?{%for param in params.lists%}{%for val in param.1%}{{param.0}}={{val}}{%if not forloop.last%}%26{%endif%}{%endfor%}{% if not forloop.last%}%26{%endif%}{%endfor%}&gt;, in: {{tlaTitle}} &lt;{{tlaBaseURL}}&gt;, Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, ed. by {{tlaEditor}}(accessed: {{dateToday}})" class="btn btn-block btn-info" role="button"><span class="far fa-envelope"></span> E-mail citation</a> 
+              <a href="https://twitter.com/share?url={{tlaBaseURL}}/search/dict?{%for param in params.lists%}{%for val in param.1%}{{param.0}}={{val}}{%if not forloop.last%}%26{%endif%}{%endfor%}{% if not forloop.last%}%26{%endif%}{%endfor%}" title="Twitter" class="btn btn-block btn-info" role="button" target="_blank"><span class="fab fa-twitter"></span> Twitter URL</a>
+              <a href="http://www.facebook.com/share.php?u={{tlaBaseURL}}/dict/occurrences?{%for param in params.lists%}{%for val in param.1%}{{param.0}}={{val}}{%if not forloop.last%}%26{%endif%}{%endfor%}{% if not forloop.last%}%26{%endif%}{%endfor%}" class="btn btn-block btn-info" role="button" target="_blank"><span class="fab fa-facebook"></span> Facebook</a> 
           </div>        
         </div>
       </div>
