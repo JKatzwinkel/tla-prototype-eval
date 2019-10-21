@@ -362,13 +362,23 @@ a span.lc:hover {
 }
 
 .lang-icon {
-    background-color: #EEE; 
+    background-color: #E0E0E0; 
     color: grey; 
     font-size: .65em; 
     padding: .3em; 
     border-radius: .2em;
     display: inline;
     top: -2px;
+    position: relative;
+}
+
+.subcorpus {
+    background-color: #E0E0E0; 
+    font-size: .65em; 
+    padding: .2em;  
+    border-radius: .2em;
+    display: inline;
+    top: -3px;
     position: relative;
 }
 

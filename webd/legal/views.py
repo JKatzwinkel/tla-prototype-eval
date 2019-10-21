@@ -11,7 +11,7 @@ import store
     
 tlaTitle = "Thesaurus Linguae Aegyptiae"
 tlaVersion = "19"
-tlaIssue = "1"
+tlaIssue = "beta"
 tlaReleaseDate = "30.10.2019"
 tlaEditor = "Berlin-Brandenburgische Akademie der Wissenschaften & Sächsische Akademie der Wissenschaften zu Leipzig"
 tlaPublisher = "Berlin-Brandenburgische Akademie der Wissenschaften"

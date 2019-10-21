@@ -11,11 +11,12 @@ import store
     
 tlaTitle = "Thesaurus Linguae Aegyptiae"
 tlaVersion = "19"
-tlaIssue = "1"
+tlaIssue = "beta"
 tlaReleaseDate = "30.10.2019"
 tlaEditor = "Berlin-Brandenburgische Akademie der Wissenschaften & Sächsische Akademie der Wissenschaften zu Leipzig"
 tlaPublisher = "Berlin-Brandenburgische Akademie der Wissenschaften"
 tlaBaseURL = "http://tla.bbaw.de"
+testHiero ="g**f{{267,603,100}}-g:(d*t)-A1\\R230-A1\\50-A1\\r2-A1\\t3-<-G1->-<-A1->-[[-]]-[&-&]-[{-}]-['-']-o-O-A1"
 
 def coins_openurl_kev(doc):
     # generate a contextobject referent
@@ -52,6 +53,7 @@ def help(request):
         request,
         'help/help.html',
         {
+        'testHiero': testHiero,
         }
     )
 

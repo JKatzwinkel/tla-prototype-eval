@@ -23,10 +23,10 @@
     
     <div id="button-bar-small" class="button-bar sticky-top d-lg-none">
         <div class="functional-icon-set">
-            
+            <!--
             <a href="javascript:history.back()"><button type="button" class="btn btn-red text-left text-decoration-none solo-icon"><i class="fas fa-arrow-circle-left"></i><span class="d-none d-lg-block">Back</span></button></a>   
-            
-            <a href="/search"><button type="button" class="btn btn-red text-left text-decoration-none solo-icon float-left"><i class="fa fa-search"></i><span class="d-none d-lg-block">Modify search</span></button></a>
+            -->
+            <a href="/search"><button type="button" class="btn btn-red text-left text-decoration-none solo-icon"><i class="fa fa-search"></i><span class="d-none d-lg-block">Modify search</span></button></a>
                         
             <div class="functional-icons float-right solo-icon sidebar-btn">
                 <a href="#" class="btn btn-light" ><i class="fa fa-eye"></i></a>               
@@ -86,7 +86,11 @@
                         {% if token.glyphs %}
                             {{token.glyphs|fixForRES}}
                         {% else %}
-                            empty
+							{% if token.type == 'destruction_marker' %}
+								empty[width=0.5,shade]-"."-"."-empty[width=0.5,shade]
+							{% else %}
+								empty
+							{% endif %}
                         {% endif %}
                        </canvas>
 					</li>
@@ -148,13 +152,20 @@
                     <div class="hieroglyph">
                         {% for token in hit.sentence.tokens %}
                         <span class="glyphbox">
-                            {%if token.glyphs%}
-								{% if token.type == 'word' %}<a href="/lemma/{{token.lemma}}" target="_blank">{% endif %}
-								<canvas class="res occ-tok-glyphs mb-2 {%if token.highlight%}highlight-{{token.highlight}}{%endif%}" title="{{token.glyphs}}">
+							{% if token.type == 'word' %}<a href="/lemma/{{token.lemma}}" target="_blank">{%endif%}
+							<canvas class="res occ-tok-glyphs mb-2 {%if token.highlight%}highlight-{{token.highlight}}{%endif%}" title="{{token.glyphs}}">
+								{% if token.glyphs %}
 									{{token.glyphs|fixForRES}}
-								</canvas>
-								{% if token.type == 'word' %}</a>{% endif %}
-                            {%endif%}
+								{% else %}
+									{% if token.type == 'destruction_marker' %}
+										empty[width=0.5,shade]-"."-"."-empty[width=0.5,shade]
+									{% endif %}
+									{% if token.type == 'lc' %}
+										"|"[gray]
+									{% endif %}
+								{% endif %}
+							</canvas>
+							{% if token.type == 'word' %}</a>{%endif%}
                         </span>
                         {%endfor%}
 						<button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{%for token in hit.sentence.tokens%}{% if token.type == 'word'%}{{token.glyphs}}{%else%}+l{{token.glyphs}}+s{%endif%}{% if not forloop.last%}-{%endif%}{%endfor%}');"><span class="fas fa-clipboard"></span>Copy Manuel de Codage</button>
@@ -327,8 +338,9 @@
                 
 				<br>
 				
+				<!-- 
 				<a href="javascript:history.back()"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Back</button></a>
-				<!-- anstelle des historyBack sollte u.U. der Search-String verwendet werden -->
+				-->
 				
 				<a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Modify search</button></a>
 			</div>
@@ -378,13 +390,6 @@
 				<button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-en-btn" type="button"><i class="fas"></i>English</button>
 				<button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-fr-btn" type="button"><i class="fas"></i>French</button>
 			</div>-->
-
-			<br>
-			
-			<a href="javascript:history.back()"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Back</button></a>
-			<!-- anstelle des historyBack sollte u.U. der Search-String verwendet werden -->
-			
-			<a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fa fa-search"></span>Modify search search</button></a>
             
         </div>
     </div>

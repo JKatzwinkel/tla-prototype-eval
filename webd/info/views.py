@@ -11,7 +11,7 @@ import store
     
 tlaTitle = "Thesaurus Linguae Aegyptiae"
 tlaVersion = "19"
-tlaIssue = "1"
+tlaIssue = "beta"
 tlaReleaseDate = "30.10.2019"
 tlaEditor = "Berlin-Brandenburgische Akademie der Wissenschaften & Sächsische Akademie der Wissenschaften zu Leipzig"
 tlaPublisher = "Berlin-Brandenburgische Akademie der Wissenschaften"
@@ -43,14 +43,6 @@ def coins_openurl_kev(doc):
     ]
     coins_kev = urlencode(ctx_rft)
     return coins_kev
-
-tlaTitle = "Thesaurus Linguae Aegyptiae"
-tlaVersion = "19"
-tlaIssue = "1"
-tlaReleaseDate = "30.10.2019"
-tlaEditor = "Berlin-Brandenburgische Akademie der Wissenschaften & Sächsische Akademie der Wissenschaften zu Leipzig"
-tlaPublisher = "Berlin-Brandenburgische Akademie der Wissenschaften"
-tlaBaseURL = "http://tla.bbaw.de"
 
 @require_http_methods(["GET"])
 def introduction(request):
