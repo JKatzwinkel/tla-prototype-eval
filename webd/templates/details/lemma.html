@@ -86,9 +86,13 @@
 							{{word.glyphs|fixForRES}}
 						</canvas>
 					</span>
+						{% if forloop.last %}
+						<button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{%for word in lemma.words%}{{word.glyphs}}{%endfor%}');"><span class="fas fa-clipboard"></span>Copy Manuel de Codage</button>
+						<button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{%for word in lemma.words%}{{word.glyphs|MdC_Unicode_noControlChars}}{%endfor%}');"><span class="fas fa-clipboard"></span>Copy Unicode</button>
+						{% endif %}
 					{% endif %}
 				{% endfor %}
-				<button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{%for word in lemma.words%}{{word.glyphs}}{%endfor%}');"><span class="fas fa-clipboard"></span>Copy Manuel de Codage</button>
+				
 				<!--<br>Unicode:
 				<! -- Unicode Hieroglyphs, Test -- >
 				{% for word in lemma.words %}
@@ -98,7 +102,7 @@
 					{%endif%}
 				</span>
 				{%endfor%} -->
-				<button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{%for word in lemma.words%}{{word.glyphs|MdC_Unicode_noControlChars}}{%endfor%}');"><span class="fas fa-clipboard"></span>Copy Unicode</button>
+
 				</p>
 			</div>
 			
