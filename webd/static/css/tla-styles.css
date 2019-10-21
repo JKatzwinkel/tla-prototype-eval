@@ -124,6 +124,8 @@ a.navbar-brand {
 
 /* Informationsseiten */
 
+.text-to-be-revised { background-color: yellow;}
+
 .information-page h3, 
 .information-page h4, 
 .information-page h5 {
@@ -325,11 +327,13 @@ a span.lc:hover {
 
 .unicode-hieroglyphs {
 	font-family: "EgyptianHiero";
+	vertical-align: sub;
+}
+.container-annotation-switch-lines .unicode-hieroglyphs { /* temporär , Test */
 	font-size: 2em;
 }
 .result-list-item .unicode-hieroglyphs {
 	font-size: 1.5em;
-	vertical-align: sub;
 }
 
 .token-destruction_marker {

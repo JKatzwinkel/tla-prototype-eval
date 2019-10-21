@@ -51,7 +51,7 @@
 	<!-- Suchergebnis -->		
 		<div class="col-sm-12 col-lg-8 result">	
             <p>Dictionary entry</p> 
-			<h2 class="id mt-1">Lemma ID {{lemma.id}} (<span class="bbaw-libertine">{%for word in lemma.words%}{{word.transcription}}{% if not forloop.last%} {%endif%}{%endfor%}</span>)<span class="Z3988" title="{{coins}}"></span></h2>
+			<h2 class="id mt-1">Lemma ID {{lemma.id}} (<span class="bbaw-libertine">{%for word in lemma.words%}{{word.transcription}}{% if not forloop.last%} {%endif%}{%endfor%}</span><!--{% for word in lemma.words %}{% if forloop.first%}, {%endif%}<span class="unicode-hieroglyphs">{%if word.glyphs %}{{word.glyphs|MdC_Unicode_noControlChars}}{%endif%}</span>{%endfor%}-->)<span class="Z3988" title="{{coins}}"></span></h2>
 			<a title="Review state: {{lemma.revisionState|niceReviewState}}"><span class="solo-icon red-status float-right"><span class="fa-check-circle {% if lemma.revisionState == 'published' %}ok{% elif lemma.revisionState == 'published-awaiting-review' %}pending{% elif lemma.revisionState == 'published-obsolete' %}notok{% endif %}"></span></span></a>
 		</div>
         
@@ -136,13 +136,13 @@
 				<hr>				
 				<p><strong>Translation</strong></p>
 				{% for translation in lemma.translations.de %}
-					<p class="german"><span class="lang-icon">DE</span> {{ translation }}</p>
+					<p class="german"><span class="lang-icon">DE</span> {{ translation|formatInTranslation }}</p>
 				{% endfor %}
 				{% for translation in lemma.translations.en %}
-					<p class="english"><span class="lang-icon">EN</span> {{ translation }}</p>
+					<p class="english"><span class="lang-icon">EN</span> {{ translation|formatInTranslation }}</p>
 				{% endfor %}
 				{% for translation in lemma.translations.fr %}
-					<p class="french"><span class="lang-icon">FR</span> {{ translation }}</p>
+					<p class="french"><span class="lang-icon">FR</span> {{ translation|formatInTranslation }}</p>
 				{% endfor %}
 			</div>	
 		
@@ -201,7 +201,7 @@
 			<div class="comment pb-2">
 				<div class="comment-wrapper hide-comment">
                     <p class="comment-title"><strong>Comment-Title</strong></p>                    
-                    <p class="comment-content">Es sequi illore ne reptation cone videm fugia dolendu ntectotas nihit rat lit fugiatum doluptatecto que maximpe eaquatin nis rehent quam, corum accatem oluptas inus doloremolo ea volum quibus voluptaque volupta amet optaers piendusae. Es sequi illore ne reptation cone videm fugia dolendu ntectotas nihit rat lit fugiatum doluptatecto que maximpe eaquatin nis rehent quam, corum accatem oluptas inus doloremolo ea volum quibus voluptaque volupta amet optaers piendusae. Es sequi illore ne reptation cone videm fugia dolendu ntectotas nihit rat lit fugiatum doluptatecto que maximpe eaquatin nis rehent quam, corum accatem oluptas inus doloremolo ea volum quibus voluptaque volupta amet optaers piendusae. Es sequi illore ne reptation cone videm fugia dolendu ntectotas nihit rat lit fugiatum doluptatecto que maximpe eaquatin nis rehent quam, corum accatem oluptas inus doloremolo ea volum quibus voluptaque volupta amet optaers piendusae.</p>
+                    <p class="comment-content">Es sequi illore ne reptation cone videm fugia dolendu ntectotas nihit rat lit fugiatum doluptatecto que maximpe eaquatin nis rehent quam, corum accatem oluptas inus doloremolo ea volum quibus voluptaque volupta amet optaers piendusae. Es sequi illore ne reptation cone videm fugia dolendu ntectotas nihit rat lit fugiatum doluptatecto que maximpe eaquatin nis rehent quam, corum accatem oluptas inus doloremolo ea volum quibus voluptaque volupta amet optaers piendusae. Es sequi illore ne reptation cone videm fugia dolendu ntectotas nihit rat lit fugiatum doluptatecto que maximpe eaquatin nis rehent quam, corum accatem oluptas inus doloremolo ea volum quibus voluptaque volupta amet optaers piendusae. Es sequi illore ne reptation cone videm fugia dolendu ntectotas nihit rat lit fugiatum doluptatecto que maximpe eaquatin nis rehent quam, corum accatem oluptas inus doloremolo ea volum quibus voluptaque volupta amet optaers piendusae.</p> <!-- |formatInTranslation filter nutzen -->
                     <p class="comment-author pt-1">Edited by&nbsp;<strong>Vorname Name</strong>&nbsp;on <span class="comment-date"><strong>20.08.2019</strong></span></p>
                 </div>
                 <div class="show-comment-button">
