@@ -1,0 +1,92 @@
+{% extends "../base.html" %}
+{% load static %}
+{% load js %}
+
+{% block title %}TLA Collaboration{%endblock%}
+
+{% block content %}
+<!-- Page Content -->
+<div class="container content my-4">
+
+	<div id="breadcrumb" class="row">
+		<!-- Breadcrumbs -->
+		<div class="col-12">
+			<nav aria-label="breadcrumb">
+			  <ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="/">Home</a></li>
+				<li class="breadcrumb-item"><a href="#">Info</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Collaboration</li>
+			  </ol>
+			</nav>
+		</div>
+	</div><!-- /.row -->
+  
+	<div class="row search-entries detail">
+	<!-- Suchergebnis -->		
+		<div class="col-sm-12 col-lg-8 result">	
+			<h2 class="id mt-1">Collaboration<span class="Z3988" title="{{coins}}"></span></h2>
+		</div>
+        
+        <!--<div class="col-md-4 align-right align-baseline d-none d-lg-block">
+            <div class="functional-icons ml-3 ">
+              <a href="#" class="btn btn-light solo-icon" role="button" data-toggle="modal" data-target="#modal_sharing">Share&nbsp;&nbsp;<i class="fa fa-share-alt share-results"></i></a>              
+            </div>
+            
+            <div class="functional-icons ml-3 ">
+            <a href="#" class="btn btn-light solo-icon" role="button" data-toggle="modal" data-target="#modal_comments">Comment&nbsp;&nbsp;<i class="far fa-comment"></i></a>
+            </div>
+		</div>-->
+	</div>
+	<!-- /.row -->
+  
+  	
+	<!-- Content -->
+	<div class="row information-page my-4">
+		<div class="col-sm-12">
+			<p>The „Wörterbuch der ägyptischen Sprache“ (1897–1963) became a great success because Egyptologists from many countries joined forces to build up an extensive archive of paper slips with texts and lemma citations (1.800.000 slips). In a similar way the <i>Thesaurus Linguae Aegyptiae</i> was planned from the start as a collaborative effort. Between its inception in the 1990ies and today many institutions and individual researchers have participated and continue participating in the conception or developement of thesauri of metadata, of text encoding and exchange standards, of standards for hieroglyphic encoding, and most of all in the encoding of countless ancient Egyptian texts in the text database.</p>
+			<p>In the first phase of the <i>Thesaurus Linguae Aegyptiae</i> primarily institutions and large projects collaborated in the buildup of text corpora (until 2012). From the moment the new text encoding software developed at the Berlin-Brandenburg Academy of Sciences and Humanities became available (from late 2015 onwards), increasingly individual researchers encode their own texts in the database or provide digital data for encoding to the team members in Berlin or Leipzig.</p>
+			<p>We are very gratefull to every institution and researcher participating in improving and expanding the <i>Thesaurus Linguae Aegyptiae</i>. Every contributor is duly recognised as the author of transcription and translation of his or her text and every text is provided with an individual ID, allowing for precise quotations including all relevant credentials.</p>
+			<p>Principal contributors of texts to the TLA until the end of 2012:</p>
+			<ul>
+				<li>Berlin-Brandenburgische Akademie der Wissenschaften, Altägyptisches Wörterbuch</li>
+				<li>Sächsische Akademie der Wissenschaften zu Leipzig, Altägyptisches Wörterbuch </li>
+				<li>Akademie der Wissenschaften und der Literatur - Mainz, Demotische Textdatenbank</li>
+				<li>Nordrhein-Westfälische Akademie der Wissenschaften, Totenbuchprojekt</li>
+				<li>Katholieke Universiteit Leuven, Leuven online index of Ptolemaic and Roman Hieroglyphic Texts</li>
+				<li>Akademie der Wissenschaften zu Göttingen, Edfu-Projekt</li>
+			</ul>
+			<p>Principal collaborators in the inception or development of the lemma lists:</p>
+			<ul>
+				<li>Horst Beinlich &amp; Friedhelm Hoffmann.</li>
+				<li>Akademie der Wissenschaften und der Literatur - Mainz, Demotische Textdatenbank</li>
+				<li>Database and Dictionary of Greek Loanwords in Coptic (DDGLC), FU Berlin</li>
+				<li>Coptic Dictionary Online</li>
+			</ul>
+			<p>Principal collaborators in the development of the metadata and the text encoding standards:</p>
+			<ul>
+				<li>Trismegistos, Katholieke Universiteit Leuven</li>
+				<li>Projet Ramsès, Université de Liège</li>
+				<li><span class="text-to-be-revised">....................</span></li>
+			</ul>
+			<p>Contributors of texts to the TLA from 2013 onwards:</p>
+			<ul>
+				<li>Berlin-Brandenburgische Akademie der Wissenschaften, Strukturen und Transformationen des Wortschatzes der ägyptischen Sprache</li>
+				<li>Sächsische Akademie der Wissenschaften zu Leipzig, Strukturen und Transformationen des Wortschatzes der ägyptischen Sprache</li>
+				<li>Françoise Labrique (Euergetestor)</li>
+				<li>Dieter Kurth (Edfou VIII)</li>
+				<li>Camilla Di Biase-Dyson (Papyrus Hearst)</li>
+				<li>Susanne Beck (Tübinger Stelen)</li>
+				<li>Annik Wüthrich (Tb Zusatzkapitel 162-167)</li>
+				<li>Erhart Graefe (Stundenritual)</li>
+				<li>Mareike Wagner (Anchnesneferibre, Sarkophage des Ibi, Grabkammer in Ibi)</li>
+				<li>Ralph Birk („Diglossie im ptolemäischen Ägypten“: Alexandria-Dekret, Kanopusdekret)</li>
+				<li>Jakob Schneider (Stele des Gallus, Stele der Taimhotep, Hungersnotstele)</li>
+				<li>Marc Brose (Königliche Stelen der 18. Dynastie bis einschließlich Amenhotep III.)</li>
+				<li>Sven Eike (Kom Ombo Projekt, Köln)</li>
+				<li>Joachim Quack (Magische Stele Karlsruhe)</li>
+			</ul>
+			
+		</div>
+	</div> <!-- /.row -->	  
+</div><!-- /.container Content -->  	
+{% endblock %}

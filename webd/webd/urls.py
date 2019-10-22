@@ -20,9 +20,14 @@ from . import views
 from search.views import search
 
 urlpatterns = [
+        path('', include('home.urls')),
+        #path('view/', include('detail.urls')),
+        path('', include('detail.urls')),
+        path('', include('legal.urls')),
         path('es/<str:index>/get/<str:_id>', views.es_get),
         path('es/<str:index>/search/<str:query>', views.es_search),
         re_path(r'^$', search),
         path('search/', include('search.urls')),
-        path('view/', include('detail.urls')),
+        path('info/', include('info.urls')),
+        path('help/', include('help.urls')),
 ]

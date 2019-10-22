@@ -1,0 +1,59 @@
+{% extends "../base.html" %}
+{% load static %}
+{% load js %}
+
+{% block title %}TLA Project{%endblock%}
+
+{% block content %}
+<!-- Page Content -->
+<div class="container content my-4">
+
+	<div id="breadcrumb" class="row">
+		<!-- Breadcrumbs -->
+		<div class="col-12">
+			<nav aria-label="breadcrumb">
+			  <ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="/">Home</a></li>
+				<li class="breadcrumb-item"><a href="#">Info</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Project</li>
+			  </ol>
+			</nav>
+		</div>
+	</div><!-- /.row -->
+  
+	<div class="row search-entries detail">
+	<!-- Suchergebnis -->		
+		<div class="col-sm-12 col-lg-8 result">	
+			<h2 class="id mt-1">Project<span class="Z3988" title="{{coins}}"></span></h2>
+		</div>
+        
+        <!--<div class="col-md-4 align-right align-baseline d-none d-lg-block">
+            <div class="functional-icons ml-3 ">
+              <a href="#" class="btn btn-light solo-icon" role="button" data-toggle="modal" data-target="#modal_sharing">Share&nbsp;&nbsp;<i class="fa fa-share-alt share-results"></i></a>              
+            </div>
+            
+            <div class="functional-icons ml-3 ">
+            <a href="#" class="btn btn-light solo-icon" role="button" data-toggle="modal" data-target="#modal_comments">Comment&nbsp;&nbsp;<i class="far fa-comment"></i></a>
+            </div>
+		</div>-->
+	</div>
+	<!-- /.row -->
+  
+  	
+	<!-- Content -->
+	<div class="row information-page my-4">
+		<div class="col-sm-12">
+			<p>Academies' research project</p>
+			<h4 class="mb-0">Strukturen und Transformationen des Wortschatzes der ägyptischen Sprache:
+			<br>Text- und Wissenskultur im Alten Ägypten</h4>
+			<p class="mt-0 mb-3">(Structure and Transformation in the Vocabulary of the Egyptian Language: 
+			<br>Texts and Knowledge in the Culture of Ancient Egypt) </p>
+			<p>The goal of the project is to compile a corpus of Egyptian texts, enabling online vocabulary research through the entire history of the Egyptian language. </p>
+			<p>In use for 4500 years, the “dead” Egyptian/Coptic language has the longest documented history of any of written language. It reflects the world view of a defining culture of antiquity and how that culture understood knowledge. </p>
+			<p>Research units at the sister institutions of the <a href="http://www.bbaw.de/" target="_blank">Berlin-Brandenburgische Akademie der Wissenschaften</a> and the <a href="http://www.saw-leipzig.de/" target="_blank">Sächsische Akademie der Wissenschaften zu Leipzig</a>, are working together to create a comprehensive digital corpus of Egyptian texts from every stage of the language and in all scripts, annotated lexically, morphologically, and syntactically, and linked to an analogously structured diachronic dictionary. This will make it possible to study texts and vocabulary beyond the boundaries of a single script (hieroglyphic/hieratic, demotic, Coptic) and to comprehend changes in the language. </p>
+			<p>The Academies' research project “Strukturen und Transformationen des Wortschatzes der ägyptischen Sprache” is part of the <a href="http://www.akademienunion.de/en/research/the-academies-programme/" target="_blank">Academies' <i>Programme</i></a>, a research funding <i>Programme</i> co-financed by the German federal government and individual federal states. Coordinated by the <a href="http://www.akademienunion.de/en/research/the-academies-programme/" target="_blank">Union of the German Academies of Sciences and Humanities</a>, the <i>Programme</i> intends to retrieve and explore our cultural heritage, to make it accessible and highlight its relevance to the present, as well as to preserve it for the future.</p>
+
+		</div>
+	</div> <!-- /.row -->	  
+</div><!-- /.container Content -->  	
+{% endblock %}

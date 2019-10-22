@@ -1,0 +1,64 @@
+{% extends "../base.html" %}
+{% load static %}
+{% load js %}
+
+{% block title %}TLA License{%endblock%}
+
+{% block content %}
+<!-- Page Content -->
+<div class="container content my-4">
+
+	<div id="breadcrumb" class="row">
+		<!-- Breadcrumbs -->
+		<div class="col-12">
+			<nav aria-label="breadcrumb">
+			  <ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="/">Home</a></li>
+				<li class="breadcrumb-item"><a href="#">Info</a></li>
+				<li class="breadcrumb-item active" aria-current="page">License</li>
+			  </ol>
+			</nav>
+		</div>
+	</div><!-- /.row -->
+  
+	<div class="row search-entries detail">
+	<!-- Suchergebnis -->		
+		<div class="col-sm-12 col-lg-8 result">	
+			<h2 class="id mt-1">License<span class="Z3988" title="{{coins}}"></span></h2>
+		</div>
+        
+        <!--<div class="col-md-4 align-right align-baseline d-none d-lg-block">
+            <div class="functional-icons ml-3 ">
+              <a href="#" class="btn btn-light solo-icon" role="button" data-toggle="modal" data-target="#modal_sharing">Share&nbsp;&nbsp;<i class="fa fa-share-alt share-results"></i></a>              
+            </div>
+            
+            <div class="functional-icons ml-3 ">
+            <a href="#" class="btn btn-light solo-icon" role="button" data-toggle="modal" data-target="#modal_comments">Comment&nbsp;&nbsp;<i class="far fa-comment"></i></a>
+            </div>
+		</div>-->
+	</div>
+	<!-- /.row -->
+  
+  	
+	<!-- Content -->
+	<div class="row search my-4">
+		<div class="col-sm-12">
+			<p>The <strong>scientific data</strong> available in this publication is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+			<br><a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="{% static "img/CC-BY-SA-88x31.png" %}"></a></p>
+			
+			<!-- Zitationsfeld -->        
+			<div class="bg-light citation mt-2 mb-4">         
+				<p class="h6"><strong>Please cite this website as:</strong></p>
+				<blockquote><i>{{tlaTitle}}</i> &lt;{{tlaBaseURL}}&gt;, 
+					Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, 
+					ed. by {{tlaEditor}}</blockquote>
+				<button type="button" class="btn btn-secondary btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{{tlaTitle}} &lt;{{tlaBaseURL}}&gt;, Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, ed. by {{tlaEditor}}');"><span class="fas fa-clipboard"></span>Copy citation</button>
+			</div> 
+			
+			<p>The <strong>design and implementation</strong> of this website are subject to copyright protection. If you wish to use any part of it, please contact the <a href="/imprint" target="_black">responsible editor</a>.</p>
+
+		</div>
+     
+	</div> <!-- /.row -->	  
+</div><!-- /.container Content -->  	
+{% endblock %}

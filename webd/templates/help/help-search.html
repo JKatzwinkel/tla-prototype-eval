@@ -1,0 +1,51 @@
+{% extends "../base.html" %}
+{% load static %}
+{% load js %}
+
+{% block title %}TLA - Help Search{%endblock%}
+
+{% block content %}
+<!-- Page Content -->
+<div class="container content my-4">
+
+	<div id="breadcrumb" class="row">
+		<!-- Breadcrumbs -->
+		<div class="col-12">
+			<nav aria-label="breadcrumb">
+			  <ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="/">Home</a></li>
+				<li class="breadcrumb-item"><a href="/help">Help</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Search</li>
+			  </ol>
+			</nav>
+		</div>
+	</div><!-- /.row -->
+  
+	<div class="row detail">
+	<!-- Suchergebnis -->		
+		<div class="col-sm-12 col-lg-8 result">	
+			<h2 class="id mt-1">Help Search<span class="Z3988" title="{{coins}}"></span></h2>
+		</div>
+        
+        <!--<div class="col-md-4 align-right align-baseline d-none d-lg-block">
+            <div class="functional-icons ml-3 ">
+              <a href="#" class="btn btn-light solo-icon" role="button" data-toggle="modal" data-target="#modal_sharing">Share&nbsp;&nbsp;<i class="fa fa-share-alt share-results"></i></a>              
+            </div>
+            
+            <div class="functional-icons ml-3 ">
+            <a href="#" class="btn btn-light solo-icon" role="button" data-toggle="modal" data-target="#modal_comments">Comment&nbsp;&nbsp;<i class="far fa-comment"></i></a>
+            </div>
+		</div>-->
+	</div>
+	<!-- /.row -->
+  
+  	
+	<!-- Content -->
+	<div class="row information-page my-4">
+		<div class="col-sm-12">
+
+		</div>
+	
+	</div> <!-- /.row -->	  
+</div><!-- /.container Content -->  	
+{% endblock %}

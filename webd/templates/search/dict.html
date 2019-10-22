@@ -24,7 +24,7 @@
     <div id="button-bar-small" class="button-bar sticky-top d-lg-none">
         <div class="functional-icon-set">
             
-            <a href="/search"><button type="button" class="btn btn-red text-left text-decoration-none solo-icon"><i class="fa fa-search"></i><span class="d-none d-lg-block">Modify search</span></button></a>
+            <a href="/search"><button type="button" class="btn btn-red text-left text-decoration-none float-left"><i class="fa fa-search"></i><span class="d-none d-lg-block">Modify search</span></button></a>
             
             <div class="functional-icons float-right solo-icon sidebar-btn">
                 <a href="#" class="btn btn-light" ><i class="fa fa-eye"></i></a>               
@@ -115,23 +115,19 @@
 						</h2>
 						<!-- Hieroglyph -->
 						<span class="result-list-item-element hieroglyph">
-							{% if not hit.id|isDemotic %}
-								{% for word in hit.words %}
-									{% if word.glyphs %}
-										<!--<span class="glyphbox">
-											<! -- TODO font-size: 20px; vertical-align: -5px; in css verschieben -- >
-											<canvas class="res" style="font-size: 20px; vertical-align: -5px;" title="{{word.glyphs}}">
-												{{word.glyphs|fixForRES}}
-											</canvas>
-										</span>-->
-										<span class="unicode-hieroglyphs">
-												{{word.glyphs|MdC_Unicode_noControlChars}}
-										</span>
-									{% endif %}
-								{% endfor %}
-							{% else %}
-								<span class="subcorpus">Demotic</span>
-							{% endif %}
+							{% for word in hit.words %}
+								{% if word.glyphs %}
+									<!--<span class="glyphbox">
+										<! -- TODO font-size: 20px; vertical-align: -5px; in css verschieben -- >
+										<canvas class="res" style="font-size: 20px; vertical-align: -5px;" title="{{word.glyphs}}">
+											{{word.glyphs|fixForRES}}
+										</canvas>
+									</span>-->
+									<span class="unicode-hieroglyphs">
+											{{word.glyphs|MdC_Unicode_noControlChars}}
+									</span>
+								{% endif %}
+							{% endfor %}
 						</span>
 
 						<!-- Lemma ID -->
@@ -236,10 +232,10 @@
                 <!--
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail combination-search-btn" disabled><i class="fas"></i>Select for combination Search</button>
 
-                <button type="button" class="btn btn-block btn-light text-left text-decoration-none show-detail" disabled><span class="fas fa-search-plus"></span>Execute combination search</button>
+                <button type="button" class="btn btn-block btn-light text-left text-decoration-none show-detail mb-2" disabled><span class="fas fa-search-plus"></span>Execute combination search</button>
 				-->
                 
-                <a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none mt-3"><span class="fas fa-arrow-circle-left"></span>Modify search</button></a>
+                <a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none mb-2"><span class="fas fa-arrow-circle-left"></span>Modify search</button></a>
             </div>
 		</div>
 	</div> <!-- /.row -->	  
@@ -278,13 +274,17 @@
                     <button class="btn btn-block btn-secondary text-left text-decoration-none show-detail translation-fr-btn" type="button"><i class="fas"></i>French</button>
 				</div>
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestation-time-btn "><i class="fas"></i>Attestation time</button>
-                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail bibliography-list-btn "><i class="fas"></i>Bibliographical references</button>                
+                <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail bibliography-list-btn "><i class="fas"></i>Bibliographical references </button>                
                 	                
                 <!--
 				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail combination-search-btn"><i class="fas"></i>Select for combination search</button>
 
                 <button type="button" class="btn btn-block btn-light text-left text-decoration-none show-detail combination-search-btn"><span class="fas fa-search-plus"></span>Execute combination search</button>
 				-->
+                
+                <a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none mt-2"><span class="fas fa-arrow-circle-left"></span>Modify search</button></a>
+            
+            
         </div>
     </div>
     

@@ -1,0 +1,103 @@
+{% extends "../base.html" %}
+{% load static %}
+{% load js %}
+
+{% block title %}TLA - Linguistic Glossing Abbreviations{%endblock%}
+
+{% block content %}
+<!-- Page Content -->
+<div class="container content my-4">
+
+	<div id="breadcrumb" class="row">
+		<!-- Breadcrumbs -->
+		<div class="col-12">
+			<nav aria-label="breadcrumb">
+			  <ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="/">Home</a></li>
+				<li class="breadcrumb-item"><a href="/help">Help</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Linguistic Glossing</li>
+			  </ol>
+			</nav>
+		</div>
+	</div><!-- /.row -->
+  
+	<div class="row search-entries detail">
+	<!-- Suchergebnis -->		
+		<div class="col-sm-12 col-lg-8 result">	
+			<h2 class="id mt-1">Linguistic Glossing Abbreviations<span class="Z3988" title="{{coins}}"></span></h2>
+		</div>
+        
+        <!--<div class="col-md-4 align-right align-baseline d-none d-lg-block">
+            <div class="functional-icons ml-3 ">
+              <a href="#" class="btn btn-light solo-icon" role="button" data-toggle="modal" data-target="#modal_sharing">Share&nbsp;&nbsp;<i class="fa fa-share-alt share-results"></i></a>              
+            </div>
+            
+            <div class="functional-icons ml-3 ">
+            <a href="#" class="btn btn-light solo-icon" role="button" data-toggle="modal" data-target="#modal_comments">Comment&nbsp;&nbsp;<i class="far fa-comment"></i></a>
+            </div>
+		</div>-->
+	</div>
+	<!-- /.row -->
+  
+  	
+	<!-- Content -->
+	<div class="row search my-4">
+		<div class="col-sm-3">
+			<table class="table table-sm table-borderless">
+			  <thead>
+				<tr>
+				  <th>Gloss</th>
+				  <th>Meaning</th>
+				</tr>
+			  </thead>
+			  <tbody>
+				<tr><th scope="row" class="ling-glossing">1</th><td>1st person</td></tr>
+				<tr><th scope="row" class="ling-glossing">2</th><td>2nd person</td></tr>
+				<tr><th scope="row" class="ling-glossing">3</th><td>3rd person</td></tr>
+				<tr><th scope="row" class="ling-glossing">act</th><td>active</td></tr>
+				<tr><th scope="row" class="ling-glossing">ADJ</th><td>adjective</td></tr>
+				<tr><th scope="row" class="ling-glossing">adv</th><td>adverb</td></tr>
+				<tr><th scope="row" class="ling-glossing">advz</th><td>adverbializer/adverbialized</td></tr>
+				<tr><th scope="row" class="ling-glossing">ant</th><td>anterior (perfective, perfect)</td></tr>
+				<tr><th scope="row" class="ling-glossing">ART</th><td>article</td></tr>
+				<tr><th scope="row" class="ling-glossing">AUX</th><td>auxilliary</td></tr>
+				<tr><th scope="row" class="ling-glossing">card</th><td>cardinal number</td></tr>
+				<tr><th scope="row" class="ling-glossing">cnsv</th><td>consecutive</td></tr>
+				<tr><th scope="row" class="ling-glossing">compl</th><td>completive</td></tr>
+				<tr><th scope="row" class="ling-glossing">du</th><td>dual</td></tr>
+				<tr><th scope="row" class="ling-glossing">excl</th><td>exclamative</td></tr>
+				<tr><th scope="row" class="ling-glossing">f</th><td>femininum</td></tr>
+				<tr><th scope="row" class="ling-glossing">imp</th><td>imperative</td></tr>
+				<tr><th scope="row" class="ling-glossing">inf</th><td>infinitive</td></tr>
+				<tr><th scope="row" class="ling-glossing">m</th><td>masculinum</td></tr>
+				<tr><th scope="row" class="ling-glossing">N</th><td>noun</td></tr>
+				<tr><th scope="row" class="ling-glossing">nmlz</th><td>nominalizer/nominalized</td></tr>
+				<tr><th scope="row" class="ling-glossing">NUM</th><td>number</td></tr>
+				<tr><th scope="row" class="ling-glossing">oblv</th><td>obligative</td></tr>
+				<tr><th scope="row" class="ling-glossing">ord</th><td>ordinal number</td></tr>
+				<tr><th scope="row" class="ling-glossing">pass</th><td>passive</td></tr>
+				<tr><th scope="row" class="ling-glossing">pl</th><td>plural</td></tr>
+				<tr><th scope="row" class="ling-glossing">poss</th><td>possessive</td></tr>
+				<tr><th scope="row" class="ling-glossing">post</th><td>posterior</td></tr>
+				<tr><th scope="row" class="ling-glossing">PREP</th><td>preposition</td></tr>
+				<tr><th scope="row" class="ling-glossing">PRON</th><td>pronoun</td></tr>
+				<tr><th scope="row" class="ling-glossing">PTCL</th><td>particle</td></tr>
+				<tr><th scope="row" class="ling-glossing">ptcp</th><td>participle</td></tr>
+				<tr><th scope="row" class="ling-glossing">rel</th><td>relative pronoun/Relative Form</td></tr>
+				<tr><th scope="row" class="ling-glossing">res</th><td>resultative</td></tr>
+				<tr><th scope="row" class="ling-glossing">sg</th><td>singular</td></tr>
+				<tr><th scope="row" class="ling-glossing">stc</th><td>status constructus</td></tr>
+				<tr><th scope="row" class="ling-glossing">stpr</th><td>status pronominalis</td></tr>
+				<tr><th scope="row" class="ling-glossing">tam</th><td>tense/aspect/mode</td></tr>
+				<tr><th scope="row" class="ling-glossing">V</th><td>verb</td></tr>
+				<tr><th scope="row" class="ling-glossing">vblz</th><td>verbializer/verbialized</td></tr>
+			  </tbody>
+			</table>
+		</div>
+	
+	
+	
+     
+	</div> <!-- /.row -->	  
+</div><!-- /.container Content -->  	
+{% endblock %}

@@ -7,8 +7,91 @@
 <link rel="stylesheet" type="text/css" href="{% static "css/keyboard.css"%}"/>
 
 <script type="text/javascript">
+
 var wordClasses = {{ word_classes | js }};
+
+var subPOSDict = {
+        "animal_name": "animal",
+        "artifact_name": "artifact",
+        "cardinal": "cardinal",
+        "demonstrative_pronoun": "demonstrative",
+        "epith_god": "divine",
+        "epith_king": "royal",
+        "gods_name": "divine",
+        "interrogative_pronoun": "interrogative",
+        "kings_name": "royal",
+        "nisbe_adjective_preposition": "de-prepositional nisbe",
+        "nisbe_adjective_substantive": "de-nominal nisbe",
+        "ordinal": "ordinal",
+        "org_name": "organization",
+        "particle_enclitic": "enclitic",
+        "particle_nonenclitic": "nonenclitic",
+        "person_name": "personal",
+        "personal_pronoun": "personal",
+        "place_name": "place",
+        "prepositional_adverb": "de-prepositional",
+        "relative_pronoun": "relative",
+        "substantive_fem": "fem.",
+        "substantive_masc": "masc.",
+        "title": "title",
+        "verb_2-gem": "II gem.",
+        "verb_2-lit": "2 lit.",
+        "verb_3-gem": "III gem.",
+        "verb_3-inf": "III inf.",
+        "verb_3-lit": "3 lit.",
+        "verb_4-inf": "IV inf.",
+        "verb_4-lit": "4 lit.",
+        "verb_5-inf": "V inf.",
+        "verb_5-lit": "5 lit.",
+        "verb_6-lit": "6 lit.",
+        "verb_caus_2-gem": "caus. II gem.",
+        "verb_caus_2-lit": "caus. 2 lit.",
+        "verb_caus_3-gem": "caus. III gem.",
+        "verb_caus_3-inf": "caus. III inf.",
+        "verb_caus_3-lit": "caus. 3 lit.",
+        "verb_caus_4-inf": "caus. IV inf.",
+        "verb_caus_4-lit": "caus. 4 lit.",
+        "verb_caus_5-lit": "caus. 5 lit.",
+        "verb_irr": "irregular"
+};
+
 $(window).on('pageshow', function(){
+    // If form values are not blank, restore them to the form fields
+    var sessionVal = sessionStorage.getItem('dictSearchTranscription');
+    if (sessionVal !== null) $('#dict-search-transcription').val(sessionVal);
+    sessionVal = sessionStorage.getItem('dictSearchRoot');
+    if (sessionVal !== null) $('#dict-search-root').val(sessionVal);
+    sessionVal = sessionStorage.getItem('dictSearchTranslation');
+    if (sessionVal !== null) $('#dict-search-translation').val(sessionVal);
+    sessionVal = sessionStorage.getItem('dictSearchBibliography');
+    if (sessionVal !== null) $('#dict-search-bibliography').val(sessionVal);
+    sessionVal = sessionStorage.getItem('dictSearchLemmaID');
+    if (sessionVal !== null) $('#dict-search-lemma-id').val(sessionVal);
+    sessionVal = sessionStorage.getItem('dictSearchPOS');
+    if (sessionVal !== null) $('#word_class_types').val(sessionVal);
+	
+	function populateSubPOS() {
+    $('#word_class_subtypes').empty();
+	var key = $("#word_class_types").val();
+    if (key in wordClasses && wordClasses[key] != null) {
+	  $('#word_class_subtypes').append('<option value="(any)">(any)</option>');
+      wordClasses[key].forEach((subtype, index) => {
+        $('#word_class_subtypes').append('<option value="'+subtype+'">'+subPOSDict[subtype]+'</option>');
+      });
+    } else {
+      $('#word_class_subtypes').val('');
+    }
+	}
+	populateSubPOS();
+	
+    sessionVal = sessionStorage.getItem('dictSearchSubPOS');
+    if (sessionVal !== null) $('#word_class_subtypes').val(sessionVal);
+    sessionVal = sessionStorage.getItem('dictSearchTranslationLanguage');
+    if (sessionVal !== null) $('#dict-search-translation-lang').val(sessionVal);
+    sessionVal = sessionStorage.getItem('dictSearchSentenceID');
+    if (sessionVal !== null) $('#dict-search-sentence-id').val(sessionVal);
+
+
   // prevent submit button from passing empty parameters in GET request
   $("#dict-search").submit(function() {
     // disable empty input fields
@@ -24,33 +107,49 @@ $(window).on('pageshow', function(){
     if (!$("#dict-search-translation").val()) {
       $("select[name=lang]").attr("disabled", "disabled");
     }
+    if (!$("#word_class_types").val() || $("#word_class_types").val() == "(any)") {
+      $("select[name=pos_subtype]").attr("disabled", "disabled");
+    }
     return true;
   });
+  
   // Un-disable form fields when page loads, in case they click back after submission
   $("#dict-search input").attr("disabled", false);
+  
   // inject subtype choices list depending on the type input field value
   var wordClassTypesField = $("#word_class_types");
   var wordClassSubtypesField = $("#word_class_subtypes");
-  wordClassSubtypesField.hide();
-  wordClassTypesField.bind('input', function(){//bind is deprecated actually we supposed to use on()
-    var key = wordClassTypesField.val();
+  //wordClassSubtypesField.hide();
+  wordClassTypesField.on('input', function(){ 
+	$('#word_class_subtypes').empty();
+    var key = $("#word_class_types").val();
     if (key in wordClasses && wordClasses[key] != null) {
-      wordClassSubtypesField.empty();
+	  $('#word_class_subtypes').append('<option value="(any)">(any)</option>');
       wordClasses[key].forEach((subtype, index) => {
-        $('#word_class_subtypes').append(
-        '<option value="'+subtype+'">'+subtype+'</option>');
+        $('#word_class_subtypes').append('<option value="'+subtype+'">'+subPOSDict[subtype]+'</option>');
       });
-      wordClassSubtypesField.show(150);
     } else {
-      wordClassSubtypesField.hide(150);
-	    wordClassSubtypesField.empty();
-        wordClassSubtypesField.val('');
+      $('#word_class_subtypes').val('');
     }
   });
 });
+
+// Storing form data   
+$(window).on('unload', function() {
+    sessionStorage.setItem("dictSearchTranscription", $('#dict-search-transcription').val());
+    sessionStorage.setItem("dictSearchPOS", $('#word_class_types').val());
+    sessionStorage.setItem("dictSearchSubPOS", $('#word_class_subtypes').val());
+    sessionStorage.setItem("dictSearchRoot", $('#dict-search-root').val());
+    sessionStorage.setItem("dictSearchTranslation", $('#dict-search-translation').val());
+    sessionStorage.setItem("dictSearchTranslationLanguage", $('#dict-search-translation-lang').val());
+    sessionStorage.setItem("dictSearchBibliography", $('#dict-search-bibliography').val());
+    sessionStorage.setItem("dictSearchLemmaID", $('#dict-search-lemma-id').val());
+    sessionStorage.setItem("dictSearchSentenceID", $('#dict-search-sentence-id').val());
+});
+
 </script>
 
-<script type="text/javascript">
+<!--<script type="text/javascript">
  
     $(document).ready(function() {
  
@@ -58,35 +157,49 @@ $(window).on('pageshow', function(){
  
     });
  
-</script>
+</script>-->
 
 {% endblock %}
 
-{% block title %}TLA - Prototyp - Search{% endblock %}
+{% block title %}TLA - Search{% endblock %}
 
 	{% block content %}  
     <!-- Page Content -->
     <div class="container content my-4">
 
-      <div class="row">
+      <div  id="breadcrumb" class="row">
+
 		<!-- Breadcrumbs -->
 		<div class="col-12">
 			<nav aria-label="breadcrumb">
 			  <ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="#">Home</a></li>
+				<li class="breadcrumb-item"><a href="/">Home</a></li>
 				<li class="breadcrumb-item active" aria-current="page">Search</li>
 			  </ol>
 			</nav>
 		</div>
 	  </div>
 	  <!-- /.row -->
-	  
+
+	<!-- Ueberschrift und Info-Button -->	
+	<div class="row">
+		<div class="col-sm-12 col-lg-8 result">
+            <h2 class="id mt-1">Search</h2> 
+		</div>
+        
+        <div class="button-bar col-md-4 align-right align-baseline d-none d-lg-block">
+            <div class="functional-icons mr-0 ">
+                <a class="btn btn-red text-left text-decoration-none solo-icon" role="button" href="/help/search" target="_blank">Help&nbsp;&nbsp;<i class="fas fa-info-circle fa-lg"></i></a>
+            </div>
+		</div>			
+    </div><!-- /.row -->	 
+	
+	<!-- einfaches Suchformular -- >
 	<div class="row global-search">
 		<div class="col-sm-12">
 			<h4 class="font-weight-light">Global Search</h4>
 			<hr>
 		</div>
-		<!-- einfaches Suchformular -->
 			
 		<div class="col-sm-12 col-md-9 col-lg-8 my-3">
 			<div class="form-group">
@@ -98,15 +211,17 @@ $(window).on('pageshow', function(){
 			<a href="/search"><button type="button" class="btn btn-block btn-danger text-left text-decoration-none" disabled><span class="fas fa-arrow-circle-right"></span>Search</button></a>
 		</div>	
 	</div>
-	<!-- /.row -->
+	<! -- einfaches Suchformular -->
 	  
 	  	
 	<!-- Detailsuche -->
 	<div class="row search my-4">
+		<!--
 		<div class="col-sm-12">
 			<h4 class="font-weight-light">Expert Search</h4>
 			<hr>
 		</div>
+		-->
 		<div class="col-sm-12 col-md-9 col-lg-8">
 		<div class="accordion" id="accordionExample">
 		
@@ -114,7 +229,7 @@ $(window).on('pageshow', function(){
 		  <div class="card">
 			<div class="card-header" id="headingOne">
 			  <h2 class="mb-0">
-				<button class="btn btn-link show-detail" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" form="dict-search">
+				<button class="btn btn-link show-detail dictionary-search-form-btn" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" form="dict-search">
 				  <i class="fas fa-minus-circle"></i>Dictionary entries
 				</button>
 				
@@ -127,70 +242,50 @@ $(window).on('pageshow', function(){
 				  <div class="form-group row bg-grey col-sm-12 col-lg-9 lg-push-3 col-xl-10 pl-4">
 					<label for="language" class="col-form-label"></label>
 					<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="script" value="h" checked>
-					  <label class="form-check-label" for="inlineCheckbox1">Hieroglyphs/Hieratic</label>
+					  <input class="form-check-input" type="checkbox" id="script-hieroglyphic" name="script" value="hieroglyphic" checked>
+					  <label class="form-check-label" for="script-hieroglyphic">Hieroglyphs/Hieratic</label>
 					</div>
 					<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="script" value="d" checked>
-					  <label class="form-check-label" for="inlineCheckbox2">Demotic</label>
+					  <input class="form-check-input" type="checkbox" id="script-demotic" name="script" value="demotic" checked>
+					  <label class="form-check-label" for="script-demotic">Demotic</label>
 					</div>	
 					<!--<div class="form-check form-check-inline">
-					  <input class="form-check-input" type="checkbox" id="inlineCheckbox3" name="script" value="c">
-					  <label class="form-check-label" for="inlineCheckbox3">Coptic</label>
+					  <input class="form-check-input" type="checkbox" id="script-coptic" name="script" value="coptic">
+					  <label class="form-check-label" for="script-coptic">Coptic</label>
 					</div>-->					
 				  </div>
 				  <div class="form-group row ">
-					<label for="Transcription" class="col-sm-12 col-lg-3 col-xl-2 col-form-label ">Transcription</label>
+					<label for="Transcription" class="col-sm-12 col-lg-3 col-xl-2 col-form-label ">Transcription</label> 
 					<div class="col-sm-12 col-lg-9 col-xl-10">
 					  <input type="text" class="bbaw-libertine form-control mb-3 keyboardInput" id="dict-search-transcription" rows="3" name="transcription" lang="egy">
-                        
-					  <div class="form-check form-check-inline">
-						  <input class="form-check-input" type="radio" name="transcription_enc" id="inlineRadio1" value="unicode" checked>
-						  <label class="form-check-label" for="inlineRadio1">Unicode<a href="#"></a></label>
+                       
+						<div class="form-check form-check-inline">
+							  <input class="form-check-input transcription-enc-btn" type="radio" name="transcription_enc" id="transcription_enc_unicode" value="unicode" checked>
+							  <label class="form-check-label" for="transcription_enc_unicode">Unicode</label>
 						</div>
 						<div class="form-check form-check-inline">
-						  <input class="form-check-input" type="radio" name="transcription_enc" id="inlineRadio2" value="mdc">
-						  <label class="form-check-label" for="inlineRadio2">Manuel de Codage</label>
+							  <input class="form-check-input transcription-enc-btn" type="radio" name="transcription_enc" id="transcription_enc_mdc" value="manuel_de_codage">
+							  <label class="form-check-label" for="transcription_enc_mdc">Manuel de Codage</label>
 						</div>
-					</div>
-				  </div>
-
-             
-              <!-- Translation -->			  
-				  <div class="form-group row bg-grey">
-					<label for="Translation" class="col-sm-12 col-lg-3 col-xl-2 col-form-label">Translation</label>
-					<div class="col-sm-12 col-lg-9 col-xl-10">
-                        <input type="text" class="form-control mb-3 mdb-select colorful-select dropdown-primary md-form" id="dict-search-translation" name="translation" multiple searchable="Search here..">
-                        <select class="form-control" id="dict-search-translation" name="lang"> 						
-						    <option value="de">German</option>						
-						    <option value="en">English</option>						
-						    <option value="fr">French</option>    
-						</select>           
+						<small class="form-text text-muted pl-2 pt-1">"§": any character; "[  ]": set of characters; "?"/"*"/"+": preceeding character 0-1, 0-x or 1-x times, respectively.</small>
 					</div>
 				  </div>
 				  
 				  <!-- Word class -->			  
-				  <div class="form-group row">
-					<label for="inputWordClass" class="col-sm-12 col-lg-3 col-xl-2 col-form-label">Word class</label>
-					<div class="col-sm-12 col-lg-9 col-xl-10">
-						<select class="form-control" id="word_class_types" name="wc_type">
-							<option value="">(any)</option>
+				  <div class="form-group row bg-grey">
+					<label for="inputWordClass" class="col-sm-12 col-lg-3 col-xl-2 col-form-label">Part of Speech</label>
+					<div class="col-sm-12 col-lg-9 col-xl-10 mb-2">
+						<select class="form-control" id="word_class_types" name="pos_type">
+							<option value="(any)">(any)</option>
 							{% for type, subtypes in word_classes.items%}
-							  <option value="{{type}}">{{type}}</option>
+							  <option value="{{type}}">{{type|nicePOS}}</option>
 							{%endfor%}
 						</select>					  
 					</div>
+					<label for="inputWordClass" class="col-sm-12 col-lg-3 col-xl-2 col-form-label">Sub-category</label>
 					<div class="col-sm-12 col-lg-9 col-xl-10">
-						<select class="form-control" id="word_class_subtypes" name="wc_subtype">
+						<select class="form-control" id="word_class_subtypes" name="pos_subtype">
 						</select>					  
-					</div>
-				  </div>
-				  
-				  <!-- Bibliography -->			  
-				  <div class="form-group row bg-grey">
-					<label for="Translation" class="col-sm-12 col-lg-3 col-xl-2 col-form-label">Bibliography</label>
-					<div class="col-sm-12 col-lg-9 col-xl-10">
-					  <input class="form-control" type="text" placeholder="" name="bib">
 					</div>
 				  </div>
 				  
@@ -202,27 +297,59 @@ $(window).on('pageshow', function(){
                         <input type="text" class="form-control mb-3 keyboardInput" id="dict-search-root" rows="3" name="root" lang="egy">
                       
                         <div class="form-check form-check-inline">
-						  <input class="form-check-input" type="radio" name="root_enc" id="inlineRadio3" value="unicode" checked>
-						  <label class="form-check-label" for="inlineRadio3">Unicode<a href="#"></a></label>
+						  <input class="form-check-input root-enc-btn" type="radio" name="root_enc" id="root_enc_unicode" value="unicode" checked>
+						  <label class="form-check-label" for="root_enc_unicode">Unicode</label>
 						</div>
 						<div class="form-check form-check-inline">
-						  <input class="form-check-input" type="radio" name="root_enc" id="inlineRadio4" value="mdc">
-						  <label class="form-check-label" for="inlineRadio4">Manuel de Codage</label>
+						  <input class="form-check-input root-enc-btn" type="radio" name="root_enc" id="root_enc_mdc" value="manuel_de_codage">
+						  <label class="form-check-label" for="root_enc_mdc">Manuel de Codage</label>
 						</div>
+						<small class="form-text text-muted pl-2 pt-1">"§": any character; "[  ]": set of characters; "?"/"*"/"+": preceeding character 0-1, 0-x or 1-x times, respectively.</small>
+					</div>
+				  </div>
+             
+              <!-- Translation -->			  
+				  <div class="form-group row bg-grey">
+					<label for="Translation" class="col-sm-12 col-lg-3 col-xl-2 col-form-label">Translation</label>
+					<div class="col-sm-12 col-lg-9 col-xl-10">
+                        <input type="text" class="form-control mb-2 mdb-select colorful-select dropdown-primary md-form" id="dict-search-translation" name="translation" multiple searchable="Search here..">
+                        <select class="form-control" id="dict-search-translation-lang" name="lang"> 						
+						    <option value="de">German</option>						
+						    <option value="en">English</option>						
+						    <option value="fr">French</option>    
+						</select>           
+					</div>
+				  </div>
+
+				  
+				  <!-- Bibliography -->			  
+				  <div class="form-group row">
+					<label for="Translation" class="col-sm-12 col-lg-3 col-xl-2 col-form-label">Bibliography</label>
+					<div class="col-sm-12 col-lg-9 col-xl-10">
+					  <input class="form-control" type="text" placeholder="" id="dict-search-bibliography" name="bibliography">
+					</div>
+				  </div>
+
+
+				  <!-- Lemma ID -->			  
+				  <div class="form-group row bg-grey">
+					<label for="Lemma-ID" class="col-sm-12 col-lg-3 col-xl-2 col-form-label">Lemma ID</label>
+					<div class="col-sm-12 col-lg-9 col-xl-10">
+					  <input class="form-control" type="text" placeholder="" id="dict-search-lemma-id" name="lemma_id">
 					</div>
 				  </div>
 				  
-				  <!-- Annotaion -->			  
-				  <div class="form-group row bg-grey">
+				  <!-- Annotaion			  
+				  <div class="form-group row">
 					<label for="Word-Class" class="col-sm-12 col-lg-3 col-xl-2 col-form-label">Annotation type</label>
 					<div class="col-sm-12 col-lg-9 col-xl-10">
-						<select class="form-control" disabled>
+						<select class="form-control">
 						  <option></option>
 						  <option>Annotation 1</option>
 						  <option>Annotation 2</option>
 						</select>					  
 					</div>					
-				  </div>
+				  </div> -->
 				
 				</form>			  
 			</div>
@@ -231,22 +358,31 @@ $(window).on('pageshow', function(){
 		  <div class="card">
 			<div class="card-header" id="headingTwo">
 			  <h2 class="mb-0">
-				<button form="text-word-search" class="btn btn-link collapsed show-detail" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-				 <i class="fas fa-plus-circle"></i>Words in texts
+				<button class="btn btn-link collapsed show-detail text-word-search-form-btn" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" form="text-word-search">
+				   <i class="fas fa-plus-circle"></i>Text database
 				</button>
 			  </h2>
 			</div>
 			<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
 				<form id="text-word-search" name="text-word-search" action="/search/occurrences">
-					{% for field in textwordform %}
+					<!--{% for field in textwordform %}
 					<div class="form-group row bg{% cycle '-grey' '' %}">
 						{{ field }}
 					</div>
-					{% endfor %}
+					{% endfor %}-->
+					
+				 <!-- Sentence ID -->			  
+				  <div class="form-group row bg-grey">
+					<label for="Lemma-ID" class="col-sm-12 col-lg-3 col-xl-2 col-form-label">Sentence ID</label>
+					<div class="col-sm-12 col-lg-9 col-xl-10">
+					  <input class="form-control" type="text" placeholder="" id="dict-search-sentence-id" name="sentence_id">
+					</div>
+				  </div>
 				</form>
 			</div>
 		  </div>
 
+		  <!-- noch nicht implementiert -- >
 		  <div class="card">
 			<div class="card-header" id="headingThree">
 			  <h2 class="mb-0">
@@ -275,31 +411,33 @@ $(window).on('pageshow', function(){
 			   </div>
 			</div>
 		  </div>
+		  <! -- noch nicht implementiert -->
 		  
 		</div>	<!-- .accordion -->	
 		<small id="GlobalSearch" class="form-text text-muted pl-2 pt-1">Enter specific search options and combine search-fields.</small>
 		</div>	<!-- .col-sm-8 -->	
 	
 	<!-- Sidebar -->
-		<div class="col-sm-12 col-md-3  col-lg-4 mt-2">
+		<div class="sidebar col-sm-12 col-md-3  col-lg-4 mt-2">
 			<div class="sticky-top">
+				<!--
 				<div class="form-check mb-4">
-					<input class="form-check-input" type="radio" name="FuzzySearch" id="Fuzzy" value="option1" disabled>
+					<input class="form-check-input" type="radio" name="FuzzySearch" id="Fuzzy" value="option1">
 					 <label class="form-check-label" for="FuzzySearch">
 						Fuzzy search
 					</label>
-					<input class="form-check-input ml-2" type="radio" name="ExactSearch" id="Fuzzy" value="option1" checked disabled>
+					<input class="form-check-input ml-2" type="radio" name="ExactSearch" id="Fuzzy" value="option1" checked>
 					 <label class="form-check-label ml-4" for="ExactSearch">
 						Exact search
 					</label>
-					
 				</div>		
+				-->
 			
-				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none">
+				<button id="clear-form-btn" type="button" class="btn btn-block btn-secondary text-left text-decoration-none">
 					<span class="fas fa-times-circle"></span>Clear all
 				</button>
 				<button id="submit-search-form" type="submit" class="btn btn-block btn-danger text-left text-decoration-none mt-4" form="dict-search" formtarget="_self" formmethod="get" formenctype="application/x-www-form-urlencoded">
-					<span class="fas fa-arrow-circle-right"></span>Search
+					<span class="fas fa-arrow-circle-right"></span>Search in dictionary
 				</button>
 			</div> <!-- .sticky -->
 		</div>
@@ -308,5 +446,3 @@ $(window).on('pageshow', function(){
 	</div>  <!-- /.row content-->
 	</div> <!-- /.container Content -->
 	{% endblock %}
-	
-	
