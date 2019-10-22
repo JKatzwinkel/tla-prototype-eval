@@ -135,7 +135,7 @@ def MdCtoRES(codeStr):
         codeStr = re.sub(r'\<[Hh]0\-([^\>]+)\-[Hh]?0\>', r'modify[before=0.2,after=0.4,omit](Hwtcloseunder(empty[width=0.5,height=0.5]-\1-empty[width=0.5,height=0.5]))', codeStr) 
         codeStr = re.sub(r'\<[Hh]0\-([^\>]+)\-[Hh]?\>', r'modify[before=0.2,omit](Hwtcloseunder(empty[width=0.5,height=0.5]-\1))', codeStr) 
         codeStr = re.sub(r'\<[Hh]0\-([^\>]+)\-[Hh]?1\>', r'modify[before=0.2,omit](Hwtopenunder(empty[width=0.5,height=0.5]-\1))', codeStr) 
-        codeStr = re.sub(r'\<[Hh]0\-([^\>]+)\-[Hh]?3\>', r'modify[before=0.2,omit](Hwtcloseunder(empty[width=0.5,height=0.5]-\1))', codeStr) 
+        codeStr = re.sub(r'\<[Hh]0\-([^\>]+)\-[Hh]?3\>', r'modify[before=0.2,omit](Hwtcloseover(empty[width=0.5,height=0.5]-\1))', codeStr) 
         codeStr = re.sub(r'\<[Hh]\-([^\>]+)\-[Hh]?\>', r'Hwtcloseunder(\1)', codeStr) 
         codeStr = re.sub(r'\<[Hh]1\-([^\>]+)\-[Hh]?3\>', r'Hwtcloseover(\1)', codeStr) 
         codeStr = re.sub(r'\<[Hh]1\-([^\>]+)\-[Hh]?0\>', r'modify[after=0.2,omit](Hwtcloseover(\1-empty[width=0.5,height=0.5]))', codeStr) 
@@ -143,13 +143,13 @@ def MdCtoRES(codeStr):
         codeStr = re.sub(r'\<[Hh]3\-([^\>]+)\-[Hh]?0\>', r'modify[after=0.2,omit](Hwtopenover(\1-empty[width=0.5,height=0.5]))', codeStr) 
         codeStr = re.sub(r'\<[Hh]2\-([^\>]+)\-[Hh]?1\>', r'Hwtopenunder(\1)', codeStr) 
         codeStr = re.sub(r'\<[Hh]3\-([^\>]+)\-[Hh]?1\>', r'Hwtopenover(\1)', codeStr) 
-        codeStr = re.sub(r'\<[Hh]1\-[Hh]?0\>', 'modify[after=0.1,omit](Hwtcloseover(empty[width=0.5,height=0.5]))', codeStr)
-        codeStr = re.sub(r'\<[Hh]2\-[Hh]?0\>', 'modify[after=0.1,omit](Hwtopenunder(empty[width=0.5,height=0.5]))', codeStr)
-        codeStr = re.sub(r'\<[Hh]3\-[Hh]?0\>', 'modify[after=0.1,omit](Hwtopenover(empty[width=0.5,height=0.5]))', codeStr)
-        codeStr = re.sub(r'\<[Hh]0\-[Hh]1\>', 'modify[before=0.1,omit](Hwtopenunder(empty[width=0.5,height=0.5]))', codeStr)
-        codeStr = re.sub(r'\<[Hh]0\-[Hh]3\>', 'modify[before=0.1,omit](Hwtcloseover(empty[width=0.5,height=0.5]))', codeStr)
-        codeStr = re.sub(r'\<[Hh]0\-[Hh]\>', 'modify[before=0.1,omit](Hwtcloseunder(empty[width=0.5,height=0.5]))', codeStr)
-        codeStr = re.sub(r'\<[Hh]\-[Hh]?0\>', 'modify[after=0.1,omit](Hwtcloseunder(empty[width=0.5,height=0.5]))', codeStr) 
+        codeStr = re.sub(r'\<[Hh]1\-[Hh]?0\>', 'modify[after=2,omit](Hwtcloseover(empty[width=0.5,height=0.5]))', codeStr)
+        codeStr = re.sub(r'\<[Hh]2\-[Hh]?0\>', 'modify[after=0.2,omit](Hwtopenunder(empty[width=0.5,height=0.5]))', codeStr)
+        codeStr = re.sub(r'\<[Hh]3\-[Hh]?0\>', 'modify[after=0.2,omit](Hwtopenover(empty[width=0.5,height=0.5]))', codeStr)
+        codeStr = re.sub(r'\<[Hh]0\-[Hh]1\>', 'modify[before=2,omit](Hwtopenunder(empty[width=0.5,height=0.5]))', codeStr)
+        codeStr = re.sub(r'\<[Hh]0\-[Hh]3\>', 'modify[before=0.2,omit](Hwtcloseover(empty[width=0.5,height=0.5]))', codeStr)
+        codeStr = re.sub(r'\<[Hh]0\-[Hh]\>', 'modify[before=0.2,omit](Hwtcloseunder(empty[width=0.5,height=0.5]))', codeStr)
+        codeStr = re.sub(r'\<[Hh]\-[Hh]?0\>', 'modify[after=2,omit](Hwtcloseunder(empty[width=0.5,height=0.5]))', codeStr) 
         
         codeStr = re.sub(r'\<0\-([^\>]+)\-0\>', r'modify[before=0.2,after=0.2,omit](cartouche(empty[width=0.5,height=0.5]-\1-empty[width=0.5,height=0.5]))', codeStr) 
         codeStr = re.sub(r'\<1\-([^\>]+)\-0\>', r'modify[after=0.2,omit](cartouche(\1-empty[width=0.5,height=0.5]))', codeStr) 
@@ -11546,11 +11546,18 @@ def computeLingGlossing(flexcode, lemmaID):
         if logFile: logFile.write('\n'+pos+'\t'+str(sub_pos)+'\t'+str(flexcode)+'\tError: Unhandled flex code: '+str(flexcode))
 
     return glossing
-    
-    
-#### Kilani Unicode Hieroglyphs Mockup
-# First Function - replaces sign codes, keeps control characters
 
+
+@register.filter(is_safe=True)
+def prettyUnicodeHieroglyphs(hieroStr):
+    if not hieroStr: return ''
+    hieroStr = mark_safe(hieroStr.replace("(", '<span class="latin-in-hiero">').replace(")", "</span>"))
+    return hieroStr
+    
+    
+#### Kilani Unicode Hieroglyphs
+
+# First Function - replaces sign codes, keeps control characters
 @register.filter(is_safe=True)
 def MdC_Unicode_withLatinControlChars(wordToParse):
     if not wordToParse: return ''
@@ -11566,10 +11573,7 @@ def MdC_Unicode_withLatinControlChars(wordToParse):
     if not wordParsed: return ''
     return wordParsed
 
-#- - - - - - - - - - - -
-
 # Second Function - replaces sign codes, removes control characters
-
 @register.filter(is_safe=True)
 def MdC_Unicode_noControlChars(wordToParse):
     if not wordToParse: return ''
@@ -11583,15 +11587,13 @@ def MdC_Unicode_noControlChars(wordToParse):
     wordToParse = "".join(signsParsed)
 
     wordParsed = wordToParse.replace("-", "").replace(":", "").replace("*", "").replace("(", "").replace(")", "").replace("&", "") #.replace('"', "")
-    wordParsed = wordParsed.replace("§", "(").replace("$", ")")
+    wordParsed = wordParsed.replace("%1%", '(').replace("%2%", ')')
 
     if not wordParsed: return ''
     return wordParsed
 
-#- - - - - - - - - - - -
 
 # Third Function - replaces sign codes, removes control characters, insert the breaking-ligature character (u
-
 @register.filter(is_safe=True)
 def MdC_Unicode_noControlChars_WithBreakLigChar(wordToParse):
     if not wordToParse: return ''
@@ -11605,13 +11607,12 @@ def MdC_Unicode_noControlChars_WithBreakLigChar(wordToParse):
     wordToParse = "".join(signsParsed)
 
     wordParsed = wordToParse.replace("-", u"\u200B").replace(":", "").replace("*", "").replace("(", "").replace(")", "").replace("&", "")
-    wordParsed = wordParsed.replace("§", "(").replace("$", ")")
+    wordParsed = wordParsed.replace("%1%", "(").replace("%2%", ")")
 
     if not wordParsed: return ''
     return wordParsed
 
 # Fourth Function - analyses the word according to all the three previous functions, and output the result as an array
-
 def MdC_Unicode_combined(wordToParse):
     if not wordToParse: return ''
 
@@ -12712,13 +12713,90 @@ dictUnicodeHieroglyphs = {
     'A1': '𓀀',
     'O': '°',
     'o': '°',
+    '[(': '(',
+    ')]': ')',
+    '[&': '〈',
+    '&]': '〉',
+    '[{': '{',
+    '}]': '}',
+    "['": "'",
+    "']": "'",
+    '[?': '⸢',
+    '?]': '⸣',
+    '[[': '[',
+    ']]': ']',
+    '..': ' ',
+    '.': ' ',
     '//': '//..//',
     'v/': '//',
     'h/': '//',
     '/': '//',
-    '[?': '[',
-    '?]': '?]',
-    '"var"': '*',
+    '"?"': '?',
+    '"¿"': '¿',
+    '"lb"': '|',
+    #'"var"': '(var)',
+    '<f': '𓊈',
+    'f>': '𓊉',
+    '<F': '𓊈',
+    'F>': '𓊉',
+    '<s' : '𓉘',
+    '<s1' : '𓉘',
+    '<s2' : '𓊁',
+    '<s0' : '',
+    '<S' : '𓉘',
+    '<S1' : '𓉘',
+    '<S2' : '𓊁',
+    '<S0' : '',
+    's>' : '𓊂',
+    's1>' : '𓊂',
+    's2>' : '𓉝',
+    's0>' : '',
+    'S>' : '𓊂',
+    'S1>' : '𓊂',
+    'S2>' : '𓉝',
+    'S0>' : '-',
+    '<h' : '𓉘',
+    '<h1' : '𓉘',
+    '<h2' : '𓉙',
+    '<h3' : '𓉚',
+    '<h0' : '-',
+    '<H' : '𓉘',
+    '<H1' : '𓉘',
+    '<H2' : '𓉙',
+    '<H3' : '𓉚',
+    '<H0' : '-',
+    'h>' : '𓉜',
+    'h1>' : '𓉝',
+    'h2>' : '𓉝',
+    'h3>' : '𓉛',
+    'h0>' : '-',
+    'H>' : '𓉜',
+    'H1>' : '𓉝',
+    'H2>' : '𓉝',
+    'H3>' : '𓉛',
+    'H0>' : '',
+    '<' : '𓍹',
+    '<1' : '𓍹',
+    '<2' : '𓍸',
+    '<0' : '-',
+    '>' : '𓍺',
+    '1>' : '𓍻',
+    '2>' : '𓍺',
+    '0>' : '-',
+    'o': '°',
+    'O': '°',
+    '"var"': '(var.)',
+    '"mutil"': '(mutil.)',
+    '"monogr"': '(monogr.)',
+    '"composite"': '(comp.)',
+    '"large"': '(large)',
+    '"hierat"': '(hierat.)',
+    '"hiero"': '(hierogl.)',
+    '"demot"': '(Demot.)',
+    '"elab"': '(elab.)',
+    '"abbr"': '(abbr.)',
+    '"ligstart"': '(lig:)',
+    '"ligend"': '(:lig)',
     }
 def replaceGardiner (signs):     
     for i in range (0, len(signs)):
@@ -12727,6 +12805,6 @@ def replaceGardiner (signs):
             signs[i] = unicodeSign
         else:
             if not signs[i] == "-" and not signs[i] == ":" and not signs[i] == "*" and not signs[i] == "(" and not signs[i] == ")" and not signs[i] == "&":
-                signs[i] = "§" + signs[i] + "$"
+                signs[i] = "%1%" + signs[i] + "%2%"
     
     return signs

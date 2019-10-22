@@ -327,13 +327,30 @@ a span.lc:hover {
 
 .unicode-hieroglyphs {
 	font-family: "EgyptianHiero";
-	vertical-align: sub;
+	vertical-align: middle;
 }
-.container-annotation-switch-lines .unicode-hieroglyphs { /* temporär , Test */
-	font-size: 2em;
+.container-annotation-switch-lines .unicode-hieroglyphs,
+.lemma .unicode-hieroglyphs { 
+	font-size: 2.5em;
 }
 .result-list-item .unicode-hieroglyphs {
 	font-size: 1.5em;
+	vertical-align: sub;
+}
+.philological {
+	color: gray;
+}
+.latin-in-hiero {
+	color: gray;
+	font-size: 0.5em;
+	vertical-align: 0.5em;
+    padding: .1em; 
+    margin: .1em; 
+    border-radius: .3em;
+	border-style: dotted;
+	border-width: 2px;
+    display: inline;
+    position: relative;
 }
 
 .token-destruction_marker {

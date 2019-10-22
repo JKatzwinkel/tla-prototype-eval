@@ -151,9 +151,27 @@
                     <!-- Hieroglyphs -->
                     <div class="hieroglyph">
                         {% for token in hit.sentence.tokens %}
+                        <span class="unicode-hieroglyphs {%if token.highlight%}highlight-{{token.highlight}}{%endif%}" title="Lemma ID {{token.lemma}}" {% if token.type == 'word' %}onclick="window.open('/lemma/{{token.lemma}}','_blank')"{% endif %}>
+								{% if token.glyphs %}
+									{{token.glyphs|MdC_Unicode_noControlChars|prettyUnicodeHieroglyphs}}
+								{% else %}
+									{% if token.type == 'destruction_marker' %}
+										<span class="philological">//..//</span>
+									{% endif %}
+									{% if token.type == 'lc' %}
+										<span class="philological">|</span>
+									{% endif %}
+								{% endif %}
+                        </span>
+                        {%endfor%}
+						<button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{%for token in hit.sentence.tokens%}{% if token.type == 'word'%}{{token.glyphs|MdC_Unicode_noControlChars}}{%else%}{{token.glyphs}}{%endif%}{%endfor%}');"><span class="fas fa-clipboard"></span>Copy Unicode</button>
+						<button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{%for token in hit.sentence.tokens%}{% if token.type == 'word'%}{{token.glyphs}}{%else%}+l{{token.glyphs}}+s{%endif%}{% if not forloop.last%}-{%endif%}{%endfor%}');"><span class="fas fa-clipboard"></span>Copy Manuel de Codage</button>
+
+						<br><span style="color:blue">##RES-Rendering##:
+                        <br>{% for token in hit.sentence.tokens %}
                         <span class="glyphbox">
 							{% if token.type == 'word' %}<a href="/lemma/{{token.lemma}}" target="_blank">{%endif%}
-							<canvas class="res occ-tok-glyphs mb-2 {%if token.highlight%}highlight-{{token.highlight}}{%endif%}" title="{{token.glyphs}}">
+							<canvas class="res occ-tok-glyphs mb-2 {%if token.highlight%}highlight-{{token.highlight}}{%endif%}" style="font-size: 2.1em;"   title="{{token.glyphs}}">
 								{% if token.glyphs %}
 									{{token.glyphs|MdCtoRES}}
 								{% else %}
@@ -167,27 +185,15 @@
 							</canvas>
 							{% if token.type == 'word' %}</a>{%endif%}
                         </span>
-                        {%endfor%}
-						<button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{%for token in hit.sentence.tokens%}{% if token.type == 'word'%}{{token.glyphs}}{%else%}+l{{token.glyphs}}+s{%endif%}{% if not forloop.last%}-{%endif%}{%endfor%}');"><span class="fas fa-clipboard"></span>Copy Manuel de Codage</button>
-						<button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{%for token in hit.sentence.tokens%}{% if token.type == 'word'%}{{token.glyphs|MdC_Unicode_noControlChars}}{%else%}{{token.glyphs}}{%endif%}{%endfor%}');"><span class="fas fa-clipboard"></span>Copy Unicode</button>
-						<!-- Unicode Hieroglyphs, Test -->
-						<br><span style="color:blue">(Unicode, ##Anzeige nur zu Testzwecken##:)
-                        <br>{% for token in hit.sentence.tokens %}
-                        <span class="unicode-hieroglyphs">
-                            {% if token.type == 'word' %}
-								{{token.glyphs|MdC_Unicode_noControlChars}}
-                            {%else%}
-								{% if token.glyphs %}{{token.glyphs}}{%endif%}
-                            {%endif%}
-                        </span>
                         {%endfor%} 
 						</span>
+
                     </div>
  
                     <!-- Transliteration -->
                     <h3 class="word bbaw-libertine mb-2">
                         {% for token in hit.sentence.tokens %}
-							{% if token.type == 'word' %}<a href="/lemma/{{token.lemma}}" target="_blank">{% endif %}
+							{% if token.type == 'word' %}<a href="/lemma/{{token.lemma}}" title="Lemma ID {{token.lemma}}" target="_blank">{% endif %}
                             <span id="{{token.id}}" class="occ-tok {%if token.highlight%}highlight-{{token.highlight}}{%endif%} {%if token.type == 'destruction_marker'%}token-destruction_marker{%endif%} token-{{token.type}} bbaw-libertine">
                                     {% if token.label %}
                                         {{token.label|niceTransliteration}}

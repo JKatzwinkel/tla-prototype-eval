@@ -83,28 +83,20 @@
 				<!--<br>Graphics: -->
 				{% for word in lemma.words %}
 					{% if word.glyphs %}
-					<span class="glyphbox">
+					<!--<span class="glyphbox">
 						<canvas class="res" title="{{word.glyphs}}">
 							{{word.glyphs|MdCtoRES}}
 						</canvas>
+					</span>-->
+					<span class="unicode-hieroglyphs" title="{{word.glyphs}}">
+						{{word.glyphs|MdC_Unicode_noControlChars}}
 					</span>
 						{% if forloop.last %}
-						<button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{%for word in lemma.words%}{{word.glyphs}}{%endfor%}');"><span class="fas fa-clipboard"></span>Copy Manuel de Codage</button>
 						<button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{%for word in lemma.words%}{{word.glyphs|MdC_Unicode_noControlChars}}{%endfor%}');"><span class="fas fa-clipboard"></span>Copy Unicode</button>
+						<button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{%for word in lemma.words%}{{word.glyphs}}{%endfor%}');"><span class="fas fa-clipboard"></span>Copy Manuel de Codage</button>
 						{% endif %}
 					{% endif %}
 				{% endfor %}
-				
-				<!--<br>Unicode:
-				<! -- Unicode Hieroglyphs, Test -- >
-				{% for word in lemma.words %}
-				<span class="unicode-hieroglyphs">
-					{%if word.glyphs %}
-						{{word.glyphs|MdC_Unicode_noControlChars}}
-					{%endif%}
-				</span>
-				{%endfor%} -->
-
 				</p>
 				<hr>
 			</div>
@@ -286,11 +278,13 @@
 												#hiero# <!-- ##Variable noch nicht verfügbar -->
 												{% for word in hit.words %}
 													{% if word.glyphs %}
-														<span class="glyphbox">
-															<!-- TODO font-size: 20px; vertical-align: -5px; in css verschieben -->
+														<!--<span class="glyphbox">
 															<canvas class="res" style="font-size: 20px; vertical-align: -5px;" title="{{word.glyphs}}">
 																{{word.glyphs}}
 															</canvas>
+														</span>-->
+														<span class="unicode-hieroglyphs">
+															{{word.glyphs|MdC_Unicode_noControlChars}}
 														</span>
 													{% endif %}
 												{% endfor %}
