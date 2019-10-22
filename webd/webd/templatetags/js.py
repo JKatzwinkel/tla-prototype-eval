@@ -63,58 +63,104 @@ def fixForRES(mdc):
     if mdc:
         mdc = mdc.replace('_', '') 
         
-        #mdc = mdc.replace('(', '(') 
-        #mdc = mdc.replace(')', ')') 
-        mdc = mdc.replace('[&', '"〈"') 
+        mdc = mdc.replace('[(', '"("')   # nicht in BTS
+        mdc = mdc.replace(')]', '")"')  
+        #mdc = mdc.replace('(', '(')  # Leipzig
+        #mdc = mdc.replace(')', ')')  
+        mdc = mdc.replace('[&', '"〈"')  # nicht in BTS
         mdc = mdc.replace('&]', '"〉"') 
-        mdc = mdc.replace('[{', '"{"') 
+        mdc = mdc.replace('[{', '"{"')  # nicht in BTS
         mdc = mdc.replace('}]', '"}"') 
-        mdc = mdc.replace("['", '"\'"') #schlecht 
-        mdc = mdc.replace("']", '"\'"') #schlecht
-        mdc = mdc.replace('[?', '[') 
-        mdc = mdc.replace('?]', '"?"-]') 
-        mdc = mdc.replace('[[', '[') 
+        mdc = mdc.replace("['", '"|"') #schlecht 
+        mdc = mdc.replace("']", '"|"') 
+        mdc = mdc.replace('[?', '⸢') 
+        mdc = mdc.replace('?]', '⸣') 
+        mdc = mdc.replace('[[', '[') # nicht in BTS
         mdc = mdc.replace(']]', ']') 
         mdc = mdc.replace('[', '"["') 
         mdc = mdc.replace(']', '"]"') 
-        mdc = mdc.replace('**', '-')  # delete JSesh placement information
-        mdc = re.sub(r'{{[0-9,]+}}', '', mdc.rstrip()) # delete JSesh placement information
-        #mdc = mdc.replace('*', '-') 
-        #mdc = mdc.replace(':', '-') 
-        mdc = mdc.replace('&&', '-') 
-        mdc = mdc.replace('&', '-') 
+        
+        mdc = mdc.replace('**', '-')   # nicht in Grundregelwerk, delete JSesh placement information
+        mdc = re.sub(r'{{[0-9,]+}}', '', mdc.rstrip())  # nicht in Grundregelwerk, delete JSesh placement information
+        mdc = mdc.replace('&&', '-')  # ?
+        mdc = mdc.replace('&', '-')   # nicht im BTS
+        #mdc = mdc.replace('*', '-')  # Leipzig
+        #mdc = mdc.replace(':', '-')  # Leipzig
+        
         mdc = mdc.replace('..', 'empty')
-        mdc = mdc.replace('.', 'empty[width=0.5,height=0.5]')
+        mdc = mdc.replace('.', 'empty[width=0.5,height=0.5]') # nicht in BTS
+        
         mdc = mdc.replace('//', 'empty[shade]') # 'empty[width=0.5,shade]-"."-"."-empty[width=0.5,shade]') 
-        mdc = mdc.replace('h/', 'empty[width=0.5,shade]')
-        mdc = mdc.replace('v/', 'empty[height=0.5,shade]')
-        mdc = mdc.replace('/', 'empty[width=0.5,height=0.5,shade]')
+        mdc = mdc.replace('h/', 'empty[width=0.5,shade]')  # nicht in BTS
+        mdc = mdc.replace('v/', 'empty[height=0.5,shade]')  # nicht in BTS
+        mdc = mdc.replace('/', 'empty[width=0.5,height=0.5,shade]')  # nicht in BTS
+
+        #mdc = mdc.replace('"?"', '"?"') 
+        #mdc = mdc.replace('"¿"', '"¿"') 
+        mdc = mdc.replace('"lb"', '"|"')   # nicht in Grundregelwerk
         mdc = mdc.replace('"var"', '"*"') 
-        mdc = mdc.replace('"lb"', '"|"') 
-        mdc = mdc.replace('\\r1', '[rotate=270]')
+        def stringHelper(latinWord):
+            charList = ''
+            if latinWord:
+                latinWord = latinWord.group(0)
+                latinWord = '('+latinWord[1:-1]+')'
+                latinChars = list(latinWord)
+                charList = '"'+'"-"'.join(latinChars)+'"'
+            return charList
+        mdc = re.sub(r'"[^"]+?"', lambda m: stringHelper(m), mdc.rstrip())   # nicht in Grundregelwerk
+        
+        mdc = mdc.replace('\\r1', '[rotate=270]')   # nicht in Grundregelwerk
         mdc = mdc.replace('\\r2', '[rotate=180]')
         mdc = mdc.replace('\\r3', '[rotate=90]')
-        mdc = mdc.replace('\\t1', '[mirror,rotate=90]')
+        mdc = mdc.replace('\\t1', '[mirror,rotate=90]')  
         mdc = mdc.replace('\\t2', '[mirror,rotate=180]')
         mdc = mdc.replace('\\t3', '[mirror,rotate=270]')
         mdc = mdc.replace('\\red', '[red]')
         mdc = mdc.replace('\\i', '[gray]')
         mdc = mdc.replace('\\l', '')
-        mdc = re.sub(r'\\R(\-?[0-9]+)', r'[rotate=\1]', mdc.rstrip()) 
-        mdc = re.sub(r'\\([0-9]+)', r'[scale=\1]', mdc.rstrip()) 
-        mdc = mdc.replace('\\', '[mirror]')
-
+        mdc = re.sub(r'\\R(\-?[0-9]+)', r'[rotate=\1]', mdc.rstrip())   # nicht in Grundregelwerk
+        mdc = re.sub(r'\\([0-9]+)', r'[scale=\1]', mdc.rstrip())   # nicht im BTS
+        mdc = mdc.replace('\\', '[mirror]')   # nicht in Grundregelwerk
+        
+        mdc = re.sub(r'\<[Ff]\-([^\>]+)\-[Ff]?\>', r'inb(\1)', mdc.rstrip()) # nicht in BTS
+        
+        mdc = re.sub(r'\<[Ss]0\-([^\>]+)\-[Ss]?0\>', r'modify[before=0.2,after=0.6,omit](serekh(empty[width=0.5,height=0.5]-\1-empty[width=0.5,height=0.5]))', mdc.rstrip()) 
+        mdc = re.sub(r'\<[Ss]1\-([^\>]+)\-[Ss]?0\>', r'modify[after=0.6,omit](serekh(\1-empty[width=0.5,height=0.5]))', mdc.rstrip()) 
+        mdc = re.sub(r'\<[Ss]0\-([^\>]+)\-[Ss]?2\>', r'modify[before=0.2,omit](serekh(empty[width=0.5,height=0.5]-\1))', mdc.rstrip()) 
+        mdc = re.sub(r'\<[Ss]\-([^\>]+)\-[Ss]?\>', r'serekh(\1)', mdc.rstrip()) 
+        mdc = re.sub(r'\<[Ss]2\-([^\>]+)\-[Ss]?1\>', r'serekh[mirror](\1)', mdc.rstrip()) 
+        mdc = re.sub(r'\<[Ss]1?\-', 'modify[after=1,omit](serekh(empty[width=0.5,height=0.5]))-', mdc.rstrip()) # fallback
+        mdc = re.sub(r'\-[Ss]2\>', '-modify[before=1,omit](serekh(empty[width=0.5,height=0.5]))', mdc.rstrip())
+        
+        mdc = re.sub(r'\<[Hh]0\-([^\>]+)\-[Hh]?0\>', r'modify[before=0.2,after=0.4,omit](Hwtcloseunder(empty[width=0.5,height=0.5]-\1-empty[width=0.5,height=0.5]))', mdc.rstrip()) 
+        mdc = re.sub(r'\<[Hh]0\-([^\>]+)\-[Hh]?\>', r'modify[before=0.2,omit](Hwtcloseunder(empty[width=0.5,height=0.5]-\1))', mdc.rstrip()) 
+        mdc = re.sub(r'\<[Hh]0\-([^\>]+)\-[Hh]?1\>', r'modify[before=0.2,omit](Hwtopenunder(empty[width=0.5,height=0.5]-\1))', mdc.rstrip()) 
+        mdc = re.sub(r'\<[Hh]0\-([^\>]+)\-[Hh]?3\>', r'modify[before=0.2,omit](Hwtcloseunder(empty[width=0.5,height=0.5]-\1))', mdc.rstrip()) 
+        mdc = re.sub(r'\<[Hh]\-([^\>]+)\-[Hh]?\>', r'Hwtcloseunder(\1)', mdc.rstrip()) 
+        mdc = re.sub(r'\<[Hh]1\-([^\>]+)\-[Hh]?3\>', r'Hwtcloseover(\1)', mdc.rstrip()) 
+        mdc = re.sub(r'\<[Hh]1\-([^\>]+)\-[Hh]?0\>', r'modify[after=0.2,omit](Hwtcloseover(\1-empty[width=0.5,height=0.5]))', mdc.rstrip()) 
+        mdc = re.sub(r'\<[Hh]2\-([^\>]+)\-[Hh]?0\>', r'modify[after=0.2,omit](Hwtopenunder(\1-empty[width=0.5,height=0.5]))', mdc.rstrip()) 
+        mdc = re.sub(r'\<[Hh]3\-([^\>]+)\-[Hh]?0\>', r'modify[after=0.2,omit](Hwtopenover(\1-empty[width=0.5,height=0.5]))', mdc.rstrip()) 
+        mdc = re.sub(r'\<[Hh]2\-([^\>]+)\-[Hh]?1\>', r'Hwtopenunder(\1)', mdc.rstrip()) 
+        mdc = re.sub(r'\<[Hh]3\-([^\>]+)\-[Hh]?1\>', r'Hwtopenover(\1)', mdc.rstrip()) 
+        mdc = re.sub(r'\<[Hh]1(\-[Hh]?0\>)', 'modify[after=0.1,omit](Hwtcloseover(empty[width=0.5,height=0.5]))', mdc.rstrip())
+        mdc = re.sub(r'\<[Hh]2(\-[Hh]?0\>)', 'modify[after=0.1,omit](Hwtopenunder(empty[width=0.5,height=0.5]))', mdc.rstrip())
+        mdc = re.sub(r'\<[Hh]3(\-[Hh]?0\>)', 'modify[after=0.1,omit](Hwtopenover(empty[width=0.5,height=0.5]))', mdc.rstrip())
+        mdc = re.sub(r'(\<[Hh]0\-)[Hh]1\>', 'modify[before=0.1,omit](Hwtopenunder(empty[width=0.5,height=0.5]))', mdc.rstrip())
+        mdc = re.sub(r'(\<[Hh]0\-)[Hh]3\>', 'modify[before=0.1,omit](Hwtcloseover(empty[width=0.5,height=0.5]))', mdc.rstrip())
+        mdc = re.sub(r'(\<[Hh]0\-)[Hh]\>', 'modify[before=0.1,omit](Hwtcloseunder(empty[width=0.5,height=0.5]))', mdc.rstrip())
+        mdc = re.sub(r'\<[Hh](\-[Hh]?0\>)', 'modify[after=0.1,omit](Hwtcloseunder(empty[width=0.5,height=0.5]))', mdc.rstrip()) 
+        
+        mdc = re.sub(r'\<0\-([^\>]+)\-0\>', r'modify[before=0.2,after=0.2,omit](cartouche(empty[width=0.5,height=0.5]-\1-empty[width=0.5,height=0.5]))', mdc.rstrip()) 
+        mdc = re.sub(r'\<1\-([^\>]+)\-0\>', r'modify[after=0.2,omit](cartouche(\1-empty[width=0.5,height=0.5]))', mdc.rstrip()) 
+        mdc = re.sub(r'\<0\-([^\>]+)\-2\>', r'modify[before=0.2,omit](cartouche(empty[width=0.5,height=0.5]-\1))', mdc.rstrip()) 
+        mdc = re.sub(r'\<2\-([^\>]+)\-0\>', r'modify[after=0.2,omit](cartouche[mirror](\1-empty[width=0.5,height=0.5]))', mdc.rstrip()) 
+        mdc = re.sub(r'\<0\-([^\>]+)\-1\>', r'modify[before=0.2,omit](cartouche[mirror](empty[width=0.5,height=0.5]-\1))', mdc.rstrip()) 
         mdc = re.sub(r'\<1\-([^\>]+)\-1\>', r'oval(\1)', mdc.rstrip()) 
         mdc = re.sub(r'\<2\-([^\>]+)\-1\>', r'cartouche[mirror](\1)', mdc.rstrip()) 
-        mdc = re.sub(r'\<S\-([^\>]+)\-\>', r'serekh(\1)', mdc.rstrip()) 
-        mdc = re.sub(r'\<s2\-([^\>]+)\-s1\>', r'serekh[mirror](\1)', mdc.rstrip()) 
-        mdc = re.sub(r'\<F\-([^\>]+)\-\>', r'inb(\1)', mdc.rstrip()) 
-        mdc = re.sub(r'\<H\-([^\>]+)\-\>', r'Hwtcloseunder(\1)', mdc.rstrip()) 
-        mdc = re.sub(r'\<h1\-([^\>]+)\-h3\>', r'Hwtcloseover(\1)', mdc.rstrip()) 
-        mdc = re.sub(r'\<h1\-([^\>]+)\-\>', r'Hwtcloseunder(\1)', mdc.rstrip()) 
-        mdc = re.sub(r'\<h2\-([^\>]+)\-h1\>', r'Hwtopenunder(\1)', mdc.rstrip()) 
-        mdc = re.sub(r'\<h3\-([^\>]+)\-h1\>', r'Hwtopenover(\1)', mdc.rstrip()) 
         mdc = re.sub(r'\<\-([^\>]+)\-\>', r'cartouche(\1)', mdc.rstrip()) 
+        mdc = re.sub('\<1?(\-0\>)', 'modify[after=1,omit](cartouche(empty[width=0.5,height=0.5]))', mdc.rstrip()) 
+        mdc = re.sub('(\<0\-)2?\>', 'modify[before=1,omit](cartouche(empty[width=0.5,height=0.5]))', mdc.rstrip())
 
         mdc = mdc.replace('S56', 'S7')
         mdc = mdc.replace('D153', 'D26')
@@ -126,6 +172,9 @@ def fixForRES(mdc):
 
         mdc = re.sub(r'\bo\b', '"°"[red]', mdc.rstrip())
         mdc = re.sub(r'\bO\b', '"°"', mdc.rstrip()) 
+
+        mdc = mdc.replace('test', 'modify[after=2,omit](cartouche(.))-modify[before=0.2,after=0.2,omit](cartouche(A1-A1))')
+
         pass
     return mdc 
 
