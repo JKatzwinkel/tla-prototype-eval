@@ -85,7 +85,7 @@
 					{% if word.glyphs %}
 					<span class="glyphbox">
 						<canvas class="res" title="{{word.glyphs}}">
-							{{word.glyphs|fixForRES}}
+							{{word.glyphs|MdCtoRES}}
 						</canvas>
 					</span>
 						{% if forloop.last %}

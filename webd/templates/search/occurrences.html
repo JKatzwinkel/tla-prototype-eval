@@ -76,7 +76,7 @@
 		<div class="col-sm-12 col-lg-8">
 		<!-- Treffer -->
         {% for hit in hits %}
-        <div class="occ-list-item pt-1 pb-1" id="{{hit.occurence.id}}">
+        <div class="occ-list-item mt-3 pt-1 pb-1" id="{{hit.occurence.id}}">
         <div class="container-annotation-switch-anno">
             <div class="container-annotation mt-2 mb-2">
                 {% for token in hit.sentence.tokens %}
@@ -84,7 +84,7 @@
                     <li class="hieroglyph" {% if token.type == 'word' %}onclick="window.open('/lemma/{{token.lemma}}','_blank')"{% endif %}>
                         <canvas class="res occ-tok-glyphs" style="font-size: 20px; vertical-align: -5px;"  title="{{token.glyphs}}">
                         {% if token.glyphs %}
-                            {{token.glyphs|fixForRES}}
+                            {{token.glyphs|MdCtoRES}}
                         {% else %}
 							{% if token.type == 'destruction_marker' %}
 								empty[width=0.5,shade]-"."-"."-empty[width=0.5,shade]
@@ -155,13 +155,13 @@
 							{% if token.type == 'word' %}<a href="/lemma/{{token.lemma}}" target="_blank">{%endif%}
 							<canvas class="res occ-tok-glyphs mb-2 {%if token.highlight%}highlight-{{token.highlight}}{%endif%}" title="{{token.glyphs}}">
 								{% if token.glyphs %}
-									{{token.glyphs|fixForRES}}
+									{{token.glyphs|MdCtoRES}}
 								{% else %}
 									{% if token.type == 'destruction_marker' %}
 										empty[width=0.5,shade]-"."-"."-empty[width=0.5,shade]
 									{% endif %}
 									{% if token.type == 'lc' %}
-										"|"[gray]
+										"|"[gray]^"lb"[gray]
 									{% endif %}
 								{% endif %}
 							</canvas>
