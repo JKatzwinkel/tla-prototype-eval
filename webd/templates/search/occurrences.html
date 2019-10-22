@@ -82,7 +82,7 @@
                 {% for token in hit.sentence.tokens %}
                 <ul class="annotation-block {%if token.highlight%}highlight-{{token.highlight}}{%endif%}">
                     <li class="hieroglyph" {% if token.type == 'word' %}onclick="window.open('/lemma/{{token.lemma}}','_blank')"{% endif %}>
-                        <canvas class="res occ-tok-glyphs" style="font-size: 20px; vertical-align: -5px;"  title="{{token.glyphs}}">
+                        <!--<canvas class="res occ-tok-glyphs" style="font-size: 20px; vertical-align: -5px;"  title="{{token.glyphs}}">
                         {% if token.glyphs %}
                             {{token.glyphs|MdCtoRES}}
                         {% else %}
@@ -92,7 +92,22 @@
 								empty
 							{% endif %}
                         {% endif %}
-                       </canvas>
+                        </canvas>-->
+                        <span class="unicode-hieroglyphs">
+						{% if token.glyphs %}
+							{{token.glyphs|MdC_Unicode_noControlChars|prettyUnicodeHieroglyphs}}
+						{% else %}
+							{% if token.type == 'destruction_marker' %}
+								<span class="philological">//..//</span>
+							{% else %}
+								{% if token.type == 'lc' %}
+									<span class="philological">|</span>
+								{% else %}
+									&nbsp;
+								{% endif %}
+							{% endif %}
+						{% endif %}
+                        </span>
 					</li>
                     <li class="transcription {%if token.type == 'destruction_marker'%}token-destruction_marker{%endif%} {%if token.type == 'lc'%}token-lc{%endif%}" {% if token.type == 'word' %}onclick="window.open('/lemma/{{token.lemma}}','_blank')"{% endif %}>
 					    {% if token.label %}

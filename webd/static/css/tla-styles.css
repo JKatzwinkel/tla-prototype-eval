@@ -329,6 +329,10 @@ a span.lc:hover {
 	font-family: "EgyptianHiero";
 	vertical-align: middle;
 }
+.annotation-block .unicode-hieroglyphs { 
+	font-size: 2em;
+	line-height: 1;
+}
 .container-annotation-switch-lines .unicode-hieroglyphs,
 .lemma .unicode-hieroglyphs { 
 	font-size: 2.5em;
