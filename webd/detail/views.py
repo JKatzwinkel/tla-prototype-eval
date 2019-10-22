@@ -4,6 +4,7 @@ from datetime import datetime
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 from django.utils.http import urlencode
+from django.utils.safestring import mark_safe
 
 from glom import glom, Coalesce, flatten
 
@@ -65,13 +66,13 @@ def render_annotations(annos):
             '<br/>',
             textcontent
         )
-        anno['body'] = tag_transcription(textcontent)
-        anno['title'] = tag_transcription(anno['title'])
+        anno['body'] = mark_safe(tag_transcription(textcontent))
+        anno['title'] = mark_safe(tag_transcription(anno['title']))
     return annos
     
 tlaTitle = "Thesaurus Linguae Aegyptiae"
 tlaVersion = "19"
-tlaIssue = "1"
+tlaIssue = "beta"
 tlaReleaseDate = "30.10.2019"
 tlaEditor = "Berlin-Brandenburgische Akademie der Wissenschaften & Sächsische Akademie der Wissenschaften zu Leipzig"
 tlaPublisher = "Berlin-Brandenburgische Akademie der Wissenschaften"
@@ -114,7 +115,8 @@ def lemma_details_page(request, lemma_id):
             (
                 (
                     'passport.bibliography.0.bibliographical_text_field.0',
-                    lambda x: x.split(';')
+                    lambda x: re.sub(r';\s*([A-Z])', r'|\1', x).split('|') # Workaround: splitten nur wenn nach ";" kein Großbuchstabe folgt
+                    #lambda x: x.split(';')
                 ),
                 [str.strip]
             ),
