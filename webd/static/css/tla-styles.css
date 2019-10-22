@@ -411,7 +411,8 @@ a span.lc:hover {
     font-size: .60em;
 }
 
-.ling-glossing {
+.ling-glossing,
+.ling-glossing-static {
     font-variant: small-caps; 
     }
 	
