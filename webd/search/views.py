@@ -115,8 +115,8 @@ def TLAWildcardToRegEx(expr):
         expr = expr.replace('.', '\.')
         expr = expr.replace('-', '\-')
         expr = expr.replace('§', '.')
-        expr = expr.replace('(', '\(') # Problem: elasticsearch Analyzer
-        expr = expr.replace(')', '\)') 
+        expr = expr.replace('(', '\(')
+        expr = expr.replace(')', '\)')
         expr = expr.lower() # elasticsearch-Suche ist offenbar aktuell case-insensitive, daher muss auch die Suche in lowercase verwandelt werden
     return expr
     
@@ -577,7 +577,7 @@ def request_url_without_page(request):
 #### Doppelung aus webd/details/views.py unschön
 tlaTitle = "Thesaurus Linguae Aegyptiae"
 tlaVersion = "19"
-tlaIssue = "beta"
+tlaIssue = "1"
 tlaReleaseDate = "30.10.2019"
 tlaEditor = "Berlin-Brandenburgische Akademie der Wissenschaften & Sächsische Akademie der Wissenschaften zu Leipzig"
 tlaPublisher = "Berlin-Brandenburgische Akademie der Wissenschaften"
@@ -660,31 +660,6 @@ def search_dict(request):
         }
     )
 
-
-def search_lemma(lemma_id):
-    q = {"query": {"bool": {"must": [], "must_not": [], "should": []}}}
-    clauses = []
-
-    lemma_id = lemma_id.strip()
-    if lemma_id != '':
-        clauses.append(
-            {
-                "term": {
-                    "id": lemma_id,
-                }
-            }
-        )
-    q = build_query(*clauses)
-    print(q)
-
-    hit = store.search(
-        'wlist',
-        q,
-        size=1,
-    )
-    
-    print(hit)
-    return hit
 
 @require_http_methods(["GET"])
 def search_text_words(request):

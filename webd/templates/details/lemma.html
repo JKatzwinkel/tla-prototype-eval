@@ -23,11 +23,10 @@
     
     <div id="button-bar-small" class="button-bar sticky-top d-lg-none">
         <div class="functional-icon-set">
-			<!--
+		
             <a href="javascript:history.back()"><button type="button" class="btn btn-red text-left text-decoration-none solo-icon"><i class="fas fa-arrow-circle-left"></i><span class="d-none d-lg-block">Back</span></button></a>  
-			-->
- 
-            <a href="/search"><button type="button" class="btn btn-red text-left text-decoration-none solo-icon"><i class="fa fa-search"></i><span class="d-none d-lg-block">Modify search</span></button></a>
+            
+            <a href="/search"><button type="button" class="btn btn-red text-left text-decoration-none float-left solo-icon"><i class="fa fa-search"></i><span class="d-none d-lg-block">Modify search</span></button></a>
             
             <div class="functional-icons float-right solo-icon sidebar-btn">
                 <a href="#" class="btn btn-light" ><i class="fa fa-eye"></i></a>               
@@ -48,7 +47,7 @@
 		</div>
     </div><!-- /#button-bar-small-->
   
-	<div class="row search-entries detail mb-3">
+	<div class="row search-entries detail">
 	<!-- Suchergebnis -->		
 		<div class="col-sm-12 col-lg-8 result">	
             <p>Dictionary entry</p> 
@@ -77,8 +76,8 @@
 	<!-- Content Details -->
 	<div class="row details-content">	
 		<div class="col-sm-12 col-lg-8">
-			{% if not lemma.id|isDemotic %}
-			<div class="lemma">
+			{% if lemma.id|subdictionaryFromLemmaID == 'Hieroglyphic/Hieratic' %}
+			<div class="lemma pt-3">
 				<p><strong>Hieroglyphic spelling(s):</strong>
 				<!--<br>Graphics: -->
 				{% for word in lemma.words %}
@@ -106,12 +105,12 @@
 				{%endfor%} -->
 
 				</p>
-				<hr>
 			</div>
 			{% endif %}
 			
 			<!-- persistente URL / ID -->
 			<div>
+				<hr>
 				<p><!--<strong>Persistent Identifiers</strong>
 				<br>--><strong>Persistent lemma ID:</strong> {{lemma.id}} 
                 <button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{{lemma.id}}')"><span class="fas fa-clipboard"></span>Copy ID</button>
@@ -182,11 +181,11 @@
 					<span class="fas fa-arrow-circle-right"></span>{{bib}} &emsp;
 				{% endfor %}
                 </p>
+				<hr>
 			<div>
 			
 			<!-- Verweise -->
 			</div>
-				<hr>
 				<p><strong>External references</strong></p>             
 				{% for provider, references in lemma.externalReferences.items %}
 					{% for reference in references %}
@@ -201,19 +200,15 @@
 						{% endif %}
 					{% endfor %}
 				{% endfor %}
+                <hr>
 			</div>
 
-			<!-- Kommentare -->  
-			{% if annotations|length > 0 %}
+			<!-- Kommentar -->  
 			<div class="comment pb-2">
-                <hr>
-				<p><strong>Comments</strong></p>                    
-				<div class="comment-wrapper ml-3 hide-comment">
-					{% for annotation in annotations %}
-					<!--<p class="comment-title"><strong>{{annotation.title}}</strong></p>-->                 
-                    <p class="comment-content">{{annotation.body}}</p> 
-                    <p class="comment-author pt-1">Edited by&nbsp;<strong>{{annotation.edited.name}}</strong>&nbsp;on <span class="comment-date"><strong>{{annotation.edited.date}}</strong></span></p>
-					{% endfor %}
+				<div class="comment-wrapper hide-comment">
+                    <p class="comment-title"><strong>Comment-Title</strong></p>                    
+                    <p class="comment-content">Es sequi illore ne reptation cone videm fugia dolendu ntectotas nihit rat lit fugiatum doluptatecto que maximpe eaquatin nis rehent quam, corum accatem oluptas inus doloremolo ea volum quibus voluptaque volupta amet optaers piendusae. Es sequi illore ne reptation cone videm fugia dolendu ntectotas nihit rat lit fugiatum doluptatecto que maximpe eaquatin nis rehent quam, corum accatem oluptas inus doloremolo ea volum quibus voluptaque volupta amet optaers piendusae. Es sequi illore ne reptation cone videm fugia dolendu ntectotas nihit rat lit fugiatum doluptatecto que maximpe eaquatin nis rehent quam, corum accatem oluptas inus doloremolo ea volum quibus voluptaque volupta amet optaers piendusae. Es sequi illore ne reptation cone videm fugia dolendu ntectotas nihit rat lit fugiatum doluptatecto que maximpe eaquatin nis rehent quam, corum accatem oluptas inus doloremolo ea volum quibus voluptaque volupta amet optaers piendusae.</p> <!-- |formatInTranslation filter nutzen -->
+                    <p class="comment-author pt-1">Edited by&nbsp;<strong>Vorname Name</strong>&nbsp;on <span class="comment-date"><strong>20.08.2019</strong></span></p>
                 </div>
                 <div class="show-comment-button">
                     <button class="btn btn-sm btn-grey">Show Comment</button>
@@ -222,8 +217,7 @@
                     <button class="btn btn-sm btn-grey">Hide Comment</button>
                 </div>
 			</div>     
-			{% endif %}
-			
+
 		</div>  <!-- close content col-sm-12 -->	
 
 
@@ -236,9 +230,7 @@
 				<!--
 				<button type="button" class="btn btn-block btn-light text-left text-decoration-none mb-2" disabled><span class="fas fa-search-plus"></span>Select for combination search</button>
 				-->
-				<!--
 				<a href="javascript:history.back()"><button type="button" class="btn btn-block btn-red text-left text-decoration-none mb-2"><i class="fas fa-arrow-circle-left"></i>Back</button></a>
-				-->
 
 				<!-- anstelle des historyBack sollte u.U. der Search-String verwendet werden -->
 				<a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Modify search</button></a> 
@@ -281,7 +273,6 @@
 											{{hit.name}}
 										</h2>
 										<!-- Hieroglyph -->
-										{% if not hit.id|isDemotic %}
 											<span class="hieroglyph">
 												#hiero# <!-- ##Variable noch nicht verfügbar -->
 												{% for word in hit.words %}
@@ -295,10 +286,7 @@
 													{% endif %}
 												{% endfor %}
 											</span>
-										{% else %}
-											<span class="subcorpus">Demotic</span>
-										{% endif %}
-										
+
 										<!-- Lemma ID -->
 										<span class="lemma-id">
 											&nbsp; (ID {{hit.id}})
@@ -379,7 +367,7 @@
 			<div class="bg-light citation mt-5 mb-4">         
 				<p class="h6"><strong>Please cite as:</strong></p>
 					<!-- Version, Issue, Release-Date, heutiges Datum noch per globaler Variable holen -->
-				<blockquote>TLA lemma ID {{lemma.id}} (<span class="bbaw-libertine">{%for word in lemma.words%}{{word.transcription}}{% if not forloop.last%} {%endif%}{%endfor%}</span>), &lt;{{tlaBaseURL}}/lemma/{{lemma.id}}&gt;, 
+				<blockquote>TLA lemma ID {{lemma.id}} ({%for word in lemma.words%}{{word.transcription}}{% if not forloop.last%} {%endif%}{%endfor%}), &lt;{{tlaBaseURL}}/lemma/{{lemma.id}}&gt;, 
 					in: <i>{{tlaTitle}}</i> &lt;{{tlaBaseURL}}&gt;, 
 					Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, 
 					ed. by {{tlaEditor}} 
@@ -390,7 +378,7 @@
             
 		</div> <!-- close content col-sm-12 -->	
 
-		<!-- Sidebar large, lower part: relations -->
+		<!-- Sidebar large -->
 		<div class="sidebar col-lg-4 d-none d-lg-block">
             <div class="sticky-top">
                 <!-- Buttons -->
@@ -407,6 +395,14 @@
 				</div>
 				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestation-time-btn "><i class="fas"></i>Attestation time</button>
 				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail bibliography-list-btn "><i class="fas"></i>Bibliographical references </button>  
+				
+				<!-- Navigation 
+				<br>
+				<button type="button" class="btn btn-block btn-light text-left text-decoration-none mb-2" disabled><span class="fas fa-search-plus"></span>Select for combination search</button>
+				<a href="javascript:history.back()"><button type="button" class="btn btn-block btn-red text-left text-decoration-none mb-2"><i class="fas fa-arrow-circle-left"></i>Back</button></a>
+
+				<a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Modify search</button></a>--> 
+
             </div>    
 		</div>		
 	</div> <!-- /.row -->
@@ -433,10 +429,18 @@
 				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail attestation-time-btn "><i class="fas"></i>Attestation time</button>
 				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail bibliography-list-btn "><i class="fas"></i>Bibliographical references </button>  
 				
-				<!--
+				<!-- Navigation -->
 				<br>
+
+				<!--
 				<button type="button" class="btn btn-block btn-light text-left text-decoration-none mb-2 disabled"><span class="fas fa-search-plus"></span>Select for Combination Search</button>
-				-->            
+				-->
+				<a href="javascript:history.back()"><button type="button" class="btn btn-block btn-red text-left text-decoration-none mb-2"><span class="fas fa-arrow-circle-left"></span>Back</button></a>
+
+				<!-- anstelle des historyBack sollte u.U. der Search-String verwendet werden -->
+				<a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Modify search</button></a>             
+            
+            
         </div>
     </div>		
     

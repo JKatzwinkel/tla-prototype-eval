@@ -13,28 +13,11 @@ def js(obj):
     return mark_safe(json.dumps(obj))
     
 @register.filter(is_safe=True)
-def isDemotic(lemmaID):
-    try:
-        firstLetter = lemmaID[0]
-    except:
-        firstLetter = ''
-    
-    if firstLetter == 'd':
-        return True
-    else:
-        return False
-
-@register.filter(is_safe=True)
 def subdictionaryFromLemmaID(lemmaID):
-    try:
-        firstLetter = lemmaID[0]
-    except:
-        firstLetter = ''
-
     subdict = '(error)'
-    if firstLetter == 'd':
+    if lemmaID[0] == 'd':
         subdict = "Demotic"
-    elif firstLetter >= '1' and firstLetter <= '9':
+    elif lemmaID[0] >= '1' and lemmaID[0] <= '9':
         subdict = "Hieroglyphic/Hieratic"
     return subdict 
     
@@ -61,71 +44,22 @@ def formatInTranslation(str):
 @register.filter(is_safe=True)
 def fixForRES(mdc):
     if mdc:
-        mdc = mdc.replace('_', '') 
-        
-        #mdc = mdc.replace('(', '(') 
-        #mdc = mdc.replace(')', ')') 
-        mdc = mdc.replace('[&', '"〈"') 
-        mdc = mdc.replace('&]', '"〉"') 
-        mdc = mdc.replace('[{', '"{"') 
-        mdc = mdc.replace('}]', '"}"') 
-        mdc = mdc.replace("['", '"\'"') #schlecht 
-        mdc = mdc.replace("']", '"\'"') #schlecht
+        mdc = mdc.replace('*', '-') 
+        mdc = mdc.replace(':', '-') 
+        mdc = mdc.replace('&', '-') 
         mdc = mdc.replace('[?', '[') 
         mdc = mdc.replace('?]', '"?"-]') 
-        mdc = mdc.replace('[[', '[') 
-        mdc = mdc.replace(']]', ']') 
         mdc = mdc.replace('[', '"["') 
         mdc = mdc.replace(']', '"]"') 
-        mdc = mdc.replace('**', '-')  # delete JSesh placement information
-        mdc = re.sub(r'{{[0-9,]+}}', '', mdc.rstrip()) # delete JSesh placement information
-        #mdc = mdc.replace('*', '-') 
-        #mdc = mdc.replace(':', '-') 
-        mdc = mdc.replace('&&', '-') 
-        mdc = mdc.replace('&', '-') 
         mdc = mdc.replace('..', 'empty')
         mdc = mdc.replace('.', 'empty[width=0.5,height=0.5]')
-        mdc = mdc.replace('//', 'empty[shade]') # 'empty[width=0.5,shade]-"."-"."-empty[width=0.5,shade]') 
+        mdc = mdc.replace('//', 'empty[width=0.5,shade]-"."-"."-empty[width=0.5,shade]') 
         mdc = mdc.replace('h/', 'empty[width=0.5,shade]')
         mdc = mdc.replace('v/', 'empty[height=0.5,shade]')
-        mdc = mdc.replace('/', 'empty[width=0.5,height=0.5,shade]')
+        #mdc = mdc.replace('/', 'empty[width=0.5,height=0.5,shade]')
         mdc = mdc.replace('"var"', '"*"') 
-        mdc = mdc.replace('"lb"', '"|"') 
-        mdc = mdc.replace('\\r1', '[rotate=270]')
-        mdc = mdc.replace('\\r2', '[rotate=180]')
-        mdc = mdc.replace('\\r3', '[rotate=90]')
-        mdc = mdc.replace('\\t1', '[mirror,rotate=90]')
-        mdc = mdc.replace('\\t2', '[mirror,rotate=180]')
-        mdc = mdc.replace('\\t3', '[mirror,rotate=270]')
-        mdc = mdc.replace('\\red', '[red]')
-        mdc = mdc.replace('\\i', '[gray]')
-        mdc = mdc.replace('\\l', '')
-        mdc = re.sub(r'\\R(\-?[0-9]+)', r'[rotate=\1]', mdc.rstrip()) 
-        mdc = re.sub(r'\\([0-9]+)', r'[scale=\1]', mdc.rstrip()) 
         mdc = mdc.replace('\\', '[mirror]')
-
-        mdc = re.sub(r'\<1\-([^\>]+)\-1\>', r'oval(\1)', mdc.rstrip()) 
-        mdc = re.sub(r'\<2\-([^\>]+)\-1\>', r'cartouche[mirror](\1)', mdc.rstrip()) 
-        mdc = re.sub(r'\<S\-([^\>]+)\-\>', r'serekh(\1)', mdc.rstrip()) 
-        mdc = re.sub(r'\<s2\-([^\>]+)\-s1\>', r'serekh[mirror](\1)', mdc.rstrip()) 
-        mdc = re.sub(r'\<F\-([^\>]+)\-\>', r'inb(\1)', mdc.rstrip()) 
-        mdc = re.sub(r'\<H\-([^\>]+)\-\>', r'Hwtcloseunder(\1)', mdc.rstrip()) 
-        mdc = re.sub(r'\<h1\-([^\>]+)\-h3\>', r'Hwtcloseover(\1)', mdc.rstrip()) 
-        mdc = re.sub(r'\<h1\-([^\>]+)\-\>', r'Hwtcloseunder(\1)', mdc.rstrip()) 
-        mdc = re.sub(r'\<h2\-([^\>]+)\-h1\>', r'Hwtopenunder(\1)', mdc.rstrip()) 
-        mdc = re.sub(r'\<h3\-([^\>]+)\-h1\>', r'Hwtopenover(\1)', mdc.rstrip()) 
-        mdc = re.sub(r'\<\-([^\>]+)\-\>', r'cartouche(\1)', mdc.rstrip()) 
-
-        mdc = mdc.replace('S56', 'S7')
-        mdc = mdc.replace('D153', 'D26')
-        mdc = mdc.replace('M22A', 'M22*M22')
-        mdc = mdc.replace('O38A', 'O38[mirror]')
-        mdc = mdc.replace('R8A', 'R8*[sep=0,fix]R8*[sep=0,fix]R8')
-        
         mdc = re.sub(r'([0-9])([A-Z])', lambda m: m.group(0).lower(), mdc.rstrip()) #replace alphanumerical glyph index by lowercase
-
-        mdc = re.sub(r'\bo\b', '"°"[red]', mdc.rstrip())
-        mdc = re.sub(r'\bO\b', '"°"', mdc.rstrip()) 
         pass
     return mdc 
 
@@ -11943,7 +11877,6 @@ def replaceGardiner (signs):
         'R10A': '𓊼',
         'R10': '𓊻',
         'R9': '𓊺',
-        'R8A': '𓊹𓊹𓊹',
         'R8': '𓊹',
         'R7': '𓊸',
         'R6': '𓊷',
@@ -12676,8 +12609,7 @@ def replaceGardiner (signs):
         'A3': '𓀂',
         'A2': '𓀁',
         'A1': '𓀀',
-        'O': '°',
-        'o': '°',
+        'O': '•',
         '//': '//..//',
         'v/': '//',
         'h/': '//',
