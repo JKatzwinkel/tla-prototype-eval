@@ -109,11 +109,11 @@ def helpLemma(request):
     )
     
 @require_http_methods(["GET"])
-def helpOccurences(request):
+def helpOccurrences(request):
     params = request.GET.copy()
     return render(
         request,
-        'help/help-occurences.html',
+        'help/help-occurrences.html',
         {
         }
     )
