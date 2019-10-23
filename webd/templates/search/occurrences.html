@@ -166,18 +166,20 @@
                     <!-- Hieroglyphs -->
                     <div class="hieroglyph">
                         {% for token in hit.sentence.tokens %}
-                        <span class="unicode-hieroglyphs {%if token.highlight%}highlight-{{token.highlight}}{%endif%}" title="Lemma ID {{token.lemma}}" {% if token.type == 'word' %}onclick="window.open('/lemma/{{token.lemma}}','_blank')"{% endif %}>
-								{% if token.glyphs %}
-									{{token.glyphs|MdC_Unicode_noControlChars|prettyUnicodeHieroglyphs}}
-								{% else %}
-									{% if token.type == 'destruction_marker' %}
-										<span class="philological">//..//</span>
+						{% if token.type == 'word' %}<a href="/lemma/{{token.lemma}}" target="_blank" title="Lemma ID {{token.lemma}}">{% endif %}
+							<span class="unicode-hieroglyphs {%if token.highlight%}highlight-{{token.highlight}}{%endif%}">
+									{% if token.glyphs %}
+										{{token.glyphs|MdC_Unicode_noControlChars|prettyUnicodeHieroglyphs}}
+									{% else %}
+										{% if token.type == 'destruction_marker' %}
+											<span class="philological">//...//</span>
+										{% endif %}
+										{% if token.type == 'lc' %}
+											<span class="philological">|</span>
+										{% endif %}
 									{% endif %}
-									{% if token.type == 'lc' %}
-										<span class="philological">|</span>
-									{% endif %}
-								{% endif %}
-                        </span>
+							</span>
+						{% if token.type == 'word' %}</a>{% endif %}
                         {%endfor%}
 						<button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{%for token in hit.sentence.tokens%}{% if token.type == 'word'%}{{token.glyphs|MdC_Unicode_noControlChars}}{%else%}{{token.glyphs}}{%endif%}{%endfor%}');"><span class="fas fa-clipboard"></span>Copy Unicode</button>
 						<button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{%for token in hit.sentence.tokens%}{% if token.type == 'word'%}{{token.glyphs}}{%else%}+l{{token.glyphs}}+s{%endif%}{% if not forloop.last%}-{%endif%}{%endfor%}');"><span class="fas fa-clipboard"></span>Copy Manuel de Codage</button>

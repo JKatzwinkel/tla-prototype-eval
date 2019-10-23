@@ -89,7 +89,7 @@
 						</canvas>
 					</span>-->
 					<span class="unicode-hieroglyphs" title="{{word.glyphs}}">
-						{{word.glyphs|MdC_Unicode_noControlChars}}
+						{{word.glyphs|MdC_Unicode_noControlChars|prettyUnicodeHieroglyphs}}
 					</span>
 						{% if forloop.last %}
 						<button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{%for word in lemma.words%}{{word.glyphs|MdC_Unicode_noControlChars}}{%endfor%}');"><span class="fas fa-clipboard"></span>Copy Unicode</button>
@@ -284,7 +284,7 @@
 															</canvas>
 														</span>-->
 														<span class="unicode-hieroglyphs">
-															{{word.glyphs|MdC_Unicode_noControlChars}}
+															{{word.glyphs|MdC_Unicode_noControlChars|prettyUnicodeHieroglyphs}}
 														</span>
 													{% endif %}
 												{% endfor %}
