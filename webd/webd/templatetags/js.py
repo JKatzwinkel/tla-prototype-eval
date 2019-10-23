@@ -11551,7 +11551,7 @@ def computeLingGlossing(flexcode, lemmaID):
 @register.filter(is_safe=True)
 def prettyUnicodeHieroglyphs(hieroStr):
     if not hieroStr: return ''
-    hieroStr = mark_safe(hieroStr.replace("(", '<span class="latin-in-hiero">').replace(")", "</span>"))
+    hieroStr = mark_safe(hieroStr.replace("%unknown1%", '<span class="latin-in-hiero">').replace("%unknown2%", "</span>"))
     return hieroStr
     
     
@@ -11578,7 +11578,9 @@ def MdC_Unicode_withLatinControlChars(wordToParse):
 def MdC_Unicode_noControlChars(wordToParse):
     if not wordToParse: return ''
 
+    wordToParse = wordToParse.replace("[(", "[%1%").replace(")]", "%2%]")
     wordToParse = wordToParse.replace("-", "£-£").replace(":", "£:£").replace("*", "£*£").replace("(", "£(£").replace(")", "£)£").replace("&", "£&£") #.replace('"', "")
+    #wordToParse = wordToParse.replace("£%leftround%£", "£[(£").replace("£%rightround%£", "£)]£")
 
     signsToParse = wordToParse.split("£")
 
@@ -11586,7 +11588,7 @@ def MdC_Unicode_noControlChars(wordToParse):
 
     wordToParse = "".join(signsParsed)
 
-    wordParsed = wordToParse.replace("-", "").replace(":", "").replace("*", "").replace("(", "").replace(")", "").replace("&", "") #.replace('"', "")
+    wordParsed = wordToParse.replace("-", "").replace(":", "").replace("*", "").replace("&", "")#.replace("(", "").replace(")", "")#.replace('"', "")
     wordParsed = wordParsed.replace("%1%", '(').replace("%2%", ')')
 
     if not wordParsed: return ''
@@ -12713,8 +12715,8 @@ dictUnicodeHieroglyphs = {
     'A1': '𓀀',
     'O': '°',
     'o': '°',
-    '[(': '(',
-    ')]': ')',
+    '[%1%': '%1%',
+    '%2%]': '%2%',
     '[&': '〈',
     '&]': '〉',
     '[{': '{',
@@ -12734,7 +12736,6 @@ dictUnicodeHieroglyphs = {
     '"?"': '?',
     '"¿"': '¿',
     '"lb"': '|',
-    #'"var"': '(var)',
     '<f': '𓊈',
     'f>': '𓊉',
     '<F': '𓊈',
@@ -12785,18 +12786,18 @@ dictUnicodeHieroglyphs = {
     '0>' : '-',
     'o': '°',
     'O': '°',
-    '"var"': '(var.)',
-    '"mutil"': '(mutil.)',
-    '"monogr"': '(monogr.)',
-    '"composite"': '(comp.)',
-    '"large"': '(large)',
-    '"hierat"': '(hierat.)',
-    '"hiero"': '(hierogl.)',
-    '"demot"': '(Demot.)',
-    '"elab"': '(elab.)',
-    '"abbr"': '(abbr.)',
-    '"ligstart"': '(lig:)',
-    '"ligend"': '(:lig)',
+    '"var"': '%1%var.%2%',
+    '"mutil"': '%1%mutil.%2%',
+    '"monogr"': '%1%monogr.%2%',
+    '"composite"': '%1%comp.%2%',
+    '"large"': '%1%large%2%',
+    '"hierat"': '%1%hierat.%2%',
+    '"hiero"': '%1%hierogl.%2%',
+    '"demot"': '%1%Demot.%2%',
+    '"elab"': '%1%elab.%2%',
+    '"abbr"': '%1%abbr.%2%',
+    '"ligstart"': '(%1%lig:%2%',
+    '"ligend"': '%1%:lig%2%',
     }
 def replaceGardiner (signs):     
     for i in range (0, len(signs)):
@@ -12805,6 +12806,6 @@ def replaceGardiner (signs):
             signs[i] = unicodeSign
         else:
             if not signs[i] == "-" and not signs[i] == ":" and not signs[i] == "*" and not signs[i] == "(" and not signs[i] == ")" and not signs[i] == "&":
-                signs[i] = "%1%" + signs[i] + "%2%"
+                signs[i] = "%unknown1%" + signs[i] + "%unknown2%"
     
     return signs
