@@ -59,6 +59,7 @@ def homepage(request):
             'tlaReleaseDate': tlaReleaseDate,
             'tlaEditor': tlaEditor,
             'tlaBaseURL': tlaBaseURL,
+            'dateToday': datetime.now().strftime("%d.%m.%Y"),
         }
     )
     
