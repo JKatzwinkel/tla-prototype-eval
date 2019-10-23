@@ -118,7 +118,14 @@ function init() {
 			  if (bibl != null && bibl != '') {
 				   setCookie("BibliographyVisible", "true");
 				}	
-		    }
+			  var hierCheckbox = document.getElementById("script-hieroglyphic");
+			  var hierChecked = hierCheckbox.checked;
+			  if (hierChecked) {
+				   setCookie("HieroglyphsVisible", "true");
+			  } else {
+				   setCookie("HieroglyphsVisible", "false");
+			  }
+		     }
 		  });	
 
 	// Abbreviation help links
