@@ -201,9 +201,8 @@ def dict_search_query(**params):
             clauses.append(
                 [
                     {
-                        "query_string": {
-                            "default_field": "translations.{}".format(lang),
-                            "query": "*{}*".format(transl),
+                        "match_phrase_prefix": {
+                            "translations.{}".format(lang): transl,
                         }
                     }
                     for lang in params.get('lang', ['de'])
@@ -582,7 +581,7 @@ tlaIssue = "beta"
 tlaReleaseDate = "30.10.2019"
 tlaEditor = "Berlin-Brandenburgische Akademie der Wissenschaften & Sächsische Akademie der Wissenschaften zu Leipzig"
 tlaPublisher = "Berlin-Brandenburgische Akademie der Wissenschaften"
-tlaBaseURL = "http://tla.bbaw.de"
+tlaBaseURL = "https://tla.bbaw.de"
 
 def sortTranslitStr(sortString):
     # zusammengesetzte Großbuchstaben in Kleinbuchstaben verwandeln

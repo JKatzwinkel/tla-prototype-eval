@@ -15,7 +15,7 @@ tlaIssue = "beta"
 tlaReleaseDate = "30.10.2019"
 tlaEditor = "Berlin-Brandenburgische Akademie der Wissenschaften & Sächsische Akademie der Wissenschaften zu Leipzig"
 tlaPublisher = "Berlin-Brandenburgische Akademie der Wissenschaften"
-tlaBaseURL = "http://tla.bbaw.de"
+tlaBaseURL = "https://tla.bbaw.de"
 
 def coins_openurl_kev(doc):
     # generate a contextobject referent
