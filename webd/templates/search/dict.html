@@ -24,7 +24,7 @@
     <div id="button-bar-small" class="button-bar sticky-top d-lg-none">
         <div class="functional-icon-set">
             
-            <a href="/search"><button type="button" class="btn btn-red text-left text-decoration-none solo-icon"><i class="fa fa-search"></i><span class="d-none d-lg-block">Modify search</span></button></a>
+            <a href="/search"><button type="button" class="btn btn-red text-left text-decoration-none solo-icon modify-search-btn"><i class="fa fa-search"></i><span class="d-none d-lg-block">Modify search</span></button></a>
             
             <div class="functional-icons float-right solo-icon sidebar-btn">
                 <a href="#" class="btn btn-light" ><i class="fa fa-eye"></i></a>               
@@ -239,7 +239,7 @@
                 <button type="button" class="btn btn-block btn-light text-left text-decoration-none show-detail" disabled><span class="fas fa-search-plus"></span>Execute combination search</button>
 				-->
                 
-                <a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none mt-3"><span class="fas fa-arrow-circle-left"></span>Modify search</button></a>
+                <a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none modify-search-btn mt-3"><span class="fas fa-arrow-circle-left"></span>Modify search</button></a>
             </div>
 		</div>
 	</div> <!-- /.row -->	  
@@ -302,7 +302,7 @@
           <div class="modal-body">            
               <a href="mailto:?subject=TLA,%20Search%20results&amp;body=TLA, Search results &lt;{{tlaBaseURL}}/search/dict?{%for param in params.lists%}{%for val in param.1%}{{param.0}}={{val}}{%if not forloop.last%}%26{%endif%}{%endfor%}{% if not forloop.last%}%26{%endif%}{%endfor%}&gt;, in: {{tlaTitle}} &lt;{{tlaBaseURL}}&gt;, Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, ed. by {{tlaEditor}}(accessed: {{dateToday}})" class="btn btn-block btn-info" role="button"><span class="far fa-envelope"></span> E-mail citation</a> 
               <a href="https://twitter.com/share?url={{tlaBaseURL}}/search/dict?{%for param in params.lists%}{%for val in param.1%}{{param.0}}={{val}}{%if not forloop.last%}%26{%endif%}{%endfor%}{% if not forloop.last%}%26{%endif%}{%endfor%}" title="Twitter" class="btn btn-block btn-info" role="button" target="_blank"><span class="fab fa-twitter"></span> Twitter URL</a>
-              <a href="http://www.facebook.com/share.php?u={{tlaBaseURL}}/dict/occurrences?{%for param in params.lists%}{%for val in param.1%}{{param.0}}={{val}}{%if not forloop.last%}%26{%endif%}{%endfor%}{% if not forloop.last%}%26{%endif%}{%endfor%}" class="btn btn-block btn-info" role="button" target="_blank"><span class="fab fa-facebook"></span> Facebook</a> 
+              <a href="http://www.facebook.com/share.php?u={{tlaBaseURL}}/dict?{%for param in params.lists%}{%for val in param.1%}{{param.0}}={{val}}{%if not forloop.last%}%26{%endif%}{%endfor%}{% if not forloop.last%}%26{%endif%}{%endfor%}" class="btn btn-block btn-info" role="button" target="_blank"><span class="fab fa-facebook"></span> Facebook</a> 
           </div>        
         </div>
       </div>
