@@ -201,8 +201,9 @@ def dict_search_query(**params):
             clauses.append(
                 [
                     {
-                        "match_phrase_prefix": {
-                            "translations.{}".format(lang): transl,
+                        "query_string": {
+                            "default_field": "translations.{}".format(lang),
+                            "query": "*{}*".format(transl),
                         }
                     }
                     for lang in params.get('lang', ['de'])
