@@ -12805,7 +12805,7 @@ def replaceGardiner (signs):
         if unicodeSign:
             signs[i] = unicodeSign
         else:
-            if not signs[i] == "-" and not signs[i] == ":" and not signs[i] == "*" and not signs[i] == "(" and not signs[i] == ")" and not signs[i] == "&":
+            if not signs[i] == "-" and not signs[i] == ":" and not signs[i] == "*" and not signs[i] == "(" and not signs[i] == ")" and not signs[i] == "&" and not signs[i] == "":
                 signs[i] = "%unknown1%" + signs[i] + "%unknown2%"
     
     return signs
