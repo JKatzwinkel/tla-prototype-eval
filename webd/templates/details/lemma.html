@@ -2,7 +2,7 @@
 {% load static %}
 {% load js %}
 
-{% block title %}TLA lemma ID {{lemma.id}} ({{lemma.name}}){%endblock%}
+{% block title %}TLA - {{lemma.name}} (Lemma ID {{lemma.id}}){%endblock%}
 
 {% block content %}
 <!-- Page Content -->
@@ -52,7 +52,7 @@
 	<!-- Suchergebnis -->		
 		<div class="col-sm-12 col-lg-8 result">	
             <p>Dictionary entry</p> 
-			<h2 class="id mt-1">Lemma ID {{lemma.id}} (<span class="bbaw-libertine">{{lemma.name}}</span><!--{% for word in lemma.words %}{% if forloop.first%}, {%endif%}<span class="unicode-hieroglyphs">{%if word.glyphs %}{{word.glyphs|MdC_Unicode_noControlChars}}{%endif%}</span>{%endfor%}-->)<span class="Z3988" title="{{coins}}"></span></h2>
+			<h2 class="id mt-1"><span class="bbaw-libertine">{{lemma.name}}</span><!--{% for word in lemma.words %}{% if forloop.first%}, {%endif%}<span class="unicode-hieroglyphs">{%if word.glyphs %}{{word.glyphs|MdC_Unicode_noControlChars}}{%endif%}</span>{%endfor%}--> (Lemma ID {{lemma.id}})<span class="Z3988" title="{{coins}}"></span></h2>
 			<a title="Review state: {{lemma.revisionState|niceReviewState}}"><span class="solo-icon red-status float-right"><span class="fa-check-circle {% if lemma.revisionState == 'published' %}ok{% elif lemma.revisionState == 'published-awaiting-review' %}pending{% elif lemma.revisionState == 'published-obsolete' %}notok{% endif %}"></span></span></a>
 		</div>
         
@@ -373,7 +373,7 @@
 			<div class="bg-light citation mt-5 mb-4">         
 				<p class="h6"><strong>Please cite as:</strong></p>
 					<!-- Version, Issue, Release-Date, heutiges Datum noch per globaler Variable holen -->
-				<blockquote>TLA lemma ID {{lemma.id}} (<span class="bbaw-libertine">{{lemma.name}}</span>), &lt;{{tlaBaseURL}}/lemma/{{lemma.id}}&gt;, 
+				<blockquote><span class="bbaw-libertine">{{lemma.name}}</span> (Lemma ID {{lemma.id}}), &lt;{{tlaBaseURL}}/lemma/{{lemma.id}}&gt;, 
 					in: <i>{{tlaTitle}}</i> &lt;{{tlaBaseURL}}&gt;, 
 					Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, 
 					ed. by {{tlaEditor}} 
@@ -478,7 +478,7 @@
             </button>
           </div>
           <div class="modal-body">            
-              <a href="mailto:?subject=TLA,%20Lemma%20{{lemma.id}}&amp;body=TLA lemma ID {{lemma.id}} ({{lemma.name}}), &lt;{{tlaBaseURL}}/lemma/{{lemma.id}}&gt;, in: {{tlaTitle}} &lt;{{tlaBaseURL}}&gt;, Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, ed. by {{tlaEditor}} (accessed: {{dateToday}})" class="btn btn-block btn-info" role="button"><span class="far fa-envelope"></span> E-mail citation</a> 
+              <a href="mailto:?subject=TLA,%20Lemma%20{{lemma.id}}&amp;body={{lemma.name}} (Lemma ID {{lemma.id}}), &lt;{{tlaBaseURL}}/lemma/{{lemma.id}}&gt;, in: {{tlaTitle}} &lt;{{tlaBaseURL}}&gt;, Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, ed. by {{tlaEditor}} (accessed: {{dateToday}})" class="btn btn-block btn-info" role="button"><span class="far fa-envelope"></span> E-mail citation</a> 
               <a href="https://twitter.com/share?url={{tlaBaseURL}}/lemma/{{lemma.id}}" title="Twitter" class="btn btn-block btn-info" role="button" target="_blank"><span class="fab fa-twitter"></span> Twitter URL</a>
               <a href="http://www.facebook.com/share.php?u={{tlaBaseURL}}/lemma/{{lemma.id}}" class="btn btn-block btn-info" role="button" target="_blank"><span class="fab fa-facebook"></span> Facebook</a> 
           </div>
