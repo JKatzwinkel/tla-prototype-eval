@@ -2,7 +2,7 @@
 {% load static %}
 {% load js %}
 
-{% block title %}TLA lemma ID {{lemma.id}} ({%for word in lemma.words%}{{word.transcription}}{% if not forloop.last%} {%endif%}{%endfor%}){%endblock%}
+{% block title %}TLA lemma ID {{lemma.id}} ({{lemma.name}}){%endblock%}
 
 {% block content %}
 <!-- Page Content -->
@@ -52,7 +52,7 @@
 	<!-- Suchergebnis -->		
 		<div class="col-sm-12 col-lg-8 result">	
             <p>Dictionary entry</p> 
-			<h2 class="id mt-1">Lemma ID {{lemma.id}} (<span class="bbaw-libertine">{%for word in lemma.words%}{{word.transcription}}{% if not forloop.last%} {%endif%}{%endfor%}</span><!--{% for word in lemma.words %}{% if forloop.first%}, {%endif%}<span class="unicode-hieroglyphs">{%if word.glyphs %}{{word.glyphs|MdC_Unicode_noControlChars}}{%endif%}</span>{%endfor%}-->)<span class="Z3988" title="{{coins}}"></span></h2>
+			<h2 class="id mt-1">Lemma ID {{lemma.id}} (<span class="bbaw-libertine">{{lemma.name}}</span><!--{% for word in lemma.words %}{% if forloop.first%}, {%endif%}<span class="unicode-hieroglyphs">{%if word.glyphs %}{{word.glyphs|MdC_Unicode_noControlChars}}{%endif%}</span>{%endfor%}-->)<span class="Z3988" title="{{coins}}"></span></h2>
 			<a title="Review state: {{lemma.revisionState|niceReviewState}}"><span class="solo-icon red-status float-right"><span class="fa-check-circle {% if lemma.revisionState == 'published' %}ok{% elif lemma.revisionState == 'published-awaiting-review' %}pending{% elif lemma.revisionState == 'published-obsolete' %}notok{% endif %}"></span></span></a>
 		</div>
         
@@ -107,7 +107,7 @@
 				<p><!--<strong>Persistent Identifiers</strong>
 				<br>--><strong>Persistent lemma ID:</strong> {{lemma.id}} 
                 <button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{{lemma.id}}')"><span class="fas fa-clipboard"></span>Copy ID</button>
-				<br><strong>Persistent URL:</strong> {{tlaBaseURL}}/lemma/{{lemma.id}} <button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('TLA lemma ID {{lemma.id}} ({%for word in lemma.words%}{{word.transcription}}{% if not forloop.last%} {%endif%}{%endfor%}), &lt;{{tlaBaseURL}}/lemma/{{lemma.id}}&gt;, in: {{tlaTitle}} &lt;{{tlaBaseURL}}&gt;, Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, ed. by {{tlaEditor}} (accessed: {{dateToday}})');"><span class="fas fa-clipboard"></span>Copy citation</button>
+				<br><strong>Persistent URL:</strong> {{tlaBaseURL}}/lemma/{{lemma.id}} <button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('TLA lemma ID {{lemma.id}} ({{lemma.name}}), &lt;{{tlaBaseURL}}/lemma/{{lemma.id}}&gt;, in: {{tlaTitle}} &lt;{{tlaBaseURL}}&gt;, Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, ed. by {{tlaEditor}} (accessed: {{dateToday}})');"><span class="fas fa-clipboard"></span>Copy citation</button>
                 </p>
 			</div>
 
@@ -373,12 +373,12 @@
 			<div class="bg-light citation mt-5 mb-4">         
 				<p class="h6"><strong>Please cite as:</strong></p>
 					<!-- Version, Issue, Release-Date, heutiges Datum noch per globaler Variable holen -->
-				<blockquote>TLA lemma ID {{lemma.id}} (<span class="bbaw-libertine">{%for word in lemma.words%}{{word.transcription}}{% if not forloop.last%} {%endif%}{%endfor%}</span>), &lt;{{tlaBaseURL}}/lemma/{{lemma.id}}&gt;, 
+				<blockquote>TLA lemma ID {{lemma.id}} (<span class="bbaw-libertine">{{lemma.name}}</span>), &lt;{{tlaBaseURL}}/lemma/{{lemma.id}}&gt;, 
 					in: <i>{{tlaTitle}}</i> &lt;{{tlaBaseURL}}&gt;, 
 					Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, 
 					ed. by {{tlaEditor}} 
 					(accessed: {{dateToday}})</blockquote>
-				<button type="button" class="btn btn-secondary btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('TLA lemma ID {{lemma.id}} ({%for word in lemma.words%}{{word.transcription}}{% if not forloop.last%} {%endif%}{%endfor%}), &lt;{{tlaBaseURL}}/lemma/{{lemma.id}}&gt;, in: {{tlaTitle}} &lt;{{tlaBaseURL}}&gt;, Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, ed. by {{tlaEditor}} (accessed: {{dateToday}})');"><span class="fas fa-clipboard"></span>Copy citation</button>
+				<button type="button" class="btn btn-secondary btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('TLA lemma ID {{lemma.id}} ({{lemma.name}}), &lt;{{tlaBaseURL}}/lemma/{{lemma.id}}&gt;, in: {{tlaTitle}} &lt;{{tlaBaseURL}}&gt;, Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, ed. by {{tlaEditor}} (accessed: {{dateToday}})');"><span class="fas fa-clipboard"></span>Copy citation</button>
 			</div>  
             
             
@@ -478,7 +478,7 @@
             </button>
           </div>
           <div class="modal-body">            
-              <a href="mailto:?subject=TLA,%20Lemma%20{{lemma.id}}&amp;body=TLA lemma ID {{lemma.id}} ({%for word in lemma.words%}{{word.transcription}}{% if not forloop.last%} {%endif%}{%endfor%}), &lt;{{tlaBaseURL}}/lemma/{{lemma.id}}&gt;, in: {{tlaTitle}} &lt;{{tlaBaseURL}}&gt;, Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, ed. by {{tlaEditor}} (accessed: {{dateToday}})" class="btn btn-block btn-info" role="button"><span class="far fa-envelope"></span> E-mail citation</a> 
+              <a href="mailto:?subject=TLA,%20Lemma%20{{lemma.id}}&amp;body=TLA lemma ID {{lemma.id}} ({{lemma.name}}), &lt;{{tlaBaseURL}}/lemma/{{lemma.id}}&gt;, in: {{tlaTitle}} &lt;{{tlaBaseURL}}&gt;, Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, ed. by {{tlaEditor}} (accessed: {{dateToday}})" class="btn btn-block btn-info" role="button"><span class="far fa-envelope"></span> E-mail citation</a> 
               <a href="https://twitter.com/share?url={{tlaBaseURL}}/lemma/{{lemma.id}}" title="Twitter" class="btn btn-block btn-info" role="button" target="_blank"><span class="fab fa-twitter"></span> Twitter URL</a>
               <a href="http://www.facebook.com/share.php?u={{tlaBaseURL}}/lemma/{{lemma.id}}" class="btn btn-block btn-info" role="button" target="_blank"><span class="fab fa-facebook"></span> Facebook</a> 
           </div>

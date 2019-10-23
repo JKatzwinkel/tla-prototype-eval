@@ -181,7 +181,7 @@ def dict_search_query(**params):
             clauses.append(
                 {
                     "regexp": {
-                        "name": TLAWildcardToRegEx(root)+"([\.].+)?", ## Problem: zusammengesetzte Unicode-Zeichen werden in "[  ]" nicht wie ein Zeichen benahdelt; H̱nm wird nicht erkannt (weil zusammengesetzt?) 
+                        "name": TLAWildcardToRegEx(root)+".*", ## Problem: zusammengesetzte Unicode-Zeichen werden in "[  ]" nicht wie ein Zeichen benahdelt; H̱nm wird nicht erkannt (weil zusammengesetzt?) 
                     }
                 }
             )
