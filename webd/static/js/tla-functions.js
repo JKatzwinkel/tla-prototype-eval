@@ -58,6 +58,10 @@ function setCookie(Bezeichner, Wert) {
 }
 
 function init() {	
+	// Modify search Button ausblenden, wenn keine Daten vorhanden
+    var sessionVal = sessionStorage.getItem('dictSearchValuesExist');
+    if (sessionVal == null) $('.modify-search-btn').hide();
+
 
     // Cookie Acceptance Banner ausblenden
 
@@ -104,7 +108,24 @@ function init() {
 			  if (lang == "fr") {
 				   setCookie("TranslationFRVisible", "true");
 				}	
-		    }
+			  var posDropdown = document.getElementById("word_class_types");
+			  var pos = posDropdown.options[posDropdown.selectedIndex].value;
+			  if (pos != "(any)" && pos != null && pos != '') {
+				   setCookie("WordClassVisible", "true");
+				}
+			  var biblInput = document.getElementById("dict-search-bibliography");
+			  var bibl = biblInput.value;
+			  if (bibl != null && bibl != '') {
+				   setCookie("BibliographyVisible", "true");
+				}	
+			  var hierCheckbox = document.getElementById("script-hieroglyphic");
+			  var hierChecked = hierCheckbox.checked;
+			  if (hierChecked) {
+				   setCookie("HieroglyphsVisible", "true");
+			  } else {
+				   setCookie("HieroglyphsVisible", "false");
+			  }
+		     }
 		  });	
 
 	// Abbreviation help links

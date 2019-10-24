@@ -2,7 +2,7 @@
 {% load static %}
 {% load js %}
 
-{% block title %}TLA - Occurences lemma ID {{params.lemma}} ({{params.transcription}}){% endblock %}
+{% block title %}TLA - Occurrences lemma ID {{params.lemma}} ({{params.transcription}}){% endblock %}
 
 {% block content %}
 <!-- Page Content -->
@@ -15,7 +15,7 @@
 			  <ol class="breadcrumb">
 				<li class="breadcrumb-item"><a href="/">Home</a></li>
 				<li class="breadcrumb-item"><a href="/search">Search</a></li>
-				<li class="breadcrumb-item active" aria-current="page">Occurences</li>
+				<li class="breadcrumb-item active" aria-current="page">Occurrences</li>
 			  </ol>
 			</nav>
 		</div>
@@ -26,7 +26,7 @@
             <!--
             <a href="javascript:history.back()"><button type="button" class="btn btn-red text-left text-decoration-none solo-icon"><i class="fas fa-arrow-circle-left"></i><span class="d-none d-lg-block">Back</span></button></a>   
             -->
-            <a href="/search"><button type="button" class="btn btn-red text-left text-decoration-none solo-icon"><i class="fa fa-search"></i><span class="d-none d-lg-block">Modify search</span></button></a>
+            <a href="/search"><button type="button" class="btn btn-red text-left text-decoration-none solo-icon modify-search-btn"><i class="fa fa-search"></i><span class="d-none d-lg-block">Modify search</span></button></a>
                         
             <div class="functional-icons float-right solo-icon sidebar-btn">
                 <a href="#" class="btn btn-light" ><i class="fa fa-eye"></i></a>               
@@ -48,7 +48,7 @@
 	<!-- Suchergebnis + sortieren-->	
 	<div class="row search-entries detail">
 		<div class="col-sm-12 col-lg-8 result">
-            <p>Occurences</p> 
+            <p>Occurrences</p> 
 			<h2 class="id mt-1">Lemma ID {{params.lemma}} (<span class="bbaw-libertine">##transkr##{{params.transcription}}</span>)</h2> <!--## transcription wird nicht mitgeliefert -->
 		</div>
         
@@ -58,7 +58,7 @@
             </div>
                        
             <div class="functional-icons mr-0 ">
-                <a class="btn btn-red text-left text-decoration-none solo-icon" role="button" href="/help/occurences" target="_blank">Help&nbsp;&nbsp;<i class="fas fa-info-circle fa-lg"></i></a>
+                <a class="btn btn-red text-left text-decoration-none solo-icon" role="button" href="/help/occurrences" target="_blank">Page&nbsp;help&nbsp;&nbsp;<i class="fas fa-info-circle fa-lg"></i></a>
             </div>
 		</div>	
            	
@@ -67,7 +67,7 @@
 	<!-- Trefferanzahl-->
 	<div class="row searchresult">		
 			<div class="col-sm-12 pt-3">
-			<p class="result-entries">Results: {%if hitcount > 0%}<b>{{start}} - {{end}}</b> of <b>{{hitcount}}</b> occurences in texts{%else%}<b>none</b>{%endif%}</p>
+			<p class="result-entries">Results: {%if hitcount > 0%}<b>{{start}} - {{end}}</b> of <b>{{hitcount}}</b> occurrences in texts{%else%}<b>none</b>{%endif%}</p>
 			</div>
 	</div><!-- /.row -->  
 	  	
@@ -366,7 +366,7 @@
 				<a href="javascript:history.back()"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Back</button></a>
 				-->
 				
-				<a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none"><span class="fas fa-arrow-circle-left"></span>Modify search</button></a>
+				<a href="/search"><button type="button" class="btn btn-block btn-red text-left text-decoration-none modify-search-btn"><span class="fas fa-arrow-circle-left"></span>Modify search</button></a>
 			</div>
 		</div>
 	</div> <!-- /.row -->
@@ -429,7 +429,7 @@
             </button>
           </div>
           <div class="modal-body"> 	  
-              <a href="mailto:?subject=TLA,%20Occurences%20lemma%20{{params.lemma}}&amp;body=TLA, occurences lemma ID {{params.lemma}} ( {% for word in lemma.words %}{{word.transcription}} {% endfor %}), &lt;{{tlaBaseURL}}/search/occurrences?lemma={{params.lemma}}&gt;, in: {{tlaTitle}} &lt;{{tlaBaseURL}}&gt;, Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, ed. by {{tlaEditor}} (accessed: {{dateToday}})" class="btn btn-block btn-info" role="button"><span class="far fa-envelope"></span> E-mail citation</a> 
+              <a href="mailto:?subject=TLA,%20Occurrences%20lemma%20{{params.lemma}}&amp;body=TLA, occurrences lemma ID {{params.lemma}} ( {% for word in lemma.words %}{{word.transcription}} {% endfor %}), &lt;{{tlaBaseURL}}/search/occurrences?lemma={{params.lemma}}&gt;, in: {{tlaTitle}} &lt;{{tlaBaseURL}}&gt;, Version {{tlaVersion}}.{{tlaIssue}}, {{tlaReleaseDate}}, ed. by {{tlaEditor}} (accessed: {{dateToday}})" class="btn btn-block btn-info" role="button"><span class="far fa-envelope"></span> E-mail citation</a> 
               <a href="https://twitter.com/share?url={{tlaBaseURL}}/search/occurrences?lemma={{params.lemma}}" title="Twitter" class="btn btn-block btn-info" role="button" target="_blank"><span class="fab fa-twitter"></span> Twitter URL</a>
               <a href="http://www.facebook.com/share.php?u={{tlaBaseURL}}/search/occurrences?lemma={{params.lemma}}" class="btn btn-block btn-info" role="button" target="_blank"><span class="fab fa-facebook"></span> Facebook</a> 
           </div>        

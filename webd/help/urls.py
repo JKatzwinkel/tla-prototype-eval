@@ -9,6 +9,6 @@ urlpatterns = [
     path('search', views.helpSearch),
     path('dict', views.helpDict),
     path('lemma', views.helpLemma),
-    path('occurences', views.helpOccurences),
+    path('occurrences', views.helpOccurrences),
 ]
 

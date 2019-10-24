@@ -47,7 +47,7 @@ def niceLineCount(lcStr):
 @register.filter(is_safe=True)
 def niceCorpus(corpus):
     if corpus:
-        corpus = corpus.replace('corpus', 'Digital BTS corpus')
+        corpus = corpus.replace('corpus', 'Digital text corpus')
     return corpus 
     
 @register.filter(is_safe=True)
@@ -227,7 +227,7 @@ def niceQueryData(name):
         
 niceReviewStateDict = {
     'published': 'reviewed',
-    'published-awaiting-review': 'yet to be reviewed',
+    'published-awaiting-review': 'awaiting review',
     'published-obsolete': 'obsolete' }
 @register.filter(is_safe=True)
 def niceReviewState(name):
