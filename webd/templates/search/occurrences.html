@@ -116,14 +116,13 @@
                             &nbsp;
                         {% endif %}
 					</li>
-                    <li class="word-class condensed"> 
-						##POS##<!-- ##Inhalt aktuell noch nicht in token mitgeliefert  -->
-					    {% if token.xxx %}
-                           {{token.xxx|nicePOS}} ({{token.xxx|niceSubPOS}})
+                    <li class="word-class condensed">
+                        {% if token.lexem.pos %}
+                          {{token.lexem.pos|nicePOS}}
                         {% else %}
-                            &nbsp;
+                           &nbsp;
                         {% endif %}
-					</li>
+                    </li>
                     <li class="ling-glossing condensed">
 						<!--##ling.gloss##-->
 					    {% if token.flexcode %}
@@ -133,12 +132,14 @@
                         {% endif %}
 					</li>
                     <li class="bts-glossing condensed"> <!-- ##Achtung in 'glossing' steht BTS glossing, nicht ling. glossing  -->
-					    {% if token.flexcode %} 
-                           {{token.flexcode|verbalFlexcode}}
-                        {% else %}
-                            &nbsp;
-                        {% endif %}
-					</li>
+                      {% if token.flexion %} 
+                        {{token.flexion.verbal}}
+                      {% elif token.flexcode %}
+                        {{token.flexcode|verbalFlexcode}}
+                      {% else %}
+                        &nbsp;
+                      {% endif %}
+                    </li>
                     <li class="token-translation condensed">
 					    {% if token.translations.de %}
  							{%for translation in token.translations.de %}

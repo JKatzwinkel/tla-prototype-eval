@@ -250,14 +250,30 @@ nicePOSDict = {
     "root": "root",
     "substantive": "noun",
     "undefined": "(undefined)",
-    "verb": "verb" }
+    "verb": "verb",
+}
+
+
 @register.filter(is_safe=True)
 def nicePOS(name):
-    newName = nicePOSDict.get(name)
-    if newName:
-        return newName
-    else:
-        return name
+    """ takes a string containing a lemma's type and optionally its subtype,
+    seperated by a ``.`` character, looks up labels for both of them and
+    returns the labels in a string which looks like either of the following:
+
+    - ``'{type_label}'``
+    - ``'{type_label} ({subtype_label})'``
+    """
+    lemma_pos_identifiers = name.split('.')
+    res = nicePOSDict.get(
+        *[lemma_pos_identifiers[0]]*2
+    )
+    return '{} ({})'.format(
+        res,
+        niceSubPOSDict.get(
+            *[lemma_pos_identifiers[1]]*2
+        )
+    ) if len(lemma_pos_identifiers) > 1 else res
+
 
 niceSubPOSDict = {
     "animal_name": "animal",
@@ -301,15 +317,18 @@ niceSubPOSDict = {
     "verb_caus_4-inf": "caus. IV inf.",
     "verb_caus_4-lit": "caus. 4 lit.",
     "verb_caus_5-lit": "caus. 5 lit.",
-    "verb_irr": "irregular" }
+    "verb_irr": "irregular",
+}
+
+
 @register.filter(is_safe=True)
 def niceSubPOS(name):
-    newName = niceSubPOSDict.get(name)
-    if newName:
-        return newName
-    else:
-        return name
-    
+    return niceSubPOSDict.get(
+        name,
+        name
+    )
+
+
 @register.filter(is_safe=True)
 def isURL(ref):       
     if ref[0:4] == 'http': 
