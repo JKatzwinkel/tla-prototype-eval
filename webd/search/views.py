@@ -75,6 +75,13 @@ WORD_CLASSES = {
     "undefined": None,
     }
 
+SORT_ORDERS = {
+    "alph_asc": "Alphabetical (asc.)",
+    "alph_desc": "Alphabetical (desc.)",
+    "time_begin": "Attestation time, start",
+    "time_end": "Attestation time, end",
+}
+
 
 def build_query(*clauses, fields=None):
     """ Generates an elasticsearch query in conjunctive normal form from the
@@ -110,6 +117,7 @@ def build_query(*clauses, fields=None):
             )
     return query
 
+
 def TLAWildcardToRegEx(expr):
     if expr:
         expr = expr.replace('.', '\.')
@@ -119,7 +127,44 @@ def TLAWildcardToRegEx(expr):
         expr = expr.replace(')', '\)') 
         expr = expr.lower() # elasticsearch-Suche ist offenbar aktuell case-insensitive, daher muss auch die Suche in lowercase verwandelt werden
     return expr
-    
+
+
+def include_sort_order(query: dict, param: list) -> dict:
+    """ takes an elasticsearch query DSL object and a list of parameter values,
+    and puts a ``sort`` specification into the query before returning it.
+    Only first element of the ``param`` list is used, tho. If ``param`` is empty,
+    this defaults to ascending alphabetic order.
+
+    :param param: list of sort order IDs like ``aleph_asc`` or ``time_begin``
+    """
+    sort_order = param[0] if len(param) > 0 else "alph_asc"
+    qualifier = sort_order.split("_")[-1]
+    if sort_order in ["alph_asc", "alph_desc"]:
+        query["sort"] = [
+            {
+                "sort_string.keyword": {
+                    "order": qualifier,
+                }
+            },
+        ]
+    elif sort_order in ["time_begin", "time_end"]:
+        query["sort"] = [
+            {
+                "time_span.{}".format(qualifier): {
+                    "order": {
+                        "begin": "asc",
+                        "end": "desc",
+                    }.get(
+                        qualifier,
+                        "asc"
+                    ),
+                    "missing": "_last",
+                }
+            }
+        ]
+    return query
+
+
 def dict_search_query(**params):
     """ generate elasticsearch query object with parameters as would be expected to come from
     the `dict-search` form in the `search/index.html` template. """
@@ -251,7 +296,10 @@ def dict_search_query(**params):
                     }
                 }
             )
-    q = build_query(*clauses)
+    q = include_sort_order(
+            build_query(*clauses),
+            params.get('sort_order', []),
+    )
     #print(q)
     return q
 
@@ -629,6 +677,7 @@ def search_dict(request):
     params = request.GET.copy()
     page = int(params.get('page', 1))
     offset = (page - 1) * RESULTS_PER_PAGE
+    sort_order = params.get('sort_order', 'alph_asc')
     hits = store.search(
         'wlist',
         dict_search_query(**params),
@@ -638,12 +687,15 @@ def search_dict(request):
     count = hits.get('total')
     hits = store.hits_contents(hits)
     hits = hit_tree(hits)
-    hits = sorted(hits, key=lambda items: sortTranslitStr(items[2]['name'])) ## Problem: sortiert nur den Ausschnitt; Sortierung müsste in es einmal? geschehen
     return render(
         request,
         'search/dict.html',
         {
             'params': params,
+            'sort_order': {
+                'options': SORT_ORDERS,
+                'selection': sort_order,
+            },
             'hits': hits,
             'hitcount': count,
             'page': page,

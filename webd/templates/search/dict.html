@@ -4,6 +4,26 @@
 
 {% block title %}TLA - Search results for {{params.transcription}}{% endblock %}
 
+{% block headjs %}
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(".select-sort-order").on("change", function(){
+			let url = window.location.href;
+			let href = url.indexOf('sort_order') < 0 ?
+				url + "&sort_order" + $(this).val() :
+				url.replace(
+					/sort_order=[a-z_]+/g,
+					"sort_order=" + $(this).val()
+				);
+			window.location.replace(
+				href
+			);
+		});
+	});
+</script>
+{% endblock %}
+	
+
 {% block content %}
 <!-- Page Content -->
 <div class="container content my-4">
@@ -213,13 +233,14 @@
             <div class="sticky-top">
 				<div class="input-group mb-3">
 					<div class="input-group-append">
-						<label class="input-group-text" for="inputGroupSelect02">Order by</label>
+						<label class="input-group-text" for="select_sort_order">Order by</label>
 					</div>
-					<select class="custom-select" id="inputGroupSelect02">
-						<option value="1" selected>Alphabetical</option>
-						<option value="2">Attestation time, start</option>
-						<option value="3">Attestation time, middle</option>
-						<option value="4">Attestation time, end</option>
+					<select class="custom-select select-sort-order">
+						{% for key, label in sort_order.options.items %}
+							<option value="{{key}}" {%if sort_order.selection == key%}selected{%endif%}>
+								{{label}}
+							</option>
+						{% endfor %}
 					</select>			  
 				</div>
 			
@@ -258,17 +279,18 @@
             </div>
             
             <div class="input-group mt-2 mb-3">
-					<div class="input-group-append">
-						<label class="input-group-text" for="inputGroupSelect02">Order by</label>
-					</div>
-					<select class="custom-select" id="inputGroupSelect02">
-						<option value="1" selected>Alphabetical, hierarchical</option>
-						<option value="2">Alphabetical, strictly</option>
-						<option value="3">Attestation time, start</option>
-						<option value="4">Attestation time, middle</option>
-						<option value="5">Attestation time, end</option>
-					</select>			  
-				</div>
+		<div class="input-group-append">
+			<label class="input-group-text" for="select_sort_order">Order by</label>
+		</div>
+		<select class="custom-select select-sort-order">
+			{% for key, label in sort_order.options.items %}
+				<option value="{{key}}" {%if sort_order.selection == key%}selected{%endif%}>
+					{{label}}
+				</option>
+			{% endfor %}
+		</select> 
+	</div>
+</div>
 			
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail hieroglyph-btn "><i class="fas"></i>Hieroglyphs</button>
                 <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail lemma-id-btn "><i class="fas"></i>Lemma ID</button>
