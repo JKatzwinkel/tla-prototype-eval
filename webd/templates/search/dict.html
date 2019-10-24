@@ -10,7 +10,7 @@
 		$(".select-sort-order").on("change", function(){
 			let url = window.location.href;
 			let href = url.indexOf('sort_order') < 0 ?
-				url + "&sort_order" + $(this).val() :
+				url + "&sort_order=" + $(this).val() :
 				url.replace(
 					/sort_order=[a-z_]+/g,
 					"sort_order=" + $(this).val()

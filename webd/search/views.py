@@ -80,6 +80,7 @@ SORT_ORDERS = {
     "alph_desc": "Alphabetical (desc.)",
     "time_begin": "Attestation time, start",
     "time_end": "Attestation time, end",
+    "root_asc": "By Root",
 }
 
 
@@ -158,6 +159,15 @@ def include_sort_order(query: dict, param: list) -> dict:
                         qualifier,
                         "asc"
                     ),
+                    "missing": "_last",
+                }
+            }
+        ]
+    elif sort_order in ["root_asc"]:
+        query["sort"] = [
+            {
+                "id.keyword": {
+                    "order": qualifier,
                     "missing": "_last",
                 }
             }
