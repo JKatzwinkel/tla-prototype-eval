@@ -86,7 +86,7 @@ def coins_openurl_kev(doc):
         ('ctx_enc', "info.ofi/enc:UTF-8"),
         ('ctx_tim', datetime.now().isoformat()),
         ('rft.language', "en-US"),
-        ('rft.au', glom(doc, "edited.name")),
+        ('rft.au', glom(doc, "editors.author")),
         ('rft.genre', "article"),
         ('rft.atitle', 'Lemma {} - {}'.format(
             doc.get("id"),
@@ -96,7 +96,7 @@ def coins_openurl_kev(doc):
         ('rft.stitle', "TLA"),
         ('rft.volume', tlaVersion),
         ('rft.issue', tlaIssue),
-        ('rft.date', glom(doc, "edited.date")),
+        ('rft.date', glom(doc, "editors.updated")),
         ('rft.place', 'Berlin'),
         ('rft.publisher', tlaPublisher),
         ('rft_val_fmt', 'info:ofi/fmt:kev:mtx:journal'),

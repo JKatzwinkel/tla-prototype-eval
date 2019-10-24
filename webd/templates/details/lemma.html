@@ -204,7 +204,7 @@
 					{% for annotation in annotations %}
 					<!--<p class="comment-title"><strong>{{annotation.title}}</strong></p>-->                 
                     <p class="comment-content">{{annotation.body}}</p> 
-                    <p class="comment-author pt-1">Edited by&nbsp;<strong>{{annotation.edited.name}}</strong>&nbsp;on <span class="comment-date"><strong>{{annotation.edited.date}}</strong></span></p>
+                    <p class="comment-author pt-1">Edited by&nbsp;<strong>{{annotation.editors.authors}}</strong>&nbsp;on <span class="comment-date"><strong>{{annotation.editors.updated}}</strong></span></p>
 					{% endfor %}
                 </div>
                 <div class="show-comment-button">
@@ -360,8 +360,8 @@
 				
 				<div class="editor">
 				<hr>	
-				<p><strong>TLA Editor:</strong> {{ lemma.edited.name }}		
-				    <br><strong>Last Revision:</strong> {{ lemma.edited.date }}
+				<p><strong>TLA Editor:</strong> {{ lemma.editors.author }}
+				    <br><strong>Last Revision:</strong> {{ lemma.editors.updated }}
 				    <!--<br><strong>Protocoll:</strong> ##protocoll##{{ lemma.xxx }}-->
 				    <br><strong>Review State:</strong> {{ lemma.revisionState|niceReviewState }}
                  </p>
