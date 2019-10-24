@@ -186,8 +186,11 @@
 						</span>
 			   
 						<!-- Attestation time -->
-						<span class="result-list-item-element attestation-time">(##att.time##{{hit.xxx}})</span> <!-- ##Variable noch nicht verfügbar -->
-						
+						{% if hit.time_span %}
+						<span class="result-list-item-element attestation-time">
+							{{hit.time_span.begin}} until {{hit.time_span.end}}
+						</span>
+						{% endif %}
 						<!-- Bibliography -->
 						<span class="result-list-item-element bibliography-list">({{hit.bibliography}})</span>
 					</div>
