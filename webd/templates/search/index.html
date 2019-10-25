@@ -278,6 +278,7 @@ $(window).on('unload', function() {
 					<div class="col-sm-12 col-lg-9 col-xl-10 mb-2">
 						<select class="form-control" id="word_class_types" name="pos_type">
 							<option value="(any)">(any)</option>
+							<option value="(any_but_names)">(any but names)</option>
 							{% for type, subtypes in word_classes.items%}
 							  <option value="{{type}}">{{type|nicePOS}}</option>
 							{%endfor%}
