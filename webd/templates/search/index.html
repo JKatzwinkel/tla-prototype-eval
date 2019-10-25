@@ -277,6 +277,7 @@ $(window).on('unload', function() {
 					<label for="inputWordClass" class="col-sm-12 col-lg-3 col-xl-2 col-form-label">Part of Speech</label>
 					<div class="col-sm-12 col-lg-9 col-xl-10 mb-2">
 						<select class="form-control" id="word_class_types" name="pos_type">
+							<option value="(any_but_names)">(any but names)</option>
 							<option value="(any)">(any)</option>
 							{% for type, subtypes in word_classes.items%}
 							  <option value="{{type}}">{{type|nicePOS}}</option>

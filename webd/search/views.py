@@ -80,7 +80,7 @@ SORT_ORDERS = {
     "alph_desc": "Alphabetical (desc.)",
     "time_begin": "Attestation time, start",
     "time_end": "Attestation time, end",
-    "root_asc": "By Root",
+    "root_asc": "Root",
 }
 
 
@@ -121,6 +121,12 @@ def build_query(*clauses, fields=None):
 
 def TLAWildcardToRegEx(expr):
     if expr:
+        #expr = expr.replace('\\*', '\*')
+        #expr = expr.replace('\\-', '\-')
+        #expr = expr.replace('\\[', '\[')
+        #expr = expr.replace('\\]', '\]')
+        #expr = expr.replace('\\(', '\)')
+        #expr = expr.replace('\\(', '\)')
         expr = expr.replace('.', '\.')
         expr = expr.replace('-', '\-')
         expr = expr.replace('§', '.')
@@ -276,12 +282,21 @@ def dict_search_query(**params):
     if 'pos_type' in params:
         pos_type = params.get('pos_type')[0]
         if pos_type != '' and pos_type != '(any)':
-            clauses.append(
-                {
+            if pos_type == '(any_but_names)':
+                query = {
                     "term": {
-                        "type": pos_type,
+                        "type": "entity_name"
                     }
                 }
+                query['predicate'] = 'must_not'
+                clauses.append(query)                 
+            else:
+                clauses.append(
+                    {
+                        "term": {
+                            "type": pos_type,
+                        }
+                    }
             )
     if 'pos_subtype' in params:
         pos_subtype = params.get('pos_subtype')[0]
