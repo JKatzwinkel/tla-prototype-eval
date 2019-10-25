@@ -214,7 +214,12 @@ niceQueryDataDict = {
     'manuel_de_codage': 'Manuel de Codage',
     'pos_type': 'Part of Speech', 
     'pos_subtype': 'Part of Speech subtype', 
-    'lemma_id': 'Lemma ID'
+    'lemma_id': 'Lemma ID',
+    'sort_order': 'Sort by',
+    'root_asc': 'root (ascending)',
+    'root_desc': 'root (descending)',
+    'time_begin': 'attestation time (start)',
+    'time_end': 'attestation time (end)',
     }  
     
 @register.filter(is_safe=True)
