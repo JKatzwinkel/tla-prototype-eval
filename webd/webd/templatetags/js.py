@@ -218,6 +218,8 @@ niceQueryDataDict = {
     'sort_order': 'Sort by',
     'root_asc': 'root (ascending)',
     'root_desc': 'root (descending)',
+    'alph_asc': 'alphabetical (ascending)',
+    'alph_desc': 'alphabetical (descending)',
     'time_begin': 'attestation time (start)',
     'time_end': 'attestation time (end)',
     }  
