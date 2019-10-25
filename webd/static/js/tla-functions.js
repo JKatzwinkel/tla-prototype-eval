@@ -709,7 +709,7 @@ function init() {
 $('#clear-form-btn').click(function(e) {
 	e.preventDefault();
     $('#dict-search-transcription').val('');
-    $('#word_class_types').val('(any)');
+    $('#word_class_types').val('(any_but_names)');
     $('#word_class_subtypes').val('');
     $('#dict-search-root').val('');
     $('#dict-search-translation').val('');
