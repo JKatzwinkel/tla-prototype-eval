@@ -121,15 +121,13 @@ def build_query(*clauses, fields=None):
 
 def TLAWildcardToRegEx(expr):
     if expr:
-        #expr = expr.replace('\\*', '\*')
-        #expr = expr.replace('\\-', '\-')
+        #expr = expr.replace('\\*', '\*') ## Test, nötig?
         #expr = expr.replace('\\[', '\[')
         #expr = expr.replace('\\]', '\]')
-        #expr = expr.replace('\\(', '\)')
-        #expr = expr.replace('\\(', '\)')
+        #expr = expr.replace('\\?', '\?')
         expr = expr.replace('.', '\.')
         expr = expr.replace('-', '\-')
-        expr = expr.replace('§', '.')
+        expr = expr.replace('*', '.')
         expr = expr.replace('(', '\(') # Problem: elasticsearch Analyzer
         expr = expr.replace(')', '\)') 
         expr = expr.lower() # elasticsearch-Suche ist offenbar aktuell case-insensitive, daher muss auch die Suche in lowercase verwandelt werden

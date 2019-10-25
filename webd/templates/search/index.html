@@ -239,7 +239,6 @@ $(window).on('unload', function() {
 
 			<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
 			  <form id="dict-search" action="/search/dict" name="dict-search">
-				  <!-- Transcription -->
 				  <div class="form-group row bg-grey col-sm-12 col-lg-9 lg-push-3 col-xl-10 pl-4">
 					<label for="language" class="col-form-label"></label>
 					<div class="form-check form-check-inline">
@@ -255,8 +254,9 @@ $(window).on('unload', function() {
 					  <label class="form-check-label" for="script-coptic">Coptic</label>
 					</div>-->					
 				  </div>
+				  <!-- Transliteration -->
 				  <div class="form-group row ">
-					<label for="Transcription" class="col-sm-12 col-lg-3 col-xl-2 col-form-label ">Transcription</label> 
+					<label for="Transcription" class="col-sm-12 col-lg-3 col-xl-2 col-form-label ">Transliteration <a href="#" class="transliteration-help" role="button" data-toggle="modal" data-target="#transliteration-help"><i class="fas fa-info-circle"></i></a></label> 
 					<div class="col-sm-12 col-lg-9 col-xl-10">
 					  <input type="text" class="bbaw-libertine form-control mb-3 keyboardInput" id="dict-search-transcription" rows="3" name="transcription" lang="egy">
                        
@@ -293,7 +293,7 @@ $(window).on('unload', function() {
 				  
 				  <!-- Root -->
 				  <div class="form-group row">
-					<label for="Transcription" class="col-sm-12 col-lg-3 col-xl-2 col-form-label">Root of the lemma</label>
+					<label for="Transcription" class="col-sm-12 col-lg-3 col-xl-2 col-form-label">Root of the lemma <a href="#" class="root-help" role="button" data-toggle="modal" data-target="#transliteration-help"><i class="fas fa-info-circle"></i></a></label>
 					<div class="col-sm-12 col-lg-9 col-xl-10">
 					  				 
                         <input type="text" class="form-control mb-3 keyboardInput" id="dict-search-root" rows="3" name="root" lang="egy">
@@ -306,7 +306,6 @@ $(window).on('unload', function() {
 						  <input class="form-check-input root-enc-btn" type="radio" name="root_enc" id="root_enc_mdc" value="manuel_de_codage">
 						  <label class="form-check-label" for="root_enc_mdc">Manuel de Codage</label>
 						</div>
-						<small class="form-text text-muted pl-2 pt-1">"§": any character; "[  ]": set of characters; "?"/"*"/"+": preceeding character 0-1, 0-x or 1-x times, respectively.</small>
 					</div>
 				  </div>
              
@@ -445,5 +444,56 @@ $(window).on('unload', function() {
       <!-- /.row -->
 	  
 	</div>  <!-- /.row content-->
-	</div> <!-- /.container Content -->
-	{% endblock %}
+	
+	<!-- Modals for local help -->
+    <div class="modal fade" id="transliteration-help" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Transliteration search string</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+		    <p>The following wildcard functions can be used:</p>
+			<p>"*": dummy for any sign, e.g. in "*?m"
+			<br>"[ ]": set of signs; any of the included character will be searched for, e.g. "s[d?].t"
+			<br>"?": the preceding sign can occur, but need not occur, e.g. "mrr?.t"</p>
+          </div>
+            
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+	
+    <div class="modal fade" id="root-help" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Help for root search string</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+		    <p>This search restricts the search for lemmata to certain roots.</p>
+			
+		    <p>The following wildcard functions can be used:</p>
+			<p>"*": dummy for any sign, e.g. in "*?m"
+			<br>"[ ]": set of signs; any of the included character will be searched for, e.g. "s[d?].t"
+			<br>"?": the preceding sign can occur, but need not occur, e.g. "mrr?.t"</p>
+          </div>
+            
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+	
+	
+</div> <!-- /.container Content -->
+{% endblock %}

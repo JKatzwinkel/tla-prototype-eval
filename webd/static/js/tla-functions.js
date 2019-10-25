@@ -138,7 +138,7 @@ function init() {
 	$('.bts-glossing').click(function(e) {
 			e.preventDefault();
 			window.open('/help/bts-glossings','_blank');
-		  });	
+		  });		
 		  
 		  
 	// Search form settings		  
