@@ -16,6 +16,10 @@
 .BBAWred {
 	color:#C60C30; /* BBAW red*/
 	}
+	
+.highlight-latin {
+	background-color: #ffcccc; 
+	}
 
 /* Container */
 
@@ -911,6 +915,7 @@ span.multiselect-native-select select {
 		width: 100%;
 	}
     
+	
     .footer-logo {
 		margin-top: 2rem; 
 		text-align: center;
