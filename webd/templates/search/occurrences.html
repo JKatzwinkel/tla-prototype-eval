@@ -81,7 +81,7 @@
             <div class="container-annotation mt-2 mb-2">
                 {% for token in hit.sentence.tokens %}
                 <ul class="annotation-block {%if token.highlight%}highlight-{{token.highlight}}{%endif%}">
-                    <li class="hieroglyph" {% if token.type == 'word' %}onclick="window.open('/lemma/{{token.lemma}}','_blank')"{% endif %}>
+                    <li class="hieroglyph" {% if token.type == 'word' %}onclick="window.open('/lemma/{{token.lemma.id}}','_blank')"{% endif %}>
                         <!--<canvas class="res occ-tok-glyphs" style="font-size: 20px; vertical-align: -5px;"  title="{{token.glyphs}}">
                         {% if token.glyphs %}
                             {{token.glyphs|MdCtoRES}}
@@ -109,7 +109,7 @@
 						{% endif %}
                         </span>
 					</li>
-                    <li class="transcription {%if token.type == 'destruction_marker'%}token-destruction_marker{%endif%} {%if token.type == 'lc'%}token-lc{%endif%}" {% if token.type == 'word' %}onclick="window.open('/lemma/{{token.lemma}}','_blank')"{% endif %}>
+                    <li class="transcription {%if token.type == 'destruction_marker'%}token-destruction_marker{%endif%} {%if token.type == 'lc'%}token-lc{%endif%}" {% if token.type == 'word' %}onclick="window.open('/lemma/{{token.lemma.id}}','_blank')"{% endif %}>
 					    {% if token.label %}
                            {{token.label|niceTransliteration}}
                         {% else %}
@@ -117,16 +117,16 @@
                         {% endif %}
 					</li>
                     <li class="word-class condensed">
-                        {% if token.lexem.pos %}
-                          {{token.lexem.pos|nicePOS}}
+                        {% if token.lemma.pos %}
+                          {{token.lemma.pos|nicePOS}}
                         {% else %}
                            &nbsp;
                         {% endif %}
                     </li>
                     <li class="ling-glossing condensed">
 						<!--##ling.gloss##-->
-					    {% if token.flexcode %}
-                           {{token.flexcode|computeLingGlossing:token.lemma}}
+					    {% if token.flexion.numeric %}
+                           {{token.flexion.numeric|computeLingGlossing:token.lemma.id}}
                         {% else %}
                             &nbsp;
                         {% endif %}
@@ -167,20 +167,20 @@
                     <!-- Hieroglyphs -->
                     <div class="hieroglyph">
                         {% for token in hit.sentence.tokens %}
-						{% if token.type == 'word' %}<a href="/lemma/{{token.lemma}}" target="_blank" title="Lemma ID {{token.lemma}}">{% endif %}
-							<span class="unicode-hieroglyphs {%if token.highlight%}highlight-{{token.highlight}}{%endif%}">
-									{% if token.glyphs %}
-										{{token.glyphs|MdC_Unicode_noControlChars|prettyUnicodeHieroglyphs}}
-									{% else %}
-										{% if token.type == 'destruction_marker' %}
-											<span class="philological">//...//</span>
-										{% endif %}
-										{% if token.type == 'lc' %}
-											<span class="philological">|</span>
-										{% endif %}
-									{% endif %}
-							</span>
-						{% if token.type == 'word' %}</a>{% endif %}
+				{% if token.type == 'word' %}<a href="/lemma/{{token.lemma.id}}" target="_blank" title="Lemma ID {{token.lemma.id}}">{% endif %}
+					<span class="unicode-hieroglyphs {%if token.highlight%}highlight-{{token.highlight}}{%endif%}">
+						{% if token.glyphs %}
+							{{token.glyphs|MdC_Unicode_noControlChars|prettyUnicodeHieroglyphs}}
+						{% else %}
+							{% if token.type == 'destruction_marker' %}
+								<span class="philological">//...//</span>
+							{% endif %}
+							{% if token.type == 'lc' %}
+								<span class="philological">|</span>
+							{% endif %}
+						{% endif %}
+					</span>
+				{% if token.type == 'word' %}</a>{% endif %}
                         {%endfor%}
 						<button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{%for token in hit.sentence.tokens%}{% if token.type == 'word'%}{{token.glyphs|MdC_Unicode_noControlChars}}{%else%}{{token.glyphs}}{%endif%}{%endfor%}');"><span class="fas fa-clipboard"></span>Copy Unicode</button>
 						<button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{%for token in hit.sentence.tokens%}{% if token.type == 'word'%}{{token.glyphs}}{%else%}+l{{token.glyphs}}+s{%endif%}{% if not forloop.last%}-{%endif%}{%endfor%}');"><span class="fas fa-clipboard"></span>Copy Manuel de Codage</button>
@@ -188,20 +188,20 @@
 						<br><span style="color:blue">##RES-Rendering##:
                         <br>{% for token in hit.sentence.tokens %}
                         <span class="glyphbox">
-							{% if token.type == 'word' %}<a href="/lemma/{{token.lemma}}" target="_blank">{%endif%}
-							<canvas class="res occ-tok-glyphs mb-2 {%if token.highlight%}highlight-{{token.highlight}}{%endif%}" style="font-size: 2.1em;"   title="{{token.glyphs}}">
-								{% if token.glyphs %}
-									{{token.glyphs|MdCtoRES}}
-								{% else %}
-									{% if token.type == 'destruction_marker' %}
-										empty[width=0.5,shade]-"."-"."-empty[width=0.5,shade]
-									{% endif %}
-									{% if token.type == 'lc' %}
-										"|"[gray]^"lb"[gray]
-									{% endif %}
-								{% endif %}
-							</canvas>
-							{% if token.type == 'word' %}</a>{%endif%}
+				{% if token.type == 'word' %}<a href="/lemma/{{token.lemma.id}}" target="_blank">{%endif%}
+				<canvas class="res occ-tok-glyphs mb-2 {%if token.highlight%}highlight-{{token.highlight}}{%endif%}" style="font-size: 2.1em;"   title="{{token.glyphs}}">
+					{% if token.glyphs %}
+						{{token.glyphs|MdCtoRES}}
+					{% else %}
+						{% if token.type == 'destruction_marker' %}
+							empty[width=0.5,shade]-"."-"."-empty[width=0.5,shade]
+						{% endif %}
+						{% if token.type == 'lc' %}
+							"|"[gray]^"lb"[gray]
+						{% endif %}
+					{% endif %}
+				</canvas>
+				{% if token.type == 'word' %}</a>{%endif%}
                         </span>
                         {%endfor%} 
 						</span>
@@ -211,7 +211,7 @@
                     <!-- Transliteration -->
                     <h3 class="word bbaw-libertine mb-2">
                         {% for token in hit.sentence.tokens %}
-							{% if token.type == 'word' %}<a href="/lemma/{{token.lemma}}" title="Lemma ID {{token.lemma}}" target="_blank">{% endif %}
+							{% if token.type == 'word' %}<a href="/lemma/{{token.lemma.id}}" title="Lemma ID {{token.lemma.id}}" target="_blank">{% endif %}
                             <span id="{{token.id}}" class="occ-tok {%if token.highlight%}highlight-{{token.highlight}}{%endif%} {%if token.type == 'destruction_marker'%}token-destruction_marker{%endif%} token-{{token.type}} bbaw-libertine">
                                     {% if token.label %}
                                         {{token.label|niceTransliteration}}

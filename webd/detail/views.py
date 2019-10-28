@@ -24,7 +24,7 @@ def occurrence_count(lemma_id):
         body={
             "query": {
                 "term": {
-                    "lemma": lemma_id,
+                    "lemma.id": lemma_id,
                 },
             }
         }

@@ -346,7 +346,7 @@ def textword_search_query(**params):
             [
                 {
                     'term': {
-                        'lemma': lemma
+                        'lemma.id': lemma
                     }
                 }
                 for lemma in params['lemma']
@@ -384,7 +384,7 @@ def textword_search_query(**params):
             clauses.append(
                 {
                     "term": {
-                        "id": sentence_id,
+                        "id": sentence_id.lower(),
                     }
                 }
             )
@@ -447,8 +447,6 @@ def search_textword_occurrences(offset=1, size=RESULTS_PER_PAGE, **params):
                 texts_query
             )
         ]
-        with open('text_query.json', 'w+') as f:
-            json.dump(texts_query, f, indent=1)
         if len(texts) < 1:
             print('no matching texts. bye!')
             return {}
@@ -462,8 +460,6 @@ def search_textword_occurrences(offset=1, size=RESULTS_PER_PAGE, **params):
                 }
             }
         )
-    with open('occurrence_query.json', 'w+') as f:
-        json.dump(occurrences_query, f, ensure_ascii=False, indent=1)
     hits = store.search(
         'occurrence',
         occurrences_query,
@@ -487,10 +483,10 @@ def populate_textword_occurrences(hits, **params):
     for hit in hits:
         sentence = store.get(
             'sentence',
-            hit.get('sentence')
+            hit.get('location', {}).get('sentence')
         )
         for i, token in enumerate(sentence['tokens']):
-            if token.get('id') == hit['token']:
+            if token.get('id') == hit['id']:
                 token['highlight'] = 1
             else:
                 match = True
@@ -518,7 +514,7 @@ def populate_textword_occurrences(hits, **params):
                     token['highlight'] = 2
         text = store.get(
             'text',
-            hit.get('text'),
+            hit.get('location', {}).get('text'),
         )
         if text:
             print('text id', text['id'])
@@ -555,7 +551,7 @@ def populate_textword_occurrences(hits, **params):
                 }
             )
         else:
-            print('text not found: ', hit["text"])
+            print('text not found: ', hit.get('location', {}).get("text"))
     return occurrences
 
 
@@ -631,7 +627,7 @@ def search(request):
     )
 
 
-def pagination(request, hitcount):
+def pagination(request, hitcount) -> list:
     page = int(request.GET.get('page', 1))
     if 'page' in request.get_full_path():
         href = request.get_full_path().replace('page={}'.format(page), 'page={}')
