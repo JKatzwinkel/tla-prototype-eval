@@ -249,7 +249,7 @@ def niceYear(year):
     if year:
         if year[0] == '-':
             year= year[1:] + " BCE"
-        else
+        else:
             year= year + " CE"
     return year
         
