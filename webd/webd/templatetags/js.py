@@ -243,6 +243,15 @@ def niceReviewState(name):
         return newName
     else:
         return name
+
+@register.filter(is_safe=True)
+def niceYear(year):
+    if year:
+        if year[0] == '-':
+            year= year[1:] + " BCE"
+        else
+            year= year + " CE"
+    return year
         
 nicePOSDict = {
     "adjective": "adjective",
