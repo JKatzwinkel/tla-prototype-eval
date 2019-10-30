@@ -161,7 +161,7 @@
 				{% endfor %}
                 </p>
                 
-		<p><strong>Time:</strong> {% if lemma.time_span %}from {{lemma.time_span.begin}} until {{lemma.time_span.end}}{%endif%}</p> <!--## Werte noch nicht mitgeliefert -->
+		<p><strong>Time:</strong> {% if lemma.time_span %}from {{lemma.time_span.begin|niceYear}} until {{lemma.time_span.end|niceYear}}{%endif%}</p> <!--## Werte noch nicht mitgeliefert -->
 			</div> 
 			
 			<!-- Bibliographie -->
