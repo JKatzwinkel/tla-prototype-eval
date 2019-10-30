@@ -14,8 +14,8 @@ from .forms import (
 import store
 from detail import views as detail_views
 
-# zu Testzwecken erhöht
-RESULTS_PER_PAGE = 100 # 24 
+# zu Testzwecken erhöhen
+RESULTS_PER_PAGE = 24 
 
 WORD_CLASSES = {
     "adjective": [

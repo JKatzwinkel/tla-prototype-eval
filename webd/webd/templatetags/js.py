@@ -10668,14 +10668,22 @@ def stemType (sub_pos):
         return 'strong'
     return ''
     
-@register.filter(is_safe=True)
-def computeLingGlossing(flexcode, lemmaID):
+#@register.filter(is_safe=True)
+@register.simple_tag
+def computeLingGlossing(flexcode, lemmaID, pos_dot_subpos):
     logFile = None # kein Error Log ausgeben
-    pos ='' # im mockup noch nicht verfügbar
-    sub_pos ='' # im mockup noch nicht verfügbar
+    pos = ''
+    sub_pos =''    
+        
+    if pos_dot_subpos:
+        posParts = pos_dot_subpos.split('.')
+        pos = posParts[0]
+        if len(posParts) > 1:
+            sub_pos = posParts[1]
     
     # ling. Glossierung aus LemmaID (Pronomina, u.a)
     glossing = lingGlossFromLemmaID(lemmaID)
+    print(glossing)
     if glossing != '':
         return glossing
     
@@ -11626,7 +11634,7 @@ def MdC_Unicode_noControlChars(wordToParse):
 
     wordToParse = "".join(signsParsed)
 
-    wordParsed = wordToParse.replace("-", "").replace(":", "").replace("*", "").replace("&", "")#.replace("(", "").replace(")", "")#.replace('"', "")
+    wordParsed = wordToParse.replace("-", "").replace(":", "").replace("*", "").replace("&", "").replace("(", "").replace(")", "")#.replace('"', "")
     wordParsed = wordParsed.replace("%1%", '(').replace("%2%", ')')
 
     if not wordParsed: return ''
@@ -11698,6 +11706,11 @@ dictUnicodeHieroglyphs = {
     'Z15B': '𓏼',
     'Z15A': '𓏻',
     'Z15': '𓏺',
+    '5': '𓐃',
+    '4': '𓏽',
+    '3': '𓏼',
+    '2': '𓏻',
+    '1': '𓏺',
     'Z14': '𓏹',
     'Z13': '𓏸',
     'Z12': '𓏷',
@@ -11805,6 +11818,10 @@ dictUnicodeHieroglyphs = {
     'V20K': '𓎑',
     'V20J': '𓎐',
     'V20I': '𓎏',
+    '50': '𓎒',
+    '40': '𓎑',
+    '30': '𓎐',
+    '20': '𓎏',
     'V20H': '𓎎',
     'V20G': '𓎍',
     'V20F': '𓎌',
@@ -11814,6 +11831,7 @@ dictUnicodeHieroglyphs = {
     'V20B': '𓎈',
     'V20A': '𓎇',
     'V20': '𓎆',
+    '10': '𓎆',
     'V19': '𓎅',
     'V18': '𓎄',
     'V17': '𓎃',
@@ -11841,6 +11859,7 @@ dictUnicodeHieroglyphs = {
     'V2A': '𓍭',
     'V2': '𓍬',
     'V1I': '𓍫',
+    '500': '𓍫',
     'V1H': '𓍪',
     'V1G': '𓍩',
     'V1F': '𓍨',
@@ -11850,6 +11869,10 @@ dictUnicodeHieroglyphs = {
     'V1B': '𓍤',
     'V1A': '𓍣',
     'V1': '𓍢',
+    '400': '𓍥',
+    '300': '𓍤',
+    '200': '𓍣',
+    '100': '𓍢',
     'U42': '𓍡',
     'U41': '𓍠',
     'U40': '𓍟',
@@ -12273,6 +12296,11 @@ dictUnicodeHieroglyphs = {
     'M12B': '𓆾',
     'M12A': '𓆽',
     'M12': '𓆼',
+    '5000': '𓇀',
+    '4000': '𓆿',
+    '3000': '𓆾',
+    '2000': '𓆽',
+    '1000': '𓆼',
     'M11': '𓆻',
     'M10A': '𓆺',
     'M10': '𓆹',
@@ -12773,6 +12801,7 @@ dictUnicodeHieroglyphs = {
     '/': '//',
     '"?"': '?',
     '"¿"': '¿',
+    '"⸮"': '¿',
     '"lb"': '|',
     '<f': '𓊈',
     'f>': '𓊉',

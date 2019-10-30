@@ -49,7 +49,7 @@
 	<div class="row search-entries detail">
 		<div class="col-sm-12 col-lg-8 result">
             <p>Occurrences</p> 
-			<h2 class="id mt-1">Lemma ID {{params.lemma}} (<span class="bbaw-libertine">##transkr##{{params.transcription}}</span>)</h2> <!--## transcription wird nicht mitgeliefert -->
+			<h2 class="id mt-1">Lemma ID {{params.lemma}} <!--(<span class="bbaw-libertine">##transkr##{{params.transcription}}</span>)--></h2> <!--## transcription wird nicht mitgeliefert -->
 		</div>
         
         <div class="button-bar col-md-4 align-right align-baseline d-none d-lg-block">
@@ -123,23 +123,20 @@
                            &nbsp;
                         {% endif %}
                     </li>
-                    <li class="ling-glossing condensed">
-						<!--##ling.gloss##-->
-					    {% if token.flexion.numeric %}
-                           {{token.flexion.numeric|computeLingGlossing:token.lemma.id}}
-                        {% else %}
-                            &nbsp;
-                        {% endif %}
-					</li>
-                    <li class="bts-glossing condensed"> <!-- ##Achtung in 'glossing' steht BTS glossing, nicht ling. glossing  -->
+                    <li class="bts-glossing condensed"> 
                       {% if token.flexion %} 
                         {{token.flexion.verbal}}
-                      {% elif token.flexcode %}
-                        {{token.flexcode|verbalFlexcode}}
                       {% else %}
                         &nbsp;
                       {% endif %}
                     </li>
+                    <li class="ling-glossing condensed">
+					    {% if token.flexion.numeric %}
+                           {% computeLingGlossing token.flexion.numeric token.lemma.id token.lemma.pos %}
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+					</li>
                     <li class="token-translation condensed">
 					    {% if token.translations.de %}
  							{%for translation in token.translations.de %}
@@ -167,44 +164,44 @@
                     <!-- Hieroglyphs -->
                     <div class="hieroglyph">
                         {% for token in hit.sentence.tokens %}
-				{% if token.type == 'word' %}<a href="/lemma/{{token.lemma.id}}" target="_blank" title="Lemma ID {{token.lemma.id}}">{% endif %}
-					<span class="unicode-hieroglyphs {%if token.highlight%}highlight-{{token.highlight}}{%endif%}">
-						{% if token.glyphs %}
-							{{token.glyphs|MdC_Unicode_noControlChars|prettyUnicodeHieroglyphs}}
-						{% else %}
-							{% if token.type == 'destruction_marker' %}
-								<span class="philological">//...//</span>
-							{% endif %}
-							{% if token.type == 'lc' %}
-								<span class="philological">|</span>
-							{% endif %}
-						{% endif %}
-					</span>
-				{% if token.type == 'word' %}</a>{% endif %}
+							{% if token.type == 'word' %}<a href="/lemma/{{token.lemma.id}}" target="_blank" title="Lemma ID {{token.lemma.id}}">{% endif %}
+								<span class="unicode-hieroglyphs {%if token.highlight%}highlight-{{token.highlight}}{%endif%}">
+									{% if token.glyphs %}
+										{{token.glyphs|MdC_Unicode_noControlChars|prettyUnicodeHieroglyphs}}
+									{% else %}
+										{% if token.type == 'destruction_marker' %}
+											<span class="philological">//...//</span>
+										{% endif %}
+										{% if token.type == 'lc' %}
+											<span class="philological">|</span>
+										{% endif %}
+									{% endif %}
+								</span>
+							{% if token.type == 'word' %}</a>{% endif %}
                         {%endfor%}
 						<button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{%for token in hit.sentence.tokens%}{% if token.type == 'word'%}{{token.glyphs|MdC_Unicode_noControlChars}}{%else%}{{token.glyphs}}{%endif%}{%endfor%}');"><span class="fas fa-clipboard"></span>Copy Unicode</button>
 						<button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{%for token in hit.sentence.tokens%}{% if token.type == 'word'%}{{token.glyphs}}{%else%}+l{{token.glyphs}}+s{%endif%}{% if not forloop.last%}-{%endif%}{%endfor%}');"><span class="fas fa-clipboard"></span>Copy Manuel de Codage</button>
 
-						<br><span style="color:blue">##RES-Rendering##:
+						<!--<br><span style="color:blue">##RES-Rendering##:
                         <br>{% for token in hit.sentence.tokens %}
                         <span class="glyphbox">
-				{% if token.type == 'word' %}<a href="/lemma/{{token.lemma.id}}" target="_blank">{%endif%}
-				<canvas class="res occ-tok-glyphs mb-2 {%if token.highlight%}highlight-{{token.highlight}}{%endif%}" style="font-size: 2.1em;"   title="{{token.glyphs}}">
-					{% if token.glyphs %}
-						{{token.glyphs|MdCtoRES}}
-					{% else %}
-						{% if token.type == 'destruction_marker' %}
-							empty[width=0.5,shade]-"."-"."-empty[width=0.5,shade]
-						{% endif %}
-						{% if token.type == 'lc' %}
-							"|"[gray]^"lb"[gray]
-						{% endif %}
-					{% endif %}
-				</canvas>
-				{% if token.type == 'word' %}</a>{%endif%}
+							{% if token.type == 'word' %}<a href="/lemma/{{token.lemma.id}}" target="_blank">{%endif%}
+							<canvas class="res occ-tok-glyphs mb-2 {%if token.highlight%}highlight-{{token.highlight}}{%endif%}" style="font-size: 2.1em;"   title="{{token.glyphs}}">
+								{% if token.glyphs %}
+									{{token.glyphs|MdCtoRES}}
+								{% else %}
+									{% if token.type == 'destruction_marker' %}
+										empty[width=0.5,shade]-"."-"."-empty[width=0.5,shade]
+									{% endif %}
+									{% if token.type == 'lc' %}
+										"|"[gray]^"lb"[gray]
+									{% endif %}
+								{% endif %}
+							</canvas>
+							{% if token.type == 'word' %}</a>{%endif%}
                         </span>
                         {%endfor%} 
-						</span>
+						</span>-->
 
                     </div>
  
@@ -242,76 +239,54 @@
 						<p class="translation-any"><span class="lang-icon">FR</span> {{translation|formatInTranslation}}</p>
 					{% endfor %}
 				{% endif %}
-			</div>
-			<!-- alt: ein/ausblendbar 
-			<div class="translations">
-				<!-- Translation DE -- >
-				{% if hit.sentence.translations.de %}
-					{% for translation in hit.sentence.translations.de %}
-						<p class="translation-de"><span class="lang-icon">DE</span> {{translation}}</p>
-					{% endfor %}
-				{% else %}
-						<p class="translation-de"><span class="lang-icon">DE</span> &mdash;</p>
-				{% endif %}
-				<!-- Translation EN  -- >				
-				{% if hit.sentence.translations.en %}
-					{% for translation in hit.sentence.translations.en %}
-						<p class="translation-en"><span class="lang-icon">EN</span> {{translation}}</p>
-					{% endfor %}
-				{% else %}
-						<p class="translation-en"><span class="lang-icon">EN</span> &mdash;</p>
-				{% endif %}
-				<!-- Translation FR -- >
-				{% if hit.sentence.translations.fr %}
-					{% for translation in hit.sentence.translations.fr %}
-						<p class="translation-fr"><span class="lang-icon">FR</span> {{translation}}</p>
-					{% endfor %}
-				{% else %}
-						<p class="translation-fr"><span class="lang-icon">FR</span> &mdash;</p>
-				{% endif %}
-			</div>-->			
+			</div>			
 			
-				<div class="corpus-paths mt-2">
-					{%for path in hit.text.paths%}
-					<div class="corpus-path">
-					    {%for object in path%}
-						<div id="{{hit.text.id}}-{{object.id}}" class="corpus-path-element">
-							{%if forloop.first%}
-							<!--<a href="{{object.url}}">-->
-								{{object.name}}
-                                <i class="fas fa-arrow-circle-right"></i> 
-							<!--</a>-->
-							{%elif forloop.last %}
-							<!--<a href="{{object.url}}">-->
-								{{object.name}}
-                                <i class="fas fa-arrow-circle-right"></i>
-							<!--</a>-->
-							{%elif forloop.revcounter == 3  %}
-								<!-- mittlere Fälle -->
-								<span class="hide-dots"><button class="btn btn-light btn-sm text-left text-decoration-none show-corpus-path">&gt;...&lt;&nbsp;&nbsp;<i class="fas fa-arrow-circle-right"></i></button></span>
-                            {%else%}
-							<!--<a href="{{object.url}}">-->
-								<span class="corpus-path-all hide">{{object.name}} <i class="fas fa-arrow-circle-right"></i></span>                                                         
-							<!--</a>-->                         						
-							{%endif%}
-     
-						</div>
-						{%endfor%}
-						<span class="lc">
-							<!--<a href="#">-->
-								 {{hit.occurrence.line|niceLineCount}}
-							<!--</a>-->
-						</span>
-                        
+			<div class="corpus-paths mt-2">
+				{%for path in hit.text.paths%}
+				<div class="corpus-path">
+					{%for object in path%}
+					<div id="{{hit.text.id}}-{{object.id}}" class="corpus-path-element">
+						{%if forloop.first%}
+						<!--<a href="{{object.url}}">-->
+							{{object.name|formatInTranslation}}
+							<i class="fas fa-arrow-circle-right"></i> 
+						<!--</a>-->
+						{%elif forloop.last %}
+						<!--<a href="{{object.url}}">-->
+							{{object.name|formatInTranslation}}
+							<i class="fas fa-arrow-circle-right"></i>
+						<!--</a>-->
+						{%elif forloop.revcounter == 3  %}
+							<!-- mittlere Fälle -->
+							<span class="hide-dots"><button class="btn btn-light btn-sm text-left text-decoration-none show-corpus-path">&gt;...&lt;&nbsp;&nbsp;<i class="fas fa-arrow-circle-right"></i></button></span>
+						{%else%}
+						<!--<a href="{{object.url}}">-->
+							<span class="corpus-path-all hide">{{object.name|formatInTranslation}} <i class="fas fa-arrow-circle-right"></i></span
+						<!--</a>-->                         						
+						{%endif%}
+ 
 					</div>
-					<p class="sentence-id-button"><button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{{hit.sentence.id}}')"><span class="far fa-clipboard"></span>Copy sentence ID</button></p>
 					{%endfor%}
-				</div>	
-				
-				<div class="text-data mt-2">
-					<p class="text-date"><strong>Date</strong>: {{hit.date}}</p>
-					<p class="text-editor"><strong>Principle editor</strong>: {{hit.editor}} ({{hit.dateEdited}})</p>
+					<span class="lc">
+						<!--<a href="#">-->
+							 line {{hit.occurrence.location.line}}
+						<!--</a>-->
+					</span>
+					
 				</div>
+				<p class="sentence-id-button"><button type="button" class="btn btn-light btn-sm text-left text-decoration-none copy-to-clipboard-btn" onclick="copyStringToClipboard('{{hit.sentence.id}}')"><span class="far fa-clipboard"></span>Copy sentence ID</button></p>
+				{%endfor%}
+			</div>	
+			
+			<div class="text-data mt-2">
+				<p class="text-date"><strong>Date</strong>: {{hit.date}}</p>
+				<p class="text-editor"><strong>Editor(s)</strong>: 
+					{{hit.text.editors.author}} 
+					{% for contributor in hit.text.editors.contributors %}
+						, {{contributor}}
+					{% endfor %}
+					({{hit.text.editors.updated}})</p>
+			</div>
 							
 			
          </div> <!--.Treffer -->
@@ -342,8 +317,8 @@
 				
                 <div class="indented-buttons indented-buttons-annotation hide">
                     <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-class-btn"><i class="fas"></i>Word class</button>
+                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail bts-glossing-btn"><i class="fas"></i>TLA glossing</button>
                     <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail ling-glossing-btn"><i class="fas"></i>Linguistic glossing</button>
-                    <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail bts-glossing-btn"><i class="fas"></i>TLA flexcode</button>
                     <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail token-translation-btn"><i class="fas"></i>Token translation</button>
                     <button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-id-btn "><i class="fas"></i>Word token ID</button>
 				</div>	
@@ -397,8 +372,8 @@
 			<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail anno-block-btn"><i class="fas"></i>Switch annotation/block view</button>
 			<div class="indented-buttons indented-buttons-annotation hide">
 				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-class-btn"><i class="fas"></i>Word class</button>
+				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail bts-glossing-btn"><i class="fas"></i>TLA glossing</button>
 				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail ling-glossing-btn"><i class="fas"></i>Linguistic glossing</button>
-				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail bts-glossing-btn"><i class="fas"></i>TLA flexcodes</button>
 				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail token-translation-btn"><i class="fas"></i>Token translation</button>
 				<button type="button" class="btn btn-block btn-secondary text-left text-decoration-none show-detail word-id-btn "><i class="fas"></i>Word token ID</button>
 			</div>	
