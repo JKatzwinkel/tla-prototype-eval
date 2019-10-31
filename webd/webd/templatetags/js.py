@@ -271,8 +271,6 @@ nicePOSDict = {
     "undefined": "(undefined)",
     "verb": "verb",
 }
-
-
 @register.filter(is_safe=True)
 def nicePOS(name):
     """ takes a string containing a lemma's type and optionally its subtype,
@@ -338,8 +336,6 @@ niceSubPOSDict = {
     "verb_caus_5-lit": "caus. 5 lit.",
     "verb_irr": "irregular",
 }
-
-
 @register.filter(is_safe=True)
 def niceSubPOS(name):
     return niceSubPOSDict.get(
@@ -10683,7 +10679,6 @@ def computeLingGlossing(flexcode, lemmaID, pos_dot_subpos):
     
     # ling. Glossierung aus LemmaID (Pronomina, u.a)
     glossing = lingGlossFromLemmaID(lemmaID)
-    print(glossing)
     if glossing != '':
         return glossing
     

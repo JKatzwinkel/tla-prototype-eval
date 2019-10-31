@@ -161,7 +161,7 @@
 				{% endfor %}
                 </p>
                 
-		<p><strong>Time:</strong> {% if lemma.time_span %}from {{lemma.time_span.begin|niceYear}} until {{lemma.time_span.end|niceYear}}{%endif%}</p> <!--## Werte noch nicht mitgeliefert -->
+				<p><strong>Attestation time in digital corpus:</strong> {% if lemma.time_span %}from {{lemma.time_span.begin|niceYear}}–{{lemma.time_span.end|niceYear}}{%endif%}</p> 
 			</div> 
 			
 			<!-- Bibliographie -->
@@ -244,13 +244,13 @@
 			<!-- Lemma Relations -->
 			<div class="relations">
 				<hr>
-				<p class="relations"><strong>Lemma Relations</strong></p><!-- ## Werden schon alle Relationen mitgeliefert? -->
+				<p class="relations"><strong>Lemma Relations</strong></p>
 				{% if lemma.relations %} <!--# Abfrage, ob überhaupt welche enthalten sind, stimmt nicht -->
 					{% for where, hits in lemma.relations.items %}
 					<p><strong>{{where|niceRelationName}}</strong></p>
 						{% for hit in hits %}
 						<div class="result-list"> <!-- ##identisch mit der in dict.html => ausgliedern? -->						
-							<div class="result-list-item indent-1 {% if hit.revisionState == 'published-obsolete' %}notok{% endif %}"> <!-- indent functioniert nicht -->
+							<div class="result-list-item indent-1 {% if hit.revisionState == 'published-obsolete' %}notok{% endif %}"> 
 								
 								<div class="lemma-rel {{where}}"></div> <!-- lemma-beziehung -->
 								
@@ -274,21 +274,21 @@
 										</h2>
 										<!-- Hieroglyph -->
 										{% if not hit.id|isDemotic %}
+											<!-- ##Variable noch nicht verfügbar
 											<span class="hieroglyph">
-												#hiero# <!-- ##Variable noch nicht verfügbar -->
 												{% for word in hit.words %}
 													{% if word.glyphs %}
-														<!--<span class="glyphbox">
+														<! --<span class="glyphbox">
 															<canvas class="res" style="font-size: 20px; vertical-align: -5px;" title="{{word.glyphs}}">
 																{{word.glyphs}}
 															</canvas>
-														</span>-->
+														</span>-- >
 														<span class="unicode-hieroglyphs">
 															{{word.glyphs|MdC_Unicode_noControlChars|prettyUnicodeHieroglyphs}}
 														</span>
 													{% endif %}
 												{% endfor %}
-											</span>
+											</span> -->
 										{% else %}
 											<span class="subcorpus">Demotic</span>
 										{% endif %}
@@ -305,7 +305,7 @@
 										<span class="word-class">
 											<strong>
 												<span class="font-italic word-class-type">{{hit.type|nicePOS}}
-												##subtype##{%if hit.subtype%}({{hit.subtype|niceSubPOS}}){%endif%}</span>
+												{%if hit.subtype%}({{hit.subtype|niceSubPOS}}){%endif%}</span>
 											</strong>
 										</span>
 										
@@ -345,10 +345,10 @@
 										</span>	
 							   
 										<!-- Attestation time -->
-										<span class="attestation-time">(#att.time#{{hit.xxx}})</span> <!-- ##Variable noch nicht verfügbar -->
+										<!-- <span class="attestation-time">[{{hit.xxx}}]</span> ##Variable noch nicht verfügbar -->
 										
 										<!-- Bibliography -->
-										<span class="bibliography-list">(#bibl#{{hit.bibliography}})</span> <!-- ##Variable noch nicht verfügbar -->
+										<!-- <span class="bibliography-list">({{hit.bibliography}})</span> ##Variable noch nicht verfügbar -->
 									</div>
 								</div> 
 							<hr>
@@ -366,7 +366,6 @@
 							, {{contributor}}
 						{% endfor %}
 				    <br><strong>Last Revision:</strong> {{ lemma.editors.updated }}
-				    <!--<br><strong>Protocoll:</strong> ##protocoll##{{ lemma.xxx }}-->
 				    <br><strong>Review State:</strong> {{ lemma.revisionState|niceReviewState }}
                  </p>
 				</div>

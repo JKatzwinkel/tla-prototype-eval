@@ -81,6 +81,7 @@
             <div class="container-annotation mt-2 mb-2">
                 {% for token in hit.sentence.tokens %}
                 <ul class="annotation-block {%if token.highlight%}highlight-{{token.highlight}}{%endif%}">
+					{% if not hit.occurrence.lemma.id|isDemotic %}
                     <li class="hieroglyph" {% if token.type == 'word' %}onclick="window.open('/lemma/{{token.lemma.id}}','_blank')"{% endif %}>
                         <!--<canvas class="res occ-tok-glyphs" style="font-size: 20px; vertical-align: -5px;"  title="{{token.glyphs}}">
                         {% if token.glyphs %}
@@ -109,6 +110,7 @@
 						{% endif %}
                         </span>
 					</li>
+					{% endif %}
                     <li class="transcription {%if token.type == 'destruction_marker'%}token-destruction_marker{%endif%} {%if token.type == 'lc'%}token-lc{%endif%}" {% if token.type == 'word' %}onclick="window.open('/lemma/{{token.lemma.id}}','_blank')"{% endif %}>
 					    {% if token.label %}
                            {{token.label|niceTransliteration}}
@@ -162,6 +164,7 @@
             <div class="container-annotation-switch-lines">
                 
                     <!-- Hieroglyphs -->
+					{% if not hit.occurrence.lemma.id|isDemotic %}
                     <div class="hieroglyph">
                         {% for token in hit.sentence.tokens %}
 							{% if token.type == 'word' %}<a href="/lemma/{{token.lemma.id}}" target="_blank" title="Lemma ID {{token.lemma.id}}">{% endif %}
@@ -202,8 +205,8 @@
                         </span>
                         {%endfor%} 
 						</span>-->
-
                     </div>
+					{% endif %}
  
                     <!-- Transliteration -->
                     <h3 class="word bbaw-libertine mb-2">
@@ -261,7 +264,7 @@
 							<span class="hide-dots"><button class="btn btn-light btn-sm text-left text-decoration-none show-corpus-path">&gt;...&lt;&nbsp;&nbsp;<i class="fas fa-arrow-circle-right"></i></button></span>
 						{%else%}
 						<!--<a href="{{object.url}}">-->
-							<span class="corpus-path-all hide">{{object.name|formatInTranslation}} <i class="fas fa-arrow-circle-right"></i></span
+							<span class="corpus-path-all hide">{{object.name|formatInTranslation}} <i class="fas fa-arrow-circle-right"></i></span>
 						<!--</a>-->                         						
 						{%endif%}
  

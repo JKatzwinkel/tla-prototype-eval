@@ -14,7 +14,6 @@ from .forms import (
 import store
 from detail import views as detail_views
 
-# zu Testzwecken erhöhen
 RESULTS_PER_PAGE = 24 
 
 WORD_CLASSES = {
@@ -97,10 +96,7 @@ def build_query(*clauses, fields=None):
                 "must": [],
                 "must_not": [],
             } 
-        }#,
-       #"sort" : [
-       #     {"name" : {"order" : "asc", "mode" : "avg"}}
-       #     ]
+        }
     }
     if fields is not None and type(fields) is list:
         query["_source"] = fields
@@ -332,7 +328,6 @@ def dict_search_query(**params):
             build_query(*clauses),
             params.get('sort_order', []),
     )
-    #print(q)
     return q
 
 
@@ -378,13 +373,12 @@ def textword_search_query(**params):
                 )
     if 'sentence_id' in params:
         sentence_id = params.get('sentence_id')[0]
-        print(sentence_id)
         sentence_id = sentence_id.strip()
         if sentence_id != '':
             clauses.append(
                 {
                     "term": {
-                        "id": sentence_id.lower(),
+                        "id": sentence_id,
                     }
                 }
             )
@@ -478,7 +472,7 @@ def populate_textword_occurrences(hits, **params):
     """
     occurrences = []
     filters = {
-        k: params.get(k) for k in ["lemma", "transcription", "hieroglyphs"]
+        k: params.get(k) for k in ["lemma", "transcription", "hieroglyphs", "sentence_id"]
     }
     for hit in hits:
         sentence = store.get(
@@ -747,10 +741,13 @@ def search_lemma(lemma_id):
     clauses = []
 
     lemma_id = lemma_id.strip()
+    print(lemma_id)
+    print('---')
+    print(lemma_id)
     if lemma_id != '':
         clauses.append(
             {
-                "term": {
+                "match": {
                     "id": lemma_id,
                 }
             }
