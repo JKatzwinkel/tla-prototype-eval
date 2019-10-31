@@ -865,11 +865,11 @@ span.multiselect-native-select select {
 .rootOf:before {content: "Root of";}
 .predecessor:before {content: "Pred.";}
 .successor:before {content: "Succ.";}     
-.referencing:before {content: "Now";}
-.referencedBy:before {content: "Prev.";}   /* Previously */
+.referencing:before {content: "Subst.";}   /* Substitute */
+.referencedBy:before {content: "Obs.";}   /* Obsolete */
 .composedOf:before {content: "Part";} 
 .composes:before {content: "Part of";}   /* Achtung: Label 'Part of' nicht verwechseln mit Var. partOf */
-.contains:before {content: "Sub.";}     /* Subordinates */
+.contains:before {content: "Subord.";}     /* Subordinates */
 .partOf:before {content: "Super.";}  /* Superordinates */
 
 
