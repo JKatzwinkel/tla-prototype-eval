@@ -143,7 +143,7 @@ def include_sort_order(query: dict, param: list) -> dict:
     if sort_order in ["alph_asc", "alph_desc"]:
         query["sort"] = [
             {
-                "sort_string.keyword": {
+                "sortKey": {
                     "order": qualifier,
                 }
             },
@@ -341,7 +341,7 @@ def textword_search_query(**params):
             [
                 {
                     'term': {
-                        'lemma.id': lemma
+                        'tokens.lemma.id': lemma
                     }
                 }
                 for lemma in params['lemma']
@@ -354,7 +354,7 @@ def textword_search_query(**params):
                 [
                     {
                         'match': {
-                            'translations.{}'.format(lang): params.get('translation')[-1]
+                            'tokens.translations.{}'.format(lang): params.get('translation')[-1]
                         }
                     }
                     for lang in params.get('trans_lang', [])
@@ -367,7 +367,7 @@ def textword_search_query(**params):
                 clauses.append(
                     {
                         'match': {
-                            'glyphs': glyph
+                            'tokens.glyphs': glyph
                         }
                     }
                 )
@@ -455,8 +455,8 @@ def search_textword_occurrences(offset=1, size=RESULTS_PER_PAGE, **params):
             }
         )
     hits = store.search(
-        'occurrence',
-        occurrences_query,
+        'sentence',
+        {'query':{'nested':{'path':'tokens','query':occurrences_query['query']}}},
         offset=offset,
         size=size,
     )
@@ -475,10 +475,7 @@ def populate_textword_occurrences(hits, **params):
         k: params.get(k) for k in ["lemma", "transcription", "hieroglyphs", "sentence_id"]
     }
     for hit in hits:
-        sentence = store.get(
-            'sentence',
-            hit.get('location', {}).get('sentence')
-        )
+        sentence = hit
         for i, token in enumerate(sentence['tokens']):
             if token.get('id') == hit['id']:
                 token['highlight'] = 1
@@ -508,7 +505,7 @@ def populate_textword_occurrences(hits, **params):
                     token['highlight'] = 2
         text = store.get(
             'text',
-            hit.get('location', {}).get('text'),
+            hit.get('context', {}).get('textId'),
         )
         if text:
             print('text id', text['id'])
@@ -706,7 +703,7 @@ def search_dict(request):
         offset=offset,
         size=RESULTS_PER_PAGE,
     )
-    count = hits.get('total')
+    count = hits.get('total', {}).get('value')
     hits = store.hits_contents(hits)
     hits = hit_tree(hits)
     return render(
@@ -776,7 +773,7 @@ def search_text_words(request):
         size=RESULTS_PER_PAGE,
         **params,
     )
-    count = hits.get('total', 0)
+    count = hits.get('total', {}).get('value', 0)
     hits = store.hits_contents(hits)
     hits = populate_textword_occurrences(hits, **params)
     return render(
