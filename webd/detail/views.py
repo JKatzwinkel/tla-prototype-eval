@@ -69,7 +69,7 @@ def render_annotations(annos):
         anno['body'] = mark_safe(tag_transcription(textcontent))
         anno['title'] = mark_safe(tag_transcription(anno['title']))
     return annos
-    
+
 tlaTitle = "Thesaurus Linguae Aegyptiae"
 tlaVersion = "19"
 tlaIssue = "beta"
@@ -108,7 +108,7 @@ def coins_openurl_kev(doc):
 
 @require_http_methods(["GET"])
 def lemma_details_page(request, lemma_id):
-    lemma = store.get('wlist', lemma_id)
+    lemma = store.get('lemma', lemma_id)
     bibl = glom(
         lemma,
         Coalesce(

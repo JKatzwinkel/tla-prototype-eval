@@ -701,7 +701,7 @@ def search_dict(request):
     offset = (page - 1) * RESULTS_PER_PAGE
     sort_order = params.get('sort_order', 'alph_asc')
     hits = store.search(
-        'wlist',
+        'lemma',
         dict_search_query(**params),
         offset=offset,
         size=RESULTS_PER_PAGE,
@@ -756,11 +756,11 @@ def search_lemma(lemma_id):
     print(q)
 
     hit = store.search(
-        'wlist',
+        'lemma',
         q,
         size=1,
     )
-    
+
     print(hit)
     return hit
 
