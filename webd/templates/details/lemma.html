@@ -182,7 +182,7 @@
 				<p><strong>External references</strong></p>             
 				{% for provider, references in lemma.externalReferences.items %}
 					{% for reference in references %}
-						{% if reference|isURL %}
+						{% if reference %}
 						<a href="{{reference}}" target="_blank">
 							<button type="button" class="btn btn-red text-left text-decoration-none">
 								<span class="fas fa-arrow-circle-right"></span>{{provider}}&nbsp;<em>{{reference}}</em>

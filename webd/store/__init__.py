@@ -90,7 +90,6 @@ def get(index, _id):
     try:
         res = es.get(
             index=index,
-            doc_type=index,
             id=_id,
         )
         if res:

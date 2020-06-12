@@ -20,12 +20,17 @@ def tag_transcription(string):
 
 def occurrence_count(lemma_id):
     count = store.es.count(
-        index="occurrence",
+        index="sentence",
         body={
             "query": {
-                "term": {
-                    "lemma.id": lemma_id,
-                },
+                "nested": {
+                    "path": "tokens",
+                    "query": {
+                        "term": {
+                            "tokens.lemma.id": lemma_id,
+                        }
+                    }
+                }
             }
         }
     ).get('count', 0)
@@ -67,7 +72,7 @@ def render_annotations(annos):
             textcontent
         )
         anno['body'] = mark_safe(tag_transcription(textcontent))
-        anno['title'] = mark_safe(tag_transcription(anno['title']))
+        anno['name'] = mark_safe(tag_transcription(anno.get('name', '')))
     return annos
     
 tlaTitle = "Thesaurus Linguae Aegyptiae"
@@ -108,7 +113,7 @@ def coins_openurl_kev(doc):
 
 @require_http_methods(["GET"])
 def lemma_details_page(request, lemma_id):
-    lemma = store.get('wlist', lemma_id)
+    lemma = store.get('lemma', lemma_id)
     bibl = glom(
         lemma,
         Coalesce(
@@ -128,7 +133,7 @@ def lemma_details_page(request, lemma_id):
             relation
             for relation in relations
             if relation.get('eclass') == 'BTSLemmaEntry'
-        ] for predicate, relations in lemma['relations'].items()
+        ] for predicate, relations in lemma.get('relations', {}).items()
     }
     return render(
         request,

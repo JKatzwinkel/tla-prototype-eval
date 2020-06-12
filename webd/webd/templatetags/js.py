@@ -280,7 +280,10 @@ def nicePOS(name):
     - ``'{type_label}'``
     - ``'{type_label} ({subtype_label})'``
     """
-    lemma_pos_identifiers = name.split('.')
+    lemma_pos_identifiers = [
+        name.get(key, '')
+        for key in ['type', 'subtype']
+    ]
     res = nicePOSDict.get(
         *[lemma_pos_identifiers[0]]*2
     )
@@ -10486,13 +10489,7 @@ lingGlossFromLemmaIDDict = {
     "78900": "gen",
     }
 def lingGlossFromLemmaID(lemmaID):
-    if lemmaID != '':
-        lingGloss = lingGlossFromLemmaIDDict.get(lemmaID)
-    
-    if lingGloss:
-        return lingGloss
-    else:
-        return ''
+    return lingGlossFromLemmaIDDict.get(lemmaID)
 
 
 def stateFromSuffix (flexcode):
@@ -10672,10 +10669,10 @@ def computeLingGlossing(flexcode, lemmaID, pos_dot_subpos):
     sub_pos =''    
         
     if pos_dot_subpos:
-        posParts = pos_dot_subpos.split('.')
-        pos = posParts[0]
+        posParts = pos_dot_subpos
+        pos = posParts.get('type')
         if len(posParts) > 1:
-            sub_pos = posParts[1]
+            sub_pos = posParts.get('subtype')
     
     # ling. Glossierung aus LemmaID (Pronomina, u.a)
     glossing = lingGlossFromLemmaID(lemmaID)
