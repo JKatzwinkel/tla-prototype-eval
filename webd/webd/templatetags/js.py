@@ -280,6 +280,8 @@ def nicePOS(name):
     - ``'{type_label}'``
     - ``'{type_label} ({subtype_label})'``
     """
+    if type(name) is not dict:
+        return ''
     lemma_pos_identifiers = [
         name.get(key, '')
         for key in ['type', 'subtype']
