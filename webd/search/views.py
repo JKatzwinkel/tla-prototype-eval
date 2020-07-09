@@ -143,7 +143,7 @@ def include_sort_order(query: dict, param: list) -> dict:
     if sort_order in ["alph_asc", "alph_desc"]:
         query["sort"] = [
             {
-                "sortKey": {
+                "sortKey.keyword": {
                     "order": qualifier,
                 }
             },
@@ -341,7 +341,7 @@ def textword_search_query(**params):
             [
                 {
                     'term': {
-                        'tokens.lemma.id': lemma
+                        'tokens.lemma.id.keyword': lemma
                     }
                 }
                 for lemma in params['lemma']
@@ -456,7 +456,7 @@ def search_textword_occurrences(offset=1, size=RESULTS_PER_PAGE, **params):
         )
     hits = store.search(
         'sentence',
-        {'query':{'nested':{'path':'tokens','query':occurrences_query['query']}}},
+        {'query':occurrences_query['query']},
         offset=offset,
         size=size,
     )

@@ -23,15 +23,10 @@ def occurrence_count(lemma_id):
         index="sentence",
         body={
             "query": {
-                "nested": {
-                    "path": "tokens",
-                    "query": {
                         "term": {
                             "tokens.lemma.id": lemma_id,
                         }
                     }
-                }
-            }
         }
     ).get('count', 0)
     return count
