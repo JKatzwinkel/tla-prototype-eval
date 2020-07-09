@@ -10668,19 +10668,19 @@ def stemType (sub_pos):
 def computeLingGlossing(flexcode, lemmaID, pos_dot_subpos):
     logFile = None # kein Error Log ausgeben
     pos = ''
-    sub_pos =''    
-        
+    sub_pos =''
+
     if pos_dot_subpos:
         posParts = pos_dot_subpos
         pos = posParts.get('type')
         if len(posParts) > 1:
             sub_pos = posParts.get('subtype')
-    
+
     # ling. Glossierung aus LemmaID (Pronomina, u.a)
     glossing = lingGlossFromLemmaID(lemmaID)
-    if glossing != '':
+    if glossing:
         return glossing
-    
+
     # ling. Glossierung aus flexcode
     glossing = ''
     try:
