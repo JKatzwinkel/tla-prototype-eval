@@ -1,18 +1,19 @@
 from setuptools import setup, find_packages
 
-VERSION = "0.0.300"
+VERSION = "0.1.0"
 
 setup(
-        name='aaew-tla-lite',
-        version=VERSION,
-        packages=find_packages(),
-        scripts=[
-            'manage.py',
-            ],
-        install_requires=[
-            "elasticsearch>=6.0.0,<7.0.0",
-            "glom>=19.2.0",
-            "django",
-            "django-extensions",
-            ],
-        )
+    name='tla-prototype',
+    version=VERSION,
+    packages=find_packages(),
+    scripts=[
+        'manage.py',
+    ],
+    install_requires=[
+        "elasticsearch>=7.0.0",
+        "glom>=19.2.0",
+        "django",
+        "django-extensions",
+        "aaew-linggloss @ git+https://github.com/JKatzwinkel/aaew-linggloss.git@master",
+    ],
+)

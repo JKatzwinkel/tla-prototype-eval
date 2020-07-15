@@ -3,4 +3,4 @@ __pycache__
 webd/static/vendor/resjs
 occurrence_query.json
 webd/db.sqlite3
-resources/scripts/entrypoint.sh
+resources/corpus/

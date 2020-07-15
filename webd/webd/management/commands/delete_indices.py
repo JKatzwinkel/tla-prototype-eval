@@ -14,9 +14,9 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         for doc_type in [
-            'wlist',
+            'lemma',
+            'ths',
             'text',
-            'occurrence',
             'annotation',
             'object',
             'sentence',

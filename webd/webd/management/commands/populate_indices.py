@@ -68,7 +68,6 @@ class Indexer(object):
             {
                 "_op_type": "index",
                 "_index": self.index,
-                "_type": self.index,
                 "_id": doc.get("id"),
                 "_source": doc,
             }
@@ -162,9 +161,9 @@ class Command(BaseCommand):
         except:
             pass
         for doc_type in [
-            'wlist',
+            'ths',
+            'lemma',
             'text',
-            'occurrence',
             'annotation',
             'object',
             'sentence',
@@ -172,7 +171,7 @@ class Command(BaseCommand):
             index_folder_contents(
                 os.path.join(
                     'corpus',
-                    'sample',
+                    'full',
                     doc_type
                 )
             )

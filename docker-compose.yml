@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   es:
-    image: elasticsearch:6.5.4
+    image: elasticsearch:7.7.1
     ports:
       - ${ES_PORT}:9200
     environment:
@@ -12,21 +12,14 @@ services:
     stdin_open: true
     tty: true
 
-  tla:
+  populate:
     build:
       context: .
-      args:
-        sample_url: ${SAMPLE_URL}
     depends_on:
       - es
     ports:
       - ${LISTEN_PORT}:8000
     environment:
       ES_URL: http://es:9200
-    volumes:
-      - type: bind
-        source: "./webd"
-        target: /app/webd
-        volume:
-          nocopy: true
-          consistency: consistent
+      SAMPLE_URL: ${SAMPLE_URL}
+    command: "ingest"
