@@ -1,3 +1,5 @@
+---
+
 version: "3.7"
 
 services:
@@ -17,9 +19,19 @@ services:
       context: .
     depends_on:
       - es
-    ports:
-      - ${LISTEN_PORT}:8000
     environment:
       ES_URL: http://es:9200
       SAMPLE_URL: ${SAMPLE_URL}
     command: "ingest"
+
+  app:
+    build:
+      context: .
+    depends_on:
+      - populate
+    ports:
+      - ${LISTEN_PORT}:8000
+    environment:
+      ES_URL: http://es:9200
+
+...
