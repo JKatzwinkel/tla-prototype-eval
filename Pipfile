@@ -8,6 +8,7 @@ django-extensions = "==2.0.7"
 django = "*"
 elasticsearch = ">=6.0.0,<7.0.0"
 glom = ">=19.2.0"
+aaew-linggloss-9999 = {git = "https://github.com/jkatzwinkel/aaew-linggloss.git",ref = "master"}
 
 [dev-packages]
 ipython = "*"
