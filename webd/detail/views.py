@@ -1,6 +1,9 @@
+import os
 import re
+import json
 from datetime import datetime
 
+from django.conf import settings
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 from django.utils.http import urlencode
@@ -9,6 +12,15 @@ from django.utils.safestring import mark_safe
 from glom import glom, Coalesce, flatten
 
 import store
+
+with open(
+    os.path.join(
+        settings.MEDIA_ROOT,
+        'link-formatters.json'
+    ), 'r'
+) as f:
+    EXT_REF_FORMATTERS = json.load(f)
+
 
 def tag_transcription(string):
     return re.sub(
@@ -106,6 +118,63 @@ def coins_openurl_kev(doc):
     return coins_kev
 
 
+def create_ext_ref_link(provider, url, text):
+    if url:
+        return '''
+        <a href="{url}" target="_blank">
+            <button type="button" class="btn btn-red text-left text-decoration-none">
+                <span class="fas fa-arrow-circle-right"></span>
+                {provider}&nbsp;
+                <em>
+                    {text}
+                </em>
+            </button>
+        </a>
+        '''.format(
+            provider=provider,
+            url=url,
+            text=text,
+        )
+    else:
+        return '''
+        <span class="fas fa-arrow-circle-right"></span>{provider}&nbsp;<em>{text}</em> &emsp;
+        '''.format(
+            provider=provider,
+            text=text,
+        )
+
+
+def format_ext_refs(provider, references):
+    formatter = EXT_REF_FORMATTERS.get(provider)
+    ext_refs = []
+    for ref in references:
+        if formatter:
+            if 'type-formats' in formatter:
+                variant = ref.get('type')
+                if variant not in formatter['type-formats']:
+                    variant = 'default'
+                ext_refs += [
+                    create_ext_ref_link(
+                        provider,
+                        formatter['type-formats'][variant].format(id=ref['id']),
+                        ref['id']
+                    )
+                ]
+            elif 'default-format' in formatter:
+                ext_refs += [
+                    create_ext_ref_link(
+                        provider,
+                        formatter['default-format'].format(id=ref['id']),
+                        ref['id']
+                    )
+                ]
+            else:
+                ext_refs += [create_ext_ref_link(provider, None, ref['id'])]
+        else:
+            ext_refs += [create_ext_ref_link(provider, None, ref['id'])]
+    return ext_refs
+
+
 @require_http_methods(["GET"])
 def lemma_details_page(request, lemma_id):
     lemma = store.get('lemma', lemma_id)
@@ -136,6 +205,10 @@ def lemma_details_page(request, lemma_id):
         {
             'lemma': lemma,
             'bibl': bibl,
+            'ext': {
+                provider: format_ext_refs(provider, refs)
+                for provider, refs in lemma.get('externalReferences', {}).items()
+            },
             'coins': coins_openurl_kev(lemma),
             'occurrences': {
                 'corpus': occurrence_count(lemma_id),

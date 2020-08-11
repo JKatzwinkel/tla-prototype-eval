@@ -9,6 +9,7 @@ django = "*"
 elasticsearch = "==7.7.1"
 glom = ">=19.2.0"
 aaew-linggloss-9999 = {git = "https://github.com/jkatzwinkel/aaew-linggloss.git",ref = "master"}
+pyyaml = "*"
 
 [dev-packages]
 ipython = "*"

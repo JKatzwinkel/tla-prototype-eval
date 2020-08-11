@@ -353,29 +353,6 @@ def niceSubPOS(name):
 
 
 @register.filter(is_safe=True)
-def isURL(ref):       
-    if ref[0:4] == 'http': 
-        return True
-    return False   
-    
-# obsolete
-@register.filter(is_safe=True)
-def linkFromExternalReference(ref, where):
-    if where == 'aaew_wcn':
-        if int(ref) >= 0: # ##: Problem: nicht Demotisch oder Demotisch
-            ref = 'http://aaew.bbaw.de/tla/servlet/GetWcnDetails?u=guest&f=0&l=0&wn='+str(ref)+'&db=0'
-            #DZA: ref = 'http://aaew.bbaw.de/tla/servlet/DzaBrowser?u=guest&f=0&l=0&wn='+str(ref)
-        elif int(ref) < 0: # Demotisch
-            ref = 'http://aaew.bbaw.de/tla/servlet/GetWcnDetails?u=guest&f=0&l=0&wn='+str(ref)+'&db=1'
-
-    # ## weitere hinzufügen
-        
-    if ref[0:4] != 'http': # falls nun keine URL, dann '' zurückgeben
-        ref = ''
-    return ref   
-# obsolete
-
-@register.filter(is_safe=True)
 def encodeEMail(text): 
     #text = urlencode(text) 
     return text

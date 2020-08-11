@@ -4,3 +4,4 @@ webd/static/vendor/resjs
 occurrence_query.json
 webd/db.sqlite3
 resources/corpus/
+resources/link-formatters.json
