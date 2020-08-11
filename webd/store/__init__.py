@@ -53,24 +53,14 @@ def pagination(page, size, hits):
 
 
 def search(index, query, size=100, offset=0):
-    """ performs a search on the given index for documents of the same doc_type
-    as the given index and applying a given lucene query. """
+    """ performs a search on the given index applying a given lucene query. """
     if type(query) is str:
-        try:
-            res = es.search(
-                index=index,
-                doc_type=index,
-                q=query,
-                size=size,
-                from_=offset
-            )
-        except TypeError:
-            res = es.search(
-                index=index,
-                q=query,
-                size=size,
-                from_=offset
-            )
+        res = es.search(
+            index=index,
+            q=query,
+            size=size,
+            from_=offset
+        )
     else:
         res = es.search(
             index=index,
@@ -82,10 +72,7 @@ def search(index, query, size=100, offset=0):
 
 
 def get(index, _id):
-    """ retrieve document with given id from given index assuming its doctype
-    is the same as index.
-
-    .. warn:: does not work for elasticsearch 7
+    """ retrieve document with given id from given index.
     """
     try:
         res = es.get(

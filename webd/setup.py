@@ -10,7 +10,7 @@ setup(
         'manage.py',
     ],
     install_requires=[
-        "elasticsearch>=7.0.0",
+        "elasticsearch>=7.7.1",
         "glom>=19.2.0",
         "django",
         "django-extensions",
