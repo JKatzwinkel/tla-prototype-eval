@@ -95,7 +95,7 @@ def build_query(*clauses, fields=None):
             "bool": {
                 "must": [],
                 "must_not": [],
-            } 
+            }
         }
     }
     if fields is not None and type(fields) is list:
@@ -460,7 +460,6 @@ def search_textword_occurrences(offset=1, size=RESULTS_PER_PAGE, **params):
         offset=offset,
         size=size,
     )
-    print(hits)
     return hits
 
 
@@ -508,7 +507,6 @@ def populate_textword_occurrences(hits, **params):
             hit.get('context', {}).get('textId'),
         )
         if text:
-            print('text id', text['id'])
             for path in text.get('paths', []):
                 for node in path:
                     #node["url"] = "/view/{}/{}".format(
@@ -732,34 +730,6 @@ def search_dict(request):
         }
     )
 
-
-def search_lemma(lemma_id):
-    q = {"query": {"bool": {"must": [], "must_not": [], "should": []}}}
-    clauses = []
-
-    lemma_id = lemma_id.strip()
-    print(lemma_id)
-    print('---')
-    print(lemma_id)
-    if lemma_id != '':
-        clauses.append(
-            {
-                "match": {
-                    "id": lemma_id,
-                }
-            }
-        )
-    q = build_query(*clauses)
-    print(q)
-
-    hit = store.search(
-        'lemma',
-        q,
-        size=1,
-    )
-
-    print(hit)
-    return hit
 
 @require_http_methods(["GET"])
 def search_text_words(request):
