@@ -4,6 +4,13 @@ CMD=runserver
 DAT=sample.tar.gz
 DIR=resources
 
+LF_FILE="${DIR}/link-formatters.json"
+if [ ! -e "${LF_FILE}" ]; then
+    echo "link formatters config file ${LF_FILE} not found."
+    echo "download external ID link formatters..."
+    python webd/manage.py dl_link_formatters
+fi
+
 if [ $# -ge 1 ]; then
     if [[ "$1" = "ingest" ]]; then
         CMD=populate

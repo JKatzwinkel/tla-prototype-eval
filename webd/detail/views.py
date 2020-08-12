@@ -13,13 +13,24 @@ from glom import glom, Coalesce, flatten
 
 import store
 
-with open(
-    os.path.join(
-        settings.MEDIA_ROOT,
-        'link-formatters.json'
-    ), 'r'
-) as f:
-    EXT_REF_FORMATTERS = json.load(f)
+try:
+    with open(
+        os.path.join(
+            settings.MEDIA_ROOT,
+            'link-formatters.json'
+        ), 'r'
+    ) as f:
+        EXT_REF_FORMATTERS = json.load(f)
+except Exception:
+    print(
+        'Could not find external reference link formatters config file {}!'.format(
+            os.path.join(
+                settings.MEDIA_ROOT,
+                'link-formatters.json',
+            )
+        )
+    )
+    EXT_REF_FORMATTERS = {}
 
 
 def tag_transcription(string):
