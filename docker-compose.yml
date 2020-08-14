@@ -33,5 +33,6 @@ services:
       - ${LISTEN_PORT}:8000
     environment:
       ES_URL: http://es:9200
+      ALLOWED_HOSTS: ${ALLOWED_HOSTS:?err}
 
 ...

@@ -25,10 +25,10 @@ SECRET_KEY = '0m9_6-ogj_yl)hv1+v1%0o09hbeq18uisf^5)aau4ocq+e!1+n'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['tladev.bbaw.de',
-        'localhost',
-        '127.0.0.1',
-        '192.168.0.36']
+ALLOWED_HOSTS = os.getenv(
+    'ALLOWED_HOSTS',
+    '127.0.0.1,localhost,tladev.bbaw.de',
+).split(',')
 
 
 # Application definition
