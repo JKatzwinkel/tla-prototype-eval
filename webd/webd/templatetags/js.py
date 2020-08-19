@@ -258,7 +258,8 @@ def niceYear(yearStr):
     except:
         yearStr ='(none)'
     return yearStr
-        
+
+
 nicePOSDict = {
     "adjective": "adjective",
     "adverb": "adverb",
@@ -274,6 +275,8 @@ nicePOSDict = {
     "undefined": "(undefined)",
     "verb": "verb",
 }
+
+
 @register.filter(is_safe=True)
 def nicePOS(name):
     """ takes a string containing a lemma's type and optionally its subtype,
@@ -283,12 +286,16 @@ def nicePOS(name):
     - ``'{type_label}'``
     - ``'{type_label} ({subtype_label})'``
     """
-    if type(name) is not dict:
+    if type(name) is dict:
+        lemma_pos_identifiers = [
+            name.get(key)
+            for key in ['type', 'subtype']
+            if key in name
+        ]
+    elif type(name) is str:
+        lemma_pos_identifiers = [name]
+    else:
         return ''
-    lemma_pos_identifiers = [
-        name.get(key, '')
-        for key in ['type', 'subtype']
-    ]
     res = nicePOSDict.get(
         *[lemma_pos_identifiers[0]]*2
     )
