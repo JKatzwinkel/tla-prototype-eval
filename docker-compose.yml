@@ -4,6 +4,7 @@ version: "3.7"
 
 services:
   es:
+    container_name: tla-prototype-es
     image: elasticsearch:7.7.1
     ports:
       - ${ES_PORT}:9200
@@ -15,6 +16,7 @@ services:
     tty: true
 
   populate:
+    container_name: tla-prototype-ingest
     build:
       context: .
     depends_on:
@@ -25,6 +27,7 @@ services:
     command: "ingest"
 
   app:
+    container_name: tla-prototype
     build:
       context: .
     depends_on:
