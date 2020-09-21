@@ -14,6 +14,7 @@ services:
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     stdin_open: true
     tty: true
+    restart: unless-stopped
 
   populate:
     container_name: tla-prototype-ingest
@@ -37,5 +38,6 @@ services:
     environment:
       ES_URL: http://es:9200
       ALLOWED_HOSTS: ${ALLOWED_HOSTS:?err}
+    restart: unless-stopped
 
 ...
