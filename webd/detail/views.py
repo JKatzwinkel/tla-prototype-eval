@@ -218,7 +218,7 @@ def lemma_details_page(request, lemma_id):
             'bibl': bibl,
             'ext': {
                 provider: format_ext_refs(provider, refs)
-                for provider, refs in lemma.get('externalReferences', {}).items()
+                for provider, refs in (lemma.get('externalReferences') or {}).items()
             },
             'coins': coins_openurl_kev(lemma),
             'occurrences': {
