@@ -16,6 +16,6 @@ setup(
         "pyyaml",
         "django",
         "django-extensions",
-        "aaew-linggloss @ git+https://github.com/JKatzwinkel/aaew-linggloss.git@master",
+        "aaew-linggloss @ git+https://github.com/dwerning/aaew-linggloss.git@master",
     ],
 )
