@@ -59,22 +59,18 @@ Als letztes startet im Container der Webanwendung (`tla_1`) ein Django-Server.
 Die Webdesign-Demo ist nun unter der dem in `.env` definierten Port `LISTEN_PORT` erreichbar,
 z.B. [http://localhost:9005/](http://localhost:9005).
 
-Obwohl die Anwendung innerhalb des Containers ausgefuehrt wird, werden Aenderungen an Programmcode,
-HTML-Templates und Assets sofort sichtbar, da das Quellverzeichnis `webd` direkt vom Dateisystem
-des Hosts in das des Containers gemounted wird.
-
 #### 2. Manuelle Einrichtung von ES und Installation mit pipenv
 
 Wenn die containerisierte Installation mittels Docker keine Option ist, koennen die Komponenten
 auch einzeln per Hand installiert werden. Dazu wird benoetigt:
 
-- Elasticsearch 6.5.4
+- Elasticsearch 7.7
 - Python
 - pipenv
 
 Unter [`www.elastic.co`](https://www.elastic.co/guide/en/elasticsearch/reference/6.5/windows.html) 
 findet sich die Anleitung zur Installation von Elasticsearch unter Windows. Zur Sicherheit sollte 
-die Version 6.5.4 verwendet werden: 
+die Version 7.7.1 verwendet werden:
 [https://www.elastic.co/de/downloads/past-releases/elasticsearch-6-5-4](https://www.elastic.co/de/downloads/past-releases/elasticsearch-6-5-4)
 
 Eine komfortable Moeglichkeit zur Einrichtung einer Python3-Umgebung ist 
@@ -97,15 +93,6 @@ Softwareabhaengigkeiten mit Pipenv:
 	pipenv install
 ```
 
-Wegen einer Inkompatibilitaet zwischen Pipenv und den letzten Versionen von Pip kann es sein, dasz
-Sie Pip auf die Version 18.0 zurueckspulen muessen. Dazu fuehren Sie folgenden Befehl aus und 
-versuchen danach die Installation der Abhaengigkeiten nochmal:
-
-```shell
-	pipenv run pip install pip==18.0
-	pipenv install
-```
-
 Danach konnen die Beispieldaten heruntergeladen und in die zuvor gestartete Elasticsearch-Instanz
 eingespielt werden.  Zuvor musz jedoch die URL, unter der die lokale Elasticsearch-Instanz
 angesprochen werden kann, in der bereits oben erwaehnten Umgebungsvariablen-Datei `.env` angegeben
@@ -117,11 +104,11 @@ koennen die beiden Skripte durchgefuehrt werden, die sich um das Herunterladen u
 Beispielcorpusdaten kuemmern und dann die Webanwendung starten:
 
 ```shell
-	pipenv run bash resources/scripts/dl-sample.sh 
-	pipenv run bash resources/scripts/entrypoint.sh
+	pipenv run bash resources/scripts/entrypoint.sh ingest
+	pipenv run bash resources/scripts/entrypoint.sh runserver
 ```
 
-Der zweite Befehl konfiguriert den lokalen Elasticsearch-Cluster, legt einzelne Indices fuer die
+Der erste Befehl konfiguriert den lokalen Elasticsearch-Cluster, legt einzelne Indices fuer die
 verschiedenen Kategorien von Corpusdaten an, und laedt die zuvor heruntergeladenen Beispieldaten
 dort hinein. Das kann zu Problemen fuehren, wenn nicht ausreichend Festplattenplatz zur Verfuegung
 steht. Sie koennen das Ergebnis des Indexierungsvorgangs pruefen, indem Sie in
@@ -138,7 +125,7 @@ Beim naechsten Mal, wenn Sie die Anwendung starten moechten, brauchen Sie nur da
 auszufuehren:
 
 ```shell
-	pipenv run bash resources/scripts/entrypoint.sh
+	pipenv run bash resources/scripts/entrypoint.sh runserver
 ```
 
 ### Inhaltsuebersicht
